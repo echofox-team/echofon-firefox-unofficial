@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://echofon/locale/pref.dtd">
+
+<overlay id="AdvancedPaneOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="paneAdvanced" onpaneload="gAdvancedPane.init()">
+
+    <script type="application/x-javascript;version=1.8" src="chrome://echofon/content/preferences/advanced.js"/>
+
+    <preferences>
+      <preference id="_open-twitter"     name="extensions.twitternotifier.openTwitterForUserPage" type="bool"/>
+    </preferences>
+
+    <stringbundle id="platformKeys" src="chrome://global-platform/locale/platformKeys.properties"/>
+    <stringbundle id="localeKeys" src="chrome://global/locale/keys.properties"/>
+    <stringbundle id="echofon-strings" src="chrome://echofon/locale/pref.properties"/>
+
+    <groupbox id="keyboard-shortcut">
+      <caption label="&keyboardShortcut.title;"/>
+      <grid>
+        <columns>
+	  <column />
+	  <column flex="1"/>
+        </columns>
+
+        <rows>
+          <!-- toggle popup -->
+	  <row>
+	    <hbox align="center">
+              <label control="echofon-key-togglePopup" value="&echofon.toggleEchofon;"/>
+	    </hbox>
+	    <hbox align="center">
+	      <textbox id="echofon-key-togglePopup" flex="1"
+		       onclick="this.select()" onkeypress="gAdvancedPane.recognize(event);"/>
+	      <button label="&echofon.revertKeyconfig;" oncommand="gAdvancedPane.revert(event)"/>
+	    </hbox>
+	  </row>
+          <!-- insert URL -->
+	  <row>
+	    <hbox align="center">
+              <label control="echofon-key-inertURL" value="&echofon.insertURL;"/>
+	    </hbox>
+	    <hbox align="center">
+	      <textbox id="echofon-key-insertURL" flex="1"
+		       onclick="this.select()" onkeypress="gAdvancedPane.recognize(event);"/>
+	      <button label="&echofon.revertKeyconfig;" oncommand="gAdvancedPane.revert(event)"/>
+	    </hbox>
+	  </row>
+
+        </rows>
+      </grid>
+
+      <description style="font-size: 11px;margin-top: 1em;margin-left:2em;">
+        &keyboardShortcut.explanation;
+      </description>
+    </groupbox>
+
+    <groupbox flex="1" style="margin-bottom: 3em">
+      <caption label="&paneAdvanced.title;"/>
+
+      <vbox id="open-in-twitter">
+      <checkbox height="32px" width="350px" id="open_twitter" preference="_open-twitter" label="&echofon.openTwitterForUserPage;" />
+      <description style="width: 200px; font-size: 11px; margin-left: 2em;">
+        &echofon.openTwitterForUserPageExplanation;
+      </description>
+      </vbox>
+
+      <hbox align="center" style="margin-top:2em;margin-bottom:1em">
+        <label control="clear-cache-button" value="&clearCache.title;"/>
+        <button id="clear-cache-button" label="&clearCache.button;" oncommand="gAdvancedPane.clearCache()"/>
+      </hbox>
+    </groupbox>
+  </prefpane>
+</overlay>

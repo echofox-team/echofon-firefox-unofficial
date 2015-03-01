@@ -1,0 +1,74 @@
+<!ENTITY echofon.showpopup "Mostra els emergents">
+<!ENTITY echofon.reload "Recarregar">
+<!ENTITY echofon.markAllAsRead "Marca tot com a llegit">
+<!ENTITY echofon.preference "Preferències…">
+<!ENTITY echofon.removeAds "Eliminar Anuncis…">
+<!ENTITY echofon.logout "Finalitza la sessió">
+<!ENTITY echofon.exit "Surt">
+<!ENTITY echofon.checkUpdate "Cerca Actualitzacions...">
+<!ENTITY echofon.aboutEchofon "Quant al Echofon">
+<!ENTITY echofon.changeAccount.tooltip "Clica-hi per canviar de compte">
+<!ENTITY echofon.copyTweet "Copia">
+<!ENTITY echofon.retweet "Retweet">
+<!ENTITY echofon.retweetWithComment "Retweet amb un comentari">
+<!ENTITY echofon.replyAll "Respon-ho tot">
+<!ENTITY echofon.deleteTweet "Suprimeix el tweet">
+<!ENTITY echofon.openTweetInTab "Obre el tweet en una pestanya nova">
+<!ENTITY echofon.clickToStart "Cliqueu-hi per començar">
+<!ENTITY echofon.copyMessage "Copia">
+<!ENTITY echofon.deleteMessage "Elimina aquest missatge">
+<!ENTITY echofon.olderPosts "TWEETS MÉS ANTICS">
+<!ENTITY echofon.reply "Respon">
+<!ENTITY echofon.sendMessage "Enviar Missatge">
+<!ENTITY echofon.block "Bloquejar...">
+<!ENTITY echofon.reportSpam "Reportar Spam...">
+<!ENTITY echofon.itsYou "Ets tu!">
+<!ENTITY echofon.chooseList "Tria una Llista...">
+<!ENTITY echofon.loadingList "Carrega una Llista...">
+<!ENTITY echofon.tweetThisPage "Tweet aquesta pàgina">
+<!ENTITY echofon.postWithLink "Publica amb l'enllaç">
+<!ENTITY echofon.copyURL "Copia URL">
+<!ENTITY echofon.searchMention "Cercar resposta">
+<!ENTITY echofon.postWithTag "Publica amb aquesta etiqueta">
+<!ENTITY echofon.muteThisUser "Emmudeix aquest usuari">
+<!ENTITY echofon.muteThisTag "Emmudeix aquesta etiqueta">
+<!ENTITY echofon.muteThisApp "Emmudeix aquesta aplicació">
+<!ENTITY echofon.cancelButton "Cancel·la">
+<!ENTITY echofon.sendButton "Envia">
+<!ENTITY echofon.tweetButton "Tweet">
+<!ENTITY echofon.followList "Segueix aquesta llista">
+<!ENTITY echofon.yourSavedSearches "Les teves cerques guardades">
+<!ENTITY echofon.trendingTopics "Trending Topics">
+<!ENTITY fileMenu.accesskey "f">
+<!ENTITY fileMenu.label "Fitxer">
+<!ENTITY fileMenu.close "Sortir">
+<!ENTITY viewMenu.accesskey "V">
+<!ENTITY viewMenu.label "Veure">
+<!ENTITY viewMenu.goHome "Principal">
+<!ENTITY viewMenu.goMentions "Respostes">
+<!ENTITY viewMenu.goMessages "Missatges">
+<!ENTITY viewMenu.goLists "Llistes">
+<!ENTITY viewMenu.goSearch "Cercar">
+<!ENTITY viewMenu.refresh "Recarrega Línia Temporal">
+<!ENTITY viewMenu.jumpToUnread "Salta a no llegit">
+<!ENTITY viewMenu.markAsRead "Marca com a llegit">
+<!ENTITY tweetMenu.accesskey "T">
+<!ENTITY tweetMenu.label "Tweet">
+<!ENTITY tweetMenu.addImage "Afegeix Imatge...">
+<!ENTITY tweetMenu.insertURL "Insereix la URL de la pestanya actual">
+<!ENTITY tweetMenu.addGeoLocation "Afegeix Localització Geogràfica">
+<!ENTITY userMenu.accesskey "U">
+<!ENTITY userMenu.label "Usuari">
+<!ENTITY userMenu.gotoUser "Ves a l'Usuari...">
+<!ENTITY userMenu.myProfile "El meu Perfil">
+<!ENTITY prevAccountCmd.accesskey "p">
+<!ENTITY nextAccountCmd.accesskey "n">
+<!ENTITY refreshCmd.accesskey "r">
+<!ENTITY jumpToUnreadCmd.accesskey "j">
+<!ENTITY markAsReadCmd.accesskey "m">
+<!ENTITY myProfileCmd.accesskey "p">
+<!ENTITY gotoUserCmd.accesskey "u">
+<!ENTITY insertURLCmd.accesskey "l">
+<!ENTITY addImageCmd.accesskey "i">
+<!ENTITY addGeoLocationCmd.accesskey "g">
+<!ENTITY closeCmd.accesskey "x">

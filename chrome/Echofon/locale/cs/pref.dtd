@@ -1,0 +1,71 @@
+<!ENTITY paneAccount.title "Účty">
+<!ENTITY paneGeneral.title "Obecné">
+<!ENTITY paneAdvanced.title "Pokročilé">
+<!ENTITY keyboardShortcut.title "Nastavení klávesnice">
+<!ENTITY keyboardShortcut.explanation "Nové klávesové zkratky se projeví až v novém okně prohlížeče.">
+<!ENTITY clearCache.title "Vyčistit mezipaměť">
+<!ENTITY clearCache.button "Vyčistit nyní">
+<!ENTITY echofon.title "Předvolby Echofonu">
+<!ENTITY echofon.accounts "Účty">
+<!ENTITY echofon.username "Uživatelské jméno">
+<!ENTITY echofon.password "Heslo">
+<!ENTITY echofon.addAccount "Přidat účet">
+<!ENTITY echofon.removeAccount "Odstranit účet">
+<!ENTITY echofon.authorizing "Autorizace">
+<!ENTITY echofon.muteSetting "Nastavení skrývání">
+<!ENTITY echofon.preferences "Předvolby">
+<!ENTITY echofon.refreshInterval "Získávat příspěvky">
+<!ENTITY echofon.theme "Motiv vzhledu">
+<!ENTITY echofon.fontSize "Velikost písma">
+<!ENTITY echofon.displayStyle "Styl zobrazení">
+<!ENTITY echofon.displayNameAndScreenName "Jméno a přezdívka">
+<!ENTITY echofon.displayNameOnly "Pouze jméno">
+<!ENTITY echofon.displayScreenNameOnly "Pouze přezdívka">
+<!ENTITY echofon.fontFace "Rodina písma">
+<!ENTITY echofon.everyminute "každou minutu">
+<!ENTITY echofon.every2minutes "každé dvě minuty">
+<!ENTITY echofon.every3minutes "každé tři minuty">
+<!ENTITY echofon.every5minutes "každých pět minut">
+<!ENTITY echofon.popupInterval "Zobrazit vysouvací upozornění na">
+<!ENTITY echofon.popup3sec "tři vteřiny">
+<!ENTITY echofon.popup5sec "pět vteřin">
+<!ENTITY echofon.popup7sec "sedm vteřin">
+<!ENTITY echofon.popup10sec "deset vteřin">
+<!ENTITY echofon.mentionsAndDMsOnly "Zobrazit upozornění pouze pro zmínky a pro přímé zprávy">
+<!ENTITY echofon.popupWhileWindowIsOpened "Zobrazit upozornění, přestože je Echofon otevřený">
+<!ENTITY echofon.toggleEchofon "Přepnout na Echofon">
+<!ENTITY echofon.insertURL "Vložit adresu">
+<!ENTITY echofon.revertKeyconfig "Původní">
+<!ENTITY echofon.balloon "Zobrazit upozornění">
+<!ENTITY echofon.newTweetNotifications "Oznámení">
+<!ENTITY echofon.sound "Zvukové oznámení">
+<!ENTITY echofon.unreadCount "Zobrazit počet nepřečtených příspěvků">
+<!ENTITY echofon.soundButton "Procházet">
+<!ENTITY echofon.syncWindowTitle "Nastavit synchronizaci s iPhonem">
+<!ENTITY echofon.alwaysOpenLinkInNewTab "Vždy otevírat odkazy v nových panelech">
+<!ENTITY echofon.alwaysOpenLinkInNewTab.tooltip "Ctrl+klepnutí (Cmd+klepnutí na systémech Mac) otevírá odkazy v nových panelech i bez tohoto nastavení.">
+<!ENTITY echofon.openLinks "Otevřít odkazy">
+<!ENTITY echofon.applicationMode "Režim zobrazení">
+<!ENTITY echofon.panelMode "Panel">
+<!ENTITY echofon.windowMode "Samostatné okno">
+<!ENTITY echofon.sidebarMode "Postranní lišta">
+<!ENTITY echofon.welcome "Vítejte v Echofonu!">
+<!ENTITY echofon.signIntoTwitter "Přihlásit se k účtu v síti Twitter">
+<!ENTITY echofon.authorize "Autorizovat účet v síti Twitter">
+<!ENTITY echofon.agreeAndAuthEchofon "Přijmout podmínky a autorizovat účet v síti Twitter">
+<!ENTITY echofon.followEchofon "Sledovat uživatele @echofon">
+<!ENTITY echofon.muteUsers "Uživatelé">
+<!ENTITY echofon.muteApplications "Aplikace">
+<!ENTITY echofon.muteHashtags "Hashtagy">
+<!ENTITY echofon.addMute "Přidat">
+<!ENTITY echofon.removeMute "Odstranit">
+<!ENTITY echofon.muteTitle "Nastavení skrývání">
+<!ENTITY echofon.openTwitterForUserPage "Pro zobrazení uživatelského profilu otevřete stránku twitter.com">
+<!ENTITY echofon.openTwitterForUserPageExplanation "Namísto zobrazení profilu uživatele v rámci doplňku Echofon můžete otevřít stránku twitter.com/uzivatelske_jmeno. Toto nastavení vrátíte do původního stavu kombinací shift+klepnutí na uživatelské jméno.">
+<!ENTITY echofon.email "E-mail">
+<!ENTITY echofon.subscribeEmail "Odebírat">
+<!ENTITY echofon.submitEmailExplanation "Zadejte svou e-mailovou adresu, na kterou vám budou chodit novinky od Echofonu a UberMedia.">
+<!ENTITY echofon.thankYouForSubscribe "Děkujeme za přihlášení k odběru novinek!">
+<!ENTITY echofon.licenseKey "Licenční klíč">
+<!ENTITY echofon.verifyLicense "Ověřit licenci">
+<!ENTITY echofon.licenseExplanation "Pokud máte licenční klíč, zadejte ho do políčka níže">

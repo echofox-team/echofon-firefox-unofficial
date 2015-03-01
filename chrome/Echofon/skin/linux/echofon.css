@@ -1,0 +1,86 @@
+/*
+   Linux Theme for Echofon
+
+   Copyright (c) 2009 Kazuho Okui / naan studio, Inc. ALL RIGHTS RESERVED.
+*/
+
+#echofon-menubar {
+  -moz-appearance: menubar !important;
+  background-image: none !important;
+}
+
+.echofon-tabs-closebutton {
+  margin: 0px !important;
+  padding: 0px !important;
+  border: 1px solid #c00 !important;
+}
+
+.echofon-link-tooltip,
+.echofon-link-tooltip:hover {
+  margin: 0px;
+  padding: 0px;
+  text-decoration: none;
+}
+
+echofon-popup-content {
+  font-weight: normal;
+  font-size: 12px;
+}
+
+echofon-popup-content[FF3="true"] {
+  border-radius: 0px !important;
+  -moz-border-radius: 0px !important;
+}
+
+echofon-notice[FF3="true"] {
+  border-radius: 0px !important;
+  -moz-border-radius: 0px !important;
+}
+
+.echofon-status-unread-message {
+  font-size: 12px;
+}
+
+#echofon-compose-bar-attach-menu-box {
+    margin-top: 5px !important;
+}
+
+.echofon-compose-bar-char-count {
+  font-size: 12px !important;
+  padding: 0px !important;
+}
+
+/*
+ Load preference icons
+*/
+.paneSelector {
+  list-style-image: url("chrome://browser/skin/preferences/Options.png");
+  padding: 5px 3px 1px;
+}
+
+
+.echofon-compose-in-reply-to {
+  font-weight:bold;
+  color: #333;
+  text-shadow: #fff 0px 1px;
+  font-size: 11px;
+}
+
+#echofon-add-search-button
+{
+  background-image: -moz-linear-gradient(center bottom, #c1c4c6 0%, #dbdcdd 100%) !important;
+  border:none !important;
+}
+
+ #echofon-add-search-button:hover
+{
+  background-image: -moz-linear-gradient(center bottom, #abafb2 0%, #cdced0 100%) !important;
+}
+
+/*ff3 */
+
+/* overwrites styles in user-view.css */
+.user-details toolbar#user_tabs[FF3="true"] toolbarbutton{width:151px;}
+.user-details toolbar#user_tabs[FF3="true"] toolbarbutton:last-child{width:153px;}
+
+.user-details toolbar#user_tabs toolbarbutton{ margin-bottom:-3px !important;}

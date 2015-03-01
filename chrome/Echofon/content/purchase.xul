@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://mozapps/content/preferences/preferences.css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://echofon/locale/pref.dtd">
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        id="twitternotifier-sync"
+        title="Purchase Echofon"
+        onload="Purchase.onload()"
+        persist="screenX screenY">
+
+  <stringbundle id="echofon-strings" src="chrome://echofon/locale/pref.properties"/>
+  <script type="application/x-javascript;version=1.8" src="chrome://echofon/content/utility.js"/>
+  <script type="application/x-javascript;version=1.8" src="chrome://echofon/content/purchase.js"/>
+
+  <vbox flex="1">
+    <browser id="browser" type="content" flex="1"/>
+    <vbox align="center" style="width:auto;border-top: 1px solid #666;background:#ededed;">
+      <label flex="1" value="&echofon.licenseExplanation;:" style="font-size:13px; margin: 5px 0px;"/>
+      <hbox style="margin-bottom:10px">
+      <grid flex="1" style="margin-left:20px">
+        <columns>
+	  <column/>
+	  <column/>
+	  <column/>
+        </columns>
+        <rows flex="1">
+          <row flex="1">
+            <hbox align="center">
+              <label value="&echofon.email;:" style="font-weight:bold;text-align: right" flex="1"/>
+            </hbox>
+            <textbox id="license_email" flex="1" size="60" oninput="Purchase.enterText()"/>
+            <spacer/>
+          </row>
+          <row>
+            <hbox align="center">
+              <label value="&echofon.licenseKey;:" style="font-weight:bold;text-align: right" flex="1"/>
+            </hbox>
+            <textbox id="license_key" flex="1" size="60" oninput="Purchase.enterText()"/>
+            <hbox align="center">
+              <button id="enter-button" label="&echofon.verifyLicense;" oncommand="Purchase.onEnterLicenseKey()" disabled="true"/>
+              <image id="spinner" src="" width="16px"/>
+            </hbox>
+          </row>
+        </rows>
+      </grid>
+      </hbox>
+    </vbox>
+  </vbox>
+
+
+</window>

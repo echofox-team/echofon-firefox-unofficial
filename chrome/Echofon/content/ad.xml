@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet href="chrome://echofon/content/echofon.css" type="text/css"?>
+<?xml-stylesheet href="chrome://echofon/skin/echofon.css" type="text/css"?>
+
+<!DOCTYPE window [
+<!ENTITY % echofonDTD SYSTEM "chrome://echofon/locale/echofon.dtd">
+%echofonDTD;
+]>
+
+<bindings
+    xmlns="http://www.mozilla.org/xbl"
+    xmlns:xbl="http://www.mozilla.org/xbl"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <binding id="echofon-ad-unit">
+    <content>
+      <xul:menupopup id="echofon-ad-context-menu">
+        <xul:menuitem label="&echofon.reply;" oncommand="replyOn140Ad(this.parentNode.parentNode._ad)"/>
+        <xul:menuitem label="&echofon.retweet;" oncommand="retweetOn140Ad(this.parentNode.parentNode._ad)"/>
+      </xul:menupopup>
+
+      <xul:vbox id="echofon-ad-container" flex="1" context="echofon-ad-context-menu">
+
+          <xul:hbox id="echofon-ad" align="top" flex="1">
+
+            <!-- messages -->
+            <xul:vbox class="echofon-ad-text-container" flex="1">
+              <xul:description class="echofon-status-message">
+                <children/>
+              </xul:description>
+              <xul:hbox class="echofon-ad-byline echofon-status-info" crop="right" align="bottom">
+                <children includes="echofon-status-tagline"/>
+                <children includes="xul:image"/>
+              </xul:hbox>
+            </xul:vbox>
+
+            <!-- user icon -->
+            <xul:box anonid="usericon" class="echofon-ad-user-icon"/>
+
+          </xul:hbox>
+        </xul:vbox>
+    </content>
+
+    <handlers>
+      <handler event="click">
+        if (event.button != "0") return;
+        if (event.originalTarget.tagName == "xul:menuitem") return;
+
+        var url = this._ad.action_urls.click_url;
+        if (event.target.className == "echofon-source-link") {
+          url = event.originalTarget.getAttribute("href");
+        }
+        EchofonCommon.openURL(url, null, true, true);
+      </handler>
+    </handlers>
+
+    <implementation>
+      <property name="ad">
+        <setter><![CDATA[
+          while (this.firstChild) this.removeChild(this.firstChild);
+          this._ad = val;
+          var usericon = document.getAnonymousElementByAttribute(this, "anonid", "usericon");
+          usericon.style.background = "url(\"" + val.user.profile_image_url.replace(/"/g, '\\"') + "\")";
+
+          var elem = document.createElement("description");
+          elem.className = "echofon-message-body echofon-ad-text";
+          var fontSize = EchofonCommon.fontSize();
+          if (EchofonCommon.pref().getCharPref("applicationMode") == "window") {
+            usericon.setAttribute("appmode", "window");
+          }
+          else {
+            fontSize -= 1;
+          }
+          elem.style.fontSize = fontSize + "px";
+
+          var anchor = EchofonCommon.createAnchorText("", val.user.screen_name, "username", "echofon-ad-user-name");
+          anchor.setAttribute("screen_name", val.user.screen_name);
+          anchor.className += " echofon-status-user";
+          elem.appendChild(anchor);
+
+          elem.appendChild(document.createTextNode("  "));
+
+          EchofonCommon.convertLinksWithRegExp(0, val, elem, this);
+          this.appendChild(elem);
+
+          if (val.byline.match(/<a .*href\=\"([^\"]*)\"[^>]*>(.*)<\/a>/)) {
+            var byline = document.createElement("echofon-status-tagline");
+            var byline_text = EchofonCommon.createAnchorText(RegExp.$1, RegExp.$2, "app", "echofon-source-link");
+            byline.appendChild(byline_text);
+            this.appendChild(byline);
+          }
+
+          var req = new XMLHttpRequest();
+          req.open("GET", val.action_urls.impression_url, true);
+          req.send(null);
+
+          if (val.action_urls.tracking_pixel) {
+            var req = new XMLHttpRequest();
+            req.open("GET", val.action_urls.tracking_pixel, true);
+            req.send(null);
+          }
+
+          ]]>
+        </setter>
+      </property>
+    </implementation>
+  </binding>
+</bindings>

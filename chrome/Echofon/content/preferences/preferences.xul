@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<!--
+    Implementation of Echofon preference panel window
+
+    Copyright (c) 2009 Kazuho Okui / naan studio, Inc. ALL RIGHTS RESERVED.
+-->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://mozapps/content/preferences/preferences.css"?>
+<?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css"?>
+
+<?xml-stylesheet href="chrome://browser/content/preferences/handlers.css"?>
+<?xml-stylesheet href="chrome://browser/skin/preferences/applications.css"?>
+
+<?xml-stylesheet href="chrome://echofon/content/echofon.css"?>
+<?xml-stylesheet href="chrome://echofon/skin/echofon.css" type="text/css"?>
+
+<!DOCTYPE prefwindow [
+<!ENTITY % echofonDTD SYSTEM "chrome://echofon/locale/pref.dtd">
+<!ENTITY % brandDTD SYSTEM "chrome://branding/locale/brand.dtd">
+<!ENTITY % preferencesDTD SYSTEM "chrome://browser/locale/preferences/preferences.dtd">
+%echofonDTD;
+%brandDTD;
+%preferencesDTD;
+]>
+
+
+<prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+            id="echofon-preference"
+            windowtype="Echofon:preferences"
+            persist="screenX screenY"
+            width="480">
+
+  <script type="application/x-javascript;version=1.8" src="chrome://echofon/content/utility.js"/>
+
+  <stringbundle id="platformKeys" src="chrome://global-platform/locale/platformKeys.properties"/>
+  <stringbundle id="localeKeys" src="chrome://global/locale/keys.properties"/>
+  <stringbundle id="echofon-strings" src="chrome://echofon/locale/pref.properties"/>
+
+  <prefpane id="paneAccounts" label="&paneAccount.title;"
+            src="chrome://echofon/content/preferences/accounts.xul"/>
+  <prefpane id="paneMain" label="&paneGeneral.title;"
+            src="chrome://echofon/content/preferences/general.xul"/>
+  <prefpane id="paneAdvanced" label="&paneAdvanced.title;"
+            src="chrome://echofon/content/preferences/advanced.xul"/>
+
+<menubar id="main-menubar"/>
+</prefwindow>

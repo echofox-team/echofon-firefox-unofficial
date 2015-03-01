@@ -1,0 +1,140 @@
+
+window{
+  color:#fff;
+  height:100%;
+  font-family:helvetica, arial;
+  font-size:16px;
+
+}
+
+box{
+  display:block;
+}
+
+#wrap{
+  background-color:#2f2f2f;
+  padding:20px;
+  display:block;
+
+  background-image:-moz-radial-gradient(50% 0 360deg,circle cover, rgba(255,255,255,.1), rgba(255,255,255,0));
+
+}
+
+#welcome_message {
+  display:block;
+  text-align:center;
+}
+
+#welcome_message h1 {
+  display:block;
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  margin-top: 20px;
+  text-shadow:0 3px 5px rgba(0,0,0,.5);
+  width:400px;
+  margin:20px auto;
+}
+
+#form {
+  width:600px;
+  margin:30px auto;
+  border-top:1px solid rgba(255,255,255,.1);
+  padding:20px 0 20px 0;
+}
+
+#form .inner{
+  margin:0 auto;
+}
+
+#form[noeula="true"] {
+  width:400px;
+}
+
+#form .field{
+  text-align: center;
+}
+
+#form .field.check{
+}
+
+
+#form .field.text label{
+}
+
+#eula {
+  width: 600px;
+  margin: 30px auto;
+}
+
+#eula h3 {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  width:600px;
+  margin: 10px auto;
+  text-shadow:0 3px 5px rgba(0,0,0,.5);
+}
+
+#eula_body {
+  width:600px;
+  height: 400px;
+  background: #fff;
+  border: none;
+  margin-bottom: 20px;
+}
+
+#email {
+  text-align: left;
+}
+
+.textbox-label {
+  text-shadow: 0 -1px rgba(0,0,0,3);
+  color: #ddd;
+}
+
+.explain {
+  font-size: 16px;
+  color: #ddd;
+  text-shadow: 0 -1px rgba(0,0,0,3);
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+#form .field button {
+  font-size: 18px;
+  font-weight:bold;
+  padding:10px 20px;
+  display:block;
+  margin:0 auto;
+  margin-top:10px;
+  -moz-appearance:none;
+
+  cursor:pointer;
+
+  color:#0a3b6e;
+  background-color:#4cadeb;
+  -moz-border-radius:5px;
+  -moz-box-shadow:0 0 5px rgba(0,0,0,.6), 0 -1px 0 #4cadeb;
+  text-shadow:0 1px rgba(255,255,255,.3);
+  border:none;
+  border-top:2px solid #82c5f1;
+  border-bottom:2px solid rgba(0,0,0,.2);
+}
+
+#form .field #signin:hover,
+#form .field #submit-email:hover
+{
+  background-color:#6fbff3;
+}
+
+#form .field #signin:active,
+#form .field #submit-email:active
+{
+  background-color:#3593cf;
+}
+
+/* overwrites styles in welcome.css */
+#form .field #signin[FF3="true"] { border:none; }
+#form .field #submit-email[FF3="true"] { border:none; }

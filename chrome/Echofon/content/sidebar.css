@@ -1,0 +1,8 @@
+.echofon-status-photo {
+    min-width: 48px !important;
+    min-height: 48px !important;
+    max-width: 48px !important;
+    max-height: 48px !important;
+    margin: 2px 4px !important;
+    padding: 1px !important;
+}

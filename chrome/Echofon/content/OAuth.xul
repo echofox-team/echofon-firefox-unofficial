@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://mozapps/content/preferences/preferences.css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://echofon/locale/echofon.pref.dtd">
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        id="twitternotifier-sync"
+        onload="DesktopOAuth.onload()"
+        onunload="DesktopOAuth.onunload()"
+        title="OAuth with Twitter"
+        persist="screenX screenY">
+
+  <stringbundle id="echofon-strings" src="chrome://echofon/locale/pref.properties"/>
+  <script type="application/x-javascript;version=1.8" src="chrome://echofon/content/utility.js"/>
+  <script type="application/x-javascript;version=1.8" src="chrome://echofon/content/OAuth.js"/>
+
+  <vbox flex="1">
+    <hbox align="center" style="border-bottom: 1px solid #666;padding: 2px 20px">
+      <label value="Enter OAuth pin here after authorizing Echofon:"/>
+      <textbox id="oauth-pin" flex="1"/>
+      <image id="spinner" src="chrome://echofon/content/images/load-more-user-view.gif" hidden="true"/>
+      <button id="enter-button" label="Enter" oncommand="DesktopOAuth.onEnterOAuthPin()"/>
+    </hbox>
+  <browser id="browser" type="content" flex="1"/>
+  </vbox>
+
+</window>

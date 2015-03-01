@@ -1,0 +1,32 @@
+/* CSS for Firefox 3 from conversation-view.css */
+.echofon-status-usericon-conversation {
+    -moz-background-size: 48px 48px !important
+    }
+/* CSS for Firefox 3 from echofon.css */
+.echofon-account-menu-button {
+    -moz-background-size: 24px 24px !important
+    }
+.echofon-ad-user-icon {
+    -moz-background-size: 32px 32px !important
+    }
+.echofon-ad-user-icon[appmode="window"] {
+    -moz-background-size: 40px 40px !important
+    }
+.echofon-event-profile-icon {
+    -moz-background-size: 20px 20px !important
+    }
+.echofon-status-usericon {
+    -moz-background-size: 32px 32px !important
+    }
+[mode="sidebar"] .echofon-status-usericon, [mode="panel"] .echofon-status-usericon {
+    -moz-background-size: 24px 24px !important
+    }
+.echofon-user-usericon {
+    -moz-background-size: 48px 48px !important
+    }
+.echofon-account-menu-button {
+    -moz-background-size: 22px 22px !important
+    }
+.echofon-tweet-popup-profile-icon {
+    -moz-background-size: 20px 20px !important
+    }

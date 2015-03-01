@@ -1,0 +1,71 @@
+<!ENTITY paneAccount.title "บัญชีผู้ใช้">
+<!ENTITY paneGeneral.title "ทั่วไป">
+<!ENTITY paneAdvanced.title "ขั้นสูง">
+<!ENTITY keyboardShortcut.title "ตั้งค่าแป้นพิมพ์">
+<!ENTITY keyboardShortcut.explanation "แป้นพิมพ์ลัดจะมีผลหลังจากเปิดหน้าต่างเบราเซอร์ใหม่">
+<!ENTITY clearCache.title "ล้างแคช">
+<!ENTITY clearCache.button "ล้าง">
+<!ENTITY echofon.title "การตั้งค่า Echofon">
+<!ENTITY echofon.accounts "บัญชีผู้ใช้">
+<!ENTITY echofon.username "ชื่อผู้ใช้">
+<!ENTITY echofon.password "รหัสผ่าน">
+<!ENTITY echofon.addAccount "เพิ่มบัญชี ...">
+<!ENTITY echofon.removeAccount "ลบบัญชี ...">
+<!ENTITY echofon.authorizing "กำลังอนุญาตเพื่อเข้าระบบ ...">
+<!ENTITY echofon.muteSetting "ตั้งค่าการ Mute ...">
+<!ENTITY echofon.preferences "การตั้งค่า">
+<!ENTITY echofon.refreshInterval "อัพเดททวีต">
+<!ENTITY echofon.theme "ธีม">
+<!ENTITY echofon.fontSize "ขนาดอักษร">
+<!ENTITY echofon.displayStyle "รูปแบบการแสดงผล">
+<!ENTITY echofon.displayNameAndScreenName "ชื่อจริงและชื่อผู้ใช้">
+<!ENTITY echofon.displayNameOnly "ชื่อจริงเท่านั้น">
+<!ENTITY echofon.displayScreenNameOnly "ชื่อผู้ใช้เท่านั้น">
+<!ENTITY echofon.fontFace "แบบอักษร">
+<!ENTITY echofon.everyminute "ทุกนาที">
+<!ENTITY echofon.every2minutes "ทุก 2 นาที">
+<!ENTITY echofon.every3minutes "ทุก 3 นาที">
+<!ENTITY echofon.every5minutes "ทุก 5 นาที">
+<!ENTITY echofon.popupInterval "ระยะเวลาป๊อปอัพ">
+<!ENTITY echofon.popup3sec "3 วินาที">
+<!ENTITY echofon.popup5sec "5 วินาที">
+<!ENTITY echofon.popup7sec "7 วินาที">
+<!ENTITY echofon.popup10sec "10 วินาที">
+<!ENTITY echofon.mentionsAndDMsOnly "ป๊อปอัพเฉพาะ Mention และ DM เท่านั้น">
+<!ENTITY echofon.popupWhileWindowIsOpened "แสดงป๊อปอัปในขณะที่เปิดหน้าต่าง Echofon อยู่">
+<!ENTITY echofon.toggleEchofon "เปิด/ปิด หน้าต่าง Echofon">
+<!ENTITY echofon.insertURL "แทรกลิงก์">
+<!ENTITY echofon.revertKeyconfig "ยกเลิกการตั้งค่า">
+<!ENTITY echofon.balloon "การแสดงป๊อปอัพ">
+<!ENTITY echofon.newTweetNotifications "แจ้งเตือน">
+<!ENTITY echofon.sound "เสียงแจ้งเตือน">
+<!ENTITY echofon.unreadCount "แสดงจำนวนข้อความที่ยังไม่ได้อ่าน">
+<!ENTITY echofon.soundButton "เลือก ...">
+<!ENTITY echofon.syncWindowTitle "ตั้งค่าการ Sync กับ iPhone">
+<!ENTITY echofon.alwaysOpenLinkInNewTab "เปิดลิงก์ในแท็บใหม่เสมอ">
+<!ENTITY echofon.alwaysOpenLinkInNewTab.tooltip "การกด Ctrl+Click (Cmd+Click สำหรับ Mac) สามารถทำให้เปิดแท็บได้โดยไม่จำเป็นต้องเลือกตัวเลือกนี้">
+<!ENTITY echofon.openLinks "การเปิดลิงค์">
+<!ENTITY echofon.applicationMode "ลักษณะหน้าต่างโปรแกรม">
+<!ENTITY echofon.panelMode "หน้าต่างมุมขวาล่าง (Panel)">
+<!ENTITY echofon.windowMode "หน้าต่างอิสระ (Window)">
+<!ENTITY echofon.sidebarMode "แถบด้านข้าง (Sidebar)">
+<!ENTITY echofon.welcome "ยินดีต้อนรับสู่ Echofon">
+<!ENTITY echofon.signIntoTwitter "ลงชื่อเข้าสู่ Twitter">
+<!ENTITY echofon.authorize "ให้สิทธิ์การเข้าระบบกับ Twitter">
+<!ENTITY echofon.agreeAndAuthEchofon "ยอมรับและอนุญาตทวิตเตอร์">
+<!ENTITY echofon.followEchofon "Follow @echofon">
+<!ENTITY echofon.muteUsers "ผู้ใช้">
+<!ENTITY echofon.muteApplications "โปรแกรม">
+<!ENTITY echofon.muteHashtags "Hashtags (#)">
+<!ENTITY echofon.addMute "เพิ่ม ...">
+<!ENTITY echofon.removeMute "ลบ">
+<!ENTITY echofon.muteTitle "การตั้งค่า Mute">
+<!ENTITY echofon.openTwitterForUserPage "เปิดหน้าของผู้ใช้จากเว็บไซต์ twitter.com">
+<!ENTITY echofon.openTwitterForUserPageExplanation "เมื่อคลิกชื่อผู้ใช้ ให้เปิดเว็บไซต์ twitter.com/screen_name แทนการเปิดหน้าของผู้ใช้ใน Echofon. คุณสามารถสลับการตั้งค่าชั่วคราวได้โดยกด shift ค้างไว้ตอนคลิกที่ชื่อผู้ใช้">
+<!ENTITY echofon.email "อีเมล">
+<!ENTITY echofon.subscribeEmail "รับข่าว">
+<!ENTITY echofon.submitEmailExplanation "กรอกอีเมลที่จะใช้รับข่าวจาก Echofon และ UberMedia">
+<!ENTITY echofon.thankYouForSubscribe "ขอบคุณสำหรับการรับข่าว">
+<!ENTITY echofon.licenseKey "License Key">
+<!ENTITY echofon.verifyLicense "ตรวจสอบ License">
+<!ENTITY echofon.licenseExplanation "กรุณากรอก License key ที่นี่ (ถ้ามี)">

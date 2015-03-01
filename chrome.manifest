@@ -1,0 +1,43 @@
+content  echofon	jar:chrome/Echofon.jar!/content/
+resource echofon	modules/
+
+skin     echofon classic/1.0 jar:chrome/Echofon.jar!/skin/win/   os=WINNT
+skin     echofon classic/1.0 jar:chrome/Echofon.jar!/skin/mac/   os=Darwin
+skin     echofon classic/1.0 jar:chrome/Echofon.jar!/skin/linux/ os=Linux
+
+overlay	 chrome://browser/content/browser.xul                    chrome://echofon/content/overlay.xul
+overlay	 chrome://emusic/content/startup.xul                     chrome://echofon/content/overlay.xul
+overlay  chrome://navigator/content/navigatorOverlay.xul         chrome://echofon/content/overlay.xul
+overlay  chrome://songbird/content/xul/mainScriptsOverlay.xul    chrome://fullhsr/content/browser.xul
+
+style chrome://global/content/customizeToolbar.xul chrome://echofon/content/overlay.css
+
+#
+# For Firefox 4
+#
+interfaces components/nsIEchofon.xpt
+
+component {3c4bfeef-c936-0d98-8fb9-b9b28e4f28ed} components/nsEchofon.js
+contract @echofon.com/echofon;1 {3c4bfeef-c936-0d98-8fb9-b9b28e4f28ed}
+category profile-after-change @echofon.com/echofon;1 @echofon.com/echofon;1
+
+locale echofon en-US jar:chrome/Echofon.jar!/locale/en-US/
+locale echofon bg jar:chrome/Echofon.jar!/locale/bg/
+locale echofon ca jar:chrome/Echofon.jar!/locale/ca/
+locale echofon cs jar:chrome/Echofon.jar!/locale/cs/
+locale echofon da jar:chrome/Echofon.jar!/locale/da/
+locale echofon de jar:chrome/Echofon.jar!/locale/de/
+locale echofon el jar:chrome/Echofon.jar!/locale/el/
+locale echofon es-ES jar:chrome/Echofon.jar!/locale/es-ES/
+locale echofon fr jar:chrome/Echofon.jar!/locale/fr/
+locale echofon gl-ES jar:chrome/Echofon.jar!/locale/gl-ES/
+locale echofon it jar:chrome/Echofon.jar!/locale/it/
+locale echofon ja jar:chrome/Echofon.jar!/locale/ja/
+locale echofon nb-NO jar:chrome/Echofon.jar!/locale/nb-NO/
+locale echofon nl jar:chrome/Echofon.jar!/locale/nl/
+locale echofon pt-BR jar:chrome/Echofon.jar!/locale/pt-BR/
+locale echofon pt-PT jar:chrome/Echofon.jar!/locale/pt-PT/
+locale echofon th jar:chrome/Echofon.jar!/locale/th/
+locale echofon tr jar:chrome/Echofon.jar!/locale/tr/
+locale echofon zh-CN jar:chrome/Echofon.jar!/locale/zh-CN/
+locale echofon zh-TW jar:chrome/Echofon.jar!/locale/zh-TW/

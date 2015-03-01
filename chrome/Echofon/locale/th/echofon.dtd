@@ -1,0 +1,74 @@
+<!ENTITY echofon.showpopup "แสดงป๊อปอัพ">
+<!ENTITY echofon.reload "รีโหลด">
+<!ENTITY echofon.markAllAsRead "ทำเครื่องหมายว่าอ่านแล้ว">
+<!ENTITY echofon.preference "การตั้งค่า...">
+<!ENTITY echofon.removeAds "ลบโฆษณา...">
+<!ENTITY echofon.logout "ออกจากระบบ">
+<!ENTITY echofon.exit "ออก">
+<!ENTITY echofon.checkUpdate "ตรวจสอบอัพเดท...">
+<!ENTITY echofon.aboutEchofon "เกี่ยวกับ Echofon">
+<!ENTITY echofon.changeAccount.tooltip "คลิกเพื่อเปลี่ยนบัญชีผู้ใช้">
+<!ENTITY echofon.copyTweet "คัดลอก">
+<!ENTITY echofon.retweet "รีทวีต...">
+<!ENTITY echofon.retweetWithComment "รีทวีตและเพิ่มความเห็น">
+<!ENTITY echofon.replyAll "ตอบทุกคน">
+<!ENTITY echofon.deleteTweet "ลบทวีตนี้">
+<!ENTITY echofon.openTweetInTab "เปิดทวีตนี้ในแท็บใหม่">
+<!ENTITY echofon.clickToStart "คลิกเพื่อเริ่ม">
+<!ENTITY echofon.copyMessage "คัดลอก">
+<!ENTITY echofon.deleteMessage "ลบข้อความนี้...">
+<!ENTITY echofon.olderPosts "ทวีตเก่า">
+<!ENTITY echofon.reply "ตอบ">
+<!ENTITY echofon.sendMessage "ส่งข้อความ">
+<!ENTITY echofon.block "บล๊อค...">
+<!ENTITY echofon.reportSpam "รายงานสแปม...">
+<!ENTITY echofon.itsYou "คุณเอง!!">
+<!ENTITY echofon.chooseList "เลือกรายชื่อ...">
+<!ENTITY echofon.loadingList "กำลังโหลดรายชื่อ...">
+<!ENTITY echofon.tweetThisPage "ทวีตหน้านี้">
+<!ENTITY echofon.postWithLink "ทวีตพร้อมลิงก์">
+<!ENTITY echofon.copyURL "คัดลอกลิงก์">
+<!ENTITY echofon.searchMention "ค้นหา Mention">
+<!ENTITY echofon.postWithTag "ทวีตแท็กนี้">
+<!ENTITY echofon.muteThisUser "Mute ผู้ใช้นี้">
+<!ENTITY echofon.muteThisTag "Mute แท็กนี้">
+<!ENTITY echofon.muteThisApp "Mute โปรแกรมนี้">
+<!ENTITY echofon.cancelButton "ยกเลิก">
+<!ENTITY echofon.sendButton "ส่ง">
+<!ENTITY echofon.tweetButton "ทวีต">
+<!ENTITY echofon.followList "ตามรายชื่อนี้">
+<!ENTITY echofon.yourSavedSearches "การค้นหาที่บันทึกไว้">
+<!ENTITY echofon.trendingTopics "หัวข้อที่กำลังเป็นประเด็น">
+<!ENTITY fileMenu.accesskey "F">
+<!ENTITY fileMenu.label "ไฟล์">
+<!ENTITY fileMenu.close "ปิด">
+<!ENTITY viewMenu.accesskey "V">
+<!ENTITY viewMenu.label "มุมมอง">
+<!ENTITY viewMenu.goHome "หน้าแรก (Home)">
+<!ENTITY viewMenu.goMentions "ถูกกล่าวถึง (Mentions)">
+<!ENTITY viewMenu.goMessages "ข้อความ (Messages)">
+<!ENTITY viewMenu.goLists "รายชื่อ (Lists)">
+<!ENTITY viewMenu.goSearch "การค้นหา">
+<!ENTITY viewMenu.refresh "รีเฟรช">
+<!ENTITY viewMenu.jumpToUnread "ข้ามไปทวีตที่ยังไม่ได้อ่าน">
+<!ENTITY viewMenu.markAsRead "ทำเครื่องหมายว่าอ่านแล้ว">
+<!ENTITY tweetMenu.accesskey "T">
+<!ENTITY tweetMenu.label "ทวีต">
+<!ENTITY tweetMenu.addImage "เพิ่มรูปภาพ...">
+<!ENTITY tweetMenu.insertURL "แทรกลิงก์แท็บปัจจุบัน">
+<!ENTITY tweetMenu.addGeoLocation "เพิ่มตำแหน่งของคุณ">
+<!ENTITY userMenu.accesskey "U">
+<!ENTITY userMenu.label "ผู้ใช้">
+<!ENTITY userMenu.gotoUser "ไปที่ผู้ใช้...">
+<!ENTITY userMenu.myProfile "โปรไฟล์ของฉัน">
+<!ENTITY prevAccountCmd.accesskey "p">
+<!ENTITY nextAccountCmd.accesskey "n">
+<!ENTITY refreshCmd.accesskey "r">
+<!ENTITY jumpToUnreadCmd.accesskey "j">
+<!ENTITY markAsReadCmd.accesskey "m">
+<!ENTITY myProfileCmd.accesskey "p">
+<!ENTITY gotoUserCmd.accesskey "u">
+<!ENTITY insertURLCmd.accesskey "l">
+<!ENTITY addImageCmd.accesskey "i">
+<!ENTITY addGeoLocationCmd.accesskey "g">
+<!ENTITY closeCmd.accesskey "x">

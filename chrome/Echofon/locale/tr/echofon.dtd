@@ -1,0 +1,74 @@
+<!ENTITY echofon.showpopup "Bildirimleri göster">
+<!ENTITY echofon.reload "Yenile">
+<!ENTITY echofon.markAllAsRead "Tümünü okundu olarak işaretle">
+<!ENTITY echofon.preference "Tercihler...">
+<!ENTITY echofon.logout "Çıkış yap">
+<!ENTITY echofon.exit "Çıkış">
+<!ENTITY echofon.checkUpdate "Güncellemeleri Kontrol Et...">
+<!ENTITY echofon.aboutEchofon "Echofon Hakkında">
+<!ENTITY echofon.changeAccount.tooltip "Hesap değiştirmek için tıklayın">
+<!ENTITY echofon.copyTweet "Kopyala">
+<!ENTITY echofon.retweet "Tekrar-tweet'le">
+<!ENTITY echofon.retweetWithComment "Yorum ekleyeret tekrar-tweet'le">
+<!ENTITY echofon.replyAll "Tümümü yanıtla">
+<!ENTITY echofon.deleteTweet "Bu tweet'i sil">
+<!ENTITY echofon.openTweetInTab "Bu tweet'i yeni sekmede aç">
+<!ENTITY echofon.clickToStart "Başlamak için tıklayın">
+<!ENTITY echofon.copyMessage "Kopyala">
+<!ENTITY echofon.deleteMessage "Bu Mesajı Sil…">
+<!ENTITY echofon.olderPosts "Eski Tweet'ler">
+<!ENTITY echofon.reply "Yanıtla">
+<!ENTITY echofon.sendMessage "Mesaj Gönder">
+<!ENTITY echofon.block "Engelle…">
+<!ENTITY echofon.reportSpam "Spam Olarak Bildir">
+<!ENTITY echofon.itsYou "Bu Sensin!">
+<!ENTITY echofon.chooseList "Liste Seç...">
+<!ENTITY echofon.loadingList "Liste Yükleniyor...">
+<!ENTITY echofon.tweetThisPage "Bu Sayfayı Tweet'le">
+<!ENTITY echofon.postWithLink "Link ile Gönder">
+<!ENTITY echofon.copyURL "URL'yi Kopyala">
+<!ENTITY echofon.searchMention "Bahsedenlerde Ara">
+<!ENTITY echofon.postWithTag "Bu Etiketle Gönder">
+<!ENTITY echofon.muteThisUser "Bu Kullanıcıyı Sustur">
+<!ENTITY echofon.muteThisTag "Bu Etiketi Sustur">
+<!ENTITY echofon.muteThisApp "Bu Uygulamayı Sustur">
+<!ENTITY echofon.cancelButton "İptal">
+<!ENTITY echofon.sendButton "Gönder">
+<!ENTITY echofon.tweetButton "Tweet'le">
+<!ENTITY echofon.followList "Bu Listeyi Takip Et">
+<!ENTITY echofon.yourSavedSearches "Kaydedilmiş Aramalarınız">
+<!ENTITY echofon.trendingTopics "Gündem">
+<!ENTITY fileMenu.accesskey "F">
+<!ENTITY fileMenu.label "Dosya">
+<!ENTITY fileMenu.close "Kapat">
+<!ENTITY viewMenu.accesskey "V">
+<!ENTITY viewMenu.label "Görünüm">
+<!ENTITY viewMenu.goHome "Ana Sayfa">
+<!ENTITY viewMenu.goMentions "Bahsedenler">
+<!ENTITY viewMenu.goMessages "Mesajlar">
+<!ENTITY viewMenu.goLists "Listeler">
+<!ENTITY viewMenu.goSearch "Ara">
+<!ENTITY viewMenu.refresh "Zaman Akışını Yenile">
+<!ENTITY viewMenu.jumpToUnread "Okunmayanlara Git">
+<!ENTITY viewMenu.markAsRead "Okundu Olarak İşaretle">
+<!ENTITY tweetMenu.accesskey "T">
+<!ENTITY tweetMenu.label "Tweet">
+<!ENTITY tweetMenu.addImage "Görsel Ekle">
+<!ENTITY tweetMenu.insertURL "Mevcut Sekmenin Adresini Ekle">
+<!ENTITY tweetMenu.addGeoLocation "Yer Bilgisi Ekle">
+<!ENTITY userMenu.accesskey "U">
+<!ENTITY userMenu.label "Kullanıcı">
+<!ENTITY userMenu.gotoUser "Kullanıcıya Git...">
+<!ENTITY userMenu.myProfile "Profilim">
+<!ENTITY prevAccountCmd.accesskey "p">
+<!ENTITY nextAccountCmd.accesskey "n">
+<!ENTITY refreshCmd.accesskey "r">
+<!ENTITY jumpToUnreadCmd.accesskey "j">
+<!ENTITY markAsReadCmd.accesskey "m">
+<!ENTITY myProfileCmd.accesskey "p">
+<!ENTITY gotoUserCmd.accesskey "u">
+<!ENTITY insertURLCmd.accesskey "l">
+<!ENTITY addImageCmd.accesskey "i">
+<!ENTITY addGeoLocationCmd.accesskey "g">
+<!ENTITY closeCmd.accesskey "x">
+<!ENTITY echofon.removeAds "Remove Ads...">

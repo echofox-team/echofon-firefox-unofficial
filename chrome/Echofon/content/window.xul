@@ -1,0 +1,256 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://echofon/content/echofon.css" type="text/css"?>
+<?xml-stylesheet href="chrome://echofon/skin/echofon.css" type="text/css"?>
+
+<!DOCTYPE window [
+<!ENTITY % echofonDTD SYSTEM "chrome://echofon/locale/echofon.dtd">
+%echofonDTD;
+]>
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        id="echofon-window"
+        windowtype="Echofon:main"
+        title="Echofon"
+        accelerated="true"
+        persist="screenX screenY,width,height,sizemode">
+
+  <script src="utility.js" type="application/x-javascript;version=1.8"/>
+  <script src="menu.js" type="application/x-javascript;version=1.8"/>
+  <script src="window.js" type="application/x-javascript;version=1.8"/>
+
+  <stringbundle id="platformKeys" src="chrome://global-platform/locale/platformKeys.properties"/>
+  <stringbundle id="localeKeys" src="chrome://global/locale/keys.properties"/>
+  <stringbundle id="echofon-strings" src="chrome://echofon/locale/echofon.properties"/>
+
+  <commandset id="mainCommandSet">
+    <command id="cmd_close"              oncommand="close()"/>
+    <command id="cmd_focusToBrowser"     oncommand="focusToBrowser()"/>
+    <command id="cmd_nextTab"            oncommand="nextTab(true)"/>
+    <command id="cmd_prevTab"            oncommand="nextTab(false)"/>
+    <command id="cmd_scrollUp"           oncommand="scrollBy(-1)"/>
+    <command id="cmd_scrollDown"         oncommand="scrollBy(1)"/>
+
+    <command id="cmd_goHome"             oncommand="changeTab(0)"/>
+    <command id="cmd_goMentions"         oncommand="changeTab(1)"/>
+    <command id="cmd_goMessages"         oncommand="changeTab(2)"/>
+    <command id="cmd_goLists"            oncommand="changeTab(3)"/>
+    <command id="cmd_goSearch"           oncommand="changeTab(4)"/>
+    <command id="cmd_prevAccount"        oncommand="nextAccount(true)"/>
+    <command id="cmd_nextAccount"        oncommand="nextAccount(false)"/>
+    <command id="cmd_preference"         oncommand="openPreference()"/>
+    <command id="cmd_purchase"           oncommand="EchofonCommon.openPurchase()"/>
+    <command id="cmd_refresh"            oncommand="EchofonCommon.reloadTimeline()"/>
+    <command id="cmd_jumpToUnread"       oncommand="jumpToUnread()"/>
+    <command id="cmd_markAsRead"         oncommand="markRead()"/>
+
+    <command id="cmd_addImage"           oncommand="addImage()"/>
+    <command id="cmd_insertURL"          oncommand="insertURL()"/>
+    <command id="cmd_addGeoLocation"     oncommand="addGeoLocation()"/>
+
+    <command id="cmd_gotoUser"           oncommand="EchofonCommon.gotoUser()"/>
+    <command id="cmd_myProfile"          oncommand="EchofonCommon.openProfile()"/>
+
+
+    <command id="cmd_newWindow"          oncommand="window.open()"/>
+
+
+  </commandset>
+
+  <keyset id="menuKeyset">
+    <!-- customizable keyboard shortcut (for backward compatibility with version 1.x) -->
+    <key id="echofon-custom-key-togglePopup" key="" command="cmd_focusToBrowser" modifiers="shift,accel"/>
+    <key id="echofon-custom-key-insertURL" key="" command="cmd_insertURL" modifiers="shift,accel"/>
+
+    <!-- global key handler -->
+<!--    <key keycode="VK_ESCAPE" command="cmd_close"/>-->
+    <key keycode="VK_TAB"    command="cmd_nextTab"/>
+    <key keycode="VK_TAB"    command="cmd_prevTab" modifiers="shift"/>
+    <key keycode="VK_UP"     command="cmd_scrollUp"/>
+    <key keycode="VK_DOWN"   command="cmd_scrollDown"/>
+
+    <!-- menu keyboard shortcut -->
+    <key id="key_close" key="w" command="cmd_close" modifiers="accel"/>
+
+    <key id="key_goHome"     key="1" command="cmd_goHome" modifiers="accel"/>
+    <key id="key_goMentions" key="2" command="cmd_goMentions" modifiers="accel"/>
+    <key id="key_goMessages" key="3" command="cmd_goMessages" modifiers="accel"/>
+    <key id="key_goLists"    key="4" command="cmd_goLists" modifiers="accel"/>
+    <key id="key_goSearch"   key="5" command="cmd_goSearch" modifiers="accel"/>
+
+    <key key="{" command="cmd_prevTab" modifiers="accel"/>
+    <key key="}" command="cmd_nextTab" modifiers="accel"/>
+
+    <key id="key_preference"   key="," command="cmd_preference" modifiers="accel"/>
+    <key id="key_refresh"      key="r" command="cmd_refresh" modifiers="accel"/>
+    <key id="key_jumpToUnread" key="j" command="cmd_jumpToUnread" modifiers="accel"/>
+    <key id="key_markAsRead"   key="k" command="cmd_markAsRead" modifiers="accel"/>
+
+    <key id="key_gotoUser"  key="u" command="cmd_gotoUser" modifiers="accel"/>
+    <key id="key_myProfile" key="u" command="cmd_myProfile" modifiers="accel, shift"/>
+
+    <key id="key_addImage"       key="i" command="cmd_addImage" modifiers="accel"/>
+    <key id="key_addGeoLocation" key="l" command="cmd_addGeoLocation" modifiers="accel"/>
+
+    <key key="j" oncommand="openJSConsole()" modifiers="accel,shift"/>
+    <key key="a" oncommand="openAboutConfig()" modifiers="accel,shift"/>
+
+    <key key="n" command="cmd_newWindow" modifiers="accel"/>
+  </keyset>
+
+  <!-- titlebar badge for Windows -->
+  <vbox id="echofon-titlebar" hidden="true">
+    <hbox id="echofon-titlebar-content">
+      <hbox id="echofon-appmenu-button-container" align="start">
+        <button id="echofon-appmenu-button"
+                type="menu"
+                menu="echofon-file-menu"
+                label="Echofon"
+                style="-moz-user-focus: ignore;">
+          <menupopup id="echofon-appmenu-menupopup" onpopupshowing="onBadgeMenuOpening()">
+            <echofon-menu/>
+          </menupopup>
+        </button>
+      </hbox>
+      <spacer id="echofon-titlebar-spacer" flex="1"/>
+      <hbox id="echofon-titlebar-buttonbox">
+        <toolbarbutton class="echofon-titlebar-button" id="echofon-titlebar-min" oncommand="window.minimize();"/>
+        <toolbarbutton class="echofon-titlebar-button" id="echofon-titlebar-max" oncommand="onTitlebarMaxClick();"/>
+        <toolbarbutton class="echofon-titlebar-button" id="echofon-titlebar-close" command="cmd_close"/>
+      </hbox>
+    </hbox>
+  </vbox>
+
+  <!-- main content box -->
+  <vbox id="echofon-main-window-content" flex="1">
+
+    <toolbox style="-moz-appearance: -moz-win-borderless-glass; background:transparent">
+
+      <menubar id="echofon-menubar">
+        <!-- File -->
+        <menu id="echofon-file-menu" label="&fileMenu.label;" accesskey="&fileMenu.accesskey;">
+          <menupopup>
+            <menuitem id="menu_purchase"
+                      label="&echofon.removeAds;"
+                      command="cmd_purchase"/>
+            <menuseparator/>
+            <menuitem id="menu_preference"
+                      label="&echofon.preference;"
+                      key="key_preference"
+                      command="cmd_preference"/>
+            <menuseparator/>
+            <menuitem id="menu_close"
+                      label="&fileMenu.close;"
+                      key="key_close"
+                      command="cmd_close"
+                      accesskey="&closeCmd.accesskey;"/>
+          </menupopup>
+        </menu>
+        <!-- View -->
+        <menu id="echofon-view-menu" label="&viewMenu.label;" accesskey="&viewMenu.accesskey;">
+          <menupopup>
+            <menuitem id="menu_goHome"
+                      label="&viewMenu.goHome;"
+                      key="key_goHome"
+                      accesskey="1"
+                      command="cmd_goHome"/>
+            <menuitem id="menu_goMentions"
+                      label="&viewMenu.goMentions;"
+                      key="key_goMentions"
+                      accesskey="2"
+                      command="cmd_goMentions"/>
+            <menuitem id="menu_goMessages"
+                      label="&viewMenu.goMessages;"
+                      key="key_goMessages"
+                      accesskey="3"
+                      command="cmd_goMessages"/>
+            <menuitem id="menu_goLists"
+                      label="&viewMenu.goLists;"
+                      key="key_goLists"
+                      accesskey="4"
+                      command="cmd_goLists"/>
+            <menuitem id="menu_goSearch"
+                      label="&viewMenu.goSearch;"
+                      key="key_goSearch"
+                      accesskey="5"
+                      command="cmd_goSearch"/>
+            <menuseparator/>
+            <menuitem id="menu_refresh"
+                      label="&viewMenu.refresh;"
+                      key="key_refresh"
+                      accesskey="&refreshCmd.accesskey;"
+                      command="cmd_refresh"/>
+            <menuseparator/>
+            <menuitem id="menu_jumpToUnread"
+                      label="&viewMenu.jumpToUnread;"
+                      key="key_jumpToUnread"
+                      accesskey="&jumpToUnreadCmd.accesskey;"
+                      command="cmd_jumpToUnread"/>
+            <menuitem id="menu_markAsRead"
+                      label="&viewMenu.markAsRead;"
+                      key="key_markAsRead"
+                      accesskey="&markAsReadCmd.accesskey;"
+                      command="cmd_markAsRead"/>
+          </menupopup>
+        </menu>
+
+        <!-- User -->
+        <menu id="echofon-user-menu" label="&userMenu.label;" accesskey="&userMenu.accesskey;">
+          <menupopup>
+            <menuitem id="menu_gotoUser"
+                      label="&userMenu.gotoUser;"
+                      key="key_gotoUser"
+                      accesskey="&gotoUserCmd.accesskey;"
+                      command="cmd_gotoUser"/>
+            <menuitem id="menu_myProfile"
+                      label="&userMenu.myProfile;"
+                      key="key_myProfile"
+                      accesskey="&myProfileCmd.accesskey;"
+                      command="cmd_myProfile"/>
+          </menupopup>
+        </menu>
+
+        <!-- Tweet -->
+        <menu id="echofon-tweet-menu" label="&tweetMenu.label;" accesskey="&tweetMenu.accesskey;">
+          <menupopup>
+            <menuitem id="menu_insertURL"
+                      label="&tweetMenu.insertURL;"
+                      key="echofon-custom-key-insertURL"
+                      accesskey="&insertURLCmd.accesskey;"
+                      command="cmd_insertURL"/>
+            <menuitem id="menu_addImage"
+                      label="&tweetMenu.addImage;"
+                      key="key_addImage"
+                      accesskey="&addImageCmd.accesskey;"
+                      command="cmd_addImage"/>
+            <menuitem id="menu_addGeLocation"
+                      label="&tweetMenu.addGeoLocation;"
+                      key="key_addGeoLocation"
+                      accesskey="&addGeoLocationCmd.accesskey;"
+                      command="cmd_addGeoLocation"/>
+          </menupopup>
+        </menu>
+      </menubar>
+
+      <!-- Main toolbar -->
+      <echofon-toolbar id="echofon-toolbar" noclosebutton="true" flex="1"/>
+
+    </toolbox>
+
+    <vbox flex="1" id="echofon-main-window-container">
+      <!-- tweetbox content -->
+      <vbox id="echofon-main-window" flex="1"/>
+
+      <!-- status bar -->
+      <vbox id="echofon-statusbar">
+        <echofon-compose id="echofon-compose-bar"/>
+      </vbox>
+    </vbox>
+
+  </vbox>
+
+  <!-- for welcome screen -->
+  <browser id="echofon-welcome-screen" flex="1" autoscroll="false" disablehistory="true" hidden="true" type="chrome" src=""/>
+
+</window>

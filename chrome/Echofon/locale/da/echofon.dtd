@@ -1,0 +1,74 @@
+<!ENTITY echofon.showpopup "Vis pop op">
+<!ENTITY echofon.reload "Genindlæs">
+<!ENTITY echofon.markAllAsRead "Marker alle som læste">
+<!ENTITY echofon.preference "Indstillinger…">
+<!ENTITY echofon.removeAds "Fjern reklamer…">
+<!ENTITY echofon.logout "Log ud">
+<!ENTITY echofon.exit "Afslut">
+<!ENTITY echofon.checkUpdate "Se efter opdateringer…">
+<!ENTITY echofon.aboutEchofon "Om Echofon">
+<!ENTITY echofon.changeAccount.tooltip "Klik for at skifte konto">
+<!ENTITY echofon.copyTweet "Kopier">
+<!ENTITY echofon.retweet "Gen-tweet…">
+<!ENTITY echofon.retweetWithComment "Gen-tweet med kommentar">
+<!ENTITY echofon.replyAll "Svar alle">
+<!ENTITY echofon.deleteTweet "Slet denne tweet…">
+<!ENTITY echofon.openTweetInTab "Åbn denne tweet i et nyt faneblad">
+<!ENTITY echofon.clickToStart "Klik for at starte">
+<!ENTITY echofon.copyMessage "Kopier">
+<!ENTITY echofon.deleteMessage "Slet denne meddelelse…">
+<!ENTITY echofon.olderPosts "ÆLDRE TWEETS">
+<!ENTITY echofon.reply "Svar">
+<!ENTITY echofon.sendMessage "Send meddelelse">
+<!ENTITY echofon.block "Bloker…">
+<!ENTITY echofon.reportSpam "Rapporter spam…">
+<!ENTITY echofon.itsYou "Det er dig!">
+<!ENTITY echofon.chooseList "Vælg liste…">
+<!ENTITY echofon.loadingList "Indlæser liste…">
+<!ENTITY echofon.tweetThisPage "Tweet denne side">
+<!ENTITY echofon.postWithLink "Send med link">
+<!ENTITY echofon.copyURL "Kopier URL">
+<!ENTITY echofon.searchMention "Søg efter omtaler">
+<!ENTITY echofon.postWithTag "Send med dette tag">
+<!ENTITY echofon.muteThisUser "Gør denne bruger tavs">
+<!ENTITY echofon.muteThisTag "Gør dette tag tavst">
+<!ENTITY echofon.muteThisApp "Gør denne applikation tavs">
+<!ENTITY echofon.cancelButton "Annuller">
+<!ENTITY echofon.sendButton "Send">
+<!ENTITY echofon.tweetButton "Tweet">
+<!ENTITY echofon.followList "Følg denne liste">
+<!ENTITY echofon.yourSavedSearches "Dine gemte søgninger">
+<!ENTITY echofon.trendingTopics "Trendsættende emner">
+<!ENTITY fileMenu.accesskey "F">
+<!ENTITY fileMenu.label "Fil">
+<!ENTITY fileMenu.close "Luk">
+<!ENTITY viewMenu.accesskey "V">
+<!ENTITY viewMenu.label "Vis">
+<!ENTITY viewMenu.goHome "Hjem">
+<!ENTITY viewMenu.goMentions "Omtaler">
+<!ENTITY viewMenu.goMessages "Meddelelser">
+<!ENTITY viewMenu.goLists "Lister">
+<!ENTITY viewMenu.goSearch "Søg">
+<!ENTITY viewMenu.refresh "Opdater tidslinje">
+<!ENTITY viewMenu.jumpToUnread "Hop til ulæst">
+<!ENTITY viewMenu.markAsRead "Marker som læst">
+<!ENTITY tweetMenu.accesskey "T">
+<!ENTITY tweetMenu.label "Tweet">
+<!ENTITY tweetMenu.addImage "Tilføj billede…">
+<!ENTITY tweetMenu.insertURL "Indsæt pågældende faneblads URL">
+<!ENTITY tweetMenu.addGeoLocation "Tilføj Geo Location…">
+<!ENTITY userMenu.accesskey "B">
+<!ENTITY userMenu.label "Bruger">
+<!ENTITY userMenu.gotoUser "Gå til bruger…">
+<!ENTITY userMenu.myProfile "Min profil">
+<!ENTITY prevAccountCmd.accesskey "f">
+<!ENTITY nextAccountCmd.accesskey "n">
+<!ENTITY refreshCmd.accesskey "O">
+<!ENTITY jumpToUnreadCmd.accesskey "H">
+<!ENTITY markAsReadCmd.accesskey "M">
+<!ENTITY myProfileCmd.accesskey "d">
+<!ENTITY gotoUserCmd.accesskey "u">
+<!ENTITY insertURLCmd.accesskey "I">
+<!ENTITY addImageCmd.accesskey "T">
+<!ENTITY addGeoLocationCmd.accesskey "g">
+<!ENTITY closeCmd.accesskey "L">

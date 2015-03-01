@@ -1,0 +1,875 @@
+<?xml version="1.0"?>
+
+<!--
+    Implementation of Echofon window elements
+
+    Copyright (c) 2009 Kazuho Okui / naan studio, Inc. ALL RIGHTS RESERVED.
+-->
+
+<!DOCTYPE bindings SYSTEM "chrome://echofon/locale/echofon.dtd">
+<bindings xmlns="http://www.mozilla.org/xbl"
+          xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:xbl="http://www.mozilla.org/xbl"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <binding id="echofon-user-icon-menu">
+    <content>
+      <xul:vbox>
+        <xul:menuitem label="&echofon.reply;" oncommand="reply()"/>
+        <xul:menuitem label="&echofon.sendMessage;" oncommand="DM()"/>
+        <xul:menuseparator/>
+        <xul:menuitem label="&echofon.muteThisUser;" oncommand="muteUser()"/>
+        <xul:menuitem label="&echofon.block;" oncommand="block('Block')"/>
+        <xul:menuitem label="&echofon.reportSpam;" oncommand="block('Spam')"/>
+      </xul:vbox>
+    </content>
+  </binding>
+
+  <binding id="echofon-link-menu">
+    <content>
+	<xul:vbox>
+            <xul:menuitem label="&echofon.copyURL;" oncommand="copyURL()"/>
+            <xul:menuitem label="&echofon.postWithLink;" oncommand="postWithLink()"/>
+	</xul:vbox>
+    </content>
+  </binding>
+
+  <binding id="echofon-app-menu">
+    <content>
+        <xul:vbox>
+            <xul:menuitem label="&echofon.muteThisApp;" oncommand="muteTag('app')"/>
+	</xul:vbox>
+    </content>
+  </binding>
+
+  <binding id="echofon-username-menu">
+    <content>
+	<xul:vbox>
+            <xul:menuitem label="&echofon.reply;" oncommand="replyToMention()"/>
+            <xul:menuitem label="&echofon.searchMention;" oncommand="searchMention(this)"/>
+	</xul:vbox>
+    </content>
+  </binding>
+
+  <binding id="echofon-hashtag-menu">
+    <content>
+	<xul:vbox>
+            <xul:menuitem label="&echofon.postWithTag;" oncommand="postWithTag()"/>
+            <xul:menuitem label="&echofon.muteThisTag;" oncommand="muteTag('hashtag')"/>
+	</xul:vbox>
+    </content>
+  </binding>
+
+  <binding id="echofon-tweet-cell-menu">
+    <content>
+	<xul:vbox>
+            <xul:menuitem anonid="copy"      label="&echofon.copyTweet;" oncommand="copyText()"/>
+            <xul:menuseparator/>
+            <xul:menuitem anonid="retweet"   label="&echofon.retweet;" oncommand="retweet()"/>
+            <xul:menuitem anonid="rtComment" label="&echofon.retweetWithComment;" oncommand="retweetWithComment()"/>
+            <xul:menuitem anonid="replyAll"  label="&echofon.replyAll;" oncommand="replyAll()"/>
+            <xul:menuseparator/>
+            <xul:menuitem anonid="delete"    label="&echofon.deleteTweet;" oncommand="deleteTweet()" disabled="true"/>
+	</xul:vbox>
+    </content>
+    <implementation>
+	<method name="item">
+	    <parameter name="val"/>
+	    <body>
+                return document.getAnonymousElementByAttribute(this, "anonid", val);
+	    </body>
+	</method>
+    </implementation>
+  </binding>
+
+  <!-- user profile icon -->
+
+  <binding id="echofon-user-profile-image">
+    <handlers>
+      <handler event="contextmenu">
+	userProfileIconMenu(this._user, event);
+	event.stopPropagation();
+	event.preventDefault();
+      </handler>
+    </handlers>
+
+    <implementation>
+      <property name="user">
+        <setter>
+          this._user = val;
+          this.style.background = "url(" + this._user.profile_image_url + ")";
+        </setter>
+        <getter>
+          return this._user;
+        </getter>
+      </property>
+    </implementation>
+  </binding>
+
+  <!--
+      Tweet cell base (common for tweet and DM)
+    -->
+  <binding id="echofon-status-base">
+    <handlers>
+      <handler event="mouseover" capturing="false">
+        if (window.gScrollTimer) {
+          window.gHoveredCell = this;
+          return;
+        }
+        this.hover();
+      </handler>
+
+      <handler event="mouseout">
+        var favorite = document.getAnonymousElementByAttribute(this, "anonid", "favorite");
+        if (favorite) {
+          if (this.getAttribute("favorited") == "true") {
+            favorite.style.display = "block";
+          }
+          else {
+            favorite.style.display = "none";
+          }
+        }
+        var reply = document.getAnonymousElementByAttribute(this, "anonid", "reply");
+        if (reply) {
+          reply.style.display = "none";
+        }
+      </handler>
+
+      <handler event="click">
+        if (event.button == 2) return;
+
+        var url = event.originalTarget.getAttribute('href');
+        if (url) {
+          if (url[0] == '#') {
+            EchofonCommon.notifyObservers("searchTweets", url);
+            return;
+          }
+          try{
+            if (event.originalTarget.getAttribute("type") == "tweet-popup") {
+              var t = EchofonModel.Status.findById(this.tweet.in_reply_to_status_id, this.uid);
+              if (!t) {
+                EchofonCommon.notify("getStatus", {status_id:this.tweet.in_reply_to_status_id});
+              }
+              var p = document.getElementById('echofon-tweet-popup');
+              if (p) {
+                p.tweet = null;
+                p.parentNode.removeChild(p);
+              }
+              else {
+                var p = document.createElement("echofon-tweet-popup");
+                p.id = "echofon-tweet-popup";
+              }
+              var parent = event.originalTarget;
+              parent.parentNode.appendChild(p);
+              p.openPopup(parent);
+              p.tweet = t;
+            }
+            else {
+              EchofonCommon.openURL(url, event);
+            }
+          }
+          catch (e) {dump('Failed to get status: ' + e.fileName + ":"+ e.lineNumber + " " + e.message);}
+        }
+      </handler>
+
+      <handler event="contextmenu">
+	  var menu = $('echofon-menu-popup');
+	  if (menu.state == 'open') return;
+
+	  var type = event.target.getAttribute('type');
+	  var items = null;
+	  if (type == 'hashtag' || type == 'app' || type == 'link' || type == 'username') {
+            items = document.createElement('echofon-' + type + "-menu");
+	    menu.target = event.target;
+	  }
+	  else if (event.target.tagName == 'echofon-status' || event.target.parentNode.tagName == 'echofon-status') {
+            items = document.createElement('echofon-tweet-cell-menu');
+            menu.target = this;
+	  }
+
+	  if (!items) return;
+	  while(menu.firstChild) menu.removeChild(menu.firstChild);
+
+	  menu.appendChild(items);
+	  menu.openPopupAtScreen(event.screenX, event.screenY, true);
+          event.stopPropagation();
+          event.preventDefault();
+      </handler>
+
+    </handlers>
+
+    <implementation>
+      <field name="padding"/>
+      <field name="containerWidth"/>
+      <field name="appMode"/>
+
+      <method name="hover">
+        <body>
+          var favorite = document.getAnonymousElementByAttribute(this, "anonid", "favorite");
+          if (favorite) {
+            favorite.style.display = "block";
+          }
+          var reply = document.getAnonymousElementByAttribute(this, "anonid", "reply");
+          if (reply) {
+            reply.style.display = "block";
+          }
+        </body>
+      </method>
+
+      <method name="onReplyButton">
+        <parameter name="parent"/>
+        <body>
+          reply(parent, this.tweet);
+        </body>
+      </method>
+
+    </implementation>
+
+  </binding>
+
+  <!--
+      Unread border
+   -->
+  <binding id="echofon-unread-border">
+    <content>
+      <xul:hbox class="echofon-status-unread-border-container" align="center" flex="1">
+        <xul:spacer class="echofon-status-unread-border" flex="1"/>
+        <xul:label class="echofon-status-unread-message" value="&echofon.olderPosts;"/>
+        <xul:spacer class="echofon-status-unread-border" flex="1"/>
+      </xul:hbox>
+    </content>
+  </binding>
+
+  <!--
+      Tweet cell
+    -->
+  <binding id="echofon-status" extends="chrome://echofon/content/tweetbox.xml#echofon-status-base">
+    <content>
+      <xul:vbox flex="1">
+        <xul:hbox flex="1" class="echofon-status-container">
+
+          <!-- user icon -->
+          <xul:vbox>
+            <xul:box anonid="usericon" class="echofon-status-usericon" align="top" tooltip="echofon-user-tooltip" xbl:inherits="href"/>
+            <xul:spacer flex="1" />
+          </xul:vbox>
+
+          <!-- messages -->
+          <xul:vbox class="echofon-status-message-container" flex="1">
+            <xul:description class="echofon-status-message">
+              <children />
+            </xul:description>
+            <xul:hbox class="echofon-status-info" crop="right" align="left">
+              <children includes="echofon-status-tagline"/>
+            </xul:hbox>
+            <xul:hbox class="echofon-status-info">
+              <children includes="echofon-status-retweet-status"/>
+            </xul:hbox>
+          </xul:vbox>
+
+          <!-- function icons -->
+          <xul:vbox align="end" class="echofon-function-icon-box">
+            <xul:image anonid="favorite"
+                       class="echofon-status-favorite"
+                       onclick="toggleFavorite()"
+                       xbl:inherits="favorited, messageId, attr,type,tooltiptext=favoriteButtonTooltip,requestFavorite"/>
+            <xul:image anonid="reply"
+                       style="display:none;"
+                       class="echofon-status-reply"
+                       onclick="onReplyButton(this)"
+                       xbl:inherits="name=screen_name,messageId,attr,type,text,tooltiptext=replyButtonTooltip"/>
+          </xul:vbox>
+
+          <!-- timeline photo -->
+          <xul:vbox flex="1">
+            <xul:stack onclick="openPhoto(event)" flex="1">
+              <xul:image anonid="thumbnail-photo" xbl:inherits="src=thumbnail-photo" class="echofon-status-photo"/>
+              <xul:hbox align="center">
+                <xul:spacer flex="1"/>
+                <xul:image anonid="video-playback-icon" class="echofon-status-video-playback-icon"/>
+                <xul:spacer flex="1"/>
+              </xul:hbox>
+            </xul:stack>
+          </xul:vbox>
+
+        </xul:hbox>
+      </xul:vbox>
+    </content>
+
+    <implementation>
+
+      <constructor>
+        var icon = document.getAnonymousElementByAttribute(this, "anonid", "usericon");
+        icon.style.background = "url(" + this.user.profile_image_url + ")";
+        icon.user = this.user;
+
+        this.padding = 10 + 32 + 5 + 18 + 5; // left avator spacing icons right
+        if (this.pb) {
+          this.padding += 64;
+        }
+        if (this.getAttribute("user-timeline")) {
+          this.padding += 24;
+        }
+        else if (this.appMode != "window") {
+          this.padding  -= (8+5);
+          if (this.pb) {
+            this.padding -= 12;
+          }
+        }
+        if (!this.containerWidth) {
+          this.containerWidth = window.innerWidth - 16;
+        }
+        this.firstChild.style.width = (this.containerWidth-this.padding) + "px";
+
+        if (this.pb) {
+          var target = this;
+          var u = this.pb.thumbnailURL(target);
+          this.setAttribute("thumbnail-photo", this.pb.thumbnailURL(target));
+          if (u.match(/(twitvid|youtube|youtu\.be)/)) {
+            document.getAnonymousElementByAttribute(this, "anonid", "video-playback-icon").style.display = "block";
+          }
+        }
+      </constructor>
+
+      <property name="border">
+	<setter>
+	  this.setAttribute("border", val);
+	</setter>
+      </property>
+
+      <method name="doRetweet">
+        <parameter name="tweet"/>
+        <body>
+        <![CDATA[
+          for (var i = 0; i < this.childNodes.length; ++i) {
+            var e = this.childNodes[i];
+            if (e.tagName == 'echofon-status-retweet-status') {
+              this.removeChild(e);
+              break;
+            }
+          }
+          var rt = document.createElement("echofon-status-retweet-status");
+          var fontSize = EchofonCommon.fontSize();
+          rt.style.fontSize = (fontSize - 1) + "px";
+          var rtby = EchofonCommon.createAnchorText(EchofonCommon.twitterURL(tweet.retweeter_screen_name), EchofonCommon.getString("you"));
+          EchofonCommon.formatTextNode(rt, "retweetedBy", rtby);
+          rt.id = "retweet-status-" + this.tweet.id;
+          this.appendChild(rt);
+          this.setAttribute("is_own_retweet", true);
+          this.tweet = tweet;
+        ]]>
+        </body>
+      </method>
+
+      <method name="undoRetweet">
+        <parameter name="tweet"/>
+        <body>
+        var rt = document.getElementById("retweet-status-" + this.tweet.id);
+        if (rt) {
+          rt.parentNode.removeChild(rt);
+        }
+        this.removeAttribute("is_own_retweet");
+        this.tweet = tweet;
+        </body>
+      </method>
+
+      <method name="setFavorited">
+        <parameter name="val"/>
+        <body>
+          this.setAttribute("requestFavorite", false);
+          this.setAttribute("favorited", val);
+          this.setAttribute("favoriteButtonTooltip", EchofonCommon.getString(val ? "UnfavoriteTweet" : "FavoriteTweet"));
+          var favorite = document.getAnonymousElementByAttribute(this, "anonid", "favorite");
+	  favorite.style.display = (val) ? "block" : "none";
+        </body>
+      </method>
+
+      <method name="openPhoto">
+        <parameter name="event"/>
+	<body>
+          var url = this.getAttribute("status-photo");
+          var win = EchofonCommon.isWindowExist(url);
+          if (win) {
+            win.focus();
+          }
+          else {
+            if (this.pb.media == EchofonPhotoBackend.MEDIA_TYPE_VIDEO) {
+              EchofonCommon.openURL(url, event);
+            }
+            else {
+              EchofonCommon.openPhotoView(this.pb);
+            }
+          }
+	</body>
+      </method>
+
+      <method name="loadImage">
+	<parameter name="url"/>
+	<body>
+            this.setAttribute("thumbnail-photo", url);
+	</body>
+      </method>
+
+      <method name="toggleFavorite">
+        <body>
+          this.setAttribute("requestFavorite", true);
+          var messageId = this.getAttribute("messageId");
+          var method;
+          if (this.getAttribute("favorited") != "true") {
+            method = "create";
+          }
+          else {
+            method = "destroy";
+          }
+          EchofonCommon.notify("setFavorite",{id: messageId, method: method});
+        </body>
+      </method>
+
+    </implementation>
+
+  </binding>
+
+  <!--
+      Thread cell
+    -->
+  <binding id="echofon-dm-thread" extends="chrome://echofon/content/tweetbox.xml#echofon-status-base">
+    <content>
+      <xul:hbox flex="1" class="echofon-thread-container">
+
+        <!-- user icon -->
+        <xul:vbox>
+          <xul:image anonid="usericon" class="echofon-status-usericon" align="top" xbl:inherits="unread"/>
+          <xul:spacer flex="1" />
+        </xul:vbox>
+
+	<!-- messages -->
+	<xul:vbox class="echofon-thread-message-container" flex="1">
+          <xul:label class="echofon-status-user" xbl:inherits="value=screen_name" style="cursor:pointer"/>
+	  <xul:description crop="right" class="echofon-status-message" xbl:inherits="value=text" style="cursor:pointer"/>
+	  <xul:label class="echofon-status-info" xbl:inherits="value=timestamp" style="cursor:pointer"/>
+        </xul:vbox>
+
+        <xul:hbox align="center">
+          <xul:label class="echofon-dm-thread-unread" xbl:inherits="value=unread"/>
+        </xul:hbox>
+
+      </xul:hbox>
+    </content>
+
+    <handlers>
+      <handler event="click">
+      <![CDATA[
+        EchofonCommon.notify('markReadThread', {id:this.thread.id});
+        this.setAttribute("unread", 0);
+        EchofonCommon.openURL("chrome://echofon/content/conversation-view.xul?source=" + this.uid + '&target=' + this.thread.user.id, event);
+      ]]>
+      </handler>
+
+    </handlers>
+
+    <implementation>
+      <constructor>
+        document.getAnonymousElementByAttribute(this, "anonid", "usericon").user = this.thread.user;
+        this.setAttribute("screen_name", this.thread.user.screen_name);
+        this.setAttribute("text", this.thread.text);
+        this.setAttribute("timestamp", EchofonCommon.getLocalTimeForDate(this.thread.updated_at, this.appMode == 'window' ? false : true));
+        if (this.thread.unread) {
+          this.setAttribute("unread", this.thread.unread);
+        }
+        else {
+          this.setAttribute("unread", 0);
+        }
+        this.style.fontSize = EchofonCommon.fontSize() + "px";
+      </constructor>
+
+      <method name="updateTimestamp">
+        <body>
+          this.setAttribute("timestamp", EchofonCommon.getLocalTimeForDate(this.thread.updated_at, this.appMode == 'window' ? false : true));
+        </body>
+      </method>
+
+    </implementation>
+
+  </binding>
+
+  <!--
+      DM cell base
+    -->
+  <binding id="echofon-conversation-base" extends="chrome://echofon/content/tweetbox.xml#echofon-status-base">
+    <handlers>
+      <handler event="contextmenu">
+        var menu = $('echofon-menu-popup');
+        menu.openPopupAtScreen(event.screenX, event.screenY, true);
+        menu.messageId = this.message.id;
+      </handler>
+    </handlers>
+
+    <implementation>
+      <constructor>
+        if (this.message) {
+          this.setAttribute("timestamp", EchofonCommon.getLocalTimeForDate(this.message.created_at));
+        }
+        document.getAnonymousElementByAttribute(this, "anonid", "usericon").user = this.user;
+      </constructor>
+
+    </implementation>
+
+  </binding>
+
+  <!--
+      DM cell (avatar left)
+    -->
+  <binding id="echofon-conversation-left" extends="chrome://echofon/content/tweetbox.xml#echofon-conversation-base">
+    <content>
+      <xul:vbox flex="1">
+        <!-- relative timestamp -->
+        <xul:label class="timestamp" xbl:inherits="value=timestamp" align="center"/>
+
+        <xul:hbox flex="1" class="echofon-message-container">
+
+          <!-- left user icon -->
+          <xul:vbox>
+            <xul:image anonid="usericon" class="echofon-status-usericon-conversation"/>
+            <xul:spacer flex="1" />
+          </xul:vbox>
+
+          <!-- messages -->
+          <xul:vbox class="echofon-message-body" flex="1">
+	          <xul:description class="echofon-message">
+	            <children/>
+	            <xul:box class="point"></xul:box>
+	          </xul:description>
+          </xul:vbox>
+
+        </xul:hbox>
+
+      </xul:vbox>
+    </content>
+
+  </binding>
+
+  <!-- DM cell (avatar right) -->
+  <binding id="echofon-conversation-right" extends="chrome://echofon/content/tweetbox.xml#echofon-conversation-base">
+    <content>
+      <xul:vbox flex="1">
+        <!-- relative timestamp -->
+        <xul:label class="timestamp" xbl:inherits="value=timestamp" align="center"/>
+
+        <xul:hbox flex="1" class="echofon-message-container" xbl:inherits="avatarRight">
+
+          <!-- messages -->
+          <xul:vbox class="echofon-message-body" flex="1" xbl:inherits="avatarRight">
+	          <xul:description class="echofon-message" xbl:inherits="avatarRight">
+	            <children/>
+              <xul:box class="point"></xul:box>
+	          </xul:description>
+          </xul:vbox>
+
+          <!-- right user icon -->
+          <xul:vbox>
+            <xul:image anonid="usericon" class="echofon-status-usericon-conversation"/>
+            <xul:spacer flex="1" />
+          </xul:vbox>
+
+        </xul:hbox>
+
+      </xul:vbox>
+    </content>
+
+  </binding>
+
+  <!--
+      DM cell (compose)
+    -->
+  <binding id="echofon-conversation-compose" extends="chrome://echofon/content/tweetbox.xml#echofon-conversation-base">
+    <content>
+      <xul:vbox flex="1">
+        <!-- relative timestamp -->
+        <xul:label class="timestamp" xbl:inherits="value=timestamp" align="center"/>
+
+        <xul:hbox flex="1" class="echofon-message-container">
+
+          <!-- left user icon -->
+          <xul:vbox>
+            <xul:image anonid="usericon" class="echofon-status-usericon-conversation"/>
+            <xul:spacer flex="1" />
+          </xul:vbox>
+
+          <!-- compose textbox -->
+          <xul:textbox class="echofon-conversation-compose-textbox" flex="1" multiline="true" rows="3" xbl:inherits="value" anonid="textbox"/>
+
+        </xul:hbox>
+
+      </xul:vbox>
+    </content>
+
+    <implementation>
+      <field name="recipient"/>
+
+      <constructor>
+        document.getAnonymousElementByAttribute(this, "anonid", "textbox").recipient = this.recipient;
+      </constructor>
+
+      <property name="textbox">
+        <getter>
+          return document.getAnonymousElementByAttribute(this, "anonid", "textbox");
+        </getter>
+      </property>
+
+      <property name="timestamp">
+        <getter>
+          return document.getAnonymousElementByAttribute(this, "anonid", "textbox").timestamp;
+        </getter>
+      </property>
+
+    </implementation>
+
+  </binding>
+
+  <!--
+   event cell
+  -->
+
+  <binding id="echofon-event">
+    <content>
+      <xul:tooltip anonid="event-tooltip">
+        <xul:description class="echofon-status-profile-user" xbl:inherits="value=name"/>
+	<xul:vbox class="echofon-status-profile">
+	  <children includes="profile"/>
+	</xul:vbox>
+      </xul:tooltip>
+
+      <xul:tooltip anonid="link-tooltip">
+        <xul:description class="echofon-link-tooltip" xbl:inherits="value=_tooltiptext"/>
+      </xul:tooltip>
+
+      <xul:stack flex="1" class="echofon-event-container">
+        <xul:hbox align="center">
+          <xul:vbox class="echofon-status-usericon-container" align="center">
+            <xul:image anonid="eventicon" class="echofon-event-icon" align="top"/>
+            <xul:spacer flex="1"/>
+          </xul:vbox>
+        </xul:hbox>
+
+        <xul:vbox flex="1" class="echofon-event-container" align="center">
+
+          <xul:hbox>
+            <children includes="profileIcon"/>
+            <!-- event message -->
+            <xul:vbox class="echofon-event-message-container" align="center">
+              <xul:description class="echofon-event-message">
+                <children />
+              </xul:description>
+            </xul:vbox>
+          </xul:hbox>
+        </xul:vbox>
+      </xul:stack>
+    </content>
+
+    <handlers>
+      <handler event="click">
+      <![CDATA[
+        if (event.button == 2) return;
+        var url = event.originalTarget.getAttribute('href');
+        if (url) {
+          if (url == "favorite") {
+            var p = document.createElement("echofon-tweet-popup");
+            var parent = event.originalTarget;
+            parent.parentNode.appendChild(p);
+            p.tweet = this._event.target_object;
+            p.openPopup(parent);
+            return;
+          }
+          else {
+            EchofonCommon.openURL(url, event);
+          }
+        }
+        ]]>
+      </handler>
+
+    </handlers>
+
+    <implementation>
+      <constructor>
+        this.setAttribute("flex", 1);
+        this.style.fontSize = EchofonCommon.fontSize() + "px";
+      </constructor>
+
+      <field name="_event"/>
+
+      <property name="event">
+        <setter>
+          this._event = val;
+
+          this.setUser(this._event.source);
+          this.setIcon(this._event.event);
+          this.setEventText();
+        </setter>
+      </property>
+
+      <method name="setEventText">
+        <body>
+          // setup text
+          var node;
+          var user = this._event.source;
+          var screen_name = EchofonCommon.createAnchorText(EchofonCommon.userViewURL(user.screen_name), user.screen_name, "username");
+          var node = document.createElement('description');
+
+          if (this._event.event == 'favorite') {
+            var strings = document.getElementById("echofon-strings");
+            var tweet_link = EchofonCommon.createAnchorText("favorite", strings.getString('tweet'));
+            EchofonCommon.formatTextNode(node, "favoriteEvent", [screen_name, tweet_link]);
+          }
+          else if (this._event.event == 'follow') {
+            node = document.createElement('description');
+            EchofonCommon.formatTextNode(node, "followEvent", [screen_name]);
+          }
+          this.appendChild(node);
+        </body>
+      </method>
+
+      <method name="setIcon">
+        <parameter name="type"/>
+        <body>
+          var n = document.getAnonymousElementByAttribute(this, "anonid", "eventicon");
+          n.setAttribute("type", type);
+        </body>
+      </method>
+
+      <method name="setUser">
+        <parameter name="user"/>
+        <body>
+          // setup user
+          var profile = document.createElement("profileIcon");
+          profile.className = 'echofon-event-profile-icon';
+          this.appendChild(profile);
+          profile.user = user;
+        </body>
+      </method>
+
+    </implementation>
+  </binding>
+
+  <!-- User Cell -->
+
+  <binding id="echofon-user">
+    <content>
+      <xul:tooltip anonid="event-tooltip">
+        <xul:description class="echofon-status-profile-user" xbl:inherits="value=name"/>
+	<xul:vbox class="echofon-status-profile">
+	  <children includes="profile"/>
+	</xul:vbox>
+      </xul:tooltip>
+
+      <xul:hbox flex="1" class="echofon-status-container" align="center">
+      <!-- user icon -->
+        <xul:vbox>
+          <xul:image anonid="usericon" class="echofon-user-usericon" align="top"/>
+          <xul:spacer flex="1" />
+        </xul:vbox>
+
+        <!-- messages -->
+        <xul:vbox class="echofon-user-cell-container" flex="1">
+          <xul:hbox style="display:-moz-inline-box;display:inline-block;" anonid="user-section">
+            <html:a xbl:inherits="href"><xul:label class="echofon-user-screen-name" xbl:inherits="value=name"/></html:a> | <xul:label class="echofon-user-fullname" xbl:inherits="value=screen_name"/>
+          </xul:hbox>
+          <xul:label class="echofon-user-last-message" xbl:inherits="value=text" crop="right"/>
+        </xul:vbox>
+      </xul:hbox>
+    </content>
+
+    <implementation>
+      <property name="user">
+        <setter>
+          document.getAnonymousElementByAttribute(this, "anonid", "usericon").user = val;
+          this.setAttribute("screen_name", '@' + val.screen_name);
+          this.setAttribute("href", EchofonCommon.userViewURL(val.screen_name));
+          this.setAttribute("name", val.name);
+          this.setAttribute("text", (val.status) ? val.status.text : "");
+        </setter>
+      </property>
+
+    </implementation>
+  </binding>
+
+  <!-- List Cell -->
+
+  <binding id="echofon-list">
+    <content>
+      <xul:hbox flex="1" class="echofon-status-container" align="center">
+      <!-- user icon -->
+        <xul:vbox>
+          <xul:image anonid="usericon" class="echofon-user-usericon" align="top" xbl:inherits="image_url"/>
+          <xul:spacer flex="1" />
+        </xul:vbox>
+
+        <!-- list info -->
+        <xul:vbox class="echofon-list-cell-container" flex="1">
+          <html:a style="display:-moz-inline-box" target="_blank" xbl:inherits="href"><xul:label class="echofon-user-screen-name" xbl:inherits="value=list_name"/></html:a>
+          <xul:label class="echofon-user-last-message" xbl:inherits="value=text" crop="right"/>
+        </xul:vbox>
+      </xul:hbox>
+    </content>
+
+    <implementation>
+      <property name="list">
+        <setter>
+          document.getAnonymousElementByAttribute(this, "anonid", "usericon").user = val.user;
+          this.setAttribute("image_url", val.user.profile_image_url);
+          this.setAttribute("list_name", val.full_name);
+          this.setAttribute("href", EchofonCommon.twitterURL("#!/" + val.user.screen_name + "/" + val.slug));
+          this.setAttribute("text", "whoami");
+        </setter>
+      </property>
+
+    </implementation>
+  </binding>
+
+  <!--
+    Load more cell
+  -->
+  <binding id="echofon-load-more">
+    <content>
+      <xul:vbox align="center" flex="1" class="echofon-load-more-box">
+        <xul:spacer flex="1"/>
+        <xul:hbox align="center">
+        <xul:image class="echofon-load-more-spinner" anonid="spinner" hidden="true"/>
+        <xul:image class="echofon-stop-dot" anonid="dot"/>
+        </xul:hbox>
+        <xul:spacer flex="1"/>
+      </xul:vbox>
+    </content>
+
+    <handlers>
+      <handler event="click">
+      <![CDATA[
+      if (!this.noMoreTweet && !this.spinner) {
+        this.spinner = true;
+        loadMore();
+      }
+      ]]>
+      </handler>
+    </handlers>
+
+    <implementation>
+      <field name="isLoadMoreCell">true</field>
+      <field name="createdAt">0</field>
+      <field name="noMoreTweet"/>
+
+      <property name="spinner">
+        <setter>
+          var spinner = document.getAnonymousElementByAttribute(this, "anonid", "spinner");
+          var dot = document.getAnonymousElementByAttribute(this, "anonid", "dot");
+          spinner.hidden = (val) ? false : true;
+          dot.hidden = (val) ? true : false;
+        </setter>
+        <getter>
+          var spinner = document.getAnonymousElementByAttribute(this, "anonid", "spinner");
+          return spinner.hidden ? false : true;
+        </getter>
+      </property>
+    </implementation>
+  </binding>
+
+
+</bindings>

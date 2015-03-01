@@ -1,0 +1,71 @@
+<!ENTITY paneAccount.title "Comptes">
+<!ENTITY paneGeneral.title "General">
+<!ENTITY paneAdvanced.title "Avançat">
+<!ENTITY keyboardShortcut.title "Configuració teclat">
+<!ENTITY keyboardShortcut.explanation "Les noves dreceres de teclat tindran efecte quan reobrir la finestra del navegador.">
+<!ENTITY clearCache.title "Neteja cache local">
+<!ENTITY clearCache.button "Neteja ara">
+<!ENTITY echofon.title "Preferències de l'Echofon">
+<!ENTITY echofon.accounts "Comptes">
+<!ENTITY echofon.username "Usuari">
+<!ENTITY echofon.password "Contrasenya">
+<!ENTITY echofon.addAccount "Afegeix un compte…">
+<!ENTITY echofon.removeAccount "Suprimeix el compte…">
+<!ENTITY echofon.authorizing "Autoritzant...">
+<!ENTITY echofon.muteSetting "Configuració d'emmudir">
+<!ENTITY echofon.preferences "Preferències">
+<!ENTITY echofon.refreshInterval "Recupera els tweets">
+<!ENTITY echofon.theme "Tema">
+<!ENTITY echofon.fontSize "Mida de la lletra">
+<!ENTITY echofon.fontFace "Tipus de lletra">
+<!ENTITY echofon.everyminute "Cada minut">
+<!ENTITY echofon.every2minutes "Cada 2 minuts">
+<!ENTITY echofon.every3minutes "cada 3 minuts">
+<!ENTITY echofon.every5minutes "cada 5 minuts">
+<!ENTITY echofon.popupInterval "Interval de les finestres">
+<!ENTITY echofon.popup3sec "3 segons">
+<!ENTITY echofon.popup5sec "5 segons">
+<!ENTITY echofon.popup7sec "7 segons">
+<!ENTITY echofon.popup10sec "10 segons">
+<!ENTITY echofon.mentionsAndDMsOnly "Mostra finestreta només amb les respostes i DM">
+<!ENTITY echofon.popupWhileWindowIsOpened "Mostra finestreta mentre Echofon estigui obert">
+<!ENTITY echofon.toggleEchofon "Activa Echofon">
+<!ENTITY echofon.insertURL "Insereix un URL">
+<!ENTITY echofon.revertKeyconfig "Reverteix">
+<!ENTITY echofon.balloon "Vista en emergent">
+<!ENTITY echofon.newTweetNotifications "Notificacions">
+<!ENTITY echofon.sound "So de notificació">
+<!ENTITY echofon.unreadCount "Mostra comptador de no llegit">
+<!ENTITY echofon.soundButton "Navega…">
+<!ENTITY echofon.syncWindowTitle "Instal·la la sincronització amb iPhone">
+<!ENTITY echofon.alwaysOpenLinkInNewTab "Obre sempre els enllaços en una nova pestanya">
+<!ENTITY echofon.alwaysOpenLinkInNewTab.tooltip "Ctrl+click (Cmd+click a Mac) obre l'enllaç en una nova pestanya sense aquesta configuració.">
+<!ENTITY echofon.openLinks "Obrir Enllaços">
+<!ENTITY echofon.applicationMode "Mode Aplicació">
+<!ENTITY echofon.panelMode "Panell">
+<!ENTITY echofon.windowMode "Finestra">
+<!ENTITY echofon.sidebarMode "Barra lateral">
+<!ENTITY echofon.welcome "Us donem la benvinguda a Echofon!">
+<!ENTITY echofon.signIntoTwitter "Entrar a Twitter">
+<!ENTITY echofon.authorize "Autoritza amb Twitter">
+<!ENTITY echofon.followEchofon "Segueix @echofon">
+<!ENTITY echofon.muteUsers "Usuaris">
+<!ENTITY echofon.muteApplications "Aplicacions">
+<!ENTITY echofon.muteHashtags "Etiquetes">
+<!ENTITY echofon.addMute "Afegeix...">
+<!ENTITY echofon.removeMute "Elimina">
+<!ENTITY echofon.muteTitle "Configuració d'Emmudir">
+<!ENTITY echofon.openTwitterForUserPage "Obrir twitter.com per a la Vista d'Usuari">
+<!ENTITY echofon.openTwitterForUserPageExplanation "Pots obrir twitter.com/screen_name enlloc de la Vista d'Usuari personalitzada d'Echofon. Pots revertir aquesta configuració usant shift+click en el nom d'usuari.">
+<!ENTITY echofon.email "Correu electrònic">
+<!ENTITY echofon.subscribeEmail "Subscriu-me">
+<!ENTITY echofon.submitEmailExplanation "Escriu el teu correu electrònic per subscriure't a les notícies d'Echofon i UberMedia.">
+<!ENTITY echofon.thankYouForSubscribe "Gràcies per subscriure't!">
+<!ENTITY echofon.licenseKey "Clau de Llicència">
+<!ENTITY echofon.verifyLicense "Verificar Llicència">
+<!ENTITY echofon.licenseExplanation "SI tens una clau de llicència, escriu-la aquí">
+<!ENTITY echofon.displayStyle "Display Style">
+<!ENTITY echofon.agreeAndAuthEchofon "Agree and Authorize with Twitter">
+<!ENTITY echofon.displayScreenNameOnly "Screen Name Only">
+<!ENTITY echofon.displayNameAndScreenName "Name and Screen Name">
+<!ENTITY echofon.displayNameOnly "Name Only">

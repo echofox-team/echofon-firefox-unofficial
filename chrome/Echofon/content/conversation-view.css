@@ -1,0 +1,126 @@
+
+#container {
+  display: -moz-inline-box;
+}
+
+
+#wrap.drawer{display: -moz-box; font-family:'helvetica neue', helvetica, arial, sans-serif; font-size:18px;}
+
+#echofon-tweets {
+  background-color:#f5f6f6;
+  min-width: 460px !important;
+  max-width: 460px !important;
+  border-right:1px solid #fff !important;
+  -moz-box-shadow:2px 0 6px #d7d7d7 !important;
+}
+
+echofon-load-more {
+  min-width: 460px !important;
+  max-width: 460px !important;
+}
+
+.echofon-message-body{text-align:left; color:#333333; width:330px;}
+
+.echofon-message-container {padding-bottom: 1em; }
+
+.echofon-message { display:block; position:relative; background-color:#fff; border:1px solid #ced1d3; padding:7px 10px; -moz-border-radius:5px;-moz-box-shadow:0 0 2px rgba(0,0,0,.1);}
+
+.echofon-status-usericon-conversation {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-user-profile-image");
+  width: 48px;
+  height: 48px;
+  padding: 0px;
+  cursor: pointer;
+  margin-right:20px;
+  background-size: 48px 48px !important;
+  border:2px solid #fff;
+  -moz-border-radius:0;
+  -moz-box-shadow:0 0 4px rgba(0,0,0,.5);
+}
+
+.echofon-message[avatarRight='true'] {background-color:#ebf7ff;}
+
+echofon-conversation[avatarRight="true"] .echofon-status-usericon-conversation {
+  margin-left:20px;
+}
+
+.timestamp {
+  color: #c5c8ca;
+  text-align: center;
+  font-size: 13px;
+  font-weight:bold;
+  margin-bottom:20px;
+}
+
+echofon-conversation:first-child, echofon-conversation[avatarRight="true"] {
+  margin-top:20px;
+}
+
+
+
+
+
+/*
+  Avatar on left
+*/
+echofon-conversation {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-conversation-left");
+  padding: 0px;
+  margin-left: 20px;
+  margin-right:20px;
+}
+
+.point{
+  margin-top:0px;
+  border-style:solid;
+  border-width:20px;
+  width:0;
+  height:0;
+}
+
+echofon-conversation .point{
+  float:left;
+  margin-left:-17px;
+  border-color: #ced1d3 transparent transparent transparent;
+  border-width:8px 0px 8px 6px;
+}
+
+echofon-conversation[avatarRight="true"] .point{
+  float:right;
+  margin-right:-17px;
+  border-color: transparent transparent transparent #ced1d3;
+  border-width:0px 0px 8px 6px;
+}
+
+
+/*
+  Avatar on right
+*/
+echofon-conversation[avatarRight="true"] {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-conversation-right");
+  padding: 0px;
+  margin: 0px;
+  margin-left:20px;
+}
+
+/*
+ Compose box
+*/
+echofon-conversation-compose {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-conversation-compose");
+  padding: 0px;
+  margin-left: 20px;
+  margin-right:20px;
+}
+
+.echofon-conversation-compose-textbox {
+
+}
+.echofon-load-more-spinner {
+  list-style-image: url("chrome://echofon/content/images/load-more-conversation.gif") !important;
+}
+
+.echofon-stop-dot {
+  list-style-image: url("chrome://echofon/content/images/window.png") !important;
+  -moz-image-region: rect(28px, 104px, 34px, 99px);
+}

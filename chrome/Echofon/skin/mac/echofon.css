@@ -1,0 +1,61 @@
+/*
+   Mac Theme for Echofon
+
+   Copyright (c) 2009 Kazuho Okui / naan studio, Inc. ALL RIGHTS RESERVED.
+*/
+
+echofon-toolbar[mode="window"] {
+  -moz-appearance: -moz-mac-unified-toolbar !important;
+  background: none;
+}
+
+[mode="window"] #echofon-toolbar-body {
+  background-image: none !important;
+  border-bottom: none !important;
+}
+
+[mode="window"] .echofon-tab[checked="true"]
+{
+  background: transparent;
+  border: 1px solid #ccc !important;
+  background: #e0e0e0;
+  background-image:-moz-linear-gradient(50% 50% 90deg,rgba(0,0,0,.03),#FFFFFF,rgba(0,0,0,.03) 0%,rgba(0,0,0,0) 30%);
+  -moz-box-shadow:inset 0 0 1px #333, inset 0 0 1px #666, inset 0 0 1px #666;
+}
+
+[mode="window"] .echofon-tab:-moz-window-inactive[checked="true"]
+{
+  border: 1px solid #999 !important;
+  background-image: none !important;
+  -moz-box-shadow: none !important;
+}
+
+.echofon-tabs-closebutton {
+  margin-right: -12px !important;
+}
+
+#echofon-compose-bar {
+/* margin-right: 9px;*/
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+#echofon-compose-bar[lion="true"],
+#echofon-compose-bar[sidebar="true"]  {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+#homeButtonIcon:-moz-window-inactive,
+#mentionsButtonIcon:-moz-window-inactive,
+#messagesButtonIcon:-moz-window-inactive,
+#listsButtonIcon:-moz-window-inactive,
+#searchButtonIcon:-moz-window-inactive {
+  opacity: 0.85;
+}
+
+#echofon-list-bar-container,
+#echofon-search-bar-container {
+  border-top: 1px solid #f7f7f7 !important;
+}
+#profile_area{ width:458px !important;max-width:458px !important;}

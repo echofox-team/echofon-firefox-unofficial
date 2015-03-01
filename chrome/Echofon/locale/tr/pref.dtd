@@ -1,0 +1,71 @@
+<!ENTITY paneAccount.title "Hesaplar">
+<!ENTITY paneGeneral.title "Genel">
+<!ENTITY paneAdvanced.title "Gelişmiş">
+<!ENTITY keyboardShortcut.title "Klavye ayarları">
+<!ENTITY keyboardShortcut.explanation "Yeni klavye kısayolları, yeni bir pencere açtığınızda hayata geçecek.">
+<!ENTITY clearCache.title "Yerel Önbelleği Temizle">
+<!ENTITY clearCache.button "Şimdi Temizle">
+<!ENTITY echofon.title "Echofon tercihleri">
+<!ENTITY echofon.accounts "Hesaplar">
+<!ENTITY echofon.username "Kullanıcı adı">
+<!ENTITY echofon.password "Parola">
+<!ENTITY echofon.addAccount "Hesap ekle...">
+<!ENTITY echofon.removeAccount "Hesabı sil...">
+<!ENTITY echofon.authorizing "Yetkilendiriliyor…">
+<!ENTITY echofon.muteSetting "Susturma Ayarı…">
+<!ENTITY echofon.preferences "Tercihler">
+<!ENTITY echofon.refreshInterval "Güncelleme sıklığı">
+<!ENTITY echofon.theme "Tema">
+<!ENTITY echofon.fontSize "Yazı tipi boyutu">
+<!ENTITY echofon.everyminute "1 dakika">
+<!ENTITY echofon.every2minutes "2 dakika">
+<!ENTITY echofon.every3minutes "3 dakika">
+<!ENTITY echofon.every5minutes "5 dakika">
+<!ENTITY echofon.popupInterval "Bildirim süresi">
+<!ENTITY echofon.popup3sec "3 saniye">
+<!ENTITY echofon.popup5sec "5 saniye">
+<!ENTITY echofon.popup7sec "7 saniye">
+<!ENTITY echofon.popup10sec "10 saniye">
+<!ENTITY echofon.mentionsAndDMsOnly "Sadece bahsedenler ve mesajlar için bildirim göster">
+<!ENTITY echofon.popupWhileWindowIsOpened "Echofon açıkken bildirimleri göster">
+<!ENTITY echofon.toggleEchofon "Echofon'u Aç/Kapat">
+<!ENTITY echofon.insertURL "URL Ekle">
+<!ENTITY echofon.revertKeyconfig "Sıfırla">
+<!ENTITY echofon.balloon "Açılır pencere">
+<!ENTITY echofon.newTweetNotifications "Bilgilendirmeler">
+<!ENTITY echofon.sound "Bildirim sesi">
+<!ENTITY echofon.unreadCount "Okunmayan sayısını göster">
+<!ENTITY echofon.soundButton "Gözat...">
+<!ENTITY echofon.syncWindowTitle "iPhone ile senkronizasyon kur">
+<!ENTITY echofon.alwaysOpenLinkInNewTab "Linkleri her zaman yeni sekmede aç">
+<!ENTITY echofon.alwaysOpenLinkInNewTab.tooltip "Bu ayar olmadığında Ctrl+Tıklama (Mac'lerde Cmd+Tıklama) linki yeni sekmede açar.">
+<!ENTITY echofon.openLinks "Linkleri Aç">
+<!ENTITY echofon.applicationMode "Uygulama modu">
+<!ENTITY echofon.panelMode "Panel">
+<!ENTITY echofon.windowMode "Pencere">
+<!ENTITY echofon.sidebarMode "Kenar Çubuğu">
+<!ENTITY echofon.welcome "Echofon'a Hoş Geldiniz!">
+<!ENTITY echofon.signIntoTwitter "Twitter'a Giriş Yap">
+<!ENTITY echofon.authorize "Twitterla Yetkilendirildi">
+<!ENTITY echofon.followEchofon "@echofon'u Takip Et">
+<!ENTITY echofon.muteUsers "Kullanıcılar">
+<!ENTITY echofon.muteApplications "Uygulamalar">
+<!ENTITY echofon.muteHashtags "Hashtagler">
+<!ENTITY echofon.addMute "Ekle...">
+<!ENTITY echofon.removeMute "Sil">
+<!ENTITY echofon.muteTitle "Ayarları Sessizleştir">
+<!ENTITY echofon.openTwitterForUserPage "Twitter.com'u Kullanıcı Görünümü'nde aç">
+<!ENTITY echofon.openTwitterForUserPageExplanation "Echofon'un Kullanıcı Görünümü yerine twitter.com/kullanıcı_adı sayfasını açabilirsiniz. Kullanıcı adının üzerine shift+tıkla yaparak ulaşabilirsiniz.">
+<!ENTITY echofon.verifyLicense "Verify License">
+<!ENTITY echofon.email "Email">
+<!ENTITY echofon.displayStyle "Display Style">
+<!ENTITY echofon.agreeAndAuthEchofon "Agree and Authorize with Twitter">
+<!ENTITY echofon.thankYouForSubscribe "Thank you for your subscription!">
+<!ENTITY echofon.displayScreenNameOnly "Screen Name Only">
+<!ENTITY echofon.displayNameAndScreenName "Name and Screen Name">
+<!ENTITY echofon.subscribeEmail "Subscribe">
+<!ENTITY echofon.displayNameOnly "Name Only">
+<!ENTITY echofon.licenseKey "License Key">
+<!ENTITY echofon.submitEmailExplanation "Enter your email address to subscribe to news from Echofon and UberMedia.">
+<!ENTITY echofon.fontFace "Font family">
+<!ENTITY echofon.licenseExplanation "If you have a license key, enter it here">

@@ -1,0 +1,1542 @@
+/*
+   Stylesheet for Echofon
+
+   Copyright (c) 2009 Kazuho Okui / naan studio, Inc. ALL RIGHTS RESERVED.
+*/
+
+/*
+ Main toolbar
+*/
+
+#echofon-menubar {
+  -moz-appearance: none;
+  background-image: url("chrome://echofon/content/images/texture.gif") !important;
+  margin: 0px;
+}
+
+echofon-menu {
+  -moz-binding: url("chrome://echofon/content/toolbar.xml#echofon-menu");
+}
+
+echofon-toolbar {
+  -moz-binding: url("chrome://echofon/content/toolbar.xml#echofon-toolbar");
+  padding: 0px !important;
+  margin: 0px !important;
+  -moz-appearance: none;
+}
+
+#echofon-toolbar-body {
+  padding: 3px 5px 3px 5px !important;
+  margin: 0px !important;
+  -moz-appearance: none;
+  background-image: url("chrome://echofon/content/images/texture.gif") !important;
+  border-bottom: 1px solid #c2c2c2;
+}
+
+#echofon-toolbar-container {
+  margin: 0px 3px;
+  -moz-appearance: none;
+  height: 28px;
+  max-width: 450px;
+/*
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  border: 1px solid #cbcbcb;
+  background: #fff;
+*/
+}
+
+[mode="panel"] #echofon-toolbar-container {
+  padding-left: 4px;
+}
+
+#homeButtonIcon     { -moz-image-region: rect( 0px, 17px, 17px,  0px)}
+#mentionsButtonIcon { -moz-image-region: rect( 0px, 33px, 18px, 17px)}
+#messagesButtonIcon { -moz-image-region: rect( 0px, 56px, 15px, 33px)}
+#listsButtonIcon    { -moz-image-region: rect( 0px, 74px, 14px, 56px)}
+#searchButtonIcon   { -moz-image-region: rect( 0px, 92px, 18px, 74px)}
+
+#homeButton[unread="true"]     > #homeButtonIcon     { -moz-image-region: rect( 18px, 17px, 35px,  0px);}
+#mentionsButton[unread="true"] > #mentionsButtonIcon { -moz-image-region: rect( 18px, 33px, 36px, 17px);}
+#messagesButton[unread="true"] > #messagesButtonIcon { -moz-image-region: rect( 18px, 56px, 33px, 33px);}
+#listsButton[unread="true"]    > #listsButtonIcon    { -moz-image-region: rect( 18px, 74px, 32px, 56px);}
+#searchButton[unread="true"]   > #searchButtonIcon   { -moz-image-region: rect( 18px, 92px, 36px, 74px);}
+
+.echofon-account-menu-button {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-size: 24px 24px !important;
+  -moz-box-shadow: inset 0px 0px 1px #555;
+}
+
+.echofon-account-compose-button {
+  list-style-image: url("chrome://echofon/content/images/compose_hover.png");
+}
+
+#echofon-tab-container {
+  margin: 0px 5px;
+}
+
+#echofon-toolbar-body > toolbarbutton > .toolbarbutton-text {
+  color: #666;
+}
+
+.echofon-tab {
+  -moz-appearance: none !important;
+  border: 1px solid transparent !important;
+
+}
+
+.echofon-tab[checked="true"]
+{
+  background: transparent;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  border: 1px solid #cdcdcd !important;
+  background-color: #fff;
+  background-image:-moz-linear-gradient(50% 50% 90deg,rgba(0,0,0,.03),#FFFFFF,rgba(0,0,0,.03) 0%,rgba(0,0,0,0) 30%);
+  -moz-box-shadow:inset 0 0 1px #fff, inset 0 0 1px #fff, inset 0 0 1px #fff;
+}
+
+.echofon-tab-icon
+{
+  margin: 0px 2px -1px 2px !important;
+  text-align: center;
+  list-style-image: url("chrome://echofon/content/images/window.png");
+}
+
+.echofon-tab-label {
+  display: none;
+}
+
+.echofon-tab-label[value] {
+  display: block;
+  margin-top: 4px !important;
+  text-shadow: none !important;
+  color: #999;
+  -moz-box-shadow: none !important;
+  margin-left: 2px !important;
+  margin-right: 0px !important;
+  padding-left: 4px !important;
+  border-left: 1px solid #ccc;
+}
+
+.echofon-tab[checked="true"] > .echofon-tab-label {
+  color: #666;
+}
+
+#echofon-list-bar-container,
+#echofon-search-bar-container {
+  background-image: url("chrome://echofon/content/images/texture.gif") !important;
+  -moz-appearance: none !important;
+  background: #f5f6f6;
+  border: none;
+  border-bottom: 1px solid #bbb;
+  padding: 1px 10px;
+  min-height: 36px;
+}
+
+
+#echofon-list-menulist {
+   margin-top: 6px;
+}
+
+#echofon-local-trend-menulist {
+   margin-right: 10px;
+}
+
+.echofon-tabs-closebutton {
+  margin: 0px !important;
+  padding: 0px !important;
+  margin-top: 2px !important;
+}
+
+.echofon-tweet-popup-close-button {
+  -moz-border-radius:2px;
+  border-radius: 2px;
+  text-align:center;
+  color:#565656;
+  background-color:rgba(0,0,0,.1);
+  width: 13px;
+  height:13px;
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  -moz-image-region: rect(94px, 29px, 101px, 22px);
+  padding: 3px;
+  margin-left: 2px;
+}
+
+.echofon-tweet-popup-close-button:hover{
+  background-color:rgba(0,0,0,.25);
+}
+
+.echofon-tweet-popup-close-button:active{
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  -moz-image-region: rect(94px, 29px, 101px, 22px);
+  background-color:rgba(0,0,0,.4);
+}
+
+.echofon-keyconfig {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-keyconfig");
+}
+
+.compose-bar {
+  background-image: url("chrome://echofon/content/images/texture.gif") !important;
+  border-top: 1px solid #b7b7b7;
+  height: 30px !important;
+  padding: 2px;
+  margin: 0px !important;
+}
+
+#echofon-ad-container {
+  margin: 0px;
+  padding: 5px;
+  border-bottom: 1px solid #aaa;
+  background: #cecece;
+  cursor: pointer;
+}
+
+.echofon-ad-text-container {
+  cursor: pointer;
+}
+
+echofon-ad-unit {
+  -moz-binding: url("chrome://echofon/content/ad.xml#echofon-ad-unit");
+}
+
+.echofon-ad-text {
+  cursor: pointer;
+}
+
+#echofon-ad {
+  padding: 5px;
+  background-color: #fff6e2;
+  -moz-box-shadow: 0px 0px 4px #999;
+}
+
+.echofon-ad-byline {
+  margin-top: 6px;
+}
+
+.echofon-140-button {
+  opacity: .3;
+  display: none;
+}
+
+.echofon-140-button:active {
+  opacity: .7;
+}
+
+.echofon-140-reply {
+  list-style-image: url("chrome://echofon/content/images/140proof.png");
+  -moz-image-region: rect(0px, 12px, 16px, 0px);
+  margin: 2px 2px 0px 6px;
+  margin-left: 4px;
+}
+
+.echofon-140-retweet {
+  list-style-image: url("chrome://echofon/content/images/140proof.png");
+  -moz-image-region: rect(0px, 30px, 16px, 12px);
+  margin: 2px 2px 0px 2px;
+}
+
+.echofon-140-favorite {
+  list-style-image: url("chrome://echofon/content/images/140proof.png");
+  -moz-image-region: rect(0px, 44px, 16px, 30px);
+  margin: 2px 2px 0px 2px;
+}
+
+.echofon-140-retweet[retweeted='true'] {
+  -moz-image-region: rect(16px, 30px, 32px, 12px);
+  opacity: 1;
+}
+
+.echofon-140-favorite[favorited='true'] {
+  -moz-image-region: rect(16px, 44px, 32px, 30px);
+  opacity: 1;
+}
+
+.echofon-ad-user-name {
+  color: #1269c5 !important;
+  margin: 0;
+  padding: 0;
+  display: -moz-inline-box;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.echofon-ad-user-icon {
+  width: 32px;
+  height: 32px;
+  margin: 0px;
+  padding: 0px;
+  margin-left: 5px;
+  cursor: pointer;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-size: 32px 32px !important;
+}
+
+.echofon-ad-user-icon[appmode="window"] {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-size: 40px 40px !important;
+}
+
+/*
+ tweet
+*/
+
+.echofon-tweets {
+  padding: 0px;
+  overflow-y: scroll;
+  background: #a7a7a7;
+}
+
+#echofon-statusbar {
+  -moz-appearance: statusbar;
+}
+
+#echofon-statusbar statusbarpanel {
+  -moz-appearance: none !important;
+  border: none !important;
+}
+
+#echofon-main-window {
+  -moz-binding: url("chrome://echofon/content/content-view.xml#echofon-main-window");
+  border: none;
+}
+
+/*
+  Popup
+*/
+#echofon-popup {
+  -moz-binding: url("chrome://echofon/content/popup.xml#echofon-popup");
+  -moz-appearance: none !important;
+  background-color: rgba(0,0,0,.25) !important;
+  border: 5px solid rgba(0,0,0,.25) !important;
+  border-radius: 3px !important;
+  -moz-border-radius: 3px !important;
+}
+
+#echofon-window-popup {
+  -moz-binding: url("chrome://echofon/content/popup.xml#echofon-window-popup");
+  -moz-appearance: none !important;
+  border: 2px solid #000 !important;
+  min-width: 300px;
+  min-height: 400px;
+}
+
+#echofon-window-popup[FF3="true"] {
+  -moz-binding: url("chrome://echofon/content/popup.xml#echofon-window-popup-ff3");
+}
+
+.echofon-resizer {
+  background: transparent;
+  -moz-appearance: none;
+  margin: 0px;
+  padding:0px;
+}
+
+.echofon-resizer-knob {
+  background-image: url("chrome://echofon/content/images/resizer.png") !important;
+  width:16px !important;
+  height:16px !important;
+}
+
+echofon-popup-content {
+  -moz-binding: url("chrome://echofon/content/popup.xml#echofon-popup-content");
+  -moz-appearance: none;
+  width: 240px;
+  max-width: 320px;
+  overflow: visible;
+  background: #fff;
+  border: 5px solid #fff !important;
+  border-radius: 3px !important;
+  -moz-border-radius: 3px !important;
+}
+
+echofon-popup-content[highlighted="true"],
+echofon-popup-content[messages="true"] {
+  background: #ecf7fe !important;
+  border-color: #ecf7fe !important;
+}
+
+echofon-notice {
+  -moz-binding: url("chrome://echofon/content/popup.xml#echofon-notice");
+  -moz-appearance: none;
+  min-width: 160px;
+  font-weight: bold;
+  background: #fff;
+  border: 5px solid #fff !important;
+  border-radius: 3px !important;
+  -moz-border-radius: 3px !important;
+}
+
+/*
+ Tweet
+*/
+
+echofon-status {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-status");
+  padding: 0px;
+  margin: 0px;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+  color: #000;
+}
+
+echofon-status[border="true"] {
+  border-bottom: none;
+}
+
+echofon-status[highlighted="true"] {
+  background: #ecf7fe;
+}
+
+echofon-unread-border {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-unread-border");
+  background: #fff;
+}
+
+.echofon-status-unread-border-container {
+  height: 9px;
+  max-height:9px;
+}
+
+.echofon-status-unread-border {
+  height:9px;
+  background:#eee;
+}
+
+.echofon-status-unread-message {
+  position: relative;
+  color: #808080;
+  margin:0px !important;
+  padding: 0px 10px !important;
+  font-weight: bold;
+  background:#fff;
+}
+
+[highlighted="true"] .echofon-status-unread-message {
+  background: #e1f1fd;
+}
+
+.echofon-status-info,
+.echofon-permalink,
+.echofon-source-link,
+.echofon-status-timestamp,
+echofon-status-tagline {
+  color: #616161 !important;
+  margin: 0px;
+}
+
+.echofon-status-additional-screen-name {
+  color: #616161 !important;
+  margin: 0px;
+  margin-left: 3px;
+}
+
+.echofon-status-additional-screen-name:hover {
+  text-decoration: underline;
+}
+
+.echofon-top-tweet {
+  border: 1px solid #ddebf8;
+  background: #ddebf8;
+  border-radius: 3px;
+  color: #727f88;
+  margin-right: .5em;
+  padding: 0px 3px;
+}
+
+.echofon-top-tweet-recent-tweets
+{
+  color: #616161 !important;
+  margin: 0px;
+}
+
+.echofon-source-link-left-padding
+{
+  margin-left: .3em !important;
+}
+
+echofonEvent {
+  background: #fff;
+}
+
+.echofon-scrollbox {
+  background: #fff;
+}
+
+.echofon-link-tooltip,
+.echofon-link-tooltip:hover {
+  margin: 0px;
+  padding: 0px;
+  text-decoration: none;
+}
+
+/*
+  Event
+*/
+
+echofonEvent {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-event");
+  border-bottom: 1px solid #ddd;
+  padding: 4px 0px;
+}
+
+echofonEvent[border="true"] {
+  border-bottom: none;
+}
+
+profileIcon {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-user-profile-image");
+}
+
+echofonLink {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-link-object");
+}
+
+.echofon-event-profile-icon {
+  width: 20px !important;
+  height: 20px !important;
+  cursor: pointer;
+  margin: 4px;
+
+  -moz-border-radius: 3px;
+  background-size: 20px 20px !important;
+}
+
+.echofon-event-message {
+  font-style: italic;
+  margin-top: 6px;
+}
+
+.echofon-event-icon[type='favorite'] {
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  -moz-image-region: rect(78px, 57px, 94px, 39px);
+  max-width: 18px;
+  max-height: 16px;
+
+}
+
+.echofon-event-icon[type='follow'] {
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  -moz-image-region: rect(78px, 82px, 94px, 57px);
+  max-width: 25px;
+  max-height: 16px;
+
+}
+
+echofon-tweet-popup {
+  -moz-binding: url("chrome://echofon/content/tweet-popup.xml#echofon-tweet-popup");
+}
+
+/*
+  Users
+*/
+echofon-user {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-user");
+  border-bottom: 1px solid #ddd;
+  padding: 4px 0px;
+  background: #fff;
+}
+
+.echofon-user-screen-name, .echofon-user-fullname {
+  font-weight: bold;
+  display: -moz-inline-box;
+}
+
+.echofon-user-fullname {
+  color: #666;
+}
+
+.echofon-user-last-message {
+  color: #999;
+  margin-right: 10px;
+  overflow: hidden;
+  font-size: 14px;
+  display: -moz-inline-box;
+}
+
+echofon-list {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-list");
+  border-bottom: 1px solid #ddd;
+  padding: 4px 0px;
+  background: #fff;
+}
+
+/*
+   Buttons
+*/
+
+.echofon-function-icon-box {
+  width: 18px;
+  min-width: 18px;
+  padding: 0px;
+  margin: 0px;
+}
+
+
+.echofon-protected-icon {
+  list-style-image: url(images/window.png);
+  -moz-image-region: rect(22px, 99px, 32px, 92px);
+  margin: 0px 4px !important;
+}
+
+.echofon-retweet-icon {
+  list-style-image: url(images/window.png);
+  -moz-image-region: rect(94px, 77px, 105px, 61px);
+  position: relative;
+  top: 2px !important;
+  margin-right: 2px !important;
+}
+
+.echofon-retweet-icon[topTweet="1"] {
+  margin-right: 7px !important;
+}
+
+.echofon-geo-icon {
+  list-style-image: url("chrome://echofon/content/images/window.png") !important;
+  -moz-image-region: rect(0px, 99px, 11px, 92px);
+  margin-left: 2px !important;
+  padding: 0px 4px !important;
+}
+
+.echofon-geo-icon:hover {
+  list-style-image: url("chrome://echofon/content/images/window.png") !important;
+  -moz-image-region: rect(11px, 99px, 22px, 92px);
+}
+
+.echofon-in-reply-to-icon {
+  position:relative; top:1px;
+  margin-left: 4px;
+  margin-right: 4px;
+  width: 8px;
+  height: 10px;
+  list-style-image: url(images/window.png);
+  -moz-image-region: rect(0px, 107px, 10px, 99px);
+}
+
+.echofon-place-icon {
+  position:relative; top:1px;
+  margin-left: 4px;
+  margin-right: 4px;
+  width: 7px;
+  height: 10px;
+  list-style-image: url("chrome://echofon/content/images/window.png") !important;
+  -moz-image-region: rect(10px, 106px, 20px, 99px);
+}
+
+.echofon-status-reply {
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  padding: 0px;
+  margin: 0px;
+  cursor: pointer;
+  -moz-image-region: rect(0px, 125px, 15px, 109px);
+  display: -moz-box;
+}
+
+.echofon-status-reply[type="balloon"],
+.echofon-status-reply:active[type="balloon"] {
+  display: none;
+}
+
+.echofon-status-reply:active {
+  -moz-image-region: rect(15px, 125px, 30px, 109px);
+}
+
+.echofon-status-favorite {
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  padding: 0px;
+  margin: 0px;
+  cursor: pointer;
+  display: none;
+  -moz-image-region: rect(30px, 125px, 45px, 109px);
+}
+
+.echofon-status-favorite[type="balloon"],
+.echofon-status-favorite:active[type="balloon"],
+.echofon-status-favorite[attr="messages"],
+.echofon-status-favorite:active[attr="messages"] {
+  display: none;
+}
+
+.echofon-status-favorite:active {
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  -moz-image-region: rect(45px, 125px, 60px, 109px);
+}
+
+.echofon-status-favorite[favorited="true"] {
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  -moz-image-region: rect(60px, 125px, 75px, 109px);
+  display: block;
+}
+
+.echofon-status-favorite[requestFavorite="true"] {
+  list-style-image: url("chrome://echofon/content/images/ajax-loader.gif");
+  -moz-image-region: rect(0px, 16px, 16px, 0px);
+  display: block;
+}
+
+.echofon-status-favorite:active[favorited="true"] {
+  -moz-image-region: rect(75px, 125px, 90px, 109px);
+}
+
+.echofon-notice-message {
+  margin: 4px 6px 4px 2px;
+  font-size: 12px;
+  color: #000;
+}
+
+.echofon-status-usericon-container {
+  min-width: 32px;
+  margin: 0px 5px;
+  padding: 0px;
+}
+
+.echofon-status-usericon {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-user-profile-image");
+  width: 32px;
+  height: 32px;
+  margin: 0px 5px;
+  padding: 0px;
+  cursor: pointer;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-size: 32px 32px !important;
+}
+
+[mode="sidebar"] .echofon-status-usericon,
+[mode="panel"] .echofon-status-usericon {
+  width: 24px;
+  height: 24px;
+  margin-left: 0px;
+  background-size: 24px 24px !important;
+}
+
+.echofon-user-usericon {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-user-profile-image");
+  width: 48px;
+  height: 48px;
+  margin: 2px;
+  margin-right: 4px;
+  margin-left: 8px;
+  padding: 0px;
+  cursor: pointer;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-size: 48px 48px !important;
+}
+
+.echofon-status-container {
+  padding: 5px 5px;
+  min-height: 42px;
+}
+
+.echofon-event-container {
+  padding: 0px 5px;
+}
+
+.echofon-status-user {
+  font-weight: bold;
+  margin: 0px;
+  padding: 0px;
+}
+
+.echofon-status-sender-label {
+  display: -moz-inline-box;
+  display: inline-block;
+  font-weight: bold;
+  margin: 0px;
+  padding: 0px;
+}
+
+.echofon-status-message-container {
+  display: -moz-inline-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+.echofon-thread-container {
+  display: -moz-inline-box;
+  margin: 0px;
+  padding: 5px;
+  overflow: hidden !important;
+  cursor: pointer;
+}
+/*
+.echofon-thread-container:hover {
+  background-color: #f2f2f2;
+}
+*/
+.echofon-thread-message-container {
+  margin-right: 1em !important;
+  overflow: hidden;
+  padding-bottom: 1px;
+  cursor: pointer;
+}
+
+echofon-dm-thread {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-dm-thread");
+  padding: 0px;
+  margin: 0px;
+  background: #fff;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+}
+
+.echofon-dm-thread-unread {
+  background: #ccc;
+  -moz-border-radius: 9px;
+  padding: 2px 7px;
+  color: #333;
+}
+
+.echofon-dm-thread-unread[value="0"],
+.echofon-dm-thread-unread[value="false"] {
+  display: none;
+}
+
+.echofon-conversation-container {
+  display: -moz-inline-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+.echofon-conversation-timestamp {
+  text-align: center;
+}
+
+.echofon-status-message {
+  margin: 0px;
+  word-wrap: break-word !important;
+}
+
+.echofon-status-body {
+  margin: 0px;
+  padding: 0px;
+  font-style: normal;
+  word-wrap: break-word !important;
+  color: #000;
+}
+
+.echofon-status-photo {
+    min-width: 56px;
+    min-height: 56px;
+    max-width: 56px;
+    max-height: 56px;
+    border: 1px solid #aaa;
+    margin: 2px 4px;
+    overflow: hidden;
+    -moz-box-shadow: 0px 0px 4px #aaa;
+    padding: 1px;
+    display:none;
+}
+
+[mode="sidebar"] .echofon-status-photo,
+[mode="panel"] .echofon-status-photo {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    max-width: 44px !important;
+    max-height: 44px !important;
+}
+
+.echofon-status-photo[src] {
+    display: block;
+}
+
+.echofon-status-video-playback-icon {
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  -moz-image-region: rect(78px, 22px, 100px, 0px);
+  width: 22px;
+  height: 22px;
+  display: none;
+}
+
+[mode="sidebar"] .echofon-status-video-playback-icon,
+[mode="panel"] .echofon-status-video-playback-icon {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+profile-tooltip-text {
+  margin: 0px;
+  padding: 0px;
+  display: block;
+}
+
+#echofon-tooltip-container {
+  display: block;
+  margin: 0px;
+  padding: 0px;
+}
+
+.echofon-profile-tooltip-name {
+  font-weight: bold;
+  display: block;
+  margin: 1px 0px;
+}
+
+.echofon-status-profile-user {
+  font-weight: bold;
+}
+
+.echofon-status-info {
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  display: -moz-inline-box;
+  word-wrap: break-word !important;
+}
+
+echofon-status-tagline,
+echofon-status-retweet-status {
+  overflow: hidden;
+  margin: 0px;
+  margin-top: 3px;
+  display: inline-block;
+  word-wrap: break-word !important;
+  font-style: normal;
+}
+
+.echofon-status-timestamp {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.echofon-permalink:hover,
+.echofon-source-link:hover,
+.echofon-status-timestamp:hover {
+  text-decoration: underline;
+}
+
+.echofon-permalink,
+.echofon-source-link {
+  margin: 0px;
+  padding: 0px;
+  cursor: pointer;
+  display: -moz-inline-box;
+  display: inline-block;
+}
+
+.echofon-hyperlink {
+  color: #1269c5 !important;
+  margin: 0;
+  padding: 0;
+}
+
+.echofon-hyperlink:hover {
+  text-decoration: underline !important;
+}
+
+.echofon-link-tooltip,
+.echofon-link-tooltip:hover {
+  margin: 0px;
+  padding: 0px;
+  text-decoration: none;
+}
+
+#echofon-progressmeter {
+  margin-top: 8px;
+}
+
+#echofon-error-message {
+  margin: 4px 4px 0px 4px;
+  -moz-border-radius: 2px;
+  padding: 2px;
+  text-align: center;
+}
+
+.echofon-tab {
+  -moz-border-radius-bottomleft: 4px;
+  -moz-border-radius-bottomright: 4px;
+  width: 90px;
+  padding: 3px 4px;
+  margin: 0px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 8.5pt !important;
+  font-weight: bold;
+  margin-right: 1px;
+}
+
+.echofon-charcount {
+}
+
+echofon-load-more {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-load-more");
+}
+
+.echofon-load-more-box {
+  background: #a7a7a7;
+  height: 50px;
+  background-image:url(/content/images/void_shadow.png);
+  background-repeat:repeat-x;
+
+}
+
+[conversation="true"] .echofon-load-more-box {
+  background:#f5f6f6;
+  background-image: none;
+}
+
+.echofon-load-more-label {
+  color: #5c676d;
+  font-size: 14px;
+}
+
+.echofon-load-more-spinner {
+  height: 16px !important;
+  width: 16px !important;
+}
+
+.echofon-load-more-spinner {
+  list-style-image: url("chrome://echofon/content/images/load-more.gif") !important;
+}
+
+.echofon-stop-dot {
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  -moz-image-region: rect(28px, 109px, 34px, 104px);
+  height: 6px !important;
+  width: 5px !important;
+}
+
+/*
+   message body
+*/
+.echofon-message-body {
+  padding: 0px;
+  margin: 0px;
+  display: -moz-inline-box;
+}
+
+.echofon-hyperlink {
+  cursor: pointer;
+  display: -moz-inline-box;
+  display: inline-block;
+}
+
+.echofon-hyperlink:hover {
+  text-decoration: underline !important;
+}
+
+/*
+ List
+*/
+
+#echofon-search-text-box
+{
+  margin: 5px 0px 5px 0px;
+}
+
+.menulist-icon {
+  margin: 1px;
+  max-width: 12px;
+  max-height: 12px;
+}
+
+/*
+ Search
+*/
+
+#echofon-search-container {
+  -moz-binding: url("chrome://echofon/content/search.xml#echofon-search-container");
+}
+
+#echofon-search-container-wrap {
+  padding: 20px;
+  background-color: #a5a5a5 !important;
+  -moz-box-shadow: inset 0px 3px 10px #666 !important;
+}
+
+echofon-saved-search,
+echofon-trend {
+  -moz-binding: url("chrome://echofon/content/search.xml#echofon-search-cell");
+  margin: 0px;
+  padding: 10px;
+  border-top: 1px solid #d3d4d3 !important;
+  color: #1d7dd1 !important;
+  text-shadow: #eee 0px 1px !important;
+  font-size: 14px !important;
+}
+
+#echofon-add-search-button {
+  -moz-appearance: none;
+  padding: 0;
+  padding-bottom:2px;
+  margin: 0;
+  min-width:0px;
+  margin-left: 5px;
+  -moz-border-radius:4px;
+  width:32px !important;
+  height:20px !important;
+  text-align: center;
+  border:1px solid #acb2b5;
+  background-color:#e0e2e3;
+  background-image: -moz-linear-gradient(center bottom,#d1d4d6 0%,#edeeef 100%);
+  cursor:pointer;
+  color: #000 !important;
+  font-weight: bold !important;
+  text-shadow: #fff 0px 1px;
+  font-size:12px;
+
+}
+
+#echofon-add-search-button:hover {
+  background-image: -moz-linear-gradient(center bottom, #c1c4c6 0%, #dbdcdd 100%);
+
+}
+
+#echofon-add-search-button:active {
+  border-top-color:#cbcbcb !important;
+  background-image: -moz-linear-gradient(center bottom, #bcbdbe 0%, #a6a8aa 100%);
+}
+
+.echofon-search-delete-button {
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  -moz-image-region: rect(94px, 45px, 103px, 37px);
+  padding: 3px;
+  max-width: 14px;
+  max-height: 15px;
+  margin-right: 5px;
+}
+
+.echofon-search-delete-button:hover {
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  -moz-image-region: rect(94px, 53px, 103px, 45px);
+}
+
+.echofon-search-delete-button:active {
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  -moz-image-region: rect(94px, 61px, 103px, 53px);
+}
+
+.echofon-search-keyword:hover {
+  text-decoration: underline;
+}
+
+.echofon-search-cell-title {
+  padding: 10px 0px 10px 10px;
+  margin: 0px;
+  font-size: 16px;
+  font-weight: bold;
+  text-shadow: #eee 0px 1px !important;
+  color: #272727 !important;
+}
+
+.echofon-keyword-box-wrap {
+  background-color: #e2e3e2;
+  -moz-border-radius: 10px;
+  -moz-box-shadow: 0px 1px 3px #666;
+}
+
+/*
+  Preference
+*/
+
+radio[pane=paneAccounts] {
+  list-style-image: url("chrome://echofon/content/images/pref.png");
+  -moz-image-region: rect(0, 32px, 30px, 0px);
+}
+
+echofon-user-icon-menu {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-user-icon-menu");
+}
+
+echofon-link-menu {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-link-menu");
+}
+
+echofon-app-menu {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-app-menu");
+}
+
+echofon-username-menu {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-username-menu");
+}
+
+echofon-hashtag-menu {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-hashtag-menu");
+}
+
+echofon-tweet-cell-menu {
+  -moz-binding: url("chrome://echofon/content/tweetbox.xml#echofon-tweet-cell-menu");
+}
+
+
+/*
+  Compose
+ */
+.tweet-textbox {
+  -moz-binding: url("chrome://echofon/content/compose.xml#tweet-textbox");
+}
+
+menuitem.spell-suggestion {
+  font-weight: bold;
+}
+
+echofon-compose-base {
+  -moz-binding: url("chrome://echofon/content/compose.xml#echofon-compose-base");
+}
+
+echofon-compose-attachment {
+  -moz-binding: url("chrome://echofon/content/compose.xml#echofon-compose-attachment");
+}
+
+echofon-compose {
+  -moz-binding: url("chrome://echofon/content/compose.xml#echofon-compose");
+}
+
+echofon-compose-popup {
+  -moz-binding: url("chrome://echofon/content/compose.xml#echofon-compose-popup");
+}
+
+.echofon-conversation-compose-textbox {
+  -moz-binding: url("chrome://echofon/content/compose.xml#echofon-conversation-compose-textbox");
+}
+
+.echofon-compose-outer-box {
+  width: 300px;
+}
+
+.echofon-notification {
+  border-top: 1px solid #666;
+}
+
+/*button base*/
+.echobutton{border:none;-moz-border-radius:3px;display:block;width:150px;padding:4px 0;font-size:16px;text-align:center;font-weight:bold;text-shadow:0 -1px 0 rgba(0,0,0,.2);background-image:-moz-linear-gradient(50% 50% 90deg,rgba(0,0,0,.08),#FFFFFF,rgba(0,0,0,.065) 0%,rgba(0,0,0,0) 30%);}
+.echobutton:hover:not([disabled=true]){ background-image:-moz-linear-gradient(50% 50% 90deg,rgba(0,0,0,.035), #FFFFFF, rgba(0,0,0,.065) 0%,rgba(0,0,0,0) 30%); }
+.echobutton:active:not([disabled=true]){ background-image:-moz-linear-gradient(50% 50% 90deg,rgba(255,255,255,.05), #FFFFFF, rgba(255,255,255,.065) 0%,rgba(0,0,0,0) 30%); }
+.echobutton[disabled="true"]{ background-color:#aaa; color:#ccc; background-image:-moz-linear-gradient(50% 50% 90deg,rgba(255,255,255,.05), #FFFFFF, rgba(255,255,255,.065) 0%,rgba(0,0,0,0) 30%); -moz-box-shadow: inset 0 0 1px #aaa, inset 0 0 1px #aaa, inset 0 0 1px #aaa; border:1px solid #333;}
+
+/*button color defaults*/
+.echobutton{
+  color:#fff;
+  background-color:#3291e4;
+  -moz-box-shadow:
+    inset 0 0 1px #3291e4,
+    inset 0 0 1px #3291e4,
+    inset 0 0 1px #3291e4;
+  border:1px solid #216199;
+}
+
+.echofon-compose-bar-container {
+  border: none;
+  -moz-appearance: none !important;
+  background: none;
+  background-color: transparent;
+  padding: 5px 5px;
+}
+
+[sidebar="true"] .echofon-compose-bar-container {
+  background-image: url("chrome://echofon/content/images/texture.gif") !important;
+  border-top: 1px solid #b7b7b7;
+}
+
+.echofon-account-menu-button {
+  width: 22px;
+  height: 22px;
+  margin: 1px 0px;
+  margin-right: 5px;
+  cursor: pointer;
+
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-size: 22px 22px !important;
+}
+
+#echofon-compose-bar-attach-menu-box {
+  -moz-appearance: none !important;
+  background: #b1b9c0;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  margin-top: 4px;
+  margin-right: 4px;
+  min-width:40px;
+  max-width:40px;
+  padding:2px;
+}
+
+#echofon-compose-bar-attach-menu-box[value="140"] {
+  background: #ffffff;
+}
+
+.echofon-compose-bar-char-count {
+  font-size: 10px;
+  text-shadow: #999 0px -1px;
+  color: #fff;
+  display: block;
+  text-align:center;
+  margin: 0px;
+  padding: 0px;
+  padding-top: 1px;
+  font-weight: bold !important;
+}
+
+.echofon-compose-bar-char-count[value="140"] {
+  text-shadow: none;
+}
+
+.echofon-compose-bar-char-count[charOver="true"] {
+  color: #a32424;
+  text-shadow: none;
+}
+
+.echofon-compose-bar-attach-menu-button {
+  margin:0px;
+  padding:0px;
+  width:7px;
+  height:4px;
+  margin-top:1px;
+  margin-right: 2px;
+  box-shadow: #999 0px -1px;
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  -moz-image-region: rect(78px, 29px, 82px, 22px);
+}
+
+.echofon-compose-bar-attach-menu-button[value="140"] {
+  box-shadow: none;
+  -moz-image-region: rect(78px, 36px, 82px, 29px);
+}
+
+.echofon-compose-popup {
+  -moz-appearance: none !important;
+  border: none !important;
+  background: transparent;
+}
+
+.echofon-compose-outer-box {
+  background: transparent;
+}
+
+.echofon-compose-box-arrow {
+  height: 10px;
+  min-height: 10px;
+  background: transparent;
+  background-image: url("chrome://echofon/content/images/ff_compose_point.png");
+  background-repeat: no-repeat;
+  background-position: 22px 0px;
+}
+
+.echofon-compose-box {
+  border: 3px solid #000;
+  border-bottom: none;
+  background: #fff;
+}
+
+.echofon-tweet-popup-box {
+  border: 2px solid #000;
+  background: #fff;
+  padding: 5px;
+}
+
+.echofon-tweet-popup-profile-icon {
+  width: 20px !important;
+  height: 20px !important;
+  -moz-border-radius: 3px;
+  background-size: 20px 20px !important;
+  margin-right: 5px;
+}
+
+.echofon-compose-account-icon {
+  margin: 5px;
+  margin-right: 0px;
+  width: 32px;
+  height: 32px;
+}
+
+.echofon-compose-buttons {
+  background: #000;
+  border-bottom: 3px solid #000;
+}
+
+.echofon-textbox-container {
+  background: #fff;
+  border: 1px solid #999;
+}
+
+[sidebar="true"] .echofon-textbox-container {
+  border: 1px solid #aaa;
+}
+
+.echofon-compose-textbox {
+  -moz-appearance: none !important;
+  border: none;
+  margin: 2px 4px 4px 4px;
+}
+
+.textbox-hidden-text,
+._textbox-textarea {
+  font-family: helvetica, sans-serif !important;
+  font-size: 13px;
+}
+
+.echofon-conversation-textbox {
+  -moz-appearance: textfield !important;
+}
+
+.echofon-compose-attach-button,
+.echofon-compose-cancel-button {
+  list-style-image: url("chrome://echofon/content/images/window.png") !important;
+  -moz-appearance: none !important;
+  border: none !important;
+  width: 24px;
+  height: 24px;
+  min-width:0;
+}
+
+.echofon-compose-attach-button {-moz-image-region: rect(78px, 99px, 94px, 82px)}
+.echofon-compose-cancel-button {-moz-image-region: rect(94px, 86px, 103px, 77px)}
+
+.echofon-compose-send-button {
+  -moz-appearance: none !important;
+  height: 24px;
+  width: 100px !important;
+  font-size: 12px !important;
+}
+
+
+.echofon-compose-cancel-button {
+  border-right: 1px solid #333;
+}
+
+.echofon-compose-char-count {
+  color: white;
+}
+
+.echofon-dm-compose-char-count {
+  color: black;
+}
+
+.echofon-compose-char-count[charOver="true"],
+.echofon-dm-compose-char-count[charOver="true"] {
+  color: red;
+}
+
+.echofon-compose-error-message {
+  padding: 4px;
+  text-align: center;
+  color: white;
+  background: #d83c10;
+}
+
+.echofon-compose-clear-error-button {
+  -moz-appearance: none !important;
+  min-width:0;
+  background: transparent;
+  list-style-image: url("chrome://echofon/content/images/ff_tweet_close_button.png");
+}
+
+.message-icon,
+.security-icon,
+.alert-icon,
+.error-icon,
+.question-icon {
+  width: 16px !important;
+  height: 16px !important;
+  margin: 2px !important;
+  padding: 0px !important;
+  margin-left: 3px !important;
+}
+
+.echofon-compose-bar-error-message-container {
+
+}
+
+.echofon-compose-bar-error-message {
+  color: #000;
+  margin-left: 3px !important;
+}
+
+.echofon-compose-bar-clear-error-button {
+  -moz-appearance: none !important;
+  min-width:0;
+  margin: 0px;
+  background: transparent;
+  border: none !important;
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  -moz-image-region: rect(94px, 29px, 101px, 22px);
+}
+.echofon-compose-bar-clear-error-button:hover {
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  -moz-image-region: rect(94px, 29px, 101px, 22px);
+}
+.echofon-compose-bar-clear-error-button:active {
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  -moz-image-region: rect(94px, 36px, 101px, 29px);
+}
+
+.echofon-compose-places {
+  color: #ccc;
+
+}
+
+.echofon-attachment-close-button {
+  -moz-appearance: none !important;
+  border: none;
+  min-width:0;
+  width: 13px;
+  height: 13px;
+  margin: 2px;
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  -moz-image-region: rect(94px, 29px, 101px, 22px);
+  background: transparent;
+}
+
+.echofon-attachment-close-button:active {
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  -moz-image-region: rect(94px, 36px, 101px, 29px);
+}
+
+.echofon-geolocation-loader {
+  width: 16px;
+  height: 16px;
+  margin-top: 4px !important;
+  margin-right: 4px;
+}
+
+.echofon-attachment-box {
+  padding: 2px;
+  border-top: 1px solid #d1d1d1;
+}
+
+[mode="window"] .echofon-attachment-box {
+  border-top: none;
+}
+
+.echofon-attachment-geo-pin {
+  background-image: url("chrome://echofon/content/images/geo.png") ;
+  background-repeat: no-repeat;
+  width: 9px;
+  height: 15px;
+  margin-left: 7px;
+  margin-top: 3px;
+  margin-right: 3px;
+}
+
+.echofon-attachment-thumbnail {
+  min-height: 0px;
+  width: 16px !important;
+  height: 16px !important;
+  margin: 4px 0px 4px 3px;
+}
+
+.echofon-attachment-label {
+  color: #333;
+}
+
+.echofon-compose-in-reply-to {
+  margin-left: 2px !important;
+  margin-bottom: 4px !important;
+  padding: 0px !important;
+  font-weight:bold;
+  color: #000;
+  text-shadow: #e8e8e8 0px 1px;
+}

@@ -1,0 +1,71 @@
+<!ENTITY paneAccount.title "Comptes">
+<!ENTITY paneGeneral.title "Générales">
+<!ENTITY paneAdvanced.title "Avancées">
+<!ENTITY keyboardShortcut.title "Paramètres de clavier">
+<!ENTITY keyboardShortcut.explanation "Les nouveaux raccourcis-clavier prendront effets à l'ouverture d'une nouvelle fenêtre de navigateur.">
+<!ENTITY clearCache.title "Vider le cache local">
+<!ENTITY clearCache.button "Vider maintenant">
+<!ENTITY echofon.title "Préférences d'Echofon">
+<!ENTITY echofon.accounts "Comptes">
+<!ENTITY echofon.username "Utilisateur">
+<!ENTITY echofon.password "Mot de passe">
+<!ENTITY echofon.addAccount "Ajouter un compte…">
+<!ENTITY echofon.removeAccount "Supprimer le compte…">
+<!ENTITY echofon.authorizing "En cours d'autorisation…">
+<!ENTITY echofon.muteSetting "Paramètres pour ignorer…">
+<!ENTITY echofon.preferences "Préférences">
+<!ENTITY echofon.refreshInterval "Relever les tweets">
+<!ENTITY echofon.theme "Thème">
+<!ENTITY echofon.fontSize "Taille de police">
+<!ENTITY echofon.displayStyle "Style d'affichage">
+<!ENTITY echofon.displayNameAndScreenName "Nom et pseudo">
+<!ENTITY echofon.displayNameOnly "Uniquement le nom">
+<!ENTITY echofon.displayScreenNameOnly "Uniquement le pseudo">
+<!ENTITY echofon.fontFace "Famille de police">
+<!ENTITY echofon.everyminute "Toutes les minutes">
+<!ENTITY echofon.every2minutes "Toutes les deux minutes">
+<!ENTITY echofon.every3minutes "Toutes les trois minutes">
+<!ENTITY echofon.every5minutes "Toutes les cinq minutes">
+<!ENTITY echofon.popupInterval "Intervalle d'affichage de la popup">
+<!ENTITY echofon.popup3sec "Trois secondes">
+<!ENTITY echofon.popup5sec "Cinq secondes">
+<!ENTITY echofon.popup7sec "Sept secondes">
+<!ENTITY echofon.popup10sec "Dix secondes">
+<!ENTITY echofon.mentionsAndDMsOnly "N'afficher que les fenêtres popup pour mentions et messages directs">
+<!ENTITY echofon.popupWhileWindowIsOpened "Afficher les fenêtres popup pendant qu'Echofon est ouverte">
+<!ENTITY echofon.toggleEchofon "Afficher/masquer Echofon">
+<!ENTITY echofon.insertURL "Insérer l'URL">
+<!ENTITY echofon.revertKeyconfig "Rétablir">
+<!ENTITY echofon.balloon "Affichage des fenêtres popup">
+<!ENTITY echofon.newTweetNotifications "Notifications">
+<!ENTITY echofon.sound "Son de notification">
+<!ENTITY echofon.unreadCount "Afficher un compte non-lu">
+<!ENTITY echofon.soundButton "Parcourir…">
+<!ENTITY echofon.syncWindowTitle "Paramètre de synchronisation pour iPhone">
+<!ENTITY echofon.alwaysOpenLinkInNewTab "Toujours ouvrir la cible des liens dans un nouvel onglet">
+<!ENTITY echofon.alwaysOpenLinkInNewTab.tooltip "Ctrl+clic (Cmd+clic sur Mac) ouvre la cible d'un lien dans un nouvel onglet sans ce paramètre.">
+<!ENTITY echofon.openLinks "Ouverture des liens">
+<!ENTITY echofon.applicationMode "Mode d'affichage">
+<!ENTITY echofon.panelMode "Panneau">
+<!ENTITY echofon.windowMode "Fenêtre">
+<!ENTITY echofon.sidebarMode "Panneau latéral">
+<!ENTITY echofon.welcome "Bienvenue sur Echofon !">
+<!ENTITY echofon.signIntoTwitter "S'inscrire sur Twitter">
+<!ENTITY echofon.authorize "Autoriser pour Twitter">
+<!ENTITY echofon.agreeAndAuthEchofon "Accepter et autoriser avec Twitter">
+<!ENTITY echofon.followEchofon "Suivre @echofon">
+<!ENTITY echofon.muteUsers "Utilisateurs">
+<!ENTITY echofon.muteApplications "Applications">
+<!ENTITY echofon.muteHashtags "Hashtags">
+<!ENTITY echofon.addMute "Ajouter…">
+<!ENTITY echofon.removeMute "Supprimer">
+<!ENTITY echofon.muteTitle "Paramètres pour ignorer">
+<!ENTITY echofon.openTwitterForUserPage "Ouvrir twitter.com pour l'affichage de l'utilisateur">
+<!ENTITY echofon.openTwitterForUserPageExplanation "Vous pouvez ouvrir twitter.com/nom_utilisateur au lieu de l'affichage personnalisé d'Echofon. Vous pouvez inverser ces paramètres en utilisant un Maj+clic sur le nom d'utilisateur.">
+<!ENTITY echofon.email "Courriel">
+<!ENTITY echofon.subscribeEmail "S'abonner">
+<!ENTITY echofon.submitEmailExplanation "Indiquez votre adresse électronique pour vous abonner aux actualités d'Echofon et d'UberMedia.">
+<!ENTITY echofon.thankYouForSubscribe "Merci pour votre demande d'abonnement !">
+<!ENTITY echofon.licenseKey "Clé de licence">
+<!ENTITY echofon.verifyLicense "Vérification de la licence">
+<!ENTITY echofon.licenseExplanation "Si vous possédez une clé de licence, veuillez l'indiquer ici">

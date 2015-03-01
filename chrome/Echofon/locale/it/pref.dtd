@@ -1,0 +1,71 @@
+<!ENTITY paneAccount.title "Profili">
+<!ENTITY paneGeneral.title "Generale">
+<!ENTITY paneAdvanced.title "Avanzate">
+<!ENTITY keyboardShortcut.title "Impostazioni della tastiera">
+<!ENTITY keyboardShortcut.explanation "Le nuove scorciatoie da tastiera avranno effetto sulle nuove finestre del browser.">
+<!ENTITY clearCache.title "Svuota cache locale">
+<!ENTITY clearCache.button "Svuota">
+<!ENTITY echofon.title "Preferenze Echofon">
+<!ENTITY echofon.accounts "Profili">
+<!ENTITY echofon.username "Utente">
+<!ENTITY echofon.password "Password">
+<!ENTITY echofon.addAccount "Aggiungi profilo">
+<!ENTITY echofon.removeAccount "Elimina profilo">
+<!ENTITY echofon.authorizing "Autorizzazione in corso...">
+<!ENTITY echofon.muteSetting "Impostazioni per ignorare">
+<!ENTITY echofon.preferences "Preferenze">
+<!ENTITY echofon.refreshInterval "Aggiorna messaggi">
+<!ENTITY echofon.theme "Tema">
+<!ENTITY echofon.fontSize "Dimensione carattere">
+<!ENTITY echofon.displayStyle "Tipo di visualizzazione">
+<!ENTITY echofon.displayNameAndScreenName "Nome e pseudonimo">
+<!ENTITY echofon.displayNameOnly "Solo il nome">
+<!ENTITY echofon.displayScreenNameOnly "Solo lo pseudonimo">
+<!ENTITY echofon.fontFace "Tipo di font">
+<!ENTITY echofon.everyminute "ogni minuto">
+<!ENTITY echofon.every2minutes "ogni 2 minuti">
+<!ENTITY echofon.every3minutes "ogni 3 minuti">
+<!ENTITY echofon.every5minutes "ogni 5 minuti">
+<!ENTITY echofon.popupInterval "Intervallo popup">
+<!ENTITY echofon.popup3sec "3 secondi">
+<!ENTITY echofon.popup5sec "5 secondi">
+<!ENTITY echofon.popup7sec "7 secondi">
+<!ENTITY echofon.popup10sec "10 secondi">
+<!ENTITY echofon.mentionsAndDMsOnly "Visualizza solo popup di citazioni e messaggi diretti">
+<!ENTITY echofon.popupWhileWindowIsOpened "Visualizza popup mentre Echofon è aperto">
+<!ENTITY echofon.toggleEchofon "Abilita/Disabilita Echofon">
+<!ENTITY echofon.insertURL "Scrivi URL dal browser">
+<!ENTITY echofon.revertKeyconfig "Ripristina">
+<!ENTITY echofon.balloon "Visualizza popup">
+<!ENTITY echofon.newTweetNotifications "Notifiche">
+<!ENTITY echofon.sound "Suono di notifica">
+<!ENTITY echofon.unreadCount "Visualizza numero messaggi non letti">
+<!ENTITY echofon.soundButton "Seleziona...">
+<!ENTITY echofon.syncWindowTitle "Imposta sincronizzazione con iPhone">
+<!ENTITY echofon.alwaysOpenLinkInNewTab "Apri i link sempre in una nuova scheda">
+<!ENTITY echofon.alwaysOpenLinkInNewTab.tooltip "Ctrl+click (Cmd+click su Mac) apre un link in una nuova scheda senza questa impostazione.">
+<!ENTITY echofon.openLinks "Apri link">
+<!ENTITY echofon.applicationMode "Modalità applicazione">
+<!ENTITY echofon.panelMode "Pannello">
+<!ENTITY echofon.windowMode "Finestra">
+<!ENTITY echofon.sidebarMode "Barra laterale">
+<!ENTITY echofon.welcome "Benvenuto su Echofon!">
+<!ENTITY echofon.signIntoTwitter "Accedi a Twitter">
+<!ENTITY echofon.authorize "Autorizza su Twitter">
+<!ENTITY echofon.agreeAndAuthEchofon "Accetta e autorizza con Twitter">
+<!ENTITY echofon.followEchofon "Segui @echofon">
+<!ENTITY echofon.muteUsers "Utenti">
+<!ENTITY echofon.muteApplications "Applicazioni">
+<!ENTITY echofon.muteHashtags "Hashtag">
+<!ENTITY echofon.addMute "Aggiungi...">
+<!ENTITY echofon.removeMute "Elimina">
+<!ENTITY echofon.muteTitle "Impostazioni per ignorare">
+<!ENTITY echofon.openTwitterForUserPage "Accedi a twitter.com per visualizzare il profilo utente">
+<!ENTITY echofon.openTwitterForUserPageExplanation "Puoi accedere a twitter.com/nickname invece che utilizzare la funzione di Echofon. Puoi alternare questa configurazione utilizzando shift+click sul nickname.">
+<!ENTITY echofon.email "Email">
+<!ENTITY echofon.subscribeEmail "Iscriviti">
+<!ENTITY echofon.submitEmailExplanation "Inserisci la tua email per ricevere le notizie di Echofon e UberMedia.">
+<!ENTITY echofon.thankYouForSubscribe "Grazie per la tua iscrizione!">
+<!ENTITY echofon.licenseKey "Codice della licenza">
+<!ENTITY echofon.verifyLicense "Verifica la licenza">
+<!ENTITY echofon.licenseExplanation "Se hai un codice di licenza, scrivilo qui">

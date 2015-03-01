@@ -1,0 +1,71 @@
+<!ENTITY paneAccount.title "Contas">
+<!ENTITY paneGeneral.title "Geral">
+<!ENTITY paneAdvanced.title "Avançado">
+<!ENTITY keyboardShortcut.title "Configurações do teclado">
+<!ENTITY keyboardShortcut.explanation "Novos atalhos de teclado terão efeito após a nova janela do navegador.">
+<!ENTITY clearCache.title "Limpar a Cache Local">
+<!ENTITY clearCache.button "Limpar agora">
+<!ENTITY echofon.title "Preferências Echofon">
+<!ENTITY echofon.accounts "Contas">
+<!ENTITY echofon.username "Nome de Utilizador">
+<!ENTITY echofon.password "Senha">
+<!ENTITY echofon.addAccount "Adicionar Conta...">
+<!ENTITY echofon.removeAccount "Remover conta...">
+<!ENTITY echofon.authorizing "A autorizar...">
+<!ENTITY echofon.muteSetting "Ambiente Mudo...">
+<!ENTITY echofon.preferences "Preferências">
+<!ENTITY echofon.refreshInterval "Obter Tweets">
+<!ENTITY echofon.theme "Tema">
+<!ENTITY echofon.fontSize "Tamanho da fonte">
+<!ENTITY echofon.displayStyle "Estilo de Exibição">
+<!ENTITY echofon.displayNameAndScreenName "Nome e Nome Alternativo">
+<!ENTITY echofon.displayNameOnly "Apenas Nome">
+<!ENTITY echofon.displayScreenNameOnly "Apenas Nome Alternativo">
+<!ENTITY echofon.fontFace "Família do tipo de letra">
+<!ENTITY echofon.everyminute "A cada minuto">
+<!ENTITY echofon.every2minutes "A cada Dois minutos">
+<!ENTITY echofon.every3minutes "A cada Três minutos">
+<!ENTITY echofon.every5minutes "A cada Cinco minutos">
+<!ENTITY echofon.popupInterval "Intervalo do Popup">
+<!ENTITY echofon.popup3sec "Três segundos">
+<!ENTITY echofon.popup5sec "Cinco segundos">
+<!ENTITY echofon.popup7sec "Sete segundos">
+<!ENTITY echofon.popup10sec "Dez segundos">
+<!ENTITY echofon.mentionsAndDMsOnly "Mostrar popup apenas de menções e Mensagens Directas">
+<!ENTITY echofon.popupWhileWindowIsOpened "Mostrar Popups enquanto Echofon está aberto">
+<!ENTITY echofon.toggleEchofon "Alternar Echofon">
+<!ENTITY echofon.insertURL "Inserir URL">
+<!ENTITY echofon.revertKeyconfig "Reverter">
+<!ENTITY echofon.balloon "exibir pop-ups">
+<!ENTITY echofon.newTweetNotifications "Notificações">
+<!ENTITY echofon.sound "Som de notificação">
+<!ENTITY echofon.unreadCount "Mostrar contagem não lida">
+<!ENTITY echofon.soundButton "Navegar...">
+<!ENTITY echofon.syncWindowTitle "Configurar sync com o iPhone">
+<!ENTITY echofon.alwaysOpenLinkInNewTab "Abrir sempre links num novo separador">
+<!ENTITY echofon.alwaysOpenLinkInNewTab.tooltip "Ctrl + clique (Cmd + clique no Mac) abre um link numa nova aba, sem esta definição.">
+<!ENTITY echofon.openLinks "Abrir Links">
+<!ENTITY echofon.applicationMode "Modo de Aplicação">
+<!ENTITY echofon.panelMode "Painel">
+<!ENTITY echofon.windowMode "Janela">
+<!ENTITY echofon.sidebarMode "Barra Lateral">
+<!ENTITY echofon.welcome "Bem-vindo ao Echofon!">
+<!ENTITY echofon.signIntoTwitter "Entre no Twitter">
+<!ENTITY echofon.authorize "Autorizar com o Twitter">
+<!ENTITY echofon.agreeAndAuthEchofon "Concorda e Autoriza com Twitter">
+<!ENTITY echofon.followEchofon "Seguir @Echofon">
+<!ENTITY echofon.muteUsers "Utilizadores">
+<!ENTITY echofon.muteApplications "Aplicações">
+<!ENTITY echofon.muteHashtags "Hashtags">
+<!ENTITY echofon.addMute "Adicionar...">
+<!ENTITY echofon.removeMute "Apagar">
+<!ENTITY echofon.muteTitle "Configurações de Silêncio">
+<!ENTITY echofon.openTwitterForUserPage "Abrir twitter.com para Visualizar Utilizador">
+<!ENTITY echofon.openTwitterForUserPageExplanation "Pode abrir twitter.com/nome_de_ecrã em vez da Vista personalizada de Utilizador do Echofon. É possível reverter essa configuração usando shift + clique no nome do ecrã.">
+<!ENTITY echofon.email "Email">
+<!ENTITY echofon.subscribeEmail "Subscrever">
+<!ENTITY echofon.submitEmailExplanation "Insira o seu endereço de email para subscrever notícias do Echofon e da UberMedia.">
+<!ENTITY echofon.thankYouForSubscribe "Obrigado pela sua subscrição!">
+<!ENTITY echofon.licenseKey "Chave de Licença">
+<!ENTITY echofon.verifyLicense "Verificar Licença">
+<!ENTITY echofon.licenseExplanation "Se tem uma chave de licença, insira-a aqui">

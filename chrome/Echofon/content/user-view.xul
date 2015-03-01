@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://echofon/content/echofon.css" type="text/css"?>
+<?xml-stylesheet href="chrome://echofon/skin/echofon.css" type="text/css"?>
+<?xml-stylesheet href="chrome://echofon/content/user-view.css" type="text/css"?>
+
+
+<!DOCTYPE window [
+<!ENTITY % echofonDTD SYSTEM "chrome://echofon/locale/echofon.dtd">
+%echofonDTD;
+]>
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        onload="onload()"
+        onunload="onunload()"
+        id="echofon-user-view"
+        accelerated="true"
+        persist="screenX,screenY,width,height">
+
+    <html:head>
+      <html:link rel="icon" id="user_favicon" href="chrome://echofon/content/images/favicon.png"/>
+    </html:head>
+
+<vbox id="wrap" class="drawer" flex="1">
+
+  <stringbundle id="echofon-strings" src="chrome://echofon/locale/echofon.properties"/>
+
+  <commandset id="mainCommandSet">
+    <command id="cmd_close"              oncommand="close()"/>
+<!--    <command id="cmd_refresh"            oncommand="refresh()"/>-->
+    <command id="cmd_gotoUser"           oncommand="EchofonCommon.gotoUser()"/>
+    <command id="cmd_myProfile"          oncommand="EchofonCommon.openProfile()"/>
+  </commandset>
+
+  <keyset id="menuKeyset">
+    <key id="key_close"     key="w" command="cmd_close" modifiers="accel"/>
+<!--    <key id="key_refresh"   key="r" command="cmd_refresh" modifiers="accel"/>-->
+    <key id="key_gotoUser"  key="u" command="cmd_gotoUser" modifiers="accel"/>
+    <key id="key_myProfile" key="u" command="cmd_myProfile" modifiers="accel, shift"/>
+  </keyset>
+
+  <menupopup id="userActionMenu" onpopupshowing="onActionMenuShowing()">
+    <menuitem label="&echofon.reply;" oncommand="replyToUser()"/>
+    <menuitem id="send-dm" label="&echofon.sendMessage;" oncommand="directMessageToUser()"/>
+    <menuseparator/>
+    <menuitem id="no-retweet" oncommand="noRetweet()"/>
+    <menuitem id="mute-menu" oncommand="mute()"/>
+    <menuseparator id="extra-separator"/>
+    <menuitem id="block-menu" oncommand="blockUser('Block')"/>
+    <menuitem id="report-spam-menu" label="&echofon.reportSpam;" oncommand="blockUser('Spam')"/>
+  </menupopup>
+
+  <menupopup id="userListMenu" onpopupshowing="onListMenuShowing()">
+    <menuitem label="&echofon.loadingList;" disabled="true"/>
+  </menupopup>
+
+  <menupopup id="ownMenu">
+    <menuitem label="&echofon.itsYou;" disabled="true"/>
+  </menupopup>
+
+  <menupopup id="echofon-menu-popup" onpopupshowing="echofonPopupMenuShowing(this)" onpopuphiding="echofonPopupMenuHiding(this)"/>
+  <tooltip id="echofon-tooltip">
+    <box id="echofon-tooltip-container"/>
+  </tooltip>
+
+  <vbox flex="1" style="display:-moz-inline-box">
+
+  <scrollbox id="scroll-container" style="width:100%;display:-moz-inline-box;overflow-y: auto;" onscroll="onScrollBox(event)" orient="vertical" sborient="vertical" flex="1">
+
+  <hbox id="profile_area">
+    <vbox id="user_image">
+      <image id="user-icon" class="userview-usericon" align="top" onclick="EchofonCommon.openPhotoView(this.href)"/>
+    </vbox>
+    <vbox id="user_data" flex="1">
+      <html:a id="user-link" target="_blank"><label id="user-name" crop="right"/></html:a>
+      <label id="user-location" style="display:block" crop="right"/>
+      <html:a id="user-url-link" target="_blank"><description id="user-url" crop="right"/></html:a>
+      <description id="user-description-multiline"><children includes="user-description"/></description>
+    </vbox>
+    <vbox id="user-tools">
+      <button type="menu-iconic" class="user-action-button" menu="userActionMenu" id="user-action-menu"/>
+      <button type="menu-iconic" class="user-list-button" menu="userListMenu"/>
+    </vbox>
+  </hbox>
+
+  <hbox id="follow_area" align="center">
+    <button class="echobutton following" id="follow_button" onclick="follow()" onmouseover="onHoverFollowingButton(true)" onmouseout="onHoverFollowingButton(false)"/>
+    <description id="follow_status" crop="right"/>
+  </hbox>
+
+
+  <hbox id="protected_user_area" hidden="true">
+    <image class="protected-lock-icon" width="65" height="89" />
+    <vbox style="margin-left: 10px">
+      <description value="Protected Tweets" />
+      <description  id="protected_user_detail" style="font-size:12px"><children includes="protected-user-description"/></description>
+    </vbox>
+  </hbox>
+
+
+  <vbox id="user_details_area" class="user-details" flex="1" style="display: -moz-box">
+    <toolbar id="user_tabs">
+      <toolbarbutton type="radio" group="mode" id="userButton"     oncommand="changeTab('user');" checked="true">
+        <image class="userview-tab-icon" id="userButtonIcon"/>
+      </toolbarbutton>
+      <toolbarbutton type="radio" group="mode" id="listButton"     oncommand="changeTab('lists');">
+        <image class="userview-tab-icon" id="listButtonIcon"/>
+      </toolbarbutton>
+      <toolbarbutton type="radio" group="mode" id="favoriteButton" oncommand="changeTab('favorites');">
+        <image class="userview-tab-icon" id="favoriteButtonIcon"/>
+      </toolbarbutton>
+    </toolbar>
+    <toolbar id="user-sub-tabs" class="sub-tabs">
+      <toolbarbutton type="radio" group="mode" id="user-statuses_count"  oncommand="changeTab('tweets');" checked="true"/>
+      <toolbarbutton type="radio" group="mode" id="user-friends_count"   oncommand="changeTab('friends')"/>
+      <toolbarbutton type="radio" group="mode" id="user-followers_count" oncommand="changeTab('followers');"/>
+    </toolbar>
+    <toolbar id="list-sub-tabs" class="sub-tabs" hidden="true">
+      <toolbarbutton type="radio" group="mode" id="user-following-lists" label="Lists"  flex="1" oncommand="changeTab('following-list');" checked="true"/>
+      <toolbarbutton type="radio" group="mode" id="user-followed-lists"  label="Listed" flex="1" oncommand="changeTab('followed-list');"/>
+    </toolbar>
+
+    <vbox id="echofon-tweets"         class="echofon-scrollbox" flex="1"/>
+    <vbox id="echofon-friends"        class="echofon-scrollbox" flex="1" collapsed="true"/>
+    <vbox id="echofon-followers"      class="echofon-scrollbox" flex="1" collapsed="true"/>
+    <vbox id="echofon-following-list" class="echofon-scrollbox" flex="1" collapsed="true"/>
+    <vbox id="echofon-followed-list"  class="echofon-scrollbox" flex="1" collapsed="true"/>
+    <vbox id="echofon-favorites"      class="echofon-scrollbox" flex="1" collapsed="true"/>
+
+  </vbox>
+
+  </scrollbox>
+
+  </vbox>
+
+</vbox>
+
+  <script src="utility.js" type="application/x-javascript;version=1.8"/>
+  <script src="user-view.js" type="application/x-javascript;version=1.8"/>
+  <script src="menu.js" type="application/x-javascript;version=1.8"/>
+
+</window>

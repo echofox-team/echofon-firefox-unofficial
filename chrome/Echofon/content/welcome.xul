@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://echofon/content/welcome.css" type="text/css"?>
+
+<!DOCTYPE window [
+<!ENTITY % echofonDTD SYSTEM "chrome://echofon/locale/pref.dtd">
+%echofonDTD;
+]>
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        id="echofon-welcome-screen"
+        onload="onload()"
+        title="Welcome to Echofon">
+
+    <html:head>
+      <html:link rel="icon" id="user_favicon" href="chrome://echofon/content/images/favicon.png"/>
+    </html:head>
+
+<box id="wrap" flex="1">
+
+  <box id="welcome_message">
+    <image src="images/welcome_logo_text.png" />
+    <h1>&echofon.welcome;</h1>
+  </box>
+
+  <box id="form">
+    <box class="inner" align="center">
+      <box id="email-subscribe" style="display:none" flex="1" align="center">
+        <description flex="1" id="explain" control="email" class="explain">&echofon.submitEmailExplanation;</description>
+        <box class="field" id="thank-you" style="display:none">
+          <label class="explain" value="&echofon.thankYouForSubscribe;"/>
+        </box>
+
+        <box class="field text" id="email_field">
+          <label control="email" class="textbox-label" value="&echofon.email;:"/>
+          <textbox id="email" onkeydown="if (event.keyCode == event.DOM_VK_RETURN) submitEmail()"/>
+        </box>
+
+        <box class="field submit" id="subscribe_button">
+          <button id="submit-email" class="echobutton" label="&echofon.subscribeEmail;" oncommand="submitEmail()"/>
+        </box>
+
+        <box class="field" id="progress-bar" style="display:none">
+          <progressmeter flex="1" mode="undetermined"/>
+        </box>
+
+      </box>
+
+      <box class="inner" align="center" id="eula">
+        <html:iframe src="chrome://echofon/content/EULA_body.html" id="eula_body"/>
+      </box>
+
+      <box class="field submit" id="authorize-form">
+        <button id="signin" class="echobutton" label="&echofon.authorize;" oncommand="authorize()"/>
+        <button id="agree_and_auth" class="echobutton" label="&echofon.agreeAndAuthEchofon;" oncommand="authorize()" style="display:none"/>
+      </box>
+
+    </box>
+  </box>
+
+
+  <script src="utility.js" type="application/x-javascript;version=1.8"/>
+  <script src="welcome.js" type="application/x-javascript;version=1.8"/>
+
+</box>
+
+
+</window>

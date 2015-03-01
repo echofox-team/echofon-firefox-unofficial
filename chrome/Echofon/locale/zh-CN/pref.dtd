@@ -1,0 +1,71 @@
+<!ENTITY paneAccount.title "帐户">
+<!ENTITY paneGeneral.title "常规">
+<!ENTITY paneAdvanced.title "高级">
+<!ENTITY keyboardShortcut.title "键盘设置">
+<!ENTITY keyboardShortcut.explanation "新的键盘快捷键将在新的浏览器窗口中生效。">
+<!ENTITY clearCache.title "清除本地缓存">
+<!ENTITY clearCache.button "立即清除">
+<!ENTITY echofon.title "Echofon 首选项">
+<!ENTITY echofon.accounts "帐户">
+<!ENTITY echofon.username "用户名">
+<!ENTITY echofon.password "密码">
+<!ENTITY echofon.addAccount "添加帐户...">
+<!ENTITY echofon.removeAccount "移除帐户...">
+<!ENTITY echofon.authorizing "正在授权...">
+<!ENTITY echofon.muteSetting "消音设置...">
+<!ENTITY echofon.preferences "首选项">
+<!ENTITY echofon.refreshInterval "获取推">
+<!ENTITY echofon.theme "主题">
+<!ENTITY echofon.fontSize "字体大小">
+<!ENTITY echofon.displayStyle "显示样式">
+<!ENTITY echofon.displayNameAndScreenName "名字和用户名">
+<!ENTITY echofon.displayNameOnly "仅名字">
+<!ENTITY echofon.displayScreenNameOnly "仅用户名">
+<!ENTITY echofon.fontFace "字体系列">
+<!ENTITY echofon.everyminute "每一分钟">
+<!ENTITY echofon.every2minutes "每两分钟">
+<!ENTITY echofon.every3minutes "每三分钟">
+<!ENTITY echofon.every5minutes "每五分钟">
+<!ENTITY echofon.popupInterval "弹出间隔">
+<!ENTITY echofon.popup3sec "三秒">
+<!ENTITY echofon.popup5sec "五秒">
+<!ENTITY echofon.popup7sec "七秒">
+<!ENTITY echofon.popup10sec "十秒">
+<!ENTITY echofon.mentionsAndDMsOnly "仅对提及和私信显示弹出提示">
+<!ENTITY echofon.popupWhileWindowIsOpened "仅 Echofon 打开时显示弹出提示">
+<!ENTITY echofon.toggleEchofon "切换 Echofon">
+<!ENTITY echofon.insertURL "插入网址">
+<!ENTITY echofon.revertKeyconfig "重置">
+<!ENTITY echofon.balloon "弹出显示">
+<!ENTITY echofon.newTweetNotifications "通知">
+<!ENTITY echofon.sound "通知声音">
+<!ENTITY echofon.unreadCount "显示未读数量">
+<!ENTITY echofon.soundButton "浏览...">
+<!ENTITY echofon.syncWindowTitle "设置与 iPhone 同步">
+<!ENTITY echofon.alwaysOpenLinkInNewTab "始终在新标签页中打开链接">
+<!ENTITY echofon.alwaysOpenLinkInNewTab.tooltip "使用 Ctrl+单击（在Mac上是Cmd+单击）可无视此设置，直接在新标签页中打开链接。">
+<!ENTITY echofon.openLinks "打开链接">
+<!ENTITY echofon.applicationMode "应用模式">
+<!ENTITY echofon.panelMode "面板">
+<!ENTITY echofon.windowMode "窗口">
+<!ENTITY echofon.sidebarMode "侧栏">
+<!ENTITY echofon.welcome "欢迎使用 Echofon！">
+<!ENTITY echofon.signIntoTwitter "登录到 Twitter">
+<!ENTITY echofon.authorize "与 Twitter 授权">
+<!ENTITY echofon.agreeAndAuthEchofon "同意并于 Twitter 授权">
+<!ENTITY echofon.followEchofon "关注 @echofon">
+<!ENTITY echofon.muteUsers "用户">
+<!ENTITY echofon.muteApplications "应用">
+<!ENTITY echofon.muteHashtags "标签">
+<!ENTITY echofon.addMute "添加...">
+<!ENTITY echofon.removeMute "删除">
+<!ENTITY echofon.muteTitle "静音设置">
+<!ENTITY echofon.openTwitterForUserPage "打开 twitter.com 的用户视图">
+<!ENTITY echofon.openTwitterForUserPageExplanation "您可以打开 twitter.com/screen_name 代替 Echofon 定制的用户视图。您可以在用户名称上按 Shift+单击 还原此设置。">
+<!ENTITY echofon.email "电子邮箱">
+<!ENTITY echofon.subscribeEmail "订阅">
+<!ENTITY echofon.submitEmailExplanation "请输入您的电子邮箱地址订阅来自 Echofon 和 UberMedia 的新闻。">
+<!ENTITY echofon.thankYouForSubscribe "感谢您的订阅！">
+<!ENTITY echofon.licenseKey "许可证密钥">
+<!ENTITY echofon.verifyLicense "验证许可证">
+<!ENTITY echofon.licenseExplanation "如果您有一个许可证密钥，请在这输入">

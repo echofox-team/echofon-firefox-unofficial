@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+<!--
+    Implementation of Echofon search top
+
+    Copyright (c) 2010 Kazuho Okui / naan studio, Inc. ALL RIGHTS RESERVED.
+-->
+
+<!DOCTYPE overlay SYSTEM "chrome://echofon/locale/echofon.dtd">
+
+<bindings xmlns="http://www.mozilla.org/xbl"
+          xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:xbl="http://www.mozilla.org/xbl"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <binding id="echofon-search-cell">
+    <content>
+      <xul:hbox flex="1" align="center">
+        <xul:label xbl:inherits="value=keyword" class="echofon-search-keyword" flex="2" crop="right"/>
+        <xul:spacer flex="1"/>
+        <xul:image class="echofon-search-delete-button" xbl:inherits="hidden=hide-button" align="center"/>
+      </xul:hbox>
+    </content>
+    <handlers>
+      <handler event="click">
+        if (event.originalTarget.tagName == 'xul:label') {
+            window.searchTweets(this.getAttribute("keyword"));
+        }
+        else if (event.originalTarget.tagName == 'xul:image') {
+            window.destroySavedSearch(this);
+        }
+      </handler>
+    </handlers>
+
+    <implementation>
+      <constructor>
+        if (this.tagName == 'echofon-trend') {
+            this.setAttribute("hide-button", "true");
+        }
+      </constructor>
+    </implementation>
+  </binding>
+
+
+  <binding id="echofon-search-container">
+    <content>
+      <xul:vbox flex="1" id="echofon-search-container-wrap">
+        <!-- saved search -->
+
+        <xul:vbox class="echofon-keyword-box-wrap" style="margin-bottom: 20px">
+          <xul:label value="&echofon.yourSavedSearches;" class="echofon-search-cell-title"/>
+          <children includes="echofon-saved-search"/>
+        </xul:vbox>
+
+        <!-- trending topics -->
+
+        <xul:vbox class="echofon-keyword-box-wrap">
+          <xul:hbox align="center">
+            <xul:label value="&echofon.trendingTopics;:" class="echofon-search-cell-title"/>
+            <xul:label id="echofon-trend-location" class="echofon-search-cell-title" />
+          </xul:hbox>
+
+          <children includes="echofon-trend"/>
+        </xul:vbox>
+
+      </xul:vbox>
+    </content>
+  </binding>
+</bindings>

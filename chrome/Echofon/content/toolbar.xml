@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet href="chrome://echofon/content/echofon.css" type="text/css"?>
+<?xml-stylesheet href="chrome://echofon/skin/echofon.css" type="text/css"?>
+
+<!DOCTYPE window [
+<!ENTITY % echofonDTD SYSTEM "chrome://echofon/locale/echofon.dtd">
+%echofonDTD;
+]>
+
+<bindings
+    xmlns="http://www.mozilla.org/xbl"
+    xmlns:xbl="http://www.mozilla.org/xbl"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <binding id="echofon-toolbar">
+    <content>
+      <xul:toolbar id="echofon-toolbar-body" flex="1">
+        <xul:spacer flex="1"/>
+        <xul:hbox id="echofon-toolbar-container" anonid="toolbutton-container" flex="2">
+          <xul:toolbarbutton class="echofon-tab" flex="1" type="radio" group="mode" id="homeButton"     onmousedown="changeTab(0);" checked="true" >
+             <xul:image class="echofon-tab-icon" id="homeButtonIcon"/>
+          </xul:toolbarbutton>
+          <xul:toolbarbutton class="echofon-tab" flex="1" type="radio" group="mode" id="mentionsButton" onmousedown="changeTab(1);">
+            <xul:image class="echofon-tab-icon" id="mentionsButtonIcon"/>
+          </xul:toolbarbutton>
+          <xul:toolbarbutton class="echofon-tab" flex="1" type="radio" group="mode" id="messagesButton" onmousedown="changeTab(2);">
+            <xul:image class="echofon-tab-icon" id="messagesButtonIcon"/>
+          </xul:toolbarbutton>
+          <xul:toolbarbutton class="echofon-tab" flex="1" type="radio" group="mode" id="listsButton"    onmousedown="changeTab(3);">
+            <xul:image class="echofon-tab-icon" id="listsButtonIcon"/>
+          </xul:toolbarbutton>
+          <xul:toolbarbutton class="echofon-tab" flex="1" type="radio" group="mode" id="searchButton"   onmousedown="changeTab(4);">
+            <xul:image class="echofon-tab-icon" id="searchButtonIcon"/>
+          </xul:toolbarbutton>
+        </xul:hbox>
+        <xul:spacer flex="1"/>
+        <xul:toolbarbutton class="echofon-tabs-closebutton tabs-closebutton" oncommand="toggleSidebar();" xbl:inherits="hidden=noclosebutton"/>
+      </xul:toolbar>
+    </content>
+
+    <implementation>
+      <property name="user">
+        <setter>
+          this._user = val;
+          var e = document.getAnonymousElementByAttribute(this, "anonid", "account");
+          e.removeAttribute("src");
+          e.style.background = "url(" + val.profile_image_url + ")";
+        </setter>
+      </property>
+
+      <method name="getNextTab">
+        <parameter name="advance"/>
+        <body>
+        <![CDATA[
+          var container = document.getAnonymousElementByAttribute(this, "anonid", "toolbutton-container");
+          for (var i = 0; i < container.childNodes.length; ++i) {
+            var button = container.childNodes[i];
+            if (button.checked) {
+              if (advance) {
+                if (++i >= container.childNodes.length) i = 0;
+              }
+              else {
+                if (--i < 0) i = container.childNodes.length - 1;
+              }
+              return i;
+            }
+          }
+        ]]>
+        </body>
+      </method>
+
+      <method name="setUnread">
+        <parameter name="tab"/>
+        <parameter name="flag"/>
+        <body>
+          var elem = document.getElementById(tab + 'Button');
+          if (flag) {
+            elem.setAttribute("unread", "true");
+          }
+          else {
+            elem.removeAttribute("unread");
+          }
+        </body>
+      </method>
+
+      <method name="hasUnread">
+        <body>
+          var tabs = ['home', 'mentions', 'messages', 'lists', 'search'];
+          for (var i in tabs) {
+            var elem = document.getElementById(tabs[i] + 'Button');
+            if (elem.hasAttribute("unread")) {
+              return true;
+            }
+          }
+          return false;
+        </body>
+      </method>
+
+    </implementation>
+
+    <handlers>
+    </handlers>
+  </binding>
+
+  <binding id="echofon-menu">
+    <content>
+      <xul:vbox>
+        <!-- View -->
+        <xul:menu id="echofon-view-menu" label="&viewMenu.label;">
+          <xul:menupopup>
+            <xul:menuitem id="menu_refresh"
+                      label="&viewMenu.refresh;"
+                      key="key_refresh"
+                      command="cmd_refresh"/>
+            <xul:menuitem id="menu_jumpToUnread"
+                      label="&viewMenu.jumpToUnread;"
+                      key="key_jumpToUnread"
+                      command="cmd_jumpToUnread"/>
+            <xul:menuitem id="menu_markAsRead"
+                      label="&viewMenu.markAsRead;"
+                      key="key_markAsRead"
+                      command="cmd_markAsRead"/>
+          </xul:menupopup>
+        </xul:menu>
+
+        <!-- User -->
+        <xul:menu id="echofon-user-menu" label="&userMenu.label;">
+          <xul:menupopup>
+            <xul:menuitem id="menu_gotoUser"
+                      label="&userMenu.gotoUser;"
+                      key="key_gotoUser"
+                      command="cmd_gotoUser"/>
+            <xul:menuitem id="menu_myProfile"
+                      label="&userMenu.myProfile;"
+                      key="key_myProfile"
+                      command="cmd_myProfile"/>
+          </xul:menupopup>
+        </xul:menu>
+
+        <!-- Tweet -->
+        <xul:menu id="echofon-tweet-menu" label="&tweetMenu.label;">
+          <xul:menupopup>
+            <xul:menuitem id="menu_addImage"
+                      label="&tweetMenu.addImage;"
+                      key="key_addImage"
+                      command="cmd_addImage"/>
+            <xul:menuitem id="menu_addGeLocation"
+                      label="&tweetMenu.addGeoLocation;"
+                      key="key_addGeoLocation"
+                      command="cmd_addGeoLocation"/>
+          </xul:menupopup>
+        </xul:menu>
+
+        <xul:menuseparator/>
+        <xul:menuitem id="menu_about"
+                      label="&echofon.aboutEchofon;"
+                      oncommand="aboutEchofon()"/>
+        <xul:menuitem id="menu_purchase"
+                      label="&echofon.removeAds;"
+                      oncommand="EchofonCommon.openPurchase()"/>
+        <xul:menuitem id="menu_preferences"
+                      label="&echofon.preference;"
+                      command="cmd_preference"/>
+        <xul:menuseparator/>
+        <xul:menuitem id="menu_exit"
+                      label="&echofon.exit;"
+                      key="key_close"
+                      command="cmd_close"/>
+        <xul:menuitem id="menu_close"
+                      label="&fileMenu.close;"
+                      key="key_close"
+                      command="cmd_close"/>
+
+      </xul:vbox>
+    </content>
+    <implementation>
+      <constructor>
+        var exitmenu;
+        if (!EchofonCommon.isXULRunner()) {
+          var item = EchofonCommon.$('menu_about');
+          item.parentNode.removeChild(item);
+          exitmenu = EchofonCommon.$('menu_exit');
+        }
+        else {
+          exitmenu = EchofonCommon.$('menu_close');
+        }
+        exitmenu.parentNode.removeChild(exitmenu);
+      </constructor>
+    </implementation>
+  </binding>
+
+  <binding id="toolbarbutton"
+           display="xul:menu"
+           extends="chrome://global/content/bindings/button.xml#menu-button-base">
+
+    <resources>
+      <stylesheet src="chrome://global/skin/toolbarbutton.css" />
+    </resources>
+
+    <content>
+      <children includes="observes|template|menupopup|panel|tooltip"/>
+      <xul:toolbarbutton class="box-inherit toolbarbutton-menubutton-button"
+                         align="center"
+                         anonid="button"
+                         flex="1"
+                         allowevents="true">
+        <xul:hbox align="center" flex="1">
+          <xul:image class="toolbarbutton-icon" xbl:inherits="validate,src=image,label" style="margin: 2px"/>
+          <xul:label xbl:inherits="value=unread,hidden=hideUnread" hidden="true" style="margin: 0px 2px"/>
+        </xul:hbox>
+        <xul:label class="toolbarbutton-text" crop="right" flex="1" xbl:inherits="value=label,accesskey,crop"/>
+      </xul:toolbarbutton>
+
+      <xul:dropmarker type="menu-button" class="toolbarbutton-menubutton-dropmarker" xbl:inherits="align,dir,pack,orient,disabled,label"/>
+    </content>
+
+  </binding>>
+
+</bindings>

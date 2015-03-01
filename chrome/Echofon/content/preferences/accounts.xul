@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://echofon/locale/pref.dtd">
+
+<overlay id="AccountsPaneOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="paneAccounts" onpaneload="gAccountsPane.init()">
+
+    <script type="application/x-javascript;version=1.8" src="chrome://echofon/content/preferences/accounts.js"/>
+
+    <preferences>
+    </preferences>
+
+    <stringbundle id="echofon-strings" src="chrome://echofon/locale/pref.properties"/>
+
+    <groupbox flex="1">
+      <vbox flex="1">
+        <hbox flex="1">
+          <vbox flex="1" align="top">
+            <listbox id="accounts"  onselect="gAccountsPane.onSelectAccount()" flex="1"/>
+          </vbox>
+          <vbox flex="1">
+            <button id="sync-account-button" oncommand="gAccountsPane.onSyncAccount()"/>
+            <button id="mute-setting-button" label="&echofon.muteSetting;" oncommand="gAccountsPane.onMuteSetting()"/>
+            <spacer flex="1"/>
+            <button id="remove-account-button" label="&echofon.removeAccount;" oncommand="gAccountsPane.onRemoveAccount()"/>
+          </vbox>
+        </hbox>
+        <hbox flex="1" align="center" style="margin-top: 5px">
+          <button id="add-account-button" label="&echofon.addAccount;" oncommand="gAccountsPane.onAddAccount()"/>
+        </hbox>
+      </vbox>
+    </groupbox>
+
+  </prefpane>
+</overlay>

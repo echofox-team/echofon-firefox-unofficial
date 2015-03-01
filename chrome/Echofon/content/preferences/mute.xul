@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+
+<!--
+    Implementation of Echofon preference panel window
+
+    Copyright (c) 2009 Kazuho Okui / naan studio, Inc. ALL RIGHTS RESERVED.
+-->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://echofon/content/echofon.css"?>
+<?xml-stylesheet href="chrome://echofon/skin/echofon.css" type="text/css"?>
+
+<!DOCTYPE prefwindow [
+<!ENTITY % echofonDTD SYSTEM "chrome://echofon/locale/pref.dtd">
+%echofonDTD;
+]>
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+            id="echofon-preference"
+            windowtype="Echofon:mute"
+            title="&echofon.muteTitle;"
+            onload="onload()"
+            persist="screenX screenY">
+
+  <script type="application/x-javascript;version=1.8" src="chrome://echofon/content/utility.js"/>
+  <script type="application/x-javascript;version=1.8" src="chrome://echofon/content/preferences/mute.js"/>
+
+  <stringbundle id="echofon-strings" src="chrome://echofon/locale/pref.properties"/>
+
+  <vbox flex="1">
+      <groupbox flex="1">
+        <caption label="&echofon.muteUsers;"/>
+        <hbox>
+            <listbox id="user" flex="1" rows="4" onselect="onselectItem(this)"/>
+            <vbox>
+                <button label="&echofon.addMute;"    oncommand="addItem('user')"/>
+                <button label="&echofon.removeMute;" oncommand="removeItem('user')" id="remove-user" disabled="true"/>
+            </vbox>
+        </hbox>
+      </groupbox>
+
+      <groupbox flex="1">
+        <caption label="&echofon.muteApplications;"/>
+        <hbox>
+            <listbox id="app" flex="1" rows="4" onselect="onselectItem(this)"/>
+            <vbox>
+                <button label="&echofon.addMute;"    oncommand="addItem('app')"/>
+                <button label="&echofon.removeMute;" oncommand="removeItem('app')" id="remove-app" disabled="true"/>
+            </vbox>
+        </hbox>
+      </groupbox>
+
+      <groupbox flex="1">
+        <caption label="&echofon.muteHashtags;"/>
+        <hbox>
+            <listbox id="hashtag" flex="1" rows="4" onselect="onselectItem(this)"/>
+            <vbox>
+                <button label="&echofon.addMute;"    oncommand="addItem('hashtag')"/>
+                <button label="&echofon.removeMute;" oncommand="removeItem('hashtag')" id="remove-hashtag" disabled="true"/>
+            </vbox>
+        </hbox>
+      </groupbox>
+  </vbox>
+
+</dialog>

@@ -1,0 +1,298 @@
+<?xml version="1.0"?>
+
+<!--
+    Implementation of Echofon balloon popup
+
+    Copyright (c) 2009 Kazuho Okui / naan studio, Inc. ALL RIGHTS RESERVED.
+-->
+
+<!DOCTYPE overlay SYSTEM "chrome://echofon/locale/echofon.dtd">
+<bindings xmlns="http://www.mozilla.org/xbl"
+          xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:xbl="http://www.mozilla.org/xbl"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <binding id="echofon-popup"
+           extends="chrome://global/content/bindings/popup.xml#popup">
+    <content>
+        <children/>
+    </content>
+
+    <handlers>
+      <handler event="mouseover">
+        this.onFocus = true;
+      </handler>
+
+      <handler event="mouseout">
+        this.onFocus = false;
+        if (this.needToUpdate) {
+          this.needToUpdate = false;
+          if (this.timer) {
+            this.timer.cancel();
+          }
+          var obj = this;
+          this.timer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer).
+              initWithCallback({notify: function() { obj.onTimeoutBalloon(obj) }}, 1000, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+        }
+      </handler>
+    </handlers>
+
+    <implementation>
+      <field name="onFocus"/>
+      <field name="needToUpdate"/>
+      <field name="timer"/>
+
+      <method name="showBalloon">
+        <parameter name="elem"/>
+        <parameter name="interval"/>
+        <body>
+        <![CDATA[
+          while (this.firstChild) {
+            this.removeChild(this.firstChild);
+          }
+          this.onFocus = false;
+          this.appendChild(elem);
+          var obj = this;
+          if (this.timer) this.timer.cancel();
+          this.timer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
+          this.timer.initWithCallback({notify: function() { obj.onTimeoutBalloon() }}, interval * 1000, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+
+          if (!EchofonCommon.isFF4()) {
+            elem.setAttribute("FF3", "true");
+          }
+          if (this.firstChild.tagName == "echofon-notice") {
+            this.openPopup(document.getElementById("appcontent"), "after_end", -8, -(44), false, true);
+          }
+          else {
+            var x = window.mozInnerScreenX + window.innerWidth - 20 - 8;
+            var y = window.mozInnerScreenY + window.innerHeight - 20 - 8;
+            this.openPopupAtScreen(x, y);
+            var style = window.getComputedStyle(elem, null);
+            var w = parseInt(style.width);
+            var h = parseInt(style.height);
+            if (!isNaN(w) && !isNaN(h)) {
+                x -= w;
+                y -= h;
+            }
+            else {
+                x -= 230;
+                y -= 50;
+            }
+            this.moveTo(x, y);
+          }
+        ]]></body>
+      </method>
+
+      <method name="hideBalloon">
+        <body>
+          this.onFocus = false;
+          if (this.timer) {
+              this.timer.cancel();
+              this.timer = null;
+          }
+          try {
+            this.removeChild(this.firstChild);
+          }catch (e) {}
+          this.hidePopup();
+        </body>
+      </method>
+
+      <method name="onTimeoutBalloon">
+        <body>
+          this.timer = null;
+          if (this.onFocus) {
+            this.needToUpdate = true;
+          }
+          else {
+            EchofonOverlay.onTimeoutBalloon();
+          }
+        </body>
+      </method>
+    </implementation>
+  </binding>
+
+  <!--
+    popup content
+  -->
+  <binding id="echofon-popup-content" extends="chrome://echofon/content/tweetbox.xml#echofon-status-base">
+    <content>
+      <xul:hbox flex="1" crop="right">
+
+        <!-- user icon -->
+        <xul:vbox>
+          <xul:image anonid="usericon" class="echofon-status-usericon" align="top"/>
+          <xul:spacer flex="1" />
+        </xul:vbox>
+
+        <!-- messages -->
+        <xul:vbox flex="1">
+          <xul:description class="echofon-status-body">
+            <children />
+          </xul:description>
+        </xul:vbox>
+
+        <!-- close button -->
+        <xul:vbox>
+          <xul:image class="echofon-tweet-popup-close-button"/>
+          <xul:spacer flex="1" />
+        </xul:vbox>
+
+
+      </xul:hbox>
+    </content>
+
+    <handlers>
+        <handler event="click">
+            if (event.originalTarget.className == "echofon-tweet-popup-close-button") {
+                EchofonCommon.notifyObservers("forceToCloseBalloon");
+            }
+            else if (!event.originalTarget.getAttribute("href")) {
+                EchofonOverlay.focusToWindow();
+            }
+            event.preventDefault();
+            event.stopPropagation();
+        </handler>
+    </handlers>
+
+    <implementation>
+      <constructor>
+      <![CDATA[
+        var msg = this.tweet;
+        var user = this.tweet.user;
+
+        document.getAnonymousElementByAttribute(this, "anonid", "usericon").style.background = "url(" + user.profile_image_url + ")";
+        this.setAttribute("href", EchofonCommon.userViewURL(user.screen_name));
+        this.setAttribute("highlighted", this.highlighted);
+
+        var textnode = EchofonCommon.buildRichTextNode(0, msg, user, this);
+        textnode.setAttribute("crop", "right");
+        textnode.style.overflow = "hidden";
+        textnode.style.fontSize = EchofonCommon.fontSize() + "px";
+        this.appendChild(textnode);
+        if (msg.has_mention) {
+          this.setAttribute("highlighted", true);
+        }
+        else if (msg.type == 'messages') {
+          this.setAttribute("messages", true);
+        }
+      ]]>
+      </constructor>
+    </implementation>
+
+  </binding>
+
+  <!--
+    notification popup (non tweet popup)
+  -->
+
+  <!--
+      Notification box
+    -->
+  <binding id="echofon-notice">
+    <content>
+      <xul:vbox class="echofon-notice-box" align="center" flex="1">
+	<xul:hbox align="center">
+	  <xul:image class="echofon-notice-check"/>
+	  <xul:description class="echofon-notice-message" xbl:inherits="value" />
+	</xul:hbox>
+      </xul:vbox>
+    </content>
+
+    <handlers>
+        <handler event="click">
+          EchofonOverlay.focusToWindow();
+        </handler>
+    </handlers>
+
+  </binding>
+
+  <!--
+      Popup window
+    -->
+  <binding id="echofon-window-popup"
+           extends="chrome://global/content/bindings/popup.xml#panel">
+    <content>
+        <xul:stack flex="1">
+            <xul:browser id="echofon-popup-browser" flex="1" autoscroll="false" disablehistory="true"/>
+            <xul:resizer class="echofon-resizer echofon-resizer-knob" element="echofon-window-popup" left="0" top="0" width="16" height="16" dir="topleft" anonid="topleft"/>
+            <xul:resizer class="echofon-resizer" element="echofon-window-popup" right="0" top="0" width="36" height="5" dir="top" anonid="top"/>
+            <xul:resizer class="echofon-resizer" element="echofon-window-popup" left="0" bottom="0" width="5" height="36" dir="left" anonid="left"/>
+        </xul:stack>
+    </content>
+
+    <handlers>
+      <handler event="resize">
+        document.getAnonymousElementByAttribute(this, "anonid", "top").width = this.width - 12;
+        document.getAnonymousElementByAttribute(this, "anonid", "left").height = this.height - 12;
+      </handler>
+    </handlers>
+  </binding>
+
+
+  <binding id="echofon-window-popup-ff3"
+           extends="chrome://global/content/bindings/popup.xml#panel">
+    <resources>
+      <stylesheet src="chrome://echofon/content/echofon.css"/>
+    </resources>
+    <content>
+        <xul:stack flex="1">
+            <xul:browser id="echofon-popup-browser" flex="1" autoscroll="false" disablehistory="true"/>
+            <xul:box id="echofon-resizer" class="echofon-resizer echofon-resizer-knob" left="0" top="0" width="16" height="16" dir="topleft" anonid="topleft" style="cursor:nw-resize"/>
+        </xul:stack>
+        <children/>
+    </content>
+
+    <handlers>
+      <handler event="draggesture">
+        if (event.originalTarget.id == 'echofon-resizer') {
+            this.dragging = true;
+            this.startX = event.screenX;
+            this.startY = event.screenY;
+        }
+      </handler>
+
+      <handler event="mousemove">
+      <![CDATA[
+        if (this.dragging) {
+          var diffX = this.startX - event.screenX;
+          var diffY = this.startY - event.screenY;
+
+          var w = parseInt(this.width);
+          var h = parseInt(this.height);
+          w += diffX;
+          h += diffY;
+          if (w < 320) w = 320;
+          if (h < 400) h = 400;
+
+          this.startX = event.screenX;
+          this.startY = event.screenY;
+
+          this.width  = w;
+          this.height = h;
+        }
+        ]]>
+      </handler>
+
+      <handler event="mouseup">
+        this.dragging = false;
+        EchofonCommon.pref().setCharPref("windowParam",
+                                         "width=" + this.width +
+                                         ",height=" + this.height);
+      </handler>
+
+    </handlers>
+
+    <implementation>
+        <field name="dragging"/>
+        <field name="startX"/>
+        <field name="startY"/>
+
+        <constructor>
+            this.dragging = false;
+        </constructor>
+
+    </implementation>
+
+  </binding>
+
+</bindings>

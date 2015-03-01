@@ -1,0 +1,71 @@
+<!ENTITY paneAccount.title "Профили">
+<!ENTITY paneGeneral.title "Общи">
+<!ENTITY paneAdvanced.title "Разширени">
+<!ENTITY keyboardShortcut.title "Клавишни комбинации">
+<!ENTITY keyboardShortcut.explanation "Новите клавишни комбинации ще влязат в сила при ново отваряне на браузъра.">
+<!ENTITY clearCache.title "Изчистване на локалния кеш">
+<!ENTITY clearCache.button "Изчистване сега">
+<!ENTITY echofon.title "Настройки на Echofon">
+<!ENTITY echofon.accounts "Профили">
+<!ENTITY echofon.username "Потр. име">
+<!ENTITY echofon.password "Парола">
+<!ENTITY echofon.addAccount "Добавяне...">
+<!ENTITY echofon.removeAccount "Премахване...">
+<!ENTITY echofon.authorizing "Идентифициране...">
+<!ENTITY echofon.muteSetting "Настройки за заглушаване">
+<!ENTITY echofon.preferences "Настройки">
+<!ENTITY echofon.refreshInterval "Получаване">
+<!ENTITY echofon.theme "Оформление">
+<!ENTITY echofon.fontSize "Размер на шрифта">
+<!ENTITY echofon.displayStyle "Показване">
+<!ENTITY echofon.displayNameAndScreenName "Име и акаунт">
+<!ENTITY echofon.displayNameOnly "Само име">
+<!ENTITY echofon.displayScreenNameOnly "Само акаунт">
+<!ENTITY echofon.fontFace "Шрифт">
+<!ENTITY echofon.everyminute "всяка минута">
+<!ENTITY echofon.every2minutes "всеки 2 минути">
+<!ENTITY echofon.every3minutes "всеки 3 минути">
+<!ENTITY echofon.every5minutes "всеки 5 минути">
+<!ENTITY echofon.popupInterval "Интервал на изск. прозорче">
+<!ENTITY echofon.popup3sec "3 секунди">
+<!ENTITY echofon.popup5sec "5 секунди">
+<!ENTITY echofon.popup7sec "7 секунди">
+<!ENTITY echofon.popup10sec "10 секунди">
+<!ENTITY echofon.mentionsAndDMsOnly "Изск. прозорче само при споменаване или DM">
+<!ENTITY echofon.popupWhileWindowIsOpened "Изск. прозорец, когато Echofon е отворен">
+<!ENTITY echofon.toggleEchofon "Свиване на Echofon">
+<!ENTITY echofon.insertURL "Въвеждане на URL">
+<!ENTITY echofon.revertKeyconfig "Начално">
+<!ENTITY echofon.balloon "Изплуващи съобщения">
+<!ENTITY echofon.newTweetNotifications "Известия">
+<!ENTITY echofon.sound "Звук при известяване">
+<!ENTITY echofon.unreadCount "Показване броя на непрочетените">
+<!ENTITY echofon.soundButton "Преглед">
+<!ENTITY echofon.syncWindowTitle "Настройки на синхр с iPhone">
+<!ENTITY echofon.alwaysOpenLinkInNewTab "Винаги отваряй връзките в нов раздел">
+<!ENTITY echofon.alwaysOpenLinkInNewTab.tooltip "Ctrl+click (Cmd+click за Mac) отваря връзка в нов раздел, без тези настройки.">
+<!ENTITY echofon.openLinks "Отваряне на връзки">
+<!ENTITY echofon.applicationMode "Начин на показване">
+<!ENTITY echofon.panelMode "Панел">
+<!ENTITY echofon.windowMode "Прозорец">
+<!ENTITY echofon.sidebarMode "Странична лента">
+<!ENTITY echofon.welcome "Добре дошли в Ехофон!">
+<!ENTITY echofon.signIntoTwitter "Вписване в Туитър">
+<!ENTITY echofon.authorize "Идентифициране с Туитър">
+<!ENTITY echofon.agreeAndAuthEchofon "Съгласявам се и упълномощавам Twitter">
+<!ENTITY echofon.followEchofon "Следвай @echofon">
+<!ENTITY echofon.muteUsers "Потребители">
+<!ENTITY echofon.muteApplications "Програми">
+<!ENTITY echofon.muteHashtags "Хаш-тагове">
+<!ENTITY echofon.addMute "Добявяне...">
+<!ENTITY echofon.removeMute "Изтриване">
+<!ENTITY echofon.muteTitle "Настройки за заглушаване">
+<!ENTITY echofon.openTwitterForUserPage "Отваряне на twitter.com за преглед на профил">
+<!ENTITY echofon.openTwitterForUserPageExplanation "Може да отворите twitter.com, вместо в Echofon. Настройките могат да се променят чрез Shift+клик върху името.">
+<!ENTITY echofon.email "Имейл">
+<!ENTITY echofon.subscribeEmail "Абониране">
+<!ENTITY echofon.submitEmailExplanation "Въведете Вашия имейл, за да получавате новини от Echofon и UberMedia.">
+<!ENTITY echofon.thankYouForSubscribe "Благодарим Ви за абонирането!">
+<!ENTITY echofon.licenseKey "Код за активиране">
+<!ENTITY echofon.verifyLicense "Потвърждаване на кода">
+<!ENTITY echofon.licenseExplanation "Ако имате код за аквивиране, въведете го тук">

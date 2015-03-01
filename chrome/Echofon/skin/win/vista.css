@@ -1,0 +1,86 @@
+/*
+   Windows Vista / 7 Theme for Echofon
+
+   Copyright (c) 2009 Kazuho Okui / naan studio, Inc. ALL RIGHTS RESERVED.
+*/
+
+@media all and (-moz-windows-compositor) {
+
+#echofon-window {
+  -moz-appearance: -moz-win-borderless-glass !important;
+  background:transparent !important;
+}
+
+#echofon-main-window-container {
+  border: 1px solid rgba(0,0,0,0.33);
+}
+
+echofon-toolbar {
+  -moz-appearance: -moz-win-borderless-glass !important;
+  background: transparent !important;
+  margin-top: -5px !important;
+  border: none !important;
+}
+
+#echofon-toolbar-body {
+  -moz-binding: url("chrome://global/content/bindings/general.xml#windowdragbox") !important;
+  background: transparent !important;
+  padding: 0px 5px !important;
+  border: none !important;
+}
+
+.echofon-tab[checked="true"]
+{
+  background: transparent !important;
+  border: none !important;
+  -moz-box-shadow: none !important;
+}
+
+#homeButtonIcon     { -moz-image-region: rect(36px, 19px, 55px,  0px) !important}
+#mentionsButtonIcon { -moz-image-region: rect(36px, 39px, 56px, 19px) !important}
+#messagesButtonIcon { -moz-image-region: rect(36px, 66px, 54px, 39px) !important}
+#listsButtonIcon    { -moz-image-region: rect(36px, 88px, 53px, 66px) !important}
+#searchButtonIcon   { -moz-image-region: rect(36px, 109px, 57px, 88px) !important}
+
+#homeButton[unread="true"]     > #homeButtonIcon     { -moz-image-region: rect( 57px, 19px, 76px,  0px) !important}
+#mentionsButton[unread="true"] > #mentionsButtonIcon { -moz-image-region: rect( 57px, 39px, 77px, 19px) !important}
+#messagesButton[unread="true"] > #messagesButtonIcon { -moz-image-region: rect( 57px, 66px, 75px, 39px) !important}
+#listsButton[unread="true"]    > #listsButtonIcon    { -moz-image-region: rect( 57px, 88px, 74px, 66px) !important}
+#searchButton[unread="true"]   > #searchButtonIcon   { -moz-image-region: rect( 57px, 109px, 78px, 88px) !important}
+
+#homeButtonIcon:-moz-window-inactive,
+#mentionsButtonIcon:-moz-window-inactive,
+#messagesButtonIcon:-moz-window-inactive,
+#listsButtonIcon:-moz-window-inactive,
+#searchButtonIcon:-moz-window-inactive {
+  opacity: 0.85;
+}
+
+
+echofon-toolbar {
+  margin-bottom: 3px !important;
+}
+
+.echofon-tab[checked="true"]
+{
+  background-image:none !important;
+  -moz-box-shadow:none !important;
+  border-left:none !important;
+  border-right:none !important;
+  background-color:rgba(0,0,0,.15) !important;
+  border-top:1px solid rgba(0,0,0,.22) !important;
+  border-bottom:1px solid rgba(255,255,255,.54) !important;
+}
+
+#echofon-ad {
+  margin-right: 3px !important;
+}
+
+} /* @media all and (moz-windows-compositor) */
+
+@media (-moz-windows-classic) {
+  #echofon-ad {
+    background: #fff !important;
+    margin-right: 0px !important;
+  }
+}

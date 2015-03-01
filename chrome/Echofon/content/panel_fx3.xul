@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet href="chrome://browser/skin/browser.css" type="text/css" ?>
+<?xml-stylesheet href="chrome://echofon/content/echofon.css" type="text/css"?>
+<?xml-stylesheet href="chrome://echofon/content/sidebar.css" type="text/css"?>
+<?xml-stylesheet href="chrome://echofon/skin/echofon.css" type="text/css"?>
+
+<!DOCTYPE page [
+<!ENTITY % echofonDTD SYSTEM "chrome://echofon/locale/echofon-window.dtd">
+%echofonDTD;
+<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd" >
+%browserDTD;
+]>
+
+<page id="sbEchofonSidebar" title="Echofon"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script src="utility.js" type="application/x-javascript;version=1.8"/>
+  <script src="menu.js" type="application/x-javascript;version=1.8"/>
+  <script src="window.js" type="application/x-javascript;version=1.8"/>
+
+  <stringbundle id="platformKeys" src="chrome://global-platform/locale/platformKeys.properties"/>
+  <stringbundle id="localeKeys" src="chrome://global/locale/keys.properties"/>
+  <stringbundle id="echofon-strings" src="chrome://echofon/locale/echofon.properties"/>
+
+  <toolbox>
+    <echofon-toolbar id="echofon-toolbar" flex="1"/>
+  </toolbox>
+
+  <vbox id="echofon-main-window" flex="1"/>
+
+  <script>
+    onloadSidebar();
+  </script>
+
+</page>

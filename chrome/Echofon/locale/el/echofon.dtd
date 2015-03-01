@@ -1,0 +1,74 @@
+<!ENTITY echofon.showpopup "Προβολή αναδυόμενου μηνύματος">
+<!ENTITY echofon.reload "Ανανέωση">
+<!ENTITY echofon.markAllAsRead "Σημείωση όλων ως αναγνωσμένων">
+<!ENTITY echofon.preference "Προτιμήσεις...">
+<!ENTITY echofon.removeAds "Απομάκρυνση διαφημίσεων...">
+<!ENTITY echofon.logout "Αποσύνδεση">
+<!ENTITY echofon.exit "Έξοδος">
+<!ENTITY echofon.checkUpdate "Έλεγχος για ενημερώσεις...">
+<!ENTITY echofon.aboutEchofon "Περί Echofon">
+<!ENTITY echofon.changeAccount.tooltip "Πατήστε εδώ για να αλλάξετε λογαριασμό">
+<!ENTITY echofon.copyTweet "Αντιγραφή">
+<!ENTITY echofon.retweet "Retweet...">
+<!ENTITY echofon.retweetWithComment "Retweet με σχολιασμό">
+<!ENTITY echofon.replyAll "Απάντηση σε όλους">
+<!ENTITY echofon.deleteTweet "Διαγραφή tweet">
+<!ENTITY echofon.openTweetInTab "Άνοιγμα tweet σε νέα καρτέλα">
+<!ENTITY echofon.clickToStart "Κάντε κλικ για εκκίνηση">
+<!ENTITY echofon.copyMessage "Αντιγραφή">
+<!ENTITY echofon.deleteMessage "Διαγραφή του μηνύματος...">
+<!ENTITY echofon.olderPosts "ΠΑΛΙΟΤΕΡΑ TWEET">
+<!ENTITY echofon.reply "Απάντηση">
+<!ENTITY echofon.sendMessage "Αποστολή μηνύματος">
+<!ENTITY echofon.block "Μπλοκάρισμα...">
+<!ENTITY echofon.reportSpam "Αναφορά ανεπιθύμητων...">
+<!ENTITY echofon.itsYou "Είστε εσείς!">
+<!ENTITY echofon.chooseList "Επιλογή λίστας...">
+<!ENTITY echofon.loadingList "Φόρτωση λίστας...">
+<!ENTITY echofon.tweetThisPage "Tweet αυτή τη σελίδα">
+<!ENTITY echofon.postWithLink "Δημοσίευση με δεσμό">
+<!ENTITY echofon.copyURL "Αντιγραφή URL">
+<!ENTITY echofon.searchMention "Αναζήτηση αναφοράς">
+<!ENTITY echofon.postWithTag "Δημοσίευση με αυτή την ετικέτα">
+<!ENTITY echofon.muteThisUser "Σίγαση χρήστη">
+<!ENTITY echofon.muteThisTag "Σίγαση ετικέτας">
+<!ENTITY echofon.muteThisApp "Σίγαση εφαρμογής">
+<!ENTITY echofon.cancelButton "Ακύρωση">
+<!ENTITY echofon.sendButton "Αποστολή">
+<!ENTITY echofon.tweetButton "Τweet">
+<!ENTITY echofon.followList "Παρακολούθηση της λίστας">
+<!ENTITY echofon.yourSavedSearches "Αποθηκευμένες αναζητήσεις">
+<!ENTITY echofon.trendingTopics "Δημοφιλή θέματα">
+<!ENTITY fileMenu.accesskey "Α">
+<!ENTITY fileMenu.label "Αρχείο">
+<!ENTITY fileMenu.close "Κλείσιμο">
+<!ENTITY viewMenu.accesskey "Ε">
+<!ENTITY viewMenu.label "Προβολή">
+<!ENTITY viewMenu.goHome "Αρχική σελίδα">
+<!ENTITY viewMenu.goMentions "Αναφορές">
+<!ENTITY viewMenu.goMessages "Μηνύματα">
+<!ENTITY viewMenu.goLists "Λίστες">
+<!ENTITY viewMenu.goSearch "Αναζήτηση">
+<!ENTITY viewMenu.refresh "Ανανέωση χρονοδιαγράμματος">
+<!ENTITY viewMenu.jumpToUnread "Μεταπήδηση στα μη αναγνωσμένα">
+<!ENTITY viewMenu.markAsRead "Σημείωση ώς αναγνωσμένου">
+<!ENTITY tweetMenu.accesskey "Τ">
+<!ENTITY tweetMenu.label "Τweet">
+<!ENTITY tweetMenu.addImage "Προσθήκη εικόνας">
+<!ENTITY tweetMenu.insertURL "Προσθήκη URL τρέχουσας καρτέλας">
+<!ENTITY tweetMenu.addGeoLocation "Προσθήκη γεωτοποθεσίας...">
+<!ENTITY userMenu.accesskey "Χ">
+<!ENTITY userMenu.label "Χρήστης">
+<!ENTITY userMenu.gotoUser "Μετάβαση στο χρήστη...">
+<!ENTITY userMenu.myProfile "Το προφίλ μου">
+<!ENTITY prevAccountCmd.accesskey "π">
+<!ENTITY nextAccountCmd.accesskey "ε">
+<!ENTITY refreshCmd.accesskey "α">
+<!ENTITY jumpToUnreadCmd.accesskey "τ">
+<!ENTITY markAsReadCmd.accesskey "ν">
+<!ENTITY myProfileCmd.accesskey "λ">
+<!ENTITY gotoUserCmd.accesskey "η">
+<!ENTITY insertURLCmd.accesskey "θ">
+<!ENTITY addImageCmd.accesskey "κ">
+<!ENTITY addGeoLocationCmd.accesskey "ο">
+<!ENTITY closeCmd.accesskey "μ">

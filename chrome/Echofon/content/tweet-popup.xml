@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<!--
+    Implementation of Echofon compose window
+    Copyright (c) 2011 Kazuho Okui / naan studio, Inc. ALL RIGHTS RESERVED.
+-->
+<!DOCTYPE overlay SYSTEM "chrome://echofon/locale/echofon.dtd">
+<bindings xmlns="http://www.mozilla.org/xbl"
+          xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:xbl="http://www.mozilla.org/xbl"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <binding id="echofon-tweet-popup">
+    <content>
+      <xul:panel anonid="panel" class="echofon-compose-popup">
+        <xul:vbox flex="1" class="echofon-compose-outer-box">
+          <xul:vbox class="echofon-compose-box-arrow"/>
+          <xul:vbox class="echofon-tweet-popup-box" flex="1">
+            <xul:hbox flex="1" anonid="content">
+              <!-- user icon -->
+              <xul:vbox>
+                <xul:image anonid="usericon" class="echofon-tweet-popup-profile-icon"/>
+                <xul:spacer flex="1"/>
+              </xul:vbox>
+
+              <!-- messages -->
+              <xul:vbox class="echofon-status-message-container" flex="1">
+                <xul:description class="echofon-status-message">
+                  <children />
+                </xul:description>
+                <xul:hbox class="echofon-status-info" crop="right" align="left">
+                  <children includes="echofon-status-tagline"/>
+                </xul:hbox>
+              </xul:vbox>
+
+            </xul:hbox>
+
+            <xul:vbox align="center" anonid="spinner">
+              <xul:hbox>
+                <xul:image src="chrome://echofon/content/images/ajax-loader.gif"/>
+              </xul:hbox>
+            </xul:vbox>
+          </xul:vbox>
+        </xul:vbox>
+      </xul:panel>
+    </content>
+
+    <handlers>
+      <handler event="click">
+        this.popup.hidePopup();
+      </handler>
+    </handlers>
+
+    <implementation>
+
+      <field name="popup">document.getAnonymousElementByAttribute(this, "anonid", "panel")</field>
+
+      <property name="tweet">
+        <setter>
+
+        this._tweet = val;
+        var tweet = val;
+        while (this.firstChild) {
+            this.removeChild(this.firstChild);
+        }
+
+        this.toggleContent();
+        if (!this._tweet) return;
+
+        var textnode = EchofonCommon.buildRichTextNode(tweet.user.id, tweet, tweet.user, this);
+        textnode.className = "echofon-status-body";
+        this.appendChild(textnode);
+
+        var info = document.createElement("echofon-status-tagline");
+        info.setAttribute("crop", "right");
+        var label = EchofonCommon.getLocalTimeForDate(tweet.created_at);
+        info.appendChild(document.createTextNode(label));
+        info.style.display = "block";
+        this.appendChild(info);
+        document.getAnonymousElementByAttribute(this, "anonid", "usericon").style.background = "url(" + this.tweet.user.profile_image_url +")";
+
+        </setter>
+        <getter>
+        return this._tweet;
+        </getter>
+      </property>
+
+      <method name="toggleContent">
+        <body>
+        var spinner = document.getAnonymousElementByAttribute(this, "anonid", "spinner");
+        var content = document.getAnonymousElementByAttribute(this, "anonid", "content");
+        if (this._tweet == null) {
+          spinner.hidden = false;
+          content.hidden = true;
+        }
+        else {
+          spinner.hidden = true;
+          content.hidden = false;
+        }
+        </body>
+      </method>
+
+      <method name="hidePopup">
+        <body>
+          this.popup.hidePopup();
+        </body>
+      </method>
+
+      <method name="openPopup">
+        <parameter name="parent"/>
+        <body>
+          if (parent) {
+            var rects = parent.getClientRects();
+            this.x = window.mozInnerScreenX + rects[0].left + parseInt(rects[0].width / 2) - 22 - 10;
+            this.y = window.mozInnerScreenY + rects[0].top + rects[0].height;
+          }
+
+          this.toggleContent();
+
+          this.popup.autoPosition = false;
+          this.popup.openPopupAtScreen(this.x, this.y);
+          this.popup.popupBoxObject.enableRollup(false);
+          this.popup.popupBoxObject.setConsumeRollupEvent(1);
+
+          window._panel = this;
+        </body>
+      </method>
+
+    </implementation>
+
+  </binding>
+</bindings>

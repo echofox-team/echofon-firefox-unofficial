@@ -1,0 +1,74 @@
+<!ENTITY echofon.showpopup "Zobrazit vysouvací upozornění na">
+<!ENTITY echofon.reload "Znovu načíst">
+<!ENTITY echofon.markAllAsRead "Označit vše za přečtené">
+<!ENTITY echofon.preference "Předvolby">
+<!ENTITY echofon.removeAds "Odstranit reklamy">
+<!ENTITY echofon.logout "Odhlásit se">
+<!ENTITY echofon.exit "Ukončit">
+<!ENTITY echofon.checkUpdate "Zkontrolovat aktualizace">
+<!ENTITY echofon.aboutEchofon "O Echofonu">
+<!ENTITY echofon.changeAccount.tooltip "Klepnutím sem se přihlásíte k jinému účtu">
+<!ENTITY echofon.copyTweet "Kopírovat text">
+<!ENTITY echofon.retweet "Retweetovat">
+<!ENTITY echofon.retweetWithComment "Retweetovat s komentářem">
+<!ENTITY echofon.replyAll "Odpovědět všem">
+<!ENTITY echofon.deleteTweet "Odstranit příspěvek">
+<!ENTITY echofon.openTweetInTab "Otevřít příspěvek v novém panelu">
+<!ENTITY echofon.clickToStart "Začněte klepnutím sem">
+<!ENTITY echofon.copyMessage "Kopírovat text">
+<!ENTITY echofon.deleteMessage "Odstranit zprávu">
+<!ENTITY echofon.olderPosts "Starší příspěvky">
+<!ENTITY echofon.reply "Odpovědět">
+<!ENTITY echofon.sendMessage "Poslat zprávu">
+<!ENTITY echofon.block "Zablokovat">
+<!ENTITY echofon.reportSpam "Nahlásit spam">
+<!ENTITY echofon.itsYou "To jste vy!">
+<!ENTITY echofon.chooseList "Vybrat seznam">
+<!ENTITY echofon.loadingList "Načítání seznamu...">
+<!ENTITY echofon.tweetThisPage "Sdílet tuto stránku v síti Twitter">
+<!ENTITY echofon.postWithLink "Odeslat jako odkaz">
+<!ENTITY echofon.copyURL "Kopírovat adresu">
+<!ENTITY echofon.searchMention "Hledat zmínku o uživateli">
+<!ENTITY echofon.postWithTag "Odeslat s tímto tagem">
+<!ENTITY echofon.muteThisUser "Skrýt tohoto uživatele">
+<!ENTITY echofon.muteThisTag "Skrýt tento tag">
+<!ENTITY echofon.muteThisApp "Skrýt tuto aplikaci">
+<!ENTITY echofon.cancelButton "Zrušit">
+<!ENTITY echofon.sendButton "Odeslat">
+<!ENTITY echofon.tweetButton "Odeslat">
+<!ENTITY echofon.followList "Sledovat tento seznam">
+<!ENTITY echofon.yourSavedSearches "Uložená vyhledávání">
+<!ENTITY echofon.trendingTopics "Aktuální témata">
+<!ENTITY fileMenu.accesskey "S">
+<!ENTITY fileMenu.label "Soubor">
+<!ENTITY fileMenu.close "Zavřít">
+<!ENTITY viewMenu.accesskey "Z">
+<!ENTITY viewMenu.label "Zobrazit">
+<!ENTITY viewMenu.goHome "Domů">
+<!ENTITY viewMenu.goMentions "Zmínky">
+<!ENTITY viewMenu.goMessages "Zprávy">
+<!ENTITY viewMenu.goLists "Seznamy">
+<!ENTITY viewMenu.goSearch "Vyhledávání">
+<!ENTITY viewMenu.refresh "Obnovit seznam příspěvků">
+<!ENTITY viewMenu.jumpToUnread "Přeskočit na nepřečtené">
+<!ENTITY viewMenu.markAsRead "Označit za přečtené">
+<!ENTITY tweetMenu.accesskey "ě">
+<!ENTITY tweetMenu.label "Příspěvek">
+<!ENTITY tweetMenu.addImage "Přidat obrázek">
+<!ENTITY tweetMenu.insertURL "Vložit adresu aktuálního panelu">
+<!ENTITY tweetMenu.addGeoLocation "Přidat aktuální polohu">
+<!ENTITY userMenu.accesskey "U">
+<!ENTITY userMenu.label "Uživatel">
+<!ENTITY userMenu.gotoUser "Přejít na uživatele">
+<!ENTITY userMenu.myProfile "Můj profil">
+<!ENTITY prevAccountCmd.accesskey "p">
+<!ENTITY nextAccountCmd.accesskey "n">
+<!ENTITY refreshCmd.accesskey "o">
+<!ENTITY jumpToUnreadCmd.accesskey "s">
+<!ENTITY markAsReadCmd.accesskey "t">
+<!ENTITY myProfileCmd.accesskey "p">
+<!ENTITY gotoUserCmd.accesskey "u">
+<!ENTITY insertURLCmd.accesskey "l">
+<!ENTITY addImageCmd.accesskey "i">
+<!ENTITY addGeoLocationCmd.accesskey "n">
+<!ENTITY closeCmd.accesskey "v">

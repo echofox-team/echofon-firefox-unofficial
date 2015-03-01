@@ -1,0 +1,71 @@
+<!ENTITY paneAccount.title "帳號">
+<!ENTITY paneGeneral.title "一般">
+<!ENTITY paneAdvanced.title "進階">
+<!ENTITY keyboardShortcut.title "鍵盤設定">
+<!ENTITY keyboardShortcut.explanation "新設的鍵盤捷徑鍵會在新開的瀏覽器視窗中生效。">
+<!ENTITY clearCache.title "清除本地快取">
+<!ENTITY clearCache.button "立即清除">
+<!ENTITY echofon.title "Echofon 偏好設定">
+<!ENTITY echofon.accounts "帳號">
+<!ENTITY echofon.username "使用者名稱">
+<!ENTITY echofon.password "密碼">
+<!ENTITY echofon.addAccount "新增帳號...">
+<!ENTITY echofon.removeAccount "移除帳號...">
+<!ENTITY echofon.authorizing "認證中...">
+<!ENTITY echofon.muteSetting "消音設定...">
+<!ENTITY echofon.preferences "偏好設定">
+<!ENTITY echofon.refreshInterval "抓取推文">
+<!ENTITY echofon.theme "佈景">
+<!ENTITY echofon.fontSize "字型大小">
+<!ENTITY echofon.displayStyle "顯示方式">
+<!ENTITY echofon.displayNameAndScreenName "名字和帳號">
+<!ENTITY echofon.displayNameOnly "只顯示名字">
+<!ENTITY echofon.displayScreenNameOnly "只顯示帳號">
+<!ENTITY echofon.fontFace "字型">
+<!ENTITY echofon.everyminute "每分鐘">
+<!ENTITY echofon.every2minutes "每2分鐘">
+<!ENTITY echofon.every3minutes "每3分鐘">
+<!ENTITY echofon.every5minutes "每5分鐘">
+<!ENTITY echofon.popupInterval "彈出視窗顯示">
+<!ENTITY echofon.popup3sec "3秒">
+<!ENTITY echofon.popup5sec "5秒">
+<!ENTITY echofon.popup7sec "7秒">
+<!ENTITY echofon.popup10sec "10秒">
+<!ENTITY echofon.mentionsAndDMsOnly "只在被提及或收到私訊時顯示彈出視窗">
+<!ENTITY echofon.popupWhileWindowIsOpened "Echofon 開啟時仍顯示彈出視窗">
+<!ENTITY echofon.toggleEchofon "開/關 Echofon">
+<!ENTITY echofon.insertURL "插入網址">
+<!ENTITY echofon.revertKeyconfig "復原">
+<!ENTITY echofon.balloon "彈出視窗顯示">
+<!ENTITY echofon.newTweetNotifications "新訊息通知">
+<!ENTITY echofon.sound "新訊息通知音效">
+<!ENTITY echofon.unreadCount "顯示未讀推數">
+<!ENTITY echofon.soundButton "瀏覽...">
+<!ENTITY echofon.syncWindowTitle "設定與iPhone同步">
+<!ENTITY echofon.alwaysOpenLinkInNewTab "總是在新分頁開啟連結">
+<!ENTITY echofon.alwaysOpenLinkInNewTab.tooltip "未勾選時，以 Ctrl+左鍵 (Mac 為 Cmd+左鍵) 亦可在新分頁開啟連結。">
+<!ENTITY echofon.openLinks "連結開啟">
+<!ENTITY echofon.applicationMode "應用程式顯示模式">
+<!ENTITY echofon.panelMode "面板">
+<!ENTITY echofon.windowMode "視窗">
+<!ENTITY echofon.sidebarMode "側邊列">
+<!ENTITY echofon.welcome "歡迎使用 Echofon!">
+<!ENTITY echofon.signIntoTwitter "登入 Twitter">
+<!ENTITY echofon.authorize "Twitter 援權">
+<!ENTITY echofon.agreeAndAuthEchofon "同意並以推特授權">
+<!ENTITY echofon.followEchofon "關注 @echofon">
+<!ENTITY echofon.muteUsers "使用者">
+<!ENTITY echofon.muteApplications "應用程式">
+<!ENTITY echofon.muteHashtags "主題標籤">
+<!ENTITY echofon.addMute "新增...">
+<!ENTITY echofon.removeMute "刪除">
+<!ENTITY echofon.muteTitle "消音設定">
+<!ENTITY echofon.openTwitterForUserPage "在 twitter.com 查看個人檔案">
+<!ENTITY echofon.openTwitterForUserPageExplanation "開啟「twitter.com/使用者名稱」的個人檔案頁面，而非 Echofon 內建的使用者檢視頁。shift+左鍵點選帳號時會採用與此處設定相反的動作。">
+<!ENTITY echofon.email "Email">
+<!ENTITY echofon.subscribeEmail "訂閱">
+<!ENTITY echofon.submitEmailExplanation "輸入您的Email，訂閱 Echofon 與 UberMedia 的最新消息。">
+<!ENTITY echofon.thankYouForSubscribe "感謝您的訂閱！">
+<!ENTITY echofon.licenseKey "授權序號">
+<!ENTITY echofon.verifyLicense "驗證授權">
+<!ENTITY echofon.licenseExplanation "若您擁有授權序號，請在此輸入">

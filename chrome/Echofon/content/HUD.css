@@ -1,0 +1,48 @@
+/*
+  HUD
+*/
+#echofon-hud {
+  border: 2px solid #000;
+  background: #000;
+}
+
+#echofon-hud-titlebar {
+  margin: 0;
+  padding: 0;
+  height: 16px !important;
+  max-height: 16px !important;
+  background: #000;
+  border: 2px solid #000;
+}
+
+#echofon-hud-close-button {
+  list-style-image: url("chrome://echofon/content/images/window.png");
+  -moz-image-region: rect(20px, 107px, 28px, 99px);
+  width:8px;
+  height:8px;
+  margin-left: 1px;
+ }
+
+#echofon-hud-image {
+  margin: 0px;
+  padding: 0px;
+  width:  160px;
+  height: 160px;
+  background: #000;
+}
+
+#echofon-loading-photo {
+  width:  32px;
+  height: 32px;
+  margin: 48px 64px 64px 64px;
+  background: transparent;
+  list-style-image: url("chrome://echofon/content/images/loading-photo.gif");
+}
+
+#echofon-hud-error-message {
+   color: #ccc;
+   vertical-align: text-top;
+   margin-top: -16px;
+   font-size:14px;
+   font-weight:bold;
+}

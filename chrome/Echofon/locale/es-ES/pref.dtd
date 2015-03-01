@@ -1,0 +1,71 @@
+<!ENTITY paneAccount.title "Cuentas">
+<!ENTITY paneGeneral.title "General">
+<!ENTITY paneAdvanced.title "Avanzado">
+<!ENTITY keyboardShortcut.title "Configuración de teclado">
+<!ENTITY keyboardShortcut.explanation "Los nuevos atajos de teclado tendrán efecto después de abrir una nueva ventana del navegador.">
+<!ENTITY clearCache.title "Limpiar caché local">
+<!ENTITY clearCache.button "Limpiar ahora">
+<!ENTITY echofon.title "Preferencias de Echofon">
+<!ENTITY echofon.accounts "Cuentas">
+<!ENTITY echofon.username "Nombre de usuario">
+<!ENTITY echofon.password "Contraseña">
+<!ENTITY echofon.addAccount "Añadir cuenta">
+<!ENTITY echofon.removeAccount "Eliminar cuenta...">
+<!ENTITY echofon.authorizing "Autorizando...">
+<!ENTITY echofon.muteSetting "Configuración de silenciador (Mute)">
+<!ENTITY echofon.preferences "Preferencias">
+<!ENTITY echofon.refreshInterval "Obtener tweets">
+<!ENTITY echofon.theme "Tema">
+<!ENTITY echofon.fontSize "Tamaño de la fuente">
+<!ENTITY echofon.displayStyle "Estilo de muestra">
+<!ENTITY echofon.displayNameAndScreenName "Nombre y Nombre de Usuario">
+<!ENTITY echofon.displayNameOnly "Nombre Solamente">
+<!ENTITY echofon.displayScreenNameOnly "Nombre de Usuario solamente">
+<!ENTITY echofon.fontFace "Tipo de Fuente">
+<!ENTITY echofon.everyminute "Cada minuto">
+<!ENTITY echofon.every2minutes "Cada dos minutos">
+<!ENTITY echofon.every3minutes "Cada tres minutos">
+<!ENTITY echofon.every5minutes "Cada cinco minutos">
+<!ENTITY echofon.popupInterval "Intervalo de Popup">
+<!ENTITY echofon.popup3sec "Tres segundos">
+<!ENTITY echofon.popup5sec "Cinco segundos">
+<!ENTITY echofon.popup7sec "Siete segundos">
+<!ENTITY echofon.popup10sec "Diez segundos">
+<!ENTITY echofon.mentionsAndDMsOnly "Mostrar popup sólo para menciones y Mensajes directos">
+<!ENTITY echofon.popupWhileWindowIsOpened "Mostrar Popups mientras Echofon esté abierto">
+<!ENTITY echofon.toggleEchofon "Activar Echofon">
+<!ENTITY echofon.insertURL "Insertar URL">
+<!ENTITY echofon.revertKeyconfig "Revertir">
+<!ENTITY echofon.balloon "Mostrar Popup">
+<!ENTITY echofon.newTweetNotifications "Notificaciones">
+<!ENTITY echofon.sound "Notificación de sonido">
+<!ENTITY echofon.unreadCount "Mostrar contador de no leídos">
+<!ENTITY echofon.soundButton "Buscar...">
+<!ENTITY echofon.syncWindowTitle "Configurar sincronización con iPhone">
+<!ENTITY echofon.alwaysOpenLinkInNewTab "Abrir siempre enlaces en una nueva pestaña">
+<!ENTITY echofon.alwaysOpenLinkInNewTab.tooltip "Ctrl+clic (Cmd+clic en Mac) abre un link en una nueva pestaña sin esta configuración.">
+<!ENTITY echofon.openLinks "Abrir enlaces">
+<!ENTITY echofon.applicationMode "Modo de la aplicación">
+<!ENTITY echofon.panelMode "Panel">
+<!ENTITY echofon.windowMode "Ventana">
+<!ENTITY echofon.sidebarMode "Barra lateral">
+<!ENTITY echofon.welcome "¡Bienvenido a Echofon!">
+<!ENTITY echofon.signIntoTwitter "Conectarse en Twitter">
+<!ENTITY echofon.authorize "Autorizar con Twitter">
+<!ENTITY echofon.agreeAndAuthEchofon "Aceptar y Autorizar con Twitter">
+<!ENTITY echofon.followEchofon "Seguir @echofon">
+<!ENTITY echofon.muteUsers "Usuarios">
+<!ENTITY echofon.muteApplications "Aplicaciones">
+<!ENTITY echofon.muteHashtags "Hashtags (Etiquetas)">
+<!ENTITY echofon.addMute "Agregar...">
+<!ENTITY echofon.removeMute "Borrar">
+<!ENTITY echofon.muteTitle "Configuración de silenciado (Mute)">
+<!ENTITY echofon.openTwitterForUserPage "Abrir twitter.com para ver perfiles">
+<!ENTITY echofon.openTwitterForUserPageExplanation "Puede abrir twitter.com/nombre_de_usuario en lugar de la vista de perfiles de Echofon. Es posible revertir esta configuracuón utilizando shift+click en un nombre de usuario.">
+<!ENTITY echofon.email "Email">
+<!ENTITY echofon.subscribeEmail "Suscribirse">
+<!ENTITY echofon.submitEmailExplanation "Ingresa tu dirección de correo electrónico para suscribirse a las noticias de Echofon y UberMedia">
+<!ENTITY echofon.thankYouForSubscribe "¡Gracias por tu suscripción!">
+<!ENTITY echofon.licenseKey "Código de Licencia">
+<!ENTITY echofon.verifyLicense "Verificar Licencia">
+<!ENTITY echofon.licenseExplanation "Si tienes un Código de licencia, ingrésalo aquí">

@@ -1,0 +1,74 @@
+<!ENTITY echofon.showpopup "Изскачащо прозорче">
+<!ENTITY echofon.reload "Презареждане">
+<!ENTITY echofon.markAllAsRead "Всички като прочетени">
+<!ENTITY echofon.preference "Настройки...">
+<!ENTITY echofon.removeAds "Премахване на рекламите...">
+<!ENTITY echofon.logout "Изход">
+<!ENTITY echofon.exit "Изход">
+<!ENTITY echofon.checkUpdate "Проверка за обновяване...">
+<!ENTITY echofon.aboutEchofon "Относно">
+<!ENTITY echofon.changeAccount.tooltip "Натиснете за смяна на профила">
+<!ENTITY echofon.copyTweet "Копиране">
+<!ENTITY echofon.retweet "Ретуит...">
+<!ENTITY echofon.retweetWithComment "Ретуит с коментар">
+<!ENTITY echofon.replyAll "Отговор на всички">
+<!ENTITY echofon.deleteTweet "Изтриване на този туит">
+<!ENTITY echofon.openTweetInTab "Отваряне на това в нов раздел">
+<!ENTITY echofon.clickToStart "Натиснете, за да започнете">
+<!ENTITY echofon.copyMessage "Копиране">
+<!ENTITY echofon.deleteMessage "Изтриване">
+<!ENTITY echofon.olderPosts "ПО-СТАРИ ТУИТОВЕ">
+<!ENTITY echofon.reply "Отговор">
+<!ENTITY echofon.sendMessage "Лично съобщение">
+<!ENTITY echofon.block "Блокиране">
+<!ENTITY echofon.reportSpam "Докладване като спам">
+<!ENTITY echofon.itsYou "Това сте вие!">
+<!ENTITY echofon.chooseList "Изберете списък...">
+<!ENTITY echofon.loadingList "Зареждане на списък...">
+<!ENTITY echofon.tweetThisPage "Споделяне на тази страница">
+<!ENTITY echofon.postWithLink "Публикуване с връзка">
+<!ENTITY echofon.copyURL "Копиране на URL">
+<!ENTITY echofon.searchMention "Търсене на споменаванe">
+<!ENTITY echofon.postWithTag "Публикуване с този таг">
+<!ENTITY echofon.muteThisUser "Заглуши този потребител">
+<!ENTITY echofon.muteThisTag "Заглуши този таг">
+<!ENTITY echofon.muteThisApp "Заглуши тази програма">
+<!ENTITY echofon.cancelButton "Отказ">
+<!ENTITY echofon.sendButton "Изпращане">
+<!ENTITY echofon.tweetButton "Туит">
+<!ENTITY echofon.followList "Следване на този списък">
+<!ENTITY echofon.yourSavedSearches "Вашите запазени търсения">
+<!ENTITY echofon.trendingTopics "Актуални теми">
+<!ENTITY fileMenu.accesskey "Ф">
+<!ENTITY fileMenu.label "Файл">
+<!ENTITY fileMenu.close "Затваряне">
+<!ENTITY viewMenu.accesskey "И">
+<!ENTITY viewMenu.label "Изглед">
+<!ENTITY viewMenu.goHome "Начало">
+<!ENTITY viewMenu.goMentions "Споменаване">
+<!ENTITY viewMenu.goMessages "Съобщения">
+<!ENTITY viewMenu.goLists "Списъци">
+<!ENTITY viewMenu.goSearch "Търсене">
+<!ENTITY viewMenu.refresh "Обновяване">
+<!ENTITY viewMenu.jumpToUnread "Към непрочетените">
+<!ENTITY viewMenu.markAsRead "Маркиране като прочетени">
+<!ENTITY tweetMenu.accesskey "Т">
+<!ENTITY tweetMenu.label "Туит">
+<!ENTITY tweetMenu.addImage "Добавяне на снимка">
+<!ENTITY tweetMenu.insertURL "Въвеждане на URL на текущата страница">
+<!ENTITY tweetMenu.addGeoLocation "Добавяне на местоположение">
+<!ENTITY userMenu.accesskey "П">
+<!ENTITY userMenu.label "Потребител">
+<!ENTITY userMenu.gotoUser "Търсене на потребител">
+<!ENTITY userMenu.myProfile "Моят профил">
+<!ENTITY prevAccountCmd.accesskey "p">
+<!ENTITY nextAccountCmd.accesskey "n">
+<!ENTITY refreshCmd.accesskey "r">
+<!ENTITY jumpToUnreadCmd.accesskey "j">
+<!ENTITY markAsReadCmd.accesskey "m">
+<!ENTITY myProfileCmd.accesskey "p">
+<!ENTITY gotoUserCmd.accesskey "u">
+<!ENTITY insertURLCmd.accesskey "l">
+<!ENTITY addImageCmd.accesskey "i">
+<!ENTITY addGeoLocationCmd.accesskey "g">
+<!ENTITY closeCmd.accesskey "x">

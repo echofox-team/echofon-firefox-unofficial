@@ -1,0 +1,71 @@
+<!ENTITY paneAccount.title "Accounts">
+<!ENTITY paneGeneral.title "Algemeen">
+<!ENTITY paneAdvanced.title "Geavanceerd">
+<!ENTITY keyboardShortcut.title "Toetsenbordinstellingen">
+<!ENTITY keyboardShortcut.explanation "Nieuwe sneltoetsen worden van kracht in een nieuw browservenster.">
+<!ENTITY clearCache.title "Lokale cache wissen">
+<!ENTITY clearCache.button "Nu wissen">
+<!ENTITY echofon.title "Echofon-voorkeuren">
+<!ENTITY echofon.accounts "Accounts">
+<!ENTITY echofon.username "Gebruikersnaam">
+<!ENTITY echofon.password "Wachtwoord">
+<!ENTITY echofon.addAccount "Account toevoegen…">
+<!ENTITY echofon.removeAccount "Account verwijderen">
+<!ENTITY echofon.authorizing "Autoriseren…">
+<!ENTITY echofon.muteSetting "Negeerinstellingen…">
+<!ENTITY echofon.preferences "Voorkeuren">
+<!ENTITY echofon.refreshInterval "Tweets ophalen">
+<!ENTITY echofon.theme "Thema">
+<!ENTITY echofon.fontSize "Lettertypegrootte">
+<!ENTITY echofon.displayStyle "Weergavestijl">
+<!ENTITY echofon.displayNameAndScreenName "Naam en schermnaam">
+<!ENTITY echofon.displayNameOnly "Alleen naam">
+<!ENTITY echofon.displayScreenNameOnly "Alleen schermnaam">
+<!ENTITY echofon.fontFace "Lettertypefamilie">
+<!ENTITY echofon.everyminute "elke minuut">
+<!ENTITY echofon.every2minutes "elke 2 minuten">
+<!ENTITY echofon.every3minutes "elke 3 minuten">
+<!ENTITY echofon.every5minutes "elke 5 minuten">
+<!ENTITY echofon.popupInterval "Pop-upinterval">
+<!ENTITY echofon.popup3sec "3 seconden">
+<!ENTITY echofon.popup5sec "5 seconden">
+<!ENTITY echofon.popup7sec "7 seconden">
+<!ENTITY echofon.popup10sec "10 seconden">
+<!ENTITY echofon.mentionsAndDMsOnly "Alleen pop-upvermeldingen en rechtstreekse berichten weergeven">
+<!ENTITY echofon.popupWhileWindowIsOpened "Pop-ups weergeven als Echofon open is">
+<!ENTITY echofon.toggleEchofon "Echofon wisselen">
+<!ENTITY echofon.insertURL "URL invoegen">
+<!ENTITY echofon.revertKeyconfig "Terugdraaien">
+<!ENTITY echofon.balloon "Pop-upweergave">
+<!ENTITY echofon.newTweetNotifications "Notificaties">
+<!ENTITY echofon.sound "Notificatiegeluid">
+<!ENTITY echofon.unreadCount "Aantal ongelezen berichten weergeven">
+<!ENTITY echofon.soundButton "Bladeren…">
+<!ENTITY echofon.syncWindowTitle "Synchronisatie met iPhone instellen">
+<!ENTITY echofon.alwaysOpenLinkInNewTab "Koppelingen altijd in een nieuw tabblad openen">
+<!ENTITY echofon.alwaysOpenLinkInNewTab.tooltip "Ctrl+klik (Cmd+klik op een Mac) opent een koppeling in een nieuw tabblad zonder deze instelling.">
+<!ENTITY echofon.openLinks "Koppelingen openen">
+<!ENTITY echofon.applicationMode "Toepassingsmodus">
+<!ENTITY echofon.panelMode "Paneel">
+<!ENTITY echofon.windowMode "Venster">
+<!ENTITY echofon.sidebarMode "Zijbalk">
+<!ENTITY echofon.welcome "Welkom bij Echofon!">
+<!ENTITY echofon.signIntoTwitter "Aanmelden bij Twitter">
+<!ENTITY echofon.authorize "Autoriseren bij Twitter">
+<!ENTITY echofon.agreeAndAuthEchofon "Instemmen en autoriseren bij Twitter">
+<!ENTITY echofon.followEchofon "@echofon volgen">
+<!ENTITY echofon.muteUsers "Gebruikers">
+<!ENTITY echofon.muteApplications "Toepassingen">
+<!ENTITY echofon.muteHashtags "Hashtags">
+<!ENTITY echofon.addMute "Toevoegen…">
+<!ENTITY echofon.removeMute "Verwijderen">
+<!ENTITY echofon.muteTitle "Negeerinstellingen">
+<!ENTITY echofon.openTwitterForUserPage "Twitter.com openen voor gebruikersweergave">
+<!ENTITY echofon.openTwitterForUserPageExplanation "U kunt twitter.com/screen_name openen in plaats van de aangepaste gebruikersweergave van Echofon. U kunt deze instelling terugzetten door shift+klik op de schermnaam.">
+<!ENTITY echofon.email "E-mailadres">
+<!ENTITY echofon.subscribeEmail "Abonneren">
+<!ENTITY echofon.submitEmailExplanation "Voer uw e-mailadres in om u te abonneren op nieuws van Echofon en UberMedia.">
+<!ENTITY echofon.thankYouForSubscribe "Bedankt voor uw aanmelding!">
+<!ENTITY echofon.licenseKey "Licentiesleutel">
+<!ENTITY echofon.verifyLicense "Licentie verifiëren">
+<!ENTITY echofon.licenseExplanation "Als u een licentiesleutel hebt, voer hem dan hier in">

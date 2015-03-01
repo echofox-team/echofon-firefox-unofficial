@@ -1,0 +1,51 @@
+/*
+   Toolbar button
+*/
+
+#echofon-toolbar-button {
+  -moz-binding: url("chrome://echofon/content/toolbar.xml#toolbarbutton");
+  list-style-image: url("chrome://echofon/content/images/overlay.png") !important;
+  -moz-image-region: rect(16px, 32px, 32px, 16px) !important;
+}
+
+#echofon-toolbar-button[state="active"] {
+  -moz-image-region: rect(0px 32px 16px 16px) !important;
+}
+
+#echofon-toolbar-button[error="1"] {
+  -moz-image-region: rect(32px, 32px, 48px, 16px) !important;
+}
+
+#wrapper-echofon-toolbar-button > #echofon-toolbar-button > dropmarker
+{
+  display: none;
+}
+
+#wrapper-echofon-toolbar-button > #echofon-toolbar-button > toolbarbutton
+{
+  border: none;
+}
+
+/*
+   Status bar button
+*/
+#echofon-statusbar-button {
+  list-style-image: url("chrome://echofon/content/images/overlay.png");
+  display: -moz-box;
+  -moz-image-region: rect(16px, 16px, 32px, 0px);
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 2px;
+}
+
+#echofon-statusbar-button[state="active"] {
+  -moz-image-region: rect(0px, 16px, 16px, 0px);
+}
+
+#echofon-statusbar-button[error="1"]  {
+  -moz-image-region: rect(32px, 16px, 48px, 0px);
+}
+
+#echofon-statusbar-button[state="hidden"] {
+  list-style-image: none;
+}

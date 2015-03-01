@@ -1,0 +1,74 @@
+<!ENTITY echofon.showpopup "Pop-up weergeven">
+<!ENTITY echofon.reload "Opnieuw laden">
+<!ENTITY echofon.markAllAsRead "Alles als gelezen markeren">
+<!ENTITY echofon.preference "Voorkeuren…">
+<!ENTITY echofon.removeAds "Advertenties verwijderen…">
+<!ENTITY echofon.logout "Uitloggen">
+<!ENTITY echofon.exit "Afsluiten">
+<!ENTITY echofon.checkUpdate "Controleren op updates…">
+<!ENTITY echofon.aboutEchofon "Over Echofon">
+<!ENTITY echofon.changeAccount.tooltip "Klik om account te wijzigen">
+<!ENTITY echofon.copyTweet "Kopiëren">
+<!ENTITY echofon.retweet "Retweeten…">
+<!ENTITY echofon.retweetWithComment "Retweeten met opmerking">
+<!ENTITY echofon.replyAll "Allen beantwoorden">
+<!ENTITY echofon.deleteTweet "Deze tweet verwijderen…">
+<!ENTITY echofon.openTweetInTab "Deze tweet in een nieuw tabblad openen">
+<!ENTITY echofon.clickToStart "Klik om te starten">
+<!ENTITY echofon.copyMessage "Kopiëren">
+<!ENTITY echofon.deleteMessage "Dit bericht verwijderen…">
+<!ENTITY echofon.olderPosts "OUDERE TWEETS">
+<!ENTITY echofon.reply "Antwoorden">
+<!ENTITY echofon.sendMessage "Bericht verzenden">
+<!ENTITY echofon.block "Blokkeren…">
+<!ENTITY echofon.reportSpam "Spam rapporteren…">
+<!ENTITY echofon.itsYou "Dit ben jij!">
+<!ENTITY echofon.chooseList "Kies lijst…">
+<!ENTITY echofon.loadingList "Lijst laden…">
+<!ENTITY echofon.tweetThisPage "Deze pagina tweeten">
+<!ENTITY echofon.postWithLink "Plaatsen met koppeling">
+<!ENTITY echofon.copyURL "URL kopiëren">
+<!ENTITY echofon.searchMention "Vermelding zoeken">
+<!ENTITY echofon.postWithTag "Plaatsen met dit label">
+<!ENTITY echofon.muteThisUser "Deze gebruiker negeren">
+<!ENTITY echofon.muteThisTag "Dit label negeren">
+<!ENTITY echofon.muteThisApp "Deze toepassing negeren">
+<!ENTITY echofon.cancelButton "Annuleren">
+<!ENTITY echofon.sendButton "Verzenden">
+<!ENTITY echofon.tweetButton "Tweeten">
+<!ENTITY echofon.followList "Deze lijst volgen">
+<!ENTITY echofon.yourSavedSearches "Uw opgeslagen zoekopdrachten">
+<!ENTITY echofon.trendingTopics "Trends">
+<!ENTITY fileMenu.accesskey "B">
+<!ENTITY fileMenu.label "Bestand">
+<!ENTITY fileMenu.close "Sluiten">
+<!ENTITY viewMenu.accesskey "e">
+<!ENTITY viewMenu.label "Beeld">
+<!ENTITY viewMenu.goHome "Start">
+<!ENTITY viewMenu.goMentions "Vermeldingen">
+<!ENTITY viewMenu.goMessages "Berichten">
+<!ENTITY viewMenu.goLists "Lijsten">
+<!ENTITY viewMenu.goSearch "Zoeken">
+<!ENTITY viewMenu.refresh "Tijdlijn verversen">
+<!ENTITY viewMenu.jumpToUnread "Naar ongelezen springen">
+<!ENTITY viewMenu.markAsRead "Als gelezen markeren">
+<!ENTITY tweetMenu.accesskey "T">
+<!ENTITY tweetMenu.label "Tweeten">
+<!ENTITY tweetMenu.addImage "Afbeelding toevoegen…">
+<!ENTITY tweetMenu.insertURL "URL van huidig tabblad invoegen">
+<!ENTITY tweetMenu.addGeoLocation "Geolocatie toevoegen…">
+<!ENTITY userMenu.accesskey "G">
+<!ENTITY userMenu.label "Gebruiker">
+<!ENTITY userMenu.gotoUser "Naar gebruiker">
+<!ENTITY userMenu.myProfile "Mijn profiel">
+<!ENTITY prevAccountCmd.accesskey "v">
+<!ENTITY nextAccountCmd.accesskey "l">
+<!ENTITY refreshCmd.accesskey "r">
+<!ENTITY jumpToUnreadCmd.accesskey "s">
+<!ENTITY markAsReadCmd.accesskey "g">
+<!ENTITY myProfileCmd.accesskey "p">
+<!ENTITY gotoUserCmd.accesskey "u">
+<!ENTITY insertURLCmd.accesskey "g">
+<!ENTITY addImageCmd.accesskey "f">
+<!ENTITY addGeoLocationCmd.accesskey "e">
+<!ENTITY closeCmd.accesskey "t">

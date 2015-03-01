@@ -1,0 +1,71 @@
+<!ENTITY paneAccount.title "Kontoer">
+<!ENTITY paneGeneral.title "Generelt">
+<!ENTITY paneAdvanced.title "Avansert">
+<!ENTITY keyboardShortcut.title "Tastaturinnstillinger">
+<!ENTITY keyboardShortcut.explanation "New keyboard shortcuts will take effect after new browser window.">
+<!ENTITY clearCache.title "Slett lokal cache">
+<!ENTITY clearCache.button "Slett nå">
+<!ENTITY echofon.title "Echofon brukervalg">
+<!ENTITY echofon.accounts "Kontoer">
+<!ENTITY echofon.username "Brukernavn">
+<!ENTITY echofon.password "Passord">
+<!ENTITY echofon.addAccount "Legg til en konto">
+<!ENTITY echofon.removeAccount "Fjern en konto">
+<!ENTITY echofon.authorizing "Autoriser...">
+<!ENTITY echofon.muteSetting "Innstillinger for å stilne">
+<!ENTITY echofon.preferences "Brukervalg">
+<!ENTITY echofon.refreshInterval "Hent tweets">
+<!ENTITY echofon.theme "Tema">
+<!ENTITY echofon.fontSize "Skriftstørrelse">
+<!ENTITY echofon.fontFace "Skrifttype">
+<!ENTITY echofon.everyminute "Hvert minutt">
+<!ENTITY echofon.every2minutes "Hvert annet minutt">
+<!ENTITY echofon.every3minutes "Hvert 3. minutt">
+<!ENTITY echofon.every5minutes "Hvert 5. minutt">
+<!ENTITY echofon.popupInterval "Popup-intervall">
+<!ENTITY echofon.popup3sec "3 sekunder">
+<!ENTITY echofon.popup5sec "5 sekunder">
+<!ENTITY echofon.popup7sec "7 sekunder">
+<!ENTITY echofon.popup10sec "10 sekunder">
+<!ENTITY echofon.mentionsAndDMsOnly "Vis bare omtaler og DMs som popups">
+<!ENTITY echofon.popupWhileWindowIsOpened "Vis popups mens Echofon er åpent">
+<!ENTITY echofon.toggleEchofon "Toggle Echofon">
+<!ENTITY echofon.insertURL "Sett inn URL">
+<!ENTITY echofon.revertKeyconfig "Tilbakestill">
+<!ENTITY echofon.balloon "Popoup-vindu">
+<!ENTITY echofon.newTweetNotifications "Notifications">
+<!ENTITY echofon.sound "Varslingslyd">
+<!ENTITY echofon.unreadCount "Show unread count">
+<!ENTITY echofon.soundButton "Finn ...">
+<!ENTITY echofon.syncWindowTitle "Konfigurer iPhone-synkronisering">
+<!ENTITY echofon.alwaysOpenLinkInNewTab "Alltid åpne linker i en ny fane">
+<!ENTITY echofon.alwaysOpenLinkInNewTab.tooltip "Ctrl+klikk (Cmd+klikk på Mac) åpner linker i nye faner uavhengig av denne opens a link in a new tab without this setting.">
+<!ENTITY echofon.openLinks "Åpne lenker">
+<!ENTITY echofon.applicationMode "Applikasjonsmodus">
+<!ENTITY echofon.panelMode "Panel">
+<!ENTITY echofon.windowMode "Vindu">
+<!ENTITY echofon.sidebarMode "Sidepanel">
+<!ENTITY echofon.welcome "Velkommen til Echofon!">
+<!ENTITY echofon.signIntoTwitter "Logg på Twitter">
+<!ENTITY echofon.authorize "Autoriser med Twitter">
+<!ENTITY echofon.agreeAndAuthEchofon "Godta og autoriser med Twitter">
+<!ENTITY echofon.followEchofon "Følg @echofon">
+<!ENTITY echofon.muteUsers "Brukere">
+<!ENTITY echofon.muteApplications "Applikasjoner">
+<!ENTITY echofon.muteHashtags "Hashtags">
+<!ENTITY echofon.addMute "Legg til ...">
+<!ENTITY echofon.removeMute "Slett">
+<!ENTITY echofon.muteTitle "Innstillinger for å stilne">
+<!ENTITY echofon.openTwitterForUserPage "Åpne twitter.com for å se brukerens side">
+<!ENTITY echofon.openTwitterForUserPageExplanation "Du kan åpne twitter.com/brukernavn istedet for Echofons egen brukervisning. Hold inne shift mens du klikker for å gjøre det motsatte.">
+<!ENTITY echofon.email "Epost">
+<!ENTITY echofon.subscribeEmail "Abonner">
+<!ENTITY echofon.submitEmailExplanation "Oppgi epostadresse for å abonnere på nyheter fra Echofon og UberMedia.">
+<!ENTITY echofon.thankYouForSubscribe "Takk for ditt abonnement!">
+<!ENTITY echofon.licenseKey "Lisensnøkkel">
+<!ENTITY echofon.verifyLicense "Bekreft lisensen">
+<!ENTITY echofon.licenseExplanation "Hvis du har en lisensnøkkel, skriv den inn her">
+<!ENTITY echofon.displayStyle "Display Style">
+<!ENTITY echofon.displayScreenNameOnly "Screen Name Only">
+<!ENTITY echofon.displayNameAndScreenName "Name and Screen Name">
+<!ENTITY echofon.displayNameOnly "Name Only">

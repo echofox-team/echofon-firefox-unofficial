@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+
+<!--
+    Implementation of Echofon content view
+
+    Copyright (c) 2010 Kazuho Okui / naan studio, Inc. ALL RIGHTS RESERVED.
+-->
+
+<!DOCTYPE overlay SYSTEM "chrome://echofon/locale/echofon.dtd">
+<bindings xmlns="http://www.mozilla.org/xbl"
+          xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:xbl="http://www.mozilla.org/xbl"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <binding id="echofon-main-window">
+    <content>
+
+        <xul:menupopup id="echofon-menu-popup" onpopupshowing="echofonPopupMenuShowing(this)" onpopuphiding="echofonPopupMenuHiding(this)"/>
+
+        <xul:tooltip id="echofon-tooltip" onpopupshowing="showTweetTooltip(event)">
+            <xul:box id="echofon-tooltip-container"/>
+        </xul:tooltip>
+
+        <xul:tooltip id="echofon-user-tooltip" onpopupshowing="showUserProfileTooltip(event)">
+            <xul:box id="echofon-user-tooltip-container"/>
+        </xul:tooltip>
+
+      <xul:vbox flex="1">
+
+        <!-- list dropdown menu -->
+        <xul:toolbar id="echofon-list-bar-container" hidden="true">
+          <xul:hbox align="center" flex="1">
+            <xul:menulist flex="1" id="echofon-list-menulist">
+                <xul:menupopup id="echofon-list-menupopup" onpopupshowing="buildListMenu()">
+                    <xul:menuitem id="fixed-list-menu-item-choose-list" label="&echofon.chooseList;" value="0" oncommand="onListSelected(this)"/>
+                </xul:menupopup>
+            </xul:menulist>
+          </xul:hbox>
+        </xul:toolbar>
+
+        <!-- search box -->
+        <xul:toolbar id="echofon-search-bar-container" hidden="true">
+          <xul:hbox align="center" flex="1">
+            <xul:textbox flex="1" id="echofon-search-text-box" type="search" onkeydown="onKeyDownSearchBox(event, this)" oncommand="onCommandSearchBox(this)"/>
+            <xul:button label="+" id="echofon-add-search-button" oncommand="saveSearch(this.previousSibling.value)" disabled="true"/>
+          </xul:hbox>
+        </xul:toolbar>
+
+        <!-- tweet container -->
+        <xul:vbox flex="1" id="echofon-timeline-box" style="margin:0; padding:0; overflow:hidden">
+          <xul:scrollbox id="home-timeline"     class="echofon-tweets" onscroll="onScrollTweetBox(event)" flex="1" orient="vertical" sborient="vertical"/>
+          <xul:scrollbox id="mentions-timeline" class="echofon-tweets" onscroll="onScrollTweetBox(event)" flex="1" orient="vertical" sborient="vertical" collapsed="true"/>
+          <xul:scrollbox id="messages-timeline" class="echofon-tweets" onscroll="onScrollTweetBox(event)" flex="1" orient="vertical" sborient="vertical" collapsed="true"/>
+          <xul:scrollbox id="lists-timeline"    class="echofon-tweets" onscroll="onScrollTweetBox(event)" flex="1" orient="vertical" sborient="vertical" collapsed="true"/>
+          <xul:scrollbox id="search-timeline"   class="echofon-tweets" onscroll="onScrollTweetBox(event)" flex="1" orient="vertical" sborient="vertical" collapsed="true"/>
+        </xul:vbox>
+
+        <!-- Error messages -->
+        <xul:notificationbox style="margin:0;" id="echofon-notificationbox">
+        </xul:notificationbox>
+
+      </xul:vbox>
+    </content>
+    <implementation>
+      <constructor>
+        this._activeTab = 'home';
+        this._scrollPos = {'home':0, 'mentions':0, 'messages':0, 'lists':0, 'search':0};
+      </constructor>
+
+      <property name="activeTab">
+        <setter>
+        <![CDATA[
+
+          // save scroll position
+          var prev = this.scrollbox;
+          var y = {};
+          prev.getPosition({}, y);
+          this._scrollPos[this._activeTab] = y.value;
+
+          // change tab
+          document.getElementById(this._activeTab + '-timeline').collapsed = true;
+          this._activeTab = val;
+          document.getElementById(val + '-timeline').collapsed = false;
+
+
+          // jump to first unread if appropriate
+          var obj = this;
+          try {
+            var border = document.getElementById('echofon-unread-border-' + val);
+            var timer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
+            if (border && border.unread) {
+              timer.initWithCallback({notify: function() {window.jumpToUnread()}}, 1, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+            }
+            else {
+              // restore scroll position with timer
+              timer.initWithCallback({notify: function() {obj.scrollbox.scrollTo(0, obj._scrollPos[obj._activeTab])}}, 1, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+            }
+          }
+          catch (e) {}
+        ]]>
+        </setter>
+        <getter>
+          return this._activeTab;
+        </getter>
+      </property>
+
+      <field name="activeTab"/>
+
+      <property name="container">
+        <getter>
+          return document.getElementById(this._activeTab + '-timeline');
+        </getter>
+      </property>
+
+      <property name="scrollbox">
+        <getter>
+          return this.getContainer().boxObject.QueryInterface(Components.interfaces.nsIScrollBoxObject);
+        </getter>
+      </property>
+
+      <method name="getContainer">
+        <parameter name="tab"/>
+        <body>
+          if (tab == null) tab = this._activeTab;
+          return document.getElementById(tab + '-timeline');
+        </body>
+      </method>
+
+      <method name="loadMore">
+        <parameter name="tab"/>
+        <body>
+        <![CDATA[
+          if (!tab) tab = this.activeTab;
+          var e = document.getElementById(tab + '-timeline').lastChild;
+          if (e && e.tagName == "echofon-load-more") return e;
+          return null;
+        ]]>
+        </body>
+      </method>
+
+      <method name="removeAllTweets">
+        <body>
+          for (var i in this._scrollPos) {
+            var e = document.getElementById(i + "-timeline");
+            EchofonCommon.removeAllChild(e);
+            this._scrollPos[i] = 0;
+          }
+          this.scrollbox.scrollTo(0, 0);
+        </body>
+      </method>
+
+    </implementation>
+  </binding>
+</bindings>

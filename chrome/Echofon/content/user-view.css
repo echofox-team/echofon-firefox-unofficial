@@ -1,0 +1,156 @@
+window{}
+a{color:#1269c5; text-decoration:none;}
+
+#wrap.drawer{display: -moz-box; background-color:#f5f6f6; font-family:'helvetica neue', helvetica, arial, sans-serif; font-size:18px; border-right:1px solid #fff; -moz-box-shadow:2px 0 6px #d7d7d7;}
+
+#profile_area{ display:-moz-inline-box; margin:20px; margin-bottom:10px;width:465px;max-width:465px;}
+#profile_area #user_image image{border:2px solid #fff; -moz-box-shadow:0 0 4px rgba(0,0,0,.5); display:-moz-box; width: 132px; height: 132px; max-width:132px;max-height:132px;}
+
+#follow_area{
+  margin:0 20px 20px 20px;
+  background-color:#fff; padding:4px;
+  border:1px solid #E4E4E4;
+  -moz-border-radius:5px;
+  width: 458px;
+  max-width: 458px;
+}
+
+#follow_button {
+    -moz-appearance: none;
+}
+
+#follow_status {
+  color:#333333;
+  padding-top:2px;
+  line-height:10px;
+  font-size:12px;
+  margin-left:18px;
+  display: -moz-inline-box;
+}
+
+#follow_area .echobutton{
+  width:130px;
+  color:#fff;
+  background-color:#ccc;
+  -moz-box-shadow:
+    inset 0 0 1px #ccc,
+    inset 0 0 1px #ccc,
+    inset 0 0 1px #ccc;
+  border:1px solid #aaa;
+}
+
+#follow_area .echobutton.following{
+  width:130px;
+  color:#fff;
+  background-color:#27a530;
+  -moz-box-shadow:
+    inset 0 0 1px #27a530,
+    inset 0 0 1px #27a530,
+    inset 0 0 1px #27a530;
+  border:1px solid #1D7400;
+}
+
+#follow_area .echobutton.following:hover{
+  color:#fff;
+  background-color:#d44;
+  -moz-box-shadow:
+    inset 0 0 1px #d44,
+    inset 0 0 1px #d44,
+    inset 0 0 1px #d44;
+  border:1px solid #a33;
+}
+
+.follow-request-sent {
+    color: #5c666d;
+    font-size: 14px !important;
+    margin: 6px 0px;
+}
+
+#protected_user_area {
+  margin: 0 20px 0 20px;
+  background-color: #fff;
+  border: 1px solid #E4E4E4;
+  padding:10px;
+  -moz-border-radius:5px;
+  text-align:left;
+}
+
+#protected_user_area #protected_user_detail {display:inline-block; font-family: georgia; width: 350px;font-size: 14px !important; color:#5c666d;}
+
+#profile_area #user_data{margin-left:20px; display: -moz-inline-box; display: inline-block;}
+#profile_area #user_data label{padding:0; margin:0;}
+#profile_area #user_data #user-name{font-weight:bold;color:black;cursor:pointer;}
+#profile_area #user_data #user-location{}
+#profile_area #user_data #user-url{cursor:pointer;}
+#profile_area #user_data #user-url-link{cursor:pointer;display:block; overflow:hidden;max-width:248px;}
+#profile_area #user_data #user-description-multiline{display: -moz-inline-box; font-family:georgia; font-size:14px; color:#5c666d;}
+#profile_area #user-tools{ display:block; width:50px; }
+#profile_area #user-tools button{-moz-box-shadow:0 -1px #acb2b5; padding-left:4px; min-width:0; -moz-border-radius:3px; width:48px; height:27px; border:1px solid #acb2b5; border-top:1px solid #ffffff; background-color:#e0e2e3; -moz-appearance:none; background-image: -moz-linear-gradient(center bottom,#d1d4d6 0%,#edeeef 100%);cursor:pointer; margin-right:0;}
+
+.user-details{margin:0px 20px 20px 20px;}
+.user-details toolbar{-moz-appearance:none; height:40px;}
+.user-details toolbar toolbarbutton{-moz-appearance: none;border:none; padding:0; margin:0; margin-right:5px;}
+.user-details toolbar toolbarbutton:last-child{margin-right:0;}
+.user-details toolbar#user_tabs{border-bottom:1px solid #f00; margin-bottom:-1px;}
+
+.user-details toolbar#user_tabs toolbarbutton{-moz-appearance:none; background-color:#fff; width:150px; border:1px solid #e4e4e4; -moz-border-radius:5px 5px 0 0; position:relative; z-index:10; margin-bottom:-1px;}
+.user-details toolbar#user_tabs toolbarbutton[checked=true]{border:1px solid #e4e4e4 !important; border-bottom:none !important;}
+.userview-tab-icon { list-style-image:url(images/userview.png); margin:0;padding:0;margin-top: 8px;}
+toolbarbutton[checked=true] > .userview-tab-icon { margin-top: 7px;}
+
+#userButtonIcon    {-moz-image-region: rect(0px, 72px, 24px, 48px)}
+#listButtonIcon    {-moz-image-region: rect(0px, 24px, 24px,  0px)}
+#favoriteButtonIcon{-moz-image-region: rect(0px, 48px, 24px, 24px)}
+
+toolbarbutton[checked=true] > #userButtonIcon    {-moz-image-region: rect(24px, 72px, 48px, 48px)}
+toolbarbutton[checked=true] > #listButtonIcon    {-moz-image-region: rect(24px, 24px, 48px,  0px)}
+toolbarbutton[checked=true] > #favoriteButtonIcon{-moz-image-region: rect(24px, 48px, 48px, 24px)}
+
+
+.user-details toolbar.sub-tabs{font-size:14px; background-color:#fff; border:1px solid #e4e4e4; border-bottom:0; position:relative; z-index:5;}
+.user-details toolbar.sub-tabs toolbarbutton{-moz-appearance:none; color:#5c676d; width:150px; }
+.user-details toolbar.sub-tabs toolbarbutton[checked=true]{ color:#4cadeb!important; background:transparent;}
+
+.user-details .echofon-scrollbox{background-color:#fff;  }
+
+.echofon-scrollbox {min-width: 460px; /* 500 - 20*2 */ background: #ededed !important; border:1px solid #e4e4e4}
+echofon-status { font-size: 14px !important; padding: 4px 6px !important; border-bottom: 1px solid #e4e4e4 !important;}
+echofon-user, echofon-list {font-size: 15px !important;}
+.echofon-user-screen-name {cursor:pointer;}
+.echofon-status-additional-screen-name {font-size: 13px !important; text-decoration: none !important;}
+echofon-status-tagline, echofon-status-retweet-status {font-size: 13px !important;}
+
+.echofon-status-container {
+  padding-right: 0px;
+}
+
+.echofon-load-more-box {
+  background: #ededed;
+  height: 50px;
+  background-image:url(/content/images/void_shadow.png);
+  background-repeat:repeat-x;
+}
+
+.echofon-stop-dot {
+  list-style-image: url("chrome://echofon/content/images/window.png") !important;
+  -moz-image-region: rect(28px, 104px, 34px, 99px);
+}
+
+.echofon-load-more-spinner {
+  list-style-image: url("chrome://echofon/content/images/load-more-user-view.gif") !important;
+}
+
+.protected-lock-icon {
+  list-style-image: url(images/userview.png);
+  -moz-image-region: rect(0px, 137px, 89px, 72px);
+}
+
+.user-action-button {
+  list-style-image: url(images/userview.png);
+  -moz-image-region: rect(48px, 34px, 68px, 0px);
+}
+
+.user-list-button {
+  list-style-image: url(images/userview.png);
+  -moz-image-region: rect(48px, 70px, 68px, 35px);
+}

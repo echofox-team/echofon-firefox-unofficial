@@ -1,0 +1,884 @@
+<?xml version="1.0"?>
+<!--
+    Implementation of Echofon compose window
+    Copyright (c) 2011 Kazuho Okui / naan studio, Inc. ALL RIGHTS RESERVED.
+-->
+<!DOCTYPE overlay SYSTEM "chrome://echofon/locale/echofon.dtd">
+<bindings xmlns="http://www.mozilla.org/xbl"
+          xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:xbl="http://www.mozilla.org/xbl"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <!--
+    auto grow textbox
+  -->
+  <binding id="tweet-textbox"
+           extends="chrome://global/content/bindings/textbox.xml#textbox">
+    <resources>
+      <stylesheet src="chrome://global/content/textbox.css"/>
+      <stylesheet src="chrome://global/skin/textbox.css"/>
+    </resources>
+    <content>
+      <xul:hbox class="textbox-input-box" flex="1" xbl:inherits="context,spellcheck">
+        <xul:stack flex="1" style="height:18px;padding-top:2px;" anonid="container">
+          <html:div class="textbox-hidden-text" anonid="compute-div" style="color: #fff;white-space:pre-wrap;margin:2px 0px;"/>
+          <html:textarea class="_textbox-textarea" anonid="input" style="-moz-appearance: none !important; border: none; resize:none;background:#fff;"
+                         xbl:inherits="onfocus,onblur,xbl:text=value,disabled,tabindex,rows,cols,readonly,wrap,placeholder,spellcheck"/>
+        </xul:stack>
+      </xul:hbox>
+    </content>
+
+    <handlers>
+
+      <handler event="input">
+        this.autogrow();
+      </handler>
+
+    </handlers>
+
+    <implementation>
+      <constructor>
+        var pref = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
+        if (pref.getIntPref("layout.spellcheckDefault") > 0) {
+          this.setAttribute("spellcheck", "true");
+        }
+        var fs = EchofonCommon.fontSize();
+        if (fs > 14) {
+            fs = parseInt(fs * 0.8);
+            this.input.style.fontSize = fs + "px";
+            this.compute.style.fontSize = fs + "px";
+            this.container.style.height = (fs + 6) + "px";
+        }
+      </constructor>
+
+      <field name="input">
+        document.getAnonymousElementByAttribute(this, "anonid", "input");
+      </field>
+      <field name="container">
+        document.getAnonymousElementByAttribute(this, "anonid", "container");
+      </field>
+      <field name="compute">
+        document.getAnonymousElementByAttribute(this, "anonid", "compute-div");
+      </field>
+      <property name="value">
+      <setter>
+        this.input.value = val;
+        this.autogrow();
+      </setter>
+      <getter>
+        return this.input.value;
+      </getter>
+      </property>
+
+      <method name="autogrow">
+        <body>
+        <![CDATA[
+          var c = this.compute;
+          while (c.childNodes.length) {
+            c.removeChild(c.firstChild);
+          }
+          var text = this.input.value + ' ';
+          this.compute.appendChild(document.createTextNode(text));
+        ]]>
+        </body>
+      </method>
+
+    </implementation>
+  </binding>
+
+  <!--
+    Tweet compose popup (base class, method and handler only)
+  -->
+  <binding id="echofon-compose-base">
+    <handlers>
+      <handler event="keydown">
+      <![CDATA[
+        if (event.keyCode == event.DOM_VK_ESCAPE) {
+          if (this.textbox.value.length == 0) {
+            this.cancel();
+          }
+          else {
+            this.textbox.value = '';
+            this.updateCharCount();
+          }
+        }
+        else if (event.keyCode == event.DOM_VK_RETURN) {
+          this.sendTweet();
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        else if (event.keyCode == event.DOM_VK_TAB) {
+          if (!event.ctrlKey) {
+            try {
+                nextTab(event.shiftKey ? false : true);
+            }
+            catch (e) {
+                EchofonCommon.notifyObservers("nextTab", event.shiftKey ? false : true);
+            }
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        }
+        else {
+          if (this.textbox.value.length == 0) {
+            if (event.keyCode == event.DOM_VK_UP || event.keyCode == event.DOM_VK_DOWN) {
+              scrollBy((event.keyCode == event.DOM_VK_UP) ? -1 : 1);
+            }
+            if (event.keyCode == event.DOM_VK_HOME ||
+                event.keyCode == event.DOM_VK_END ||
+                event.keyCode == event.DOM_VK_PAGE_UP ||
+                event.keyCode == event.DOM_VK_PAGE_DOWN) {
+              scrollTo(event);
+            }
+          }
+          else {
+            this.edited = true;
+          }
+        }
+      ]]>
+      </handler>
+
+      <handler event="input">
+        this.updateCharCount();
+      </handler>
+
+    </handlers>
+
+    <implementation>
+      <field name="user"/>
+      <field name="user_id"/>
+      <field name="recipient"/>
+
+      <property name="user">
+        <setter>
+          this._user = val;
+
+          var icon = document.getAnonymousElementByAttribute(this, "anonid", "accountIcon");
+          if (icon) {
+            var image_url = (val) ? val.profile_image_url : "chrome://echofon/content/images/texture.gif";
+            icon.style.background = "url(" + image_url + ")";
+          }
+        </setter>
+        <getter>
+          return this._user;
+        </getter>
+      </property>
+
+
+      <property name="maxCharCount">
+        <getter>
+          if (this.images.length == 0) {
+            return 140;
+          }
+          var conf = JSON.parse(EchofonCommon.pref().getCharPref("configuration"));
+          return 140 - this.images.length * (conf.config.characters_reserved_per_media);
+        </getter>
+      </property>
+
+      <property name="error">
+        <setter>
+        <![CDATA[
+          var c = document.getAnonymousElementByAttribute(this, 'anonid', 'errorMessageContainer');
+          if (val && val.length) {
+            var label = document.getAnonymousElementByAttribute(this, 'anonid', 'errorMessage');
+            label.setAttribute("value", val);
+            c.setAttribute("hidden", "false");
+          }
+          else {
+            c.setAttribute("hidden", "true");
+          }
+        ]]>
+        </setter>
+      </property>
+
+      <field name="icon">
+        document.getAnonymousElementByAttribute(this, 'anonid', 'errorIcon');
+      </field>
+
+
+      <field name="textbox">
+        document.getAnonymousElementByAttribute(this, 'anonid', 'text');
+      </field>
+
+      <field name="popup">
+        document.getAnonymousElementByAttribute(this, 'anonid', 'panel');
+      </field>
+
+      <field name="menu">
+        document.getAnonymousElementByAttribute(this, 'anonid', 'menu');
+      </field>
+
+      <field name="sendButton">
+        document.getAnonymousElementByAttribute(this, 'anonid', 'sendButton');
+      </field>
+
+
+      <property name="inReplyTo"/>
+
+      <constructor>
+        this.init();
+      </constructor>
+
+      <method name="init">
+        <body>
+          this.images = [];
+          this.edited = false;
+          this._places = null;
+          this.updateCharCount();
+          Components.utils.import("resource://echofon/Models.jsm");
+          if (this.user_id) {
+            var user = EchofonModel.User.findById(this.user_id, this.user_id);
+            if (user) {
+              this.user = user;
+              this.setAttribute("src", user.profile_image_url);
+            }
+          }
+        </body>
+      </method>
+
+      <method name="clearError">
+        <body>
+        this.error = null;
+        </body>
+      </method>
+
+      <method name="updateCharCount">
+        <body>
+        <![CDATA[
+
+          var conf = JSON.parse(EchofonCommon.pref().getCharPref("configuration"));
+
+          var txt = this.textbox.value;
+          txt = txt.replace(/^(d\s+[A-Za-z_]+\s+)/, '');
+          var length = txt.length;
+
+          var diff = 0;
+
+          var pat =  /(https?\:\/\/\S+)/;
+          while (pat.exec(txt)) {
+            diff += RegExp.$1.length - ((RegExp.$1[4] == 's') ? conf.config.short_url_length_https : conf.config.short_url_length);
+            txt = RegExp.rightContext;
+          }
+
+          length -= diff;
+          var count = this.maxCharCount - length;
+          this.setAttribute('value', count);
+          this.setAttribute('charOver', (count < 0) ? true : false);
+          if (length == 0) {
+            this.inReplyTo = null;
+          }
+        ]]>
+        </body>
+      </method>
+
+      <method name="sendTweet">
+        <body>
+        <![CDATA[
+          var text = this.textbox;
+          if (text.value.length == 0 && this.images.length == 0) {
+            return;
+          }
+
+          this.timestamp = Date.now();
+          var param = {status:text.value, inReplyTo:this.inReplyTo, images:this.images, timestamp:this.timestamp};
+          if (this._places) {
+            var place = this._places['result']['places'][this.selectedPlace];
+            param.place_id = place.id;
+          }
+          if (this.recipient) {
+            param.user = this.recipient.screen_name;
+            param.isDM = true;
+          }
+          EchofonCommon.notify("sendMessage", param);
+          this.inReplyTo = null;
+          if (this.statsURL) {
+            let req = new XMLHttpRequest();
+            req.open("GET", this.statsURL, true);
+            req.send(null);
+          }
+          this.statsURL = null;
+
+          this.hidePopup();
+        ]]>
+        </body>
+      </method>
+
+      <method name="insertURL">
+        <body>
+        <![CDATA[
+          var wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
+          var enumlator = wm.getZOrderDOMWindowEnumerator(null, true);
+          while (1) {
+            var win = enumlator.getNext();
+            if (!win) break;
+            if (win && win.content) {
+              var textbox = this.textbox;
+              if (textbox.value.length) textbox.value += " ";
+              textbox.value += win.content.document.title + " " + win.content.document.location.toString();
+              this.updateCharCount();
+              break;
+            }
+          }
+        ]]></body>
+      </method>
+
+      <property name="places">
+        <setter>
+        <![CDATA[
+          document.getAnonymousElementByAttribute(this, 'anonid', 'geospinner').setAttribute("hidden", true);
+          var menu = document.getAnonymousElementByAttribute(this, 'anonid', 'geomenu');
+
+          if (val && val.error) {
+            this.error = val.error;
+            menu.disabled = false;
+            return;
+          }
+          this._places = val;
+          this.selectedPlace = 0;
+
+
+          if (val) {
+            var attachment = document.createElement('echofon-compose-attachment');
+            this.appendChild(attachment);
+            attachment.parent = this;
+            attachment.type = "place";
+            attachment.setAttribute("label", val['result']['places'][0]['full_name']);
+            menu.disabled = true;
+          }
+          else {
+            menu.disabled = false;
+          }
+        ]]>
+        </setter>
+        <getter>
+          return this._places;
+        </getter>
+      </property>
+
+      <method name="onPlacesMenuShowing">
+        <parameter name="menu"/>
+        <body>
+          if (menu.childNodes.length) return;
+          for (var i in this._places['result']['places']) {
+            var place = this._places['result']['places'][i];
+            var item = document.createElement('menuitem');
+            item.setAttribute("type", "radio");
+            item.setAttribute("name", "place");
+            item.setAttribute("value", i);
+            item.setAttribute("label", place.full_name);
+            if (i == this.selectedPlace) {
+              item.setAttribute("checked", true);
+            }
+            menu.appendChild(item);
+          }
+        </body>
+      </method>
+
+      <method name="onPlacesMenuSelected">
+        <parameter name="menu"/>
+        <body>
+        <![CDATA[
+            for (var i in menu.childNodes) {
+              var item = menu.childNodes[i];
+              if (item.getAttribute("checked")) {
+                this.selectedPlace = i;
+                for (var j in this.childNodes) {
+                  var elem = this.childNodes[j];
+                  if (elem.tagName == 'echofon-compose-attachment' && elem.type == 'place') {
+                    elem.setAttribute("label", this._places['result']['places'][this.selectedPlace]['full_name']);
+                    break;
+                  }
+                }
+                break;
+              }
+            }
+        ]]>
+        </body>
+      </method>
+
+      <method name="addImage">
+        <body>
+          var picker = Components.interfaces.nsIFilePicker;
+          var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(picker);
+          fp.init(window, "Add Image", picker.modeOpen | picker.modeOpenMultiple);
+          fp.appendFilters(picker.filterImages);
+
+          var rv = fp.show();
+          if (rv == picker.returnOK) {
+            var files = fp.files;
+            var paths = [];
+            while (files.hasMoreElements()) {
+              var file = files.getNext().QueryInterface(Components.interfaces.nsILocalFile);
+              this.images.push(file.path);
+              var attachment = document.createElement('echofon-compose-attachment');
+              this.appendChild(attachment);
+              var obj = this;
+              attachment.parent = obj;
+              attachment.type = "image";
+              attachment.setAttribute("image", "file://" + file.path);
+              attachment.setAttribute("label", file.leafName);
+            }
+            this.updateCharCount();
+          }
+        </body>
+      </method>
+
+      <method name="getPlaces">
+        <body>
+          document.getAnonymousElementByAttribute(this, 'anonid', 'geospinner').setAttribute("hidden", false);
+          document.getAnonymousElementByAttribute(this, 'anonid', 'geomenu').disabled = true;
+          EchofonCommon.notify("getPlaces");
+        </body>
+      </method>
+
+      <method name="addGeoLocation">
+        <body>
+        <![CDATA[
+          if (this.user && this.user.geo_enabled) {
+            this.getPlaces();
+          }
+          else {
+            Components.utils.import("resource://echofon/TwitterClient.jsm");
+            Components.utils.import("resource://echofon/Account.jsm");
+            var account = EchofonAccountManager.instance().get(this.user_id);
+            var req = new TwitterClient(account, this);
+            req.get('account.verify_credentials');
+          }
+        ]]></body>
+      </method>
+
+      <method name="account_verify_credentials">
+        <parameter name="resp"/>
+        <parameter name="req"/>
+        <parameter name="context"/>
+        <body>
+          if (!resp) {
+            var prompt = Components.classes["@mozilla.org/embedcomp/prompt-service;1"].getService(Components.interfaces.nsIPromptService);
+            prompt.alert(window, "Echofon", EchofonCommon.getString("failedToGetUserInformation"));
+            return;
+          }
+
+          this.user = new EchofonModel.User(resp, this.user_id);
+          if (this.user.geo_enabled) {
+            this.getPlaces();
+          }
+          else {
+            var ps = Components.interfaces.nsIPromptService;
+            var prompt = Components.classes["@mozilla.org/embedcomp/prompt-service;1"].getService(ps);
+            var out = {};
+            var ret = prompt.confirmEx(null,
+                                       EchofonCommon.getString("enableGeoLocation"),
+                                       EchofonCommon.getString("enableGeoLocationExplain"),
+                                       ps.BUTTON_POS_0 * ps.BUTTON_TITLE_IS_STRING + ps.BUTTON_POS_1 * ps.BUTTON_TITLE_CANCEL,
+                                       EchofonCommon.getString("continue"),
+                                       null, null, null, out);
+            if (ret == 0) {
+              EchofonCommon.openURL("http://twitter.com/account/settings", null, true);
+            }
+          }
+      </body>
+      </method>
+
+    </implementation>
+
+  </binding>
+
+  <binding id="echofon-compose-attachment">
+    <content>
+      <xul:hbox flex="1" class="echofon-attachment-box" align="center">
+        <xul:image anonid="geo" class="echofon-attachment-geo-pin" hidden="true"/>
+        <xul:image anonid="image" class="echofon-attachment-thumbnail" hidden="true" xbl:inherits="src=image"/>
+        <xul:label anonid="label" class="echofon-attachment-label" flex="1" xbl:inherits="value=label,menu"/>
+        <xul:button class="echofon-attachment-close-button" oncommand="clearAttachment()"/>
+      </xul:hbox>
+    </content>
+
+    <implementation>
+      <constructor>
+        if (EchofonCommon.pref().getCharPref("applicationMode") == 'window') {
+          this.setAttribute("mode", "window");
+        }
+      </constructor>
+      <field name="parent"/>
+
+      <property name="type">
+        <setter>
+          this._type = val;
+          if (val == 'place') {
+            document.getAnonymousElementByAttribute(this, 'anonid', 'label').setAttribute("menu", "echofon-places-menu");
+            document.getAnonymousElementByAttribute(this, 'anonid', 'geo').hidden = false;
+          }
+          else {
+            document.getAnonymousElementByAttribute(this, 'anonid', 'image').hidden = false;
+          }
+        </setter>
+        <getter>
+          return this._type;
+        </getter>
+      </property>
+
+      <method name="clearAttachment">
+        <body>
+        <![CDATA[
+        if (this._type == 'place') {
+          this.parent.places = null;
+          this.parent.selectedPlace = 0;
+        }
+        else {
+          for (var i = 0; i < this.parent.images.length; ++i) {
+            var path = this.parent.images[i];
+            if ("file://" + path == this.getAttribute("image")) {
+              this.parent.images.splice(i, 1);
+              break;
+            }
+          }
+        }
+        this.parent.updateCharCount();
+        this.parentNode.removeChild(this);
+        ]]>
+        </body>
+      </method>
+    </implementation>
+  </binding>
+
+  <!--
+    Compose bar
+  -->
+
+  <binding id="echofon-compose" extends="chrome://echofon/content/compose.xml#echofon-compose-base">
+    <content>
+      <xul:menupopup id="echofon-attach-menu-bar">
+        <xul:menuitem id="echofon-insert-url-menuitem" label="&tweetMenu.insertURL;" key="echofon-custom-key-insertURL" oncommand="insertURL()" anonid="insertURLMenuItem"/>
+        <xul:menuitem id="echofon-attach-add-image" label="&tweetMenu.addImage;" key="key_addImage" oncommand="addImage()"/>
+        <xul:menuitem id="echofon-geo-menuitem" label="&tweetMenu.addGeoLocation;" key="key_addGeoLocation" oncommand="addGeoLocation()" anonid="geomenu"/>
+      </xul:menupopup>
+
+      <xul:menupopup id="echofon-places-menu" onpopupshowing="onPlacesMenuShowing(this)" oncommand="onPlacesMenuSelected(this)"/>
+      <xul:menupopup id="echofon-account-menu" onpopupshowing="onAccountMenuShowing(this)"/>
+
+      <xul:toolbar class="echofon-compose-bar-container" flex="1">
+        <xul:vbox flex="1">
+
+        <xul:hbox align="center" anonid="inReplyToField" flex="1">
+          <xul:label flex="1" anonid="inReplyToMessage" class="echofon-compose-in-reply-to" crop="right"/>
+          <xul:spacer flex="2"/>
+          <xul:button class="echofon-attachment-close-button" oncommand="clearInReplyTo()"/>
+        </xul:hbox>
+
+        <xul:hbox id="echofon-compose-bar-textbox" flex="1">
+          <xul:vbox align="center" id="echofon-account-menu-box">
+            <xul:spacer flex="1"/>
+            <xul:image class="echofon-account-menu-button" align="top" menu="echofon-account-menu" anonid="accountIcon"/>
+            <xul:spacer flex="1"/>
+          </xul:vbox>
+
+          <xul:vbox flex="1">
+            <xul:hbox flex="1" class="echofon-textbox-container">
+              <xul:vbox flex="1">
+                <xul:box id="echofon-textbox" class="tweet-textbox echofon-compose-textbox" anonid="text" align="center"/>
+              </xul:vbox>
+
+              <xul:vbox align="center">
+                <xul:hbox align="center">
+                  <xul:image class="echofon-geolocation-loader" src="chrome://echofon/content/images/ajax-loader.gif" anonid="geospinner" hidden="true"/>
+                  <xul:hbox id="echofon-compose-bar-attach-menu-box" align="center" xbl:inherits="value" menu="echofon-attach-menu-bar">
+                    <xul:label class="echofon-compose-bar-char-count" xbl:inherits="value,charOver" flex="1"/>
+                    <xul:image class="echofon-compose-bar-attach-menu-button" xbl:inherits="value"/>
+                  </xul:hbox>
+                </xul:hbox>
+              </xul:vbox>
+            </xul:hbox>
+            <!-- attachment goes here -->
+            <children/>
+          </xul:vbox>
+        </xul:hbox>
+        </xul:vbox>
+      </xul:toolbar>
+    </content>
+
+    <implementation>
+      <constructor>
+        if (EchofonCommon.isXULRunner()) {
+          var e = document.getAnonymousElementByAttribute(this, "anonid", "insertURLMenuItem");
+          e.parentNode.removeChild(e);
+        }
+      </constructor>
+      <field name="accountIcon">document.getAnonymousElementByAttribute(this, "anonid", "accountIcon")</field>
+      <method name="cancel">
+        <body>
+          // do nothing here
+          this.updateCharCount();
+          if (EchofonCommon.pref().getCharPref("applicationMode") == "panel") {
+            getMainWindowFromSidebar().EchofonOverlay.closePanel();
+          }
+        </body>
+      </method>
+
+      <method name="onAccountMenuShowing">
+        <parameter name="menu"/>
+        <body>
+        <![CDATA[
+          Components.utils.import("resource://echofon/Account.jsm");
+          var accounts = EchofonAccountManager.instance().allAccounts();
+          var user_id = EchofonCommon.pref().getIntPref("activeUserId");
+          EchofonCommon.removeAllChild(menu);
+
+          var loggedIn = EchofonCommon.pref().getBoolPref("login");
+
+          for (var i in accounts) {
+            if (accounts.hasOwnProperty(i)) {
+              var item = document.createElement("menuitem");
+              var user = accounts[i];
+              item.setAttribute("label", user.screen_name);
+              item.setAttribute("user_id", user.user_id);
+              item.setAttribute("name", "account");
+              item.setAttribute("type", "radio");
+              item.setAttribute("oncommand", "try {window.changeAccount(this.getAttribute('user_id'))} catch (e) {EchofonOverlay.changeAccount(this.getAttribute('user_id'))}");
+
+              if (user_id == 0) {
+                user_id = user;
+              }
+
+              if (user.user_id == user_id && loggedIn) {
+                item.setAttribute("checked", true);
+              }
+              menu.appendChild(item);
+            }
+          }
+        ]]></body>
+      </method>
+
+      <property name="inReplyTo">
+        <setter>
+          this._inReplyTo = val;
+          var c = document.getAnonymousElementByAttribute(this, 'anonid', 'inReplyToField').hidden = val ? false : true;
+        </setter>
+        <getter>
+          return this._inReplyTo;
+        </getter>
+      </property>
+
+      <property name="inReplyToMessage">
+        <setter>
+          document.getAnonymousElementByAttribute(this, 'anonid', 'inReplyToMessage').value = EchofonCommon.getFormattedString("InReplyTo", [val]);
+        </setter>
+      </property>
+
+      <field name="statsURL"/>
+
+      <method name="clearInReplyTo">
+        <body>
+          this.inReplyTo = null;
+        </body>
+      </method>
+
+      <method name="hidePopup">
+        <body>
+          EchofonCommon.removeAllChild(this);
+          this.images = [];
+          this.places = null;
+          this.textbox.value = "";
+          this.updateCharCount();
+        </body>
+      </method>
+    </implementation>
+
+  </binding>
+
+  <!--
+    Tweet compose popup
+  -->
+
+  <binding id="echofon-compose-popup" extends="chrome://echofon/content/compose.xml#echofon-compose-base">
+   <content>
+      <xul:menupopup id="echofon-attach-menu">
+        <xul:menuitem id="echofon-attach-add-image" label="&tweetMenu.addImage;" oncommand="addImage()"/>
+      </xul:menupopup>
+
+      <xul:menupopup id="echofon-places-menu" onpopupshowing="onPlacesMenuShowing(this)" oncommand="onPlacesMenuSelected(this)"/>
+
+      <xul:panel noautohide="true" level="parent" anonid="panel" class="echofon-compose-popup">
+        <xul:vbox flex="1" class="echofon-compose-outer-box">
+          <xul:vbox class="echofon-compose-box-arrow"/>
+          <xul:vbox class="echofon-compose-box" flex="1">
+          <xul:hbox flex="1">
+            <xul:vbox>
+              <xul:image xbl:inherits="src" class="echofon-compose-account-icon"/>
+              <xul:spacer flex="1"/>
+            </xul:vbox>
+
+            <xul:box class="tweet-textbox echofon-compose-textbox" flex="1" anonid="text"/>
+          </xul:hbox>
+          <children/>
+          </xul:vbox>
+
+          <xul:vbox class="echofon-compose-buttons">
+            <xul:hbox flex="1" align="center">
+              <xul:button class="echofon-compose-cancel-button" oncommand="cancel()" style="-moz-appearance: none"/>
+              <xul:button class="echofon-compose-attach-button" anonid="menu" menu="echofon-attach-menu"/>
+              <xul:image class="echofon-geolocation-loader" src="chrome://echofon/content/images/geolocation_loader.gif" anonid="geospinner" hidden="true"/>
+              <xul:spacer flex="1"/>
+              <xul:label class="echofon-compose-char-count" value="140" xbl:inherits="value,charOver" anonid="charcount"/>
+              <xul:button class="echofon-compose-send-button echobutton" label="&echofon.tweetButton;" oncommand="sendTweet()" anonid="sendButton"/>
+            </xul:hbox>
+
+          <xul:stack anonid="errorMessageContainer" flex="1" hidden="true">
+            <xul:label anonid="errorMessage" class="echofon-compose-error-message"/>
+            <xul:hbox align="center">
+              <xul:spacer flex="1"/>
+              <xul:button class="echofon-compose-clear-error-button" align="right" oncommand="clearError()"/>
+            </xul:hbox>
+          </xul:stack>
+
+          </xul:vbox>
+        </xul:vbox>
+      </xul:panel>
+    </content>
+
+    <handlers>
+      <handler event="popupshown">
+        this.textbox.focus();
+      </handler>
+    </handlers>
+
+    <implementation>
+      <field name="cursorToBeginning"/>
+      <field name="x"/>
+      <field name="y"/>
+      <field name="timestamp"/>
+
+      <property name="state">
+        <getter>
+          return this.popup.state;
+        </getter>
+      </property>
+
+      <method name="openPopup">
+        <parameter name="parent"/>
+        <parameter name="window"/>
+        <body>
+          this.init();
+
+          if (parent) {
+            var rects = parent.getClientRects();
+            this.x = window.mozInnerScreenX + rects[0].left + parseInt(rects[0].width / 2) - 22 - 10;
+            this.y = window.mozInnerScreenY + rects[0].top + rects[0].height;
+          }
+
+          this.popup.autoPosition = false;
+          this.popup.openPopupAtScreen(this.x, this.y);
+          this.popup.popupBoxObject.enableRollup(false);
+          this.popup.popupBoxObject.setConsumeRollupEvent(1);
+          if (this.cursorToBeginning) {
+            var obj = this;
+            Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer).
+              initWithCallback({notify: function() {obj.moveCursor()}}, 30, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+          }
+        </body>
+      </method>
+
+      <method name="moveCursor">
+        <body>
+          this.textbox.setSelectionRange(0,0);
+        </body>
+      </method>
+
+      <method name="hidePopup">
+        <body>
+          this.error = null;
+          this.edited = false;
+          this.images = [];
+          this.textbox.value = "";
+          this.updateCharCount();
+          this.popup.hidePopup();
+        </body>
+      </method>
+
+      <method name="cancel">
+        <body>
+        <![CDATA[
+          if (this.edited && this.textbox.value.length != 0) {
+            var ps = Components.interfaces.nsIPromptService;
+            var prompt = Components.classes["@mozilla.org/embedcomp/prompt-service;1"].getService(ps);
+            var out = {};
+            var ret = prompt.confirmEx(null,
+                                       EchofonCommon.getString("DiscardTweet"),
+                                       EchofonCommon.getString("TweetWillBeLost"),
+                                       ps.BUTTON_POS_0 * ps.BUTTON_TITLE_IS_STRING + ps.BUTTON_POS_1 * ps.BUTTON_TITLE_CANCEL,
+                                       EchofonCommon.getString("Discard"),
+                                       null, null, null, out);
+            if (ret == 0) {
+              this.hidePopup();
+            }
+          }
+          else {
+            this.hidePopup();
+          }
+        ]]>
+        </body>
+      </method>
+
+    </implementation>
+
+  </binding>
+
+  <!--
+    Compose box for conversation view
+  -->
+
+  <binding id="echofon-conversation-compose-textbox" extends="chrome://echofon/content/compose.xml#echofon-compose-base">
+    <content>
+      <xul:menupopup id="echofon-attach-menu">
+        <xul:menuitem id="echofon-attach-add-image" label="&tweetMenu.addImage;" oncommand="addImage()"/>
+      </xul:menupopup>
+
+      <xul:menupopup id="echofon-places-menu" onpopupshowing="onPlacesMenuShowing(this)" oncommand="onPlacesMenuSelected(this)"/>
+
+      <xul:vbox flex="1">
+        <xul:vbox flex="1">
+
+          <xul:textbox multiline="true" rows="3" style="font-size:14px" anonid="text"/>
+
+        <xul:stack anonid="errorMessageContainer" flex="1" hidden="true">
+          <xul:label anonid="errorMessage" class="echofon-compose-error-message" style="font-size:13px !important"/>
+          <xul:hbox align="center">
+            <xul:spacer flex="1"/>
+            <xul:button class="echofon-compose-clear-error-button" align="right" oncommand="clearError()"/>
+          </xul:hbox>
+        </xul:stack>
+
+          <xul:hbox flex="1" align="center">
+            <xul:spacer flex="1"/>
+            <xul:label value="140" xbl:inherits="value,charOver" class="echofon-dm-compose-char-count" anonid="menu" menu="echofon-attach-menu"/>
+            <xul:button id="echofon-compose-send-button" label="&echofon.sendButton;" oncommand="sendTweet()" anonid="sendButton"/>
+          </xul:hbox>
+        </xul:vbox>
+
+      </xul:vbox>
+    </content>
+
+    <implementation>
+
+      <constructor>
+        var pref = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
+        if (pref.getIntPref("layout.spellcheckDefault") > 0) {
+          this.textbox.setAttribute("spellcheck", "true");
+        }
+      </constructor>
+
+      <method name="cancel">
+        <body>
+        </body>
+      </method>
+
+      <method name="hidePopup">
+        <body>
+          this.error = null;
+          this.textbox.value = "";
+        </body>
+      </method>
+
+    </implementation>
+
+  </binding>
+</bindings>

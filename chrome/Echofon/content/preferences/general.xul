@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://echofon/locale/pref.dtd">
+
+<overlay id="GeneralPaneOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="paneMain" onpaneload="gGeneralPane.init()">
+    <preferences>
+      <preference id="font.language.group"
+                  name="font.language.group"
+                  type="wstring"
+                  onchange="gContentPane._rebuildFonts();"/>
+
+      <preference id="_font-size"        name="extensions.twitternotifier.fontSize"        type="int"/>
+      <preference id="_font-face"        name="extensions.twitternotifier.fontFace"        type="string"/>
+      <preference id="_application-mode" name="extensions.twitternotifier.applicationMode" type="string"/>
+      <preference id="_popup-interval"   name="extensions.twitternotifier.popup-interval"  type="int"/>
+      <preference id="_balloon-popup"    name="extensions.twitternotifier.popup"           type="bool"/>
+      <preference id="_limited-popup"    name="extensions.twitternotifier.popup-mentions-and-dms" type="bool"/>
+      <preference id="_limited-popup2"   name="extensions.twitternotifier.popup-while-window-is-opened" type="bool"/>
+      <preference id="_open-new-tab"     name="extensions.twitternotifier.openLinkInNewTab" type="bool"/>
+      <preference id="_display-style"    name="extensions.twitternotifier.displayStyle"     type="int"/>
+
+      <preference id="_unread-count"     name="extensions.twitternotifier.unreadCount"            type="bool"/>
+      <preference id="_sound"            name="extensions.twitternotifier.sound"                  type="bool"/>
+      <preference id="_soundFile"        name="extensions.twitternotifier.soundFile"              type="string"/>
+    </preferences>
+
+    <stringbundle id="echofon-strings" src="chrome://echofon/locale/pref.properties"/>
+
+    <script type="application/x-javascript;version=1.8" src="chrome://mozapps/content/preferences/fontbuilder.js"/>
+    <script type="application/x-javascript;version=1.8" src="chrome://echofon/content/preferences/general.js"/>
+
+    <groupbox>
+      <caption label="&echofon.preferences;"/>
+      <grid>
+        <columns>
+	  <column />
+	  <column flex="1"/>
+        </columns>
+
+        <rows>
+          <row id="application-mode-group">
+	    <hbox align="center">
+              <label control="application-mode" value="&echofon.applicationMode;"/>
+	    </hbox>
+            <menulist id="application-mode" preference="_application-mode" oncommand="gGeneralPane.onChangeAppMode(this)">
+	      <menupopup>
+                <menuitem label="&echofon.windowMode;"  value="window"/>
+                <menuitem label="&echofon.sidebarMode;" value="sidebar"/>
+                <menuitem label="&echofon.panelMode;" value="panel" id="app-mode-panel"/>
+	      </menupopup>
+            </menulist>
+          </row>
+
+	  <row>
+            <hbox align="center">
+              <label control="font-face" value="&echofon.fontFace;" />
+            </hbox>
+            <menulist id="font-face" preference="_font-face" oncommand="gGeneralPane.onChangeFont()"/>
+	  </row>
+
+          <!-- font size -->
+	  <row>
+            <hbox align="center">
+              <label control="font-size" value="&echofon.fontSize;" />
+            </hbox>
+            <menulist id="font-size" preference="_font-size" oncommand="gGeneralPane.onChangeFont()">
+	      <menupopup>
+	        <menuitem label="10" value="10"/>
+	        <menuitem label="11" value="11"/>
+	        <menuitem label="12" value="12"/>
+	        <menuitem label="13" value="13"/>
+	        <menuitem label="14" value="14"/>
+	        <menuitem label="15" value="15"/>
+	        <menuitem label="16" value="16"/>
+	        <menuitem label="18" value="18"/>
+	        <menuitem label="20" value="20"/>
+	        <menuitem label="22" value="22"/>
+	        <menuitem label="24" value="24"/>
+	      </menupopup>
+	    </menulist>
+	  </row>
+
+          <!-- display style -->
+    <row>
+            <hbox align="center">
+              <label control="display-style" value="&echofon.displayStyle;" />
+            </hbox>
+            <menulist id="display-style" preference="_display-style" oncommand="gGeneralPane.onChangeFont()">
+        <menupopup>
+          <menuitem label="&echofon.displayNameAndScreenName;" value="0"/>
+          <menuitem label="&echofon.displayNameOnly;"          value="1"/>
+          <menuitem label="&echofon.displayScreenNameOnly;"    value="2"/>
+        </menupopup>
+      </menulist>
+    </row>
+
+	  <!-- open links -->
+	  <row style="margin-top:15px" id="open-link">
+	    <hbox align="center">
+              <label control="open-new-tab" value="&echofon.openLinks;"/>
+            </hbox>
+            <hbox align="center">
+              <checkbox id="open-new-tab" preference="_open-new-tab" label="&echofon.alwaysOpenLinkInNewTab;" tooltiptext="&echofon.alwaysOpenLinkInNewTab.tooltip;"/>
+            </hbox>
+	  </row>
+        </rows>
+      </grid>
+    </groupbox>
+
+
+
+    <groupbox id="popup-group">
+      <caption label="&echofon.balloon;"/>
+	  <vbox>
+            <hbox align="center">
+              <checkbox id="balloon-popup" preference="_balloon-popup" oncommand="gGeneralPane.onChangePopup(this.checked)"
+                        label="&echofon.popupInterval;"/>
+              <spacer style="width:10px"/>
+              <menulist id="popup-interval" preference="_popup-interval">
+                <menupopup>
+                  <menuitem label="&echofon.popup3sec;" value="3" />
+                  <menuitem label="&echofon.popup5sec;" value="5"/>
+                  <menuitem label="&echofon.popup7sec;" value="7" />
+                  <menuitem label="&echofon.popup10sec;" value="10" />
+                </menupopup>
+              </menulist>
+            </hbox>
+	  </vbox>
+
+	  <vbox style="margin-top:15px">
+	    <hbox align="center"/>
+            <hbox align="center">
+              <checkbox id="limited-popup2" preference="_limited-popup2" label="&echofon.popupWhileWindowIsOpened;"/>
+            </hbox>
+	  </vbox>
+
+	  <vbox style="margin-top:15px">
+	    <hbox align="center"/>
+            <hbox align="center">
+              <checkbox id="limited-popup" preference="_limited-popup" label="&echofon.mentionsAndDMsOnly;"/>
+            </hbox>
+	  </vbox>
+    </groupbox>
+
+    <groupbox id="notification-group">
+      <caption label="&echofon.newTweetNotifications;"/>
+      <vbox>
+        <hbox align="center">
+            <checkbox id="unread-count" oncommand="gGeneralPane.onCheckUnreadCount(!this.checked)" preference="_unread-count" label="&echofon.unreadCount;"/>
+        </hbox>
+        <hbox align="center" style="margin-top: 5px">
+            <checkbox id="sound" oncommand="gGeneralPane.onCheckSound(!this.checked)" preference="_sound" label="&echofon.sound;"/>
+	    <textbox id="sound-file" readonly="true"/>
+	    <button id="choose-sound" label="&echofon.soundButton;" oncommand="gGeneralPane.onBrowseFile()"/>
+	  </hbox>
+      </vbox>
+    </groupbox>
+
+  </prefpane>
+</overlay>

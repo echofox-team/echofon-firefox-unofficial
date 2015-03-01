@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://echofon/content/echofon.css" type="text/css"?>
+<?xml-stylesheet href="chrome://echofon/content/conversation-view.css" type="text/css"?>
+<?xml-stylesheet href="chrome://echofon/skin/echofon.css" type="text/css"?>
+
+
+<!DOCTYPE window [
+<!ENTITY % echofonDTD SYSTEM "chrome://echofon/locale/echofon.dtd">
+%echofonDTD;
+]>
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        id="echofon-conversation-view"
+        accelerated="true"
+        onload="onload()"
+        onunload="onunload()"
+        persist="screenX,screenY,width,height">
+
+    <html:head>
+      <html:link rel="icon" id="user_favicon" href="chrome://echofon/content/images/favicon.png"/>
+    </html:head>
+
+  <stringbundle id="echofon-strings" src="chrome://echofon/locale/echofon.properties"/>
+
+  <menupopup id="echofon-menu-popup">
+    <menuitem label="&echofon.deleteMessage;" oncommand="deleteMessage(this.parentNode)"/>
+  </menupopup>
+
+  <tooltip id="echofon-tooltip">
+    <box id="echofon-tooltip-container"/>
+  </tooltip>
+
+  <commandset id="mainCommandSet">
+    <command id="cmd_close"              oncommand="close()"/>
+  </commandset>
+
+  <keyset id="menuKeyset">
+    <key id="key_close"     key="w" command="cmd_close" modifiers="accel"/>
+  </keyset>
+
+  <vbox id="wrap" class="drawer" flex="1" style="display: -moz-box;">
+    <vbox id="container" flex="1" style="display: -moz-box;">
+      <scrollbox id="scroll-container" style="overflow-y: auto;" onscroll="onScrollTweetBox(event)" orient="vertical" sborient="vertical" flex="1">
+        <vbox id="echofon-tweets"/>
+      </scrollbox>
+
+    </vbox>
+  </vbox>
+
+  <script src="utility.js" type="application/x-javascript;version=1.8"/>
+  <script src="conversation-view.js" type="application/x-javascript;version=1.8"/>
+  <script src="menu.js" type="application/x-javascript;version=1.8"/>
+
+</window>

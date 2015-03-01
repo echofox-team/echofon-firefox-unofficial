@@ -1,0 +1,74 @@
+<!ENTITY echofon.showpopup "Mostrar Popup">
+<!ENTITY echofon.reload "Recargar">
+<!ENTITY echofon.markAllAsRead "Marcar todos como leídos">
+<!ENTITY echofon.preference "Preferencias">
+<!ENTITY echofon.removeAds "Remover anuncios...">
+<!ENTITY echofon.logout "Desconectarse">
+<!ENTITY echofon.exit "Salir">
+<!ENTITY echofon.checkUpdate "Buscar actualización...">
+<!ENTITY echofon.aboutEchofon "Acerca de Echofon">
+<!ENTITY echofon.changeAccount.tooltip "Clic para cambiar cuentas">
+<!ENTITY echofon.copyTweet "Copiar">
+<!ENTITY echofon.retweet "Retweet...">
+<!ENTITY echofon.retweetWithComment "Retweet con comentario">
+<!ENTITY echofon.replyAll "Responder todos">
+<!ENTITY echofon.deleteTweet "Borrar este tweet">
+<!ENTITY echofon.openTweetInTab "Abrir este tweet en una nueva pestaña">
+<!ENTITY echofon.clickToStart "Clic para empezar">
+<!ENTITY echofon.copyMessage "Copiar">
+<!ENTITY echofon.deleteMessage "Borrar este mensaje...">
+<!ENTITY echofon.olderPosts "Tweets antiguos">
+<!ENTITY echofon.reply "Responder">
+<!ENTITY echofon.sendMessage "Enviar mensaje">
+<!ENTITY echofon.block "Bloquear...">
+<!ENTITY echofon.reportSpam "Reportar Spam...">
+<!ENTITY echofon.itsYou "¡Eres tu!">
+<!ENTITY echofon.chooseList "Escoger lista...">
+<!ENTITY echofon.loadingList "Cargando lista...">
+<!ENTITY echofon.tweetThisPage "Twittear esta página">
+<!ENTITY echofon.postWithLink "Publicar con enlace">
+<!ENTITY echofon.copyURL "Copiar URL">
+<!ENTITY echofon.searchMention "Buscar mención">
+<!ENTITY echofon.postWithTag "Publicar con esta etiqueta">
+<!ENTITY echofon.muteThisUser "Silenciar este usuario">
+<!ENTITY echofon.muteThisTag "Silenciar esta etiqueta">
+<!ENTITY echofon.muteThisApp "Silenciar esta aplicación">
+<!ENTITY echofon.cancelButton "Cancelar">
+<!ENTITY echofon.sendButton "Enviar">
+<!ENTITY echofon.tweetButton "Tweet">
+<!ENTITY echofon.followList "Seguir esta lista">
+<!ENTITY echofon.yourSavedSearches "Tus búsquedas guardadas">
+<!ENTITY echofon.trendingTopics "Temas del momento">
+<!ENTITY fileMenu.accesskey "A">
+<!ENTITY fileMenu.label "Archivo">
+<!ENTITY fileMenu.close "Cerrar">
+<!ENTITY viewMenu.accesskey "V">
+<!ENTITY viewMenu.label "Ver">
+<!ENTITY viewMenu.goHome "Inicio">
+<!ENTITY viewMenu.goMentions "Menciones">
+<!ENTITY viewMenu.goMessages "Mensajes">
+<!ENTITY viewMenu.goLists "Listas">
+<!ENTITY viewMenu.goSearch "Buscar">
+<!ENTITY viewMenu.refresh "Actualizar Timeline">
+<!ENTITY viewMenu.jumpToUnread "Ir a no leídos">
+<!ENTITY viewMenu.markAsRead "Marcar como leído">
+<!ENTITY tweetMenu.accesskey "T">
+<!ENTITY tweetMenu.label "Tweet">
+<!ENTITY tweetMenu.addImage "Agregar imagen...">
+<!ENTITY tweetMenu.insertURL "Insertar URL pestaña actual">
+<!ENTITY tweetMenu.addGeoLocation "Añadir Geolocalización...">
+<!ENTITY userMenu.accesskey "U">
+<!ENTITY userMenu.label "Usuario">
+<!ENTITY userMenu.gotoUser "Ir a usuario">
+<!ENTITY userMenu.myProfile "Mi perfil">
+<!ENTITY prevAccountCmd.accesskey "p">
+<!ENTITY nextAccountCmd.accesskey "n">
+<!ENTITY refreshCmd.accesskey "r">
+<!ENTITY jumpToUnreadCmd.accesskey "j">
+<!ENTITY markAsReadCmd.accesskey "m">
+<!ENTITY myProfileCmd.accesskey "p">
+<!ENTITY gotoUserCmd.accesskey "u">
+<!ENTITY insertURLCmd.accesskey "l">
+<!ENTITY addImageCmd.accesskey "i">
+<!ENTITY addGeoLocationCmd.accesskey "g">
+<!ENTITY closeCmd.accesskey "x">

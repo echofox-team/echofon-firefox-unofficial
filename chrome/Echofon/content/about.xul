@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://echofon/content/about.css" type="text/css"?>
+
+<!DOCTYPE window [
+<!ENTITY % echofonDTD SYSTEM "chrome://echofon/locale/echofon.dtd">
+%echofonDTD;
+]>
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        id="echofon-about"
+        onload="onload()"
+        title="About Echofon">
+
+<vbox id="wrap" flex="1" align="center" style="margin:20px">
+
+  <box id="welcome_message">
+    <image src="images/about_echofon.png" />
+  </box>
+
+  <vbox align="center">
+    <description style="font-weight:bold;font-size:18px;">Echofon</description>
+    <description id="version" style="margin-bottom: 10px;"/>
+    <description id="copyright" value="Copyright 2011 naan studio, Inc."/>
+    <button label="&echofon.checkUpdate;" oncommand="opener.checkUpdate()"/>
+  </vbox>
+
+  <script src="utility.js"/>
+
+  <script>
+    function onload() {
+      var info = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
+      var pref = Components.classes['@mozilla.org/preferences-service;1']
+       .getService(Components.interfaces.nsIPrefService).getBranch("app.update.");
+
+      var versionStr = "Version " + info.version;
+      try {
+        if (pref.getCharPref("channel") == "beta") {
+          versionStr += " (Beta channel)";
+        }
+      }
+      catch (e) {}
+      document.getElementById("version").setAttribute("value", versionStr);
+    }
+  </script>
+
+</vbox>
+
+
+</window>

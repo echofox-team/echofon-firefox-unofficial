@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+  <Description about="urn:mozilla:install-manifest">
+    <em:id>twitternotifier@naan.net</em:id>
+    <em:name>Echofon</em:name>
+    <em:version>2.5.2</em:version>
+    <em:type>2</em:type>
+    <em:unpack>true</em:unpack>
+    <em:creator>naan studio, Inc.</em:creator>
+    <em:developer>Kazuho Okui</em:developer>
+    <em:translator>Fingli(bg)</em:translator>
+    <em:translator>animarval(ca)</em:translator>
+    <em:translator>PetrTwo(cs)</em:translator>
+    <em:translator>Joergen(da)</em:translator>
+    <em:translator>HorstS(de)</em:translator>
+    <em:translator>Sonickydon(el)</em:translator>
+    <em:translator>andresro14(es-ES)</em:translator>
+    <em:translator>jojaba(fr)</em:translator>
+    <em:translator>lois(gl-ES)</em:translator>
+    <em:translator>marcosegato(it)</em:translator>
+    <em:translator>lassedahl(nb-NO)</em:translator>
+    <em:translator>markh(nl)</em:translator>
+    <em:translator>netocury(pt-BR)</em:translator>
+    <em:translator>ricardosimoes(pt-PT)</em:translator>
+    <em:translator>lancaster(th)</em:translator>
+    <em:translator>guzelmu(tr)</em:translator>
+    <em:translator>yfdyh000(zh-CN)</em:translator>
+    <em:translator>velociraptor(zh-TW)</em:translator>
+    <em:description>Full featured, super clean Twitter app for Firefox.</em:description>
+    <em:homepageURL>http://www.echofon.com/</em:homepageURL>
+    <em:iconURL>chrome://echofon/content/images/icon.png</em:iconURL>
+
+    <em:optionsURL>chrome://echofon/content/preferences/preferences.xul</em:optionsURL>
+
+                  kPlAyq0+OyuuYCL0SRGv7/oJAMUkkEc+AI0BA/timyAutwMixSQtK7Q7OAIJ4
+                  Fqw1z42l04wihoiddUqaxvkzRBefrMeQRohOIw6IIAJG9zfjp+WHcxtsXFiUf
+
+    <em:targetApplication>
+      <Description>
+        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- firefox -->
+        <em:minVersion>3.6.4</em:minVersion>
+        <em:maxVersion>30.0a1</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+  </Description>
+</RDF>

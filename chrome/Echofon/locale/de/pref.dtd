@@ -1,0 +1,71 @@
+<!ENTITY paneAccount.title "Konten">
+<!ENTITY paneGeneral.title "Allgemein">
+<!ENTITY paneAdvanced.title "Erweitert">
+<!ENTITY keyboardShortcut.title "Tastatur Einstellungen">
+<!ENTITY keyboardShortcut.explanation "Neue Tastenkombinationen werden erst nach neuem Browser-Fenster wirksam.">
+<!ENTITY clearCache.title "Lokaler Cache löschen">
+<!ENTITY clearCache.button "Jetzt löschen">
+<!ENTITY echofon.title "Echofon Einstellungen">
+<!ENTITY echofon.accounts "Konten">
+<!ENTITY echofon.username "Benutzername">
+<!ENTITY echofon.password "Passwort">
+<!ENTITY echofon.addAccount "Konto hinzufügen">
+<!ENTITY echofon.removeAccount "Konto entfernen ...">
+<!ENTITY echofon.authorizing "Autorisieren von ...">
+<!ENTITY echofon.muteSetting "Stummschaltung ...">
+<!ENTITY echofon.preferences "Einstellungen">
+<!ENTITY echofon.refreshInterval "Tweets holen">
+<!ENTITY echofon.theme "Theme">
+<!ENTITY echofon.fontSize "Schriftgröße">
+<!ENTITY echofon.fontFace "Schriftarten Familie">
+<!ENTITY echofon.everyminute "Jede Minute">
+<!ENTITY echofon.every2minutes "Alle zwei Minuten">
+<!ENTITY echofon.every3minutes "Alle 3 Minuten">
+<!ENTITY echofon.every5minutes "Alle 5 Minuten">
+<!ENTITY echofon.popupInterval "Popupintervall">
+<!ENTITY echofon.popup3sec "3 Sekunden">
+<!ENTITY echofon.popup5sec "5 Sekunden">
+<!ENTITY echofon.popup7sec "7 Sekunden">
+<!ENTITY echofon.popup10sec "10 Sekunden">
+<!ENTITY echofon.mentionsAndDMsOnly "Pop-up nur bei Erwähnungen und Nachrichten anzeigen">
+<!ENTITY echofon.popupWhileWindowIsOpened "Pop-ups">
+<!ENTITY echofon.toggleEchofon "Echofon umschalten">
+<!ENTITY echofon.insertURL "URL eintragen">
+<!ENTITY echofon.revertKeyconfig "Zurücksetzen">
+<!ENTITY echofon.balloon "Pop-up-Benachrichtigung">
+<!ENTITY echofon.newTweetNotifications "Benachrichtigungen">
+<!ENTITY echofon.sound "Benachrichtigungssound">
+<!ENTITY echofon.unreadCount "Ungelesene Zähler anzeigen">
+<!ENTITY echofon.soundButton "Durchsuchen ...">
+<!ENTITY echofon.syncWindowTitle "Setup Synchronisation mit dem iPhone">
+<!ENTITY echofon.alwaysOpenLinkInNewTab "Links immer in einem neuen Tab öffnen">
+<!ENTITY echofon.alwaysOpenLinkInNewTab.tooltip "Strg+Klick (CMD+Klick bei Mac) öffnet auch ohne diese Einstellung den Link in einem neuen Tab.">
+<!ENTITY echofon.openLinks "Link öffnen">
+<!ENTITY echofon.applicationMode "Anwendungsmodus">
+<!ENTITY echofon.panelMode "Panel">
+<!ENTITY echofon.windowMode "Fenster">
+<!ENTITY echofon.sidebarMode "Sidebar">
+<!ENTITY echofon.welcome "Willkommen bei Echofon!">
+<!ENTITY echofon.signIntoTwitter "Melden Sie sich bei Twitter an">
+<!ENTITY echofon.authorize "Bei Twitter autorisieren">
+<!ENTITY echofon.agreeAndAuthEchofon "Zustimmen und bei Twitter autorisieren">
+<!ENTITY echofon.followEchofon "Folge @Echofon">
+<!ENTITY echofon.muteUsers "Benutzer">
+<!ENTITY echofon.muteApplications "Anwendungen">
+<!ENTITY echofon.muteHashtags "Hashtag">
+<!ENTITY echofon.addMute "Hinzufügen ...">
+<!ENTITY echofon.removeMute "Löschen">
+<!ENTITY echofon.muteTitle "Stummschaltung">
+<!ENTITY echofon.openTwitterForUserPage "twitter.com für Benutzeransicht nutzen">
+<!ENTITY echofon.openTwitterForUserPageExplanation "Sie können twitter.com/screen_name anstatt Echofons Benutzeransicht nutzen. Mit Shift+Klick können Sie zur anderen Einstellung zurückkehren.">
+<!ENTITY echofon.email "E-Mail">
+<!ENTITY echofon.subscribeEmail "Abonnieren">
+<!ENTITY echofon.submitEmailExplanation "E-Mail-Adresse eingeben, um aktuelle Informationen von Echofon oder UberMedia zu erhalten.">
+<!ENTITY echofon.thankYouForSubscribe "Vielen Dank für Ihre Anmeldung!">
+<!ENTITY echofon.licenseKey "Lizenzschlüssel">
+<!ENTITY echofon.verifyLicense "Lizenz überprüfen">
+<!ENTITY echofon.licenseExplanation "Wenn Sie über einen Lizenzschlüssel verfügen, bitte hier eingeben!">
+<!ENTITY echofon.displayStyle "Display Style">
+<!ENTITY echofon.displayScreenNameOnly "Screen Name Only">
+<!ENTITY echofon.displayNameAndScreenName "Name and Screen Name">
+<!ENTITY echofon.displayNameOnly "Name Only">

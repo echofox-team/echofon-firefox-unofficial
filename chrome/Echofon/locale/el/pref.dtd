@@ -1,0 +1,71 @@
+<!ENTITY paneAccount.title "Λογαριασμοί">
+<!ENTITY paneGeneral.title "Γενικά">
+<!ENTITY paneAdvanced.title "Για προχωρημένους">
+<!ENTITY keyboardShortcut.title "Ρυθμίσεις πληκτρολογίου">
+<!ENTITY keyboardShortcut.explanation "Οι νέες συντομεύσεις θα ισχύσουν μετά από επανεκκίνηση">
+<!ENTITY clearCache.title "Εκκαθάριση τοπικής λανθάνουσας">
+<!ENTITY clearCache.button "Εκκαθάριση τώρα">
+<!ENTITY echofon.title "Προτιμήσεις Echofon">
+<!ENTITY echofon.accounts "Λογαριασμοί">
+<!ENTITY echofon.username "Όνομα χρήστη">
+<!ENTITY echofon.password "Κωδικός">
+<!ENTITY echofon.addAccount "Προσθήκη λογαριασμού">
+<!ENTITY echofon.removeAccount "Αφαίρεση λογαριασμού...">
+<!ENTITY echofon.authorizing "Εξουσιοδότηση...">
+<!ENTITY echofon.muteSetting "Ρύθμιση σίγασης...">
+<!ENTITY echofon.preferences "Προτιμήσεις">
+<!ENTITY echofon.refreshInterval "Λήψη tweets">
+<!ENTITY echofon.theme "Θέμα">
+<!ENTITY echofon.fontSize "Μέγεθος κειμένου">
+<!ENTITY echofon.displayStyle "Στυλ εμφάνισης">
+<!ENTITY echofon.displayNameAndScreenName "Όνομα και ψευδώνυμο">
+<!ENTITY echofon.displayNameOnly "Όνομα μόνο">
+<!ENTITY echofon.displayScreenNameOnly "Ψευδώνυμο μόνο">
+<!ENTITY echofon.fontFace "Οικογένεια γραμματοσειράς">
+<!ENTITY echofon.everyminute "Κάθε 1 λεπτό">
+<!ENTITY echofon.every2minutes "Κάθε 2 λεπτά">
+<!ENTITY echofon.every3minutes "κάθε 3 λεπτά">
+<!ENTITY echofon.every5minutes "κάθε 5 λεπτά">
+<!ENTITY echofon.popupInterval "Διάρκεια εμφάνισης αναδυόμενου μηνύματος">
+<!ENTITY echofon.popup3sec "3 δευτερόλεπτα">
+<!ENTITY echofon.popup5sec "5 δευτερόλεπτα">
+<!ENTITY echofon.popup7sec "7 δευτερόλεπτα">
+<!ENTITY echofon.popup10sec "10 δευτερόλεπτα">
+<!ENTITY echofon.mentionsAndDMsOnly "Προβολή σε αναδυόμενο μόνο αναφορών και άμεσων μηνυμάτων">
+<!ENTITY echofon.popupWhileWindowIsOpened "Εμφάνιση αναδυόμενων όταν το Echofon είναι ανοιχτό">
+<!ENTITY echofon.toggleEchofon "Εναλλαγή Echofon">
+<!ENTITY echofon.insertURL "Εισαγωγή URL">
+<!ENTITY echofon.revertKeyconfig "Αναίρεση">
+<!ENTITY echofon.balloon "Εμφάνιση αναδυόμενης ειδοποίησης">
+<!ENTITY echofon.newTweetNotifications "Ειδοποιήσεις">
+<!ENTITY echofon.sound "Ήχος ειδοποίησης">
+<!ENTITY echofon.unreadCount "Προβολή μετρητή μη αναγνωσμένων">
+<!ENTITY echofon.soundButton "Εύρεση...">
+<!ENTITY echofon.syncWindowTitle "Ρύθμιση συγχρονισμού με iPhone">
+<!ENTITY echofon.alwaysOpenLinkInNewTab "Άνοιγμα δεσμών σε νέα καρτέλα πάντα">
+<!ENTITY echofon.alwaysOpenLinkInNewTab.tooltip "Το Ctrl+κλικ (Cmd+κλικ σε Mac) θα ανοίγει δεσμούς σε νέα καρτέλα χωρίς αυτή τη ρύθμιση.">
+<!ENTITY echofon.openLinks "Άνοιγμα δεσμών">
+<!ENTITY echofon.applicationMode "Κατάσταση λειτουργίας εφαρμογής">
+<!ENTITY echofon.panelMode "Ταμπλό">
+<!ENTITY echofon.windowMode "Παράθυρο">
+<!ENTITY echofon.sidebarMode "Πλευρική στήλη">
+<!ENTITY echofon.welcome "Καλώς ορίσατε στο Echofon!">
+<!ENTITY echofon.signIntoTwitter "Συνδεθείτε στο Twitter">
+<!ENTITY echofon.authorize "Εξουσιοδότηση για το Twitter">
+<!ENTITY echofon.agreeAndAuthEchofon "Αποδοχή όρων και εξουσιοδότηση για το Twitter">
+<!ENTITY echofon.followEchofon "Παρακολούθηση @Echofon">
+<!ENTITY echofon.muteUsers "Χρήστες">
+<!ENTITY echofon.muteApplications "Εφαρμογές">
+<!ENTITY echofon.muteHashtags "Hashtags">
+<!ENTITY echofon.addMute "Προσθήκη...">
+<!ENTITY echofon.removeMute "Διαγραφή">
+<!ENTITY echofon.muteTitle "Ρυθμίσεις σίγασης">
+<!ENTITY echofon.openTwitterForUserPage "Άνοιγμα twitter.com για εμφάνιση χρήστη">
+<!ENTITY echofon.openTwitterForUserPageExplanation "Μπορείτε να ανοίξετε το twitter.com/screen_name αντί για την προσαρμοσμένη εμφάνιση χρήστη του Echofon. Για εναλλαγή της προβολής, πατήστε shift+κλικ στο screen name.">
+<!ENTITY echofon.email "Διεύθυνση email">
+<!ENTITY echofon.subscribeEmail "Συνδρομή">
+<!ENTITY echofon.submitEmailExplanation "Εισάγετε τη διεύθυνση ηλ. ταχυδρομείου σας για να λαβαίνετε νέα από το Echofon και την UberMedia.">
+<!ENTITY echofon.thankYouForSubscribe "Σας ευχαριστούμε για τη συνδρομή!">
+<!ENTITY echofon.licenseKey "Κλειδί αδειοδότησης">
+<!ENTITY echofon.verifyLicense "Επικύρωση κλειδιού">
+<!ENTITY echofon.licenseExplanation "Αν έχετε κλειδί αδειοδότησης, εισάγετε το εδώ">

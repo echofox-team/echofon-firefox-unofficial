@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://echofon/content/HUD.css" type="text/css"?>
+
+<!DOCTYPE window SYSTEM "chrome://echofon/locale/echofon.dtd">
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        flex="1"
+        hidechrome="true"
+        onload="onload()"
+        onclick="onclick(event)"
+        width="164"
+        height="164"
+        style="background: transparent; -moz-appearance: none;">
+
+  <keyset>
+    <key keycode="VK_ESCAPE" oncommand="close()"/>
+    <key keycode="VK_TAB"  oncommand="close()"/>
+    <key key=" "  oncommand="close()"/>
+  </keyset>
+
+  <titlebar id="echofon-hud" flex="1">
+    <vbox flex="1">
+      <hbox id="echofon-hud-titlebar" flex="1" align="center">
+        <image id="echofon-hud-close-button"/>
+        <spacer flex="1"/>
+      </hbox>
+      <image id="echofon-loading-photo" src="chrome://echofon/content/images/loading-photo.gif"/>
+      <image id="echofon-hud-image" flex="1" hidden="true"/>
+      <vbox flex="1" id="echofon-hud-error" hidden="true" align="center">
+        <hbox flex="1" align="center">
+          <label value="Failed to Load" id="echofon-hud-error-message"/>
+        </hbox>
+      </vbox>
+    </vbox>
+  </titlebar>
+
+  <script src="utility.js" type="application/x-javascript;version=1.8"/>
+  <script src="HUD.js" type="application/x-javascript;version=1.8"/>
+
+</window>
