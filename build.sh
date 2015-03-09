@@ -1,6 +1,6 @@
 #!/bin/bash
 
-versionNumber=$(cat VERSION)
+versionNumber=$(sed -ne '/em:version/{s/.*<em:version>\(.*\)<\/em:version>.*/\1/p;q;}' install.rdf)
 
 rm -rf build
 mkdir -p build/src
