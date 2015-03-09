@@ -36,7 +36,7 @@
           </xul:toolbarbutton>
         </xul:hbox>
         <xul:spacer flex="1"/>
-        <xul:toolbarbutton class="echofon-tabs-closebutton tabs-closebutton" oncommand="toggleSidebar();" xbl:inherits="hidden=noclosebutton"/>
+		<xul:toolbarbutton class="echofon-tabs-closebutton tab-close-button close-icon" oncommand="toggleSidebar();" xbl:inherits="hidden=noclosebutton"/>
       </xul:toolbar>
     </content>
 
