@@ -114,12 +114,7 @@ EchofonHttpRequest.prototype = {
 
   setPostData: function(data) {
     var upStream = Cc["@mozilla.org/io/string-input-stream;1"].createInstance(Ci.nsIStringInputStream);
-    if (data.length == 0) {
-      upStream.setData("", 1);
-    }
-    else {
-      upStream.setData(data, data.length);
-    }
+    upStream.setData(data, data.length);
     var upChannel = this.channel.QueryInterface(Ci.nsIUploadChannel);
     upChannel.setUploadStream(upStream, "application/x-www-form-urlencoded", -1);
 
