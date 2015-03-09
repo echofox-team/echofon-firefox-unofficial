@@ -112,14 +112,14 @@
         </getter>
       </property>
 
-	  <!-- Try/catch added for https://bugzilla.mozilla.org/show_bug.cgi?id=979835 -->
+      <!-- Try/catch added for https://bugzilla.mozilla.org/show_bug.cgi?id=979835 -->
       <property name="scrollbox">
         <getter>
-		try {
-          return this.getContainer().boxObject.QueryInterface(Components.interfaces.nsIScrollBoxObject);
-		  } catch (ex) {
-		  return this.getContainer().boxObject;
-		  }
+          try {
+            return this.getContainer().boxObject.QueryInterface(Components.interfaces.nsIScrollBoxObject);
+          } catch (ex) {
+            return this.getContainer().boxObject;
+          }
         </getter>
       </property>
 
