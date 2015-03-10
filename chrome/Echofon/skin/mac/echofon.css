@@ -30,10 +30,6 @@ echofon-toolbar[mode="window"] {
   -moz-box-shadow: none !important;
 }
 
-.echofon-tabs-closebutton {
-  margin-right: -12px !important;
-}
-
 #echofon-compose-bar {
 /* margin-right: 9px;*/
   margin-right: 5px;
