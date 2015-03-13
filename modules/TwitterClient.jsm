@@ -5,7 +5,7 @@ const {classes:Cc, interfaces:Ci, utils:Cu} = Components;
 
 Cu.import("resource://echofon/EchofonHttpRequest.jsm");
 
-const OAUTH_CONSUMER_KEY = "yqoymTNrS9ZDGsBnlFhIuw";
+const OAUTH_CONSUMER_KEY = "%CONSUMER_KEY%" || "yqoymTNrS9ZDGsBnlFhIuw";
 const TWITTER_API_URL    = "api.twitter.com/1.1/";
 
 function convertToHexString(data)
