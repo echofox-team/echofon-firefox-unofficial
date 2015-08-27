@@ -813,7 +813,7 @@ var EchofonCommon = {
 
     var ure = /chrome:\/\/echofon\/content\/user-view.xul\?screen_name=([A-Za-z0-9_]+)/;
     if (ure.test(url) && openInTwitter) {
-      url = "https://twitter.com/#!/" + RegExp.$1;
+      url = "https://twitter.com/" + RegExp.$1;
     }
 
     var tabs = tabbrowser.tabContainer.childNodes;
