@@ -437,7 +437,7 @@ var EchofonCommon = {
     // building tweet with urls, mentions and hashtags.
     //
     function unescape(a) {
-      var escape = this.Cc["@mozilla.org/feed-unescapehtml;1"].getService(this.Ci.nsIScriptableUnescapeHTML);
+      var escape = Cc["@mozilla.org/feed-unescapehtml;1"].getService(Ci.nsIScriptableUnescapeHTML);
       if (a[0] == ' ') {
         return ' ' + escape.unescape(a);
       }

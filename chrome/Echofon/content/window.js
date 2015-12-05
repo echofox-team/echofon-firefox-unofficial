@@ -1860,7 +1860,7 @@ function notifyStatusToWindows(sts, obj)
 {
   var msg = {"state": sts, "data": obj};
   var data = JSON.stringify(msg);
-  this.Cc["@mozilla.org/observer-service;1"].getService(this.Ci.nsIObserverService).notifyObservers(null, "echofon-status", data);
+  Cc["@mozilla.org/observer-service;1"].getService(Ci.nsIObserverService).notifyObservers(null, "echofon-status", data);
 }
 
 function isActiveWindow()
