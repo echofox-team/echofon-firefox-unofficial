@@ -9,7 +9,7 @@ const {classes:Cc, interfaces:Ci} = Components;
 
 const SQLITE_DB_FILENAME = "echofon_2.0.sqlite";
 const SQLITE_IMAGE_CACHE = "echofon_image_cache.sqlite";
-const ECHOFON_UUID       = "twitternotifier@naan.net";
+const ECHOFON_UUID       = "echofon-unofficial@echofox-team";
 
 function EchofonDatabase()
 {

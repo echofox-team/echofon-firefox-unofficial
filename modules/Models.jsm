@@ -57,7 +57,7 @@ EchofonModel.init = function() {
     var appInfo = Cc["@mozilla.org/xre/app-info;1"].getService(Ci.nsIXULAppInfo);
     if (appInfo.name != "Echofon") {
       Components.utils.import("resource://gre/modules/AddonManager.jsm");
-      AddonManager.getAddonByID("twitternotifier@naan.net", didGetAddon);
+      AddonManager.getAddonByID("echofon-unofficial@echofox-team", didGetAddon);
     }
     else {
       if (login) {
