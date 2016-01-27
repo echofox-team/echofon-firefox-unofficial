@@ -5,7 +5,6 @@
 var EXPORTED_SYMBOLS = ["EchofonSign"];
 
 const {classes:Cc, interfaces:Ci, utils:Cu} = Components;
-const ECHOFON_UUID = "twitternotifier@naan.net";
 
 Cu.import("resource://echofon/Models.jsm")
 

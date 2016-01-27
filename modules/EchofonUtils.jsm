@@ -119,7 +119,7 @@ const EchofonUtils = {
       var appInfo = Cc["@mozilla.org/xre/app-info;1"].getService(Ci.nsIXULAppInfo);
       return appInfo.version;
     }
-    var guid = 'twitternotifier@naan.net';
+    var guid = 'echofon-unofficial@echofox-team';
       try {
         var addon = Cc["@mozilla.org/extensions/manager;1"];
         ADDON_VERSION = addon.getService(Ci.nsIExtensionManager).getItemForID(guid).version;
@@ -200,7 +200,7 @@ const EchofonUtils = {
   },
 
   readFile: function(path, filename) {
-    const TWITTERFOX_UUID    = "twitternotifier@naan.net";
+    const TWITTERFOX_UUID    = "echofon-unofficial@echofox-team";
 
     var manager = Cc["@mozilla.org/extensions/manager;1"].getService(Ci.nsIExtensionManager);
     var file = manager.getInstallLocation(TWITTERFOX_UUID).getItemLocation(TWITTERFOX_UUID);
