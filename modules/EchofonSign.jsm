@@ -169,8 +169,12 @@ EchofonSign.getSignatureForSyncServer = function(str)
 
 EchofonSign.OAuthSignature = function(str, secret)
 {
-  var consumerSecret = "%CONSUMER_SECRET%";
-  if(!consumerSecret) {
+  var prefs = Cc['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch("extensions.twitternotifier.");
+  try {
+    const customSecret = prefs.getCharPref("customSecret");
+    if(!customSecret) throw 'No custom key';
+    return b64_hmac_sha1(customSecret + "&" + secret, str);
+  } catch(e) {
     if (Cc['@naan.net/twitterfox-sign;1']) {
       var com = Cc['@naan.net/twitterfox-sign;1'].getService(Ci.nsITwitterFoxSign);
       return com.OAuthSignature(str, secret);
@@ -179,10 +183,6 @@ EchofonSign.OAuthSignature = function(str, secret)
       return OAuthSignatureByLibrary(str, secret);
     }
   }
-  
-  var signature = b64_hmac_sha1(consumerSecret + "&" + secret, str);
-
-  return signature;
 }
 
 /*

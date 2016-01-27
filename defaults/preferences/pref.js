@@ -17,6 +17,8 @@ pref("extensions.twitternotifier.clearDB", false);
 pref("extensions.twitternotifier.debug", false);
 pref("extensions.twitternotifier.sync", "{}");
 pref("extensions.twitternotifier.accounts", "{}");
+pref("extensions.twitternotifier.customKey", "");
+pref("extensions.twitternotifier.customSecret", "");
 pref("extensions.twitternotifier.checkFollow", 0);
 pref("extensions.twitternotifier.applicationMode", "window");
 pref("extensions.twitternotifier.splashScreen", true);

@@ -5,8 +5,17 @@ const {classes:Cc, interfaces:Ci, utils:Cu} = Components;
 
 Cu.import("resource://echofon/EchofonHttpRequest.jsm");
 
-const OAUTH_CONSUMER_KEY = "%CONSUMER_KEY%" || "yqoymTNrS9ZDGsBnlFhIuw";
 const TWITTER_API_URL    = "api.twitter.com/1.1/";
+
+function getOAuthConsumerKey() {
+  var prefs = Cc['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefService).getBranch("extensions.twitternotifier.");
+  const defaultKey = "yqoymTNrS9ZDGsBnlFhIuw";
+  try {
+    return prefs.getCharPref("customKey") || defaultKey;
+  } catch(e) {
+    return defaultKey;
+  }
+}
 
 function convertToHexString(data)
 {
@@ -102,7 +111,7 @@ TwitterClient.buildOAuthHeader = function (user, method, url, param)
 
   var s = convertToHexString(hash);
 
-  var oauthparam = {"oauth_consumer_key"     : OAUTH_CONSUMER_KEY,
+  var oauthparam = {"oauth_consumer_key"     : getOAuthConsumerKey(),
 		    "oauth_timestamp"        : ts,
 		    "oauth_signature_method" : "HMAC-SHA1",
 		    "oauth_nonce"            : s + Math.random(),
