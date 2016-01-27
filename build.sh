@@ -12,4 +12,4 @@ cd ..
 rm -rf Echofon
 
 cd ..
-zip -r -9 ../echofon_for_twitter-$versionNumber.xpi *
+zip -r -9 ../echofon_unofficial-$versionNumber.xpi *
