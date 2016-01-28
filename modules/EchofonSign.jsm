@@ -160,7 +160,7 @@ EchofonSign.getSignatureForSyncServer = function(str)
     var com = Cc['@naan.net/twitterfox-sign;1'].getService(Ci.nsITwitterFoxSign);
     var sig = com.sign(str);
     var toHexString = function(charCode) { return ("0" + charCode.toString(16)).slice(-2); };
-    return [toHexString(sig.charCodeAt(i)) for (i in sig)].join("");
+    return sig.map((e) => toHexString(sig.charCodeAt(e))).join("");
   }
   else {
     return signByLibrary(str);
