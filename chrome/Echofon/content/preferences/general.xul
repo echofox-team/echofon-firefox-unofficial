@@ -68,6 +68,10 @@
             </hbox>
             <menulist id="font-size" preference="_font-size" oncommand="gGeneralPane.onChangeFont()">
 	      <menupopup>
+		<menuitem label="6" value="6"/>
+		<menuitem label="7" value="7"/>
+		<menuitem label="8" value="8"/>
+		<menuitem label="9" value="9"/>
 	        <menuitem label="10" value="10"/>
 	        <menuitem label="11" value="11"/>
 	        <menuitem label="12" value="12"/>
