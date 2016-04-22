@@ -34,8 +34,8 @@ var gAccountsPane = {
   onFinishOAuth: function(user_id) {
     var account = EchofonAccountManager.instance().get(user_id);
 
-    if (EchofonCommon.pref().getIntPref("activeUserId") == 0) {
-      EchofonCommon.pref().setIntPref("activeUserId", account.user_id);
+    if (EchofonCommon.pref().getCharPref("activeUserId") == 0) {
+      EchofonCommon.pref().setCharPref("activeUserId", account.user_id);
     }
 
     var list = EchofonCommon.$("accounts");
@@ -109,7 +109,7 @@ var gAccountsPane = {
     this.updateButtonState();
 
     // switch account or logout if user delete current
-    if (user_id == EchofonCommon.pref().getIntPref("activeUserId")) {
+    if (user_id == EchofonCommon.pref().getCharPref("activeUserId")) {
       if (list.firstChild) {
         EchofonCommon.notify("changeAccount", {user_id:list.firstChild.value});
       }

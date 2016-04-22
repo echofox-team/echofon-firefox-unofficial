@@ -677,7 +677,7 @@ var EchofonCommon = {
   },
 
   reloadTimeline: function() {
-    EchofonCommon.notify("refresh", {user_id:this.pref().getIntPref("activeUserId")});
+    EchofonCommon.notify("refresh", {user_id:this.pref().getCharPref("activeUserId")});
   },
 
   openComposeWindow: function(parentNode, text, cursorToBeginning) {
@@ -722,7 +722,7 @@ var EchofonCommon = {
     var panel = this.composePanel();
     if (panel.state == "open") return null;
 
-    panel.user_id = EchofonCommon.pref().getIntPref("activeUserId");
+    panel.user_id = EchofonCommon.pref().getCharPref("activeUserId");
 
     if (cursorToBeginning) {
       panel.textbox.value = ' ' + text;

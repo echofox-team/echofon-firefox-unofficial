@@ -620,7 +620,7 @@
         <![CDATA[
           Components.utils.import("resource://echofon/Account.jsm");
           var accounts = EchofonAccountManager.instance().allAccounts();
-          var user_id = EchofonCommon.pref().getIntPref("activeUserId");
+          var user_id = EchofonCommon.pref().getCharPref("activeUserId");
           EchofonCommon.removeAllChild(menu);
 
           var loggedIn = EchofonCommon.pref().getBoolPref("login");
@@ -635,7 +635,7 @@
               item.setAttribute("type", "radio");
               item.setAttribute("oncommand", "try {window.changeAccount(this.getAttribute('user_id'))} catch (e) {EchofonOverlay.changeAccount(this.getAttribute('user_id'))}");
 
-              if (user_id == 0) {
+              if (user_id == '') {
                 user_id = user;
               }
 

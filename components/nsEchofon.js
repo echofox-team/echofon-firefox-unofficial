@@ -52,10 +52,10 @@ Echofon.prototype = {
 
     this.loadConfiguration();
 
-    var user_id = EchofonUtils.pref().getIntPref('activeUserId');
+    var user_id = EchofonUtils.pref().getCharPref('activeUserId');
 
     if (!EchofonAccountManager.instance().get(user_id)) {
-      EchofonUtils.pref().setIntPref('activeUserId', 0);
+      EchofonUtils.pref().setCharPref('activeUserId', '');
       EchofonUtils.pref().setBoolPref('login', false);
     }
 
@@ -98,8 +98,6 @@ Echofon.prototype = {
       var unread = this.timelineLoader.timelines.getUnreadCount();
       EchofonUtils.notifyObservers("updateUnreadCount", unread);
     }
-
-    var user_id = EchofonUtils.pref().getIntPref('activeUserId');
   },
 
   getAd: function(info) {
@@ -792,7 +790,7 @@ Echofon.prototype = {
     // reset session
     this.reset();
 
-    this._pref.setIntPref("activeUserId", account.user_id);
+    this._pref.setCharPref("activeUserId", account.user_id);
     this.initSession();
 
     var user = EchofonModel.User.findById(account.user_id, account.user_id);
@@ -826,7 +824,7 @@ Echofon.prototype = {
     }
     catch (e) {}
     if (!EchofonUtils.isXULRunner()) {
-      this._pref.setIntPref("activeUserId", 0);
+      this._pref.setCharPref("activeUserId", '');
       this._pref.setBoolPref("login", false);
     }
     EchofonUtils.notifyObservers("logout");
@@ -1007,7 +1005,7 @@ Echofon.prototype = {
         var current = this._pref.getCharPref("currentUser");
 
         if (tokens[current.toLowerCase()]) {
-          this._pref.setIntPref("activeUserId", tokens[current].user_id);
+          this._pref.setCharPref("activeUserId", tokens[current].user_id);
         }
 
         for (var i in tokens) {
