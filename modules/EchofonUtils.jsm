@@ -91,7 +91,7 @@ const EchofonUtils = {
   },
 
   isActiveUser: function(token) {
-    return (EchofonUtils.pref().getCharPref("activeUserId") == token.user_id) ? true : false;
+    return (EchofonUtils.pref().getCharPref("activeUserIdStr") == token.user_id) ? true : false;
   },
 
   setDelayTask: function(delay, target, func, data, type) {

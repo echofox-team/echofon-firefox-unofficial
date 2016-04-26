@@ -620,7 +620,7 @@
         <![CDATA[
           Components.utils.import("resource://echofon/Account.jsm");
           var accounts = EchofonAccountManager.instance().allAccounts();
-          var user_id = EchofonCommon.pref().getCharPref("activeUserId");
+          var user_id = EchofonCommon.pref().getCharPref("activeUserIdStr");
           EchofonCommon.removeAllChild(menu);
 
           var loggedIn = EchofonCommon.pref().getBoolPref("login");

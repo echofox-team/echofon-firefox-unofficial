@@ -52,10 +52,10 @@ Echofon.prototype = {
 
     this.loadConfiguration();
 
-    var user_id = EchofonUtils.pref().getCharPref('activeUserId');
+    var user_id = EchofonUtils.pref().getCharPref('activeUserIdStr');
 
     if (!EchofonAccountManager.instance().get(user_id)) {
-      EchofonUtils.pref().setCharPref('activeUserId', '');
+      EchofonUtils.pref().setCharPref('activeUserIdStr', '');
       EchofonUtils.pref().setBoolPref('login', false);
     }
 
@@ -790,7 +790,7 @@ Echofon.prototype = {
     // reset session
     this.reset();
 
-    this._pref.setCharPref("activeUserId", account.user_id);
+    this._pref.setCharPref("activeUserIdStr", account.user_id);
     this.initSession();
 
     var user = EchofonModel.User.findById(account.user_id, account.user_id);
@@ -824,7 +824,7 @@ Echofon.prototype = {
     }
     catch (e) {}
     if (!EchofonUtils.isXULRunner()) {
-      this._pref.setCharPref("activeUserId", '');
+      this._pref.setCharPref("activeUserIdStr", '');
       this._pref.setBoolPref("login", false);
     }
     EchofonUtils.notifyObservers("logout");
@@ -1005,7 +1005,7 @@ Echofon.prototype = {
         var current = this._pref.getCharPref("currentUser");
 
         if (tokens[current.toLowerCase()]) {
-          this._pref.setCharPref("activeUserId", tokens[current].user_id);
+          this._pref.setCharPref("activeUserIdStr", tokens[current].user_id);
         }
 
         for (var i in tokens) {

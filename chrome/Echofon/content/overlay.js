@@ -371,7 +371,7 @@ var EchofonOverlay = {
     // do nothing if window is minimized
     if (window.windowState == Components.interfaces.nsIDOMChromeWindow.STATE_MINIMIZED) return;
 
-    var user_id = EchofonCommon.pref().getCharPref("activeUserId");
+    var user_id = EchofonCommon.pref().getCharPref("activeUserIdStr");
     if (user_id != params.user_id) {
       return;
     }
@@ -599,15 +599,15 @@ var EchofonOverlay = {
 
   toggleWindow: function(from_toolbar) {
 
-    if (EchofonCommon.pref().getBoolPref("login") == false || EchofonCommon.pref().getCharPref("activeUserId") == '') {
+    if (EchofonCommon.pref().getBoolPref("login") == false || EchofonCommon.pref().getCharPref("activeUserIdStr") == '') {
       var accounts = EchofonCommon.pref().getCharPref("accounts");
-      if (EchofonCommon.pref().getCharPref("activeUserId") == '' && accounts == "{}") {
+      if (EchofonCommon.pref().getCharPref("activeUserIdStr") == '' && accounts == "{}") {
           EchofonCommon.openPreferences();
       return;
       }
       EchofonCommon.pref().setBoolPref("login", true);
-      if (EchofonCommon.pref().getCharPref("activeUserId") == '') {
-        EchofonCommon.pref().setCharPref("activeUserId", EchofonAccountManager.instance().getPrimaryAccount());
+      if (EchofonCommon.pref().getCharPref("activeUserIdStr") == '') {
+        EchofonCommon.pref().setCharPref("activeUserIdStr", EchofonAccountManager.instance().getPrimaryAccount());
       }
       EchofonCommon.notify("initSession");
     }
@@ -714,7 +714,7 @@ var EchofonOverlay = {
     }
 
     let accounts = EchofonAccountManager.instance().allAccounts();
-    let user_id = EchofonCommon.pref().getCharPref("activeUserId");
+    let user_id = EchofonCommon.pref().getCharPref("activeUserIdStr");
     let isLogin = EchofonCommon.pref().getBoolPref("login");
 
     for (let i = 0; i < menu.childNodes.length; ++i) {
@@ -840,7 +840,7 @@ var EchofonOverlay = {
 
     this.showMessage(obj.message);
 
-    let user_id = EchofonCommon.pref().getCharPref("activeUserId");
+    let user_id = EchofonCommon.pref().getCharPref("activeUserIdStr");
     let account = EchofonAccountManager.instance().get(user_id);
     if (!account.needToAlertOAuthError()) return;
 
@@ -868,8 +868,8 @@ var EchofonOverlay = {
 
   onFinishOAuth: function(user_id) {
     var account = EchofonAccountManager.instance().get(user_id);
-    if (EchofonCommon.pref().getCharPref("activeUserId") == 0) {
-      EchofonCommon.pref().setCharPref("activeUserId", account.user_id);
+    if (EchofonCommon.pref().getCharPref("activeUserIdStr") == 0) {
+      EchofonCommon.pref().setCharPref("activeUserIdStr", account.user_id);
     }
     EchofonCommon.reloadTimeline();
     this._askedToReAuth = false;

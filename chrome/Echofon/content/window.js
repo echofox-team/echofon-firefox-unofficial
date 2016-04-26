@@ -1720,8 +1720,8 @@ function needToReAuth(screen_name)
 
 function onFinishOAuth(user_id) {
   var account = EchofonAccountManager.instance().get(user_id);
-  if (EchofonCommon.pref().getCharPref("activeUserId") == '') {
-    EchofonCommon.pref().setCharPref("activeUserId", account.user_id);
+  if (EchofonCommon.pref().getCharPref("activeUserIdStr") == '') {
+    EchofonCommon.pref().setCharPref("activeUserIdStr", account.user_id);
   }
   EchofonCommon.reloadTimeline();
 }
@@ -1842,7 +1842,7 @@ function removePurchaseMenu()
 //
 function activeUser()
 {
-  return EchofonCommon.pref().getCharPref("activeUserId");
+  return EchofonCommon.pref().getCharPref("activeUserIdStr");
 }
 
 function activeUserName()
