@@ -1,8 +1,8 @@
-# echofon-firefox-unofficial
+# Echofon Unofficial
 
-Unofficial support &amp; fixes for Echofon for Firefox
+Maintained version of Echofon: full featured, super clean Twitter app for Firefox.
 
-This is based of [JaHIY](https://github.com/JaHIY) [changes](https://gist.github.com/JaHIY/4483939) and a follow up to fix support for Firefox 36 and ongoing.
+This is based on JaHIY [JaHIY](https://github.com/JaHIY) [changes](https://gist.github.com/JaHIY/4483939) and a follow up to fix support for Firefox 36 and ongoing.
 
 Use build.sh to zip Echofon.jar and produce the xpi.
 
