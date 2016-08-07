@@ -46,17 +46,17 @@ Echofon.prototype = {
     if (this._initialized) return;
     EchofonUtils.get_version();
     this.migrateV1toV2();
+    this.migrateV2Next();
     if (this._pref.getBoolPref("clearDB")) {
       this.clearDatabase();
     }
 
     this.loadConfiguration();
 
-    var user_id = EchofonUtils.pref().getCharPref('activeUserIdStr');
-
+    var user_id = this._pref.getCharPref('activeUserIdStr');
     if (!EchofonAccountManager.instance().get(user_id)) {
-      EchofonUtils.pref().setCharPref('activeUserIdStr', '');
-      EchofonUtils.pref().setBoolPref('login', false);
+      this._pref.setCharPref('activeUserIdStr', '');
+      this._pref.setBoolPref('login', false);
     }
 
     if (EchofonUtils.isXULRunner()) {
@@ -1039,6 +1039,16 @@ Echofon.prototype = {
     catch (e) {
       this.log("Can't remove user's password: " + e.message);
     }
+  },
+
+  migrateV2Next: function() {
+    // activeUserId to activeUserIdStr (GitHub PR #52)
+    try {
+      var activeUserId = this._pref.getIntPref("activeUserId");
+      this._pref.setCharPref("activeUserIdStr", activeUserId > 0 ? activeUserId.toString() : '');
+      this._pref.deleteBranch("activeUserId");
+    }
+    catch (e) {}
   },
 
   clearDatabase: function() {
