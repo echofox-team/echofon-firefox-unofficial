@@ -998,7 +998,6 @@ Echofon.prototype = {
       var accounts = {};
       var synckey = {};
       if (tokens) {
-
         tokens = JSON.parse(tokens);
         try {
           sync = JSON.parse(this._pref.getCharPref("synckey"));
@@ -1031,7 +1030,6 @@ Echofon.prototype = {
     }
 
     try {
-      var host = "chrome://echofon";
       var loginMgr = Cc["@mozilla.org/login-manager;1"].getService(Ci.nsILoginManager);
       var logins = loginMgr.findLogins({}, "chrome://echofon", "", null);
       for (var i = 0; i < logins.length; ++i) {
@@ -1039,7 +1037,7 @@ Echofon.prototype = {
       }
     }
     catch (e) {
-      this.log("Can't remove user's password: " + e.message);
+      EchofonUtils.log("Can't remove user's password: " + e.message);
     }
   },
 
