@@ -438,14 +438,11 @@ function onresizeWindow()
   var w = window.innerWidth - 16;
   var elems = contentBox.container.getElementsByClassName('echofon-status-body');
 
-  for (var i in elems) {
+  for (var i = 0; i < elems.length; i++) {
     var e = elems[i];
-    try {
-      if (e.parentNode && e.parentNode.containerWidth != w) {
-        e.parentNode.containerWidth = w;
-        e.style.width = (w - e.parentNode.padding) + "px";
-      }
-    }catch (err) {}
+    if (e.parentNode) {
+      e.style.width = (w - e.parentNode.padding) + "px";
+    }
   }
   var ad = $('echofon-ad');
   if (ad) {

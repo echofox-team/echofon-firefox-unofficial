@@ -816,14 +816,13 @@ echofon-dm-thread {
 
 .echofon-status-message {
   margin: 0px;
-  word-wrap: break-word !important;
 }
 
 .echofon-status-body {
   margin: 0px;
   padding: 0px;
   font-style: normal;
-  word-wrap: break-word !important;
+  word-wrap: break-word;
   color: #000;
 }
 
@@ -893,7 +892,7 @@ profile-tooltip-text {
   padding: 0px;
   overflow: hidden;
   display: -moz-inline-box;
-  word-wrap: break-word !important;
+  word-wrap: break-word;
 }
 
 echofon-status-tagline,
@@ -902,7 +901,7 @@ echofon-status-retweet-status {
   margin: 0px;
   margin-top: 3px;
   display: inline-block;
-  word-wrap: break-word !important;
+  word-wrap: break-word;
   font-style: normal;
 }
 
