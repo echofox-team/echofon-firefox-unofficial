@@ -574,7 +574,7 @@ Echofon.prototype = {
   retweet: function(msg) {
     var account = EchofonAccountManager.instance().get();
     var req = new TwitterClient(account, this);
-    req.post("statuses.retweet." + msg.id, {'trim_user': true}, "statuses_retweet");
+    req.post("statuses.retweet." + msg.id, {'trim_user': false}, "statuses_retweet");
         //EchofonGA.instance().trackEvent("post", "retweet");
   },
 
