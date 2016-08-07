@@ -10,7 +10,7 @@ const {classes:Cc, interfaces:Ci, utils:Cu} = Components;
 const CONNECTION_ESTABLISH_TIMEOUT = 25 * 1000;
 const USER_STREAMS_TIMEOUT = 90 * 1000;
 
-Components.utils.import("resource://echofon/EchofonUtils.jsm");
+Components.utils.import("resource://gre/modules/Services.jsm");
 
 function UserStreams() {
   this.wrappedJSObject = true;
@@ -24,6 +24,7 @@ function UserStreams() {
   observer.addObserver(this, "http-on-examine-response", false);
   observer.addObserver(this, "quit-application-granted", false);
   Components.utils.import("resource://echofon/xpcerror.jsm");
+  Components.utils.import("resource://echofon/EchofonUtils.jsm");
 }
 
 UserStreams.prototype = {
@@ -38,7 +39,8 @@ UserStreams.prototype = {
     var URI = ioService.newURI(url, null, null);
     this.URI = URI;
 
-    this.channel = ioService.newChannelFromURI(URI);
+    this.channel = ioService.newChannelFromURI2(URI, null, Services.scriptSecurityManager.getSystemPrincipal(), null,
+      Components.interfaces.nsILoadInfo.SEC_NORMAL, Components.interfaces.nsIContentPolicy.TYPE_OTHER);
     this.httpChannel().redirectionLimit = 2;
   },
 

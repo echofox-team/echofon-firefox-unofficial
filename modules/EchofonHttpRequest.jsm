@@ -8,6 +8,8 @@ var EXPORTED_SYMBOLS = ["EchofonHttpRequest"];
 
 const {classes:Cc, interfaces:Ci} = Components;
 
+Components.utils.import("resource://gre/modules/Services.jsm");
+
 //
 // Utility functions
 //
@@ -83,7 +85,8 @@ EchofonHttpRequest.prototype = {
     var URI = ioService.newURI(url, null, null);
     this.URI = URI;
 
-    this.channel = ioService.newChannelFromURI(URI);
+    this.channel = ioService.newChannelFromURI2(URI, null, Services.scriptSecurityManager.getSystemPrincipal(), null,
+      Components.interfaces.nsILoadInfo.SEC_NORMAL, Components.interfaces.nsIContentPolicy.TYPE_OTHER);
   },
 
   setRedirectLimitation: function(num) {
