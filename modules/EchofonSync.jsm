@@ -354,17 +354,6 @@ EchofonSync.prototype = {
 
   addSignature: function(data) {
     return EchofonSign.getSignatureForSyncServer(data);
-
-    try {
-      var com = Cc['@naan.net/twitterfox-sign;1'].getService(Ci.nsITwitterFoxSign);
-      var sig = com.sign(data);
-    }
-    catch (e) {
-      EchofonUtils.log("Can't load sync module. This platform is not supported.");
-      return null;
-    }
-    var toHexString = function(charCode) { return ("0" + charCode.toString(16)).slice(-2); };
-    return sig.map((e) => toHexString(sig.charCodeAt(i))).join("");
   },
 
   onLoadSync: function(req, user, callback) {
