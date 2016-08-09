@@ -47,7 +47,7 @@ EchofonAccountManager.prototype = {
       acct = this.accounts[user_id];
     }
     else {
-      acct = this.accounts[this.pref.getIntPref("activeUserId")];
+      acct = this.accounts[this.pref.getCharPref("activeUserIdStr")];
     }
     if (acct) {
       this.addMethods(acct);

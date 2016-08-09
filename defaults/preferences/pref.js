@@ -20,7 +20,7 @@ pref("extensions.twitternotifier.accounts", "{}");
 pref("extensions.twitternotifier.checkFollow", 0);
 pref("extensions.twitternotifier.applicationMode", "window");
 pref("extensions.twitternotifier.splashScreen", true);
-pref("extensions.twitternotifier.activeUserId", 0);
+pref("extensions.twitternotifier.activeUserIdStr", '');
 pref("extensions.twitternotifier.fontSize", 12);
 pref("extensions.twitternotifier.fontFace", "");
 pref("extensions.twitternotifier.toolbarButtonAdded", false);

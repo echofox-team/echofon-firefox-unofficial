@@ -13,7 +13,7 @@ function onload() {
   if (EchofonCommon.isXULRunner()) {
     $('form').setAttribute('noeula', true);
   }
-  if (EchofonCommon.pref().getIntPref("activeUserId") > 0) {
+  if (EchofonCommon.pref().getCharPref("activeUserIdStr") != '') {
     $('email-subscribe').style.display = 'block';
     $('authorize-form').style.display = 'none';
     $('email').focus();
@@ -63,8 +63,8 @@ function onErrorRequestToken(req)
 
 function onFinishOAuth(user_id)
 {
-  if (EchofonCommon.pref().getIntPref("activeUserId") == 0) {
-    EchofonCommon.pref().setIntPref("activeUserId", user_id);
+  if (EchofonCommon.pref().getCharPref("activeUserIdStr") == '') {
+    EchofonCommon.pref().setCharPref("activeUserIdStr", user_id);
   }
 
   EchofonCommon.pref().setBoolPref("login", true);
@@ -91,7 +91,7 @@ function submitEmail()
   $('email_field').style.display = 'none';
   $('subscribe_button').style.display = 'none';
 
-  var user_id = EchofonCommon.pref().getIntPref("activeUserId");
+  var user_id = EchofonCommon.pref().getCharPref("activeUserIdStr");
 
   var app = 'Echofon Firefox';
   if (EchofonCommon.isXULRunner()) {

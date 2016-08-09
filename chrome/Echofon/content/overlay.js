@@ -371,7 +371,7 @@ var EchofonOverlay = {
     // do nothing if window is minimized
     if (window.windowState == Components.interfaces.nsIDOMChromeWindow.STATE_MINIMIZED) return;
 
-    var user_id = EchofonCommon.pref().getIntPref("activeUserId");
+    var user_id = EchofonCommon.pref().getCharPref("activeUserIdStr");
     if (user_id != params.user_id) {
       return;
     }
@@ -599,15 +599,15 @@ var EchofonOverlay = {
 
   toggleWindow: function(from_toolbar) {
 
-    if (EchofonCommon.pref().getBoolPref("login") == false || EchofonCommon.pref().getIntPref("activeUserId") == 0) {
+    if (EchofonCommon.pref().getBoolPref("login") == false || EchofonCommon.pref().getCharPref("activeUserIdStr") == '') {
       var accounts = EchofonCommon.pref().getCharPref("accounts");
-      if (EchofonCommon.pref().getIntPref("activeUserId") == 0 && accounts == "{}") {
+      if (EchofonCommon.pref().getCharPref("activeUserIdStr") == '' && accounts == "{}") {
           EchofonCommon.openPreferences();
       return;
       }
       EchofonCommon.pref().setBoolPref("login", true);
-      if (EchofonCommon.pref().getIntPref("activeUserId") == 0) {
-        EchofonCommon.pref().setIntPref("activeUserId", EchofonAccountManager.instance().getPrimaryAccount());
+      if (EchofonCommon.pref().getCharPref("activeUserIdStr") == '') {
+        EchofonCommon.pref().setCharPref("activeUserIdStr", EchofonAccountManager.instance().getPrimaryAccount());
       }
       EchofonCommon.notify("initSession");
     }
@@ -714,7 +714,7 @@ var EchofonOverlay = {
     }
 
     let accounts = EchofonAccountManager.instance().allAccounts();
-    let user_id = EchofonCommon.pref().getIntPref("activeUserId");
+    let user_id = EchofonCommon.pref().getCharPref("activeUserIdStr");
     let isLogin = EchofonCommon.pref().getBoolPref("login");
 
     for (let i = 0; i < menu.childNodes.length; ++i) {
@@ -744,7 +744,7 @@ var EchofonOverlay = {
         //      item.setAttribute("image", 'http://img.tweetimag.es/i/' + user.screen_name + '_b');
         //      item.className = "menuitem-iconic";
 
-        if (user_id == 0) {
+        if (user_id == '') {
           user_id = user;
         }
 
@@ -840,7 +840,7 @@ var EchofonOverlay = {
 
     this.showMessage(obj.message);
 
-    let user_id = EchofonCommon.pref().getIntPref("activeUserId");
+    let user_id = EchofonCommon.pref().getCharPref("activeUserIdStr");
     let account = EchofonAccountManager.instance().get(user_id);
     if (!account.needToAlertOAuthError()) return;
 
@@ -868,8 +868,8 @@ var EchofonOverlay = {
 
   onFinishOAuth: function(user_id) {
     var account = EchofonAccountManager.instance().get(user_id);
-    if (EchofonCommon.pref().getIntPref("activeUserId") == 0) {
-      EchofonCommon.pref().setIntPref("activeUserId", account.user_id);
+    if (EchofonCommon.pref().getCharPref("activeUserIdStr")) {
+      EchofonCommon.pref().setCharPref("activeUserIdStr", account.user_id);
     }
     EchofonCommon.reloadTimeline();
     this._askedToReAuth = false;
@@ -949,13 +949,13 @@ var EchofonOverlay = {
 (function() {
 
   let obj = this;
-    
+
   window.addEventListener("load",       function(e) { obj.load(e);      }, false);
   window.addEventListener("unload",     function(e) { obj.unload(e);    }, false);
   window.addEventListener("resize",     function(e) { obj.resize(e);    }, false);
   window.addEventListener("activate",   function(e) { obj.activate(e);  }, false);
   window.addEventListener("deactivate", function(e) { obj.deactivate(e);}, false);
-    
+
   if (navigator.platform.match("Linux")) {
     window.addEventListener("focus",  function(e) { obj.focus(e);  }, true);
     window.addEventListener("blur",   function(e) { obj.blur(e);   }, true);
@@ -964,4 +964,3 @@ var EchofonOverlay = {
 
 
 }
-

@@ -46,17 +46,17 @@ Echofon.prototype = {
     if (this._initialized) return;
     EchofonUtils.get_version();
     this.migrateV1toV2();
+    this.migrateV2Next();
     if (this._pref.getBoolPref("clearDB")) {
       this.clearDatabase();
     }
 
     this.loadConfiguration();
 
-    var user_id = EchofonUtils.pref().getIntPref('activeUserId');
-
+    var user_id = this._pref.getCharPref('activeUserIdStr');
     if (!EchofonAccountManager.instance().get(user_id)) {
-      EchofonUtils.pref().setIntPref('activeUserId', 0);
-      EchofonUtils.pref().setBoolPref('login', false);
+      this._pref.setCharPref('activeUserIdStr', '');
+      this._pref.setBoolPref('login', false);
     }
 
     if (EchofonUtils.isXULRunner()) {
@@ -98,8 +98,6 @@ Echofon.prototype = {
       var unread = this.timelineLoader.timelines.getUnreadCount();
       EchofonUtils.notifyObservers("updateUnreadCount", unread);
     }
-
-    var user_id = EchofonUtils.pref().getIntPref('activeUserId');
   },
 
   getAd: function(info) {
@@ -792,7 +790,7 @@ Echofon.prototype = {
     // reset session
     this.reset();
 
-    this._pref.setIntPref("activeUserId", account.user_id);
+    this._pref.setCharPref("activeUserIdStr", account.user_id);
     this.initSession();
 
     var user = EchofonModel.User.findById(account.user_id, account.user_id);
@@ -826,7 +824,7 @@ Echofon.prototype = {
     }
     catch (e) {}
     if (!EchofonUtils.isXULRunner()) {
-      this._pref.setIntPref("activeUserId", 0);
+      this._pref.setCharPref("activeUserIdStr", '');
       this._pref.setBoolPref("login", false);
     }
     EchofonUtils.notifyObservers("logout");
@@ -1006,7 +1004,7 @@ Echofon.prototype = {
         var current = this._pref.getCharPref("currentUser");
 
         if (tokens[current.toLowerCase()]) {
-          this._pref.setIntPref("activeUserId", tokens[current].user_id);
+          this._pref.setCharPref("activeUserIdStr", tokens[current].user_id);
         }
 
         for (var i in tokens) {
@@ -1039,6 +1037,16 @@ Echofon.prototype = {
     catch (e) {
       EchofonUtils.log("Can't remove user's password: " + e.message);
     }
+  },
+
+  migrateV2Next: function() {
+    // activeUserId to activeUserIdStr (GitHub PR #52)
+    try {
+      var activeUserId = this._pref.getIntPref("activeUserId");
+      this._pref.setCharPref("activeUserIdStr", activeUserId > 0 ? activeUserId.toString() : '');
+      this._pref.deleteBranch("activeUserId");
+    }
+    catch (e) {}
   },
 
   clearDatabase: function() {
