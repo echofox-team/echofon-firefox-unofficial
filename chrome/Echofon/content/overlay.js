@@ -868,7 +868,7 @@ var EchofonOverlay = {
 
   onFinishOAuth: function(user_id) {
     var account = EchofonAccountManager.instance().get(user_id);
-    if (EchofonCommon.pref().getCharPref("activeUserIdStr") == 0) {
+    if (EchofonCommon.pref().getCharPref("activeUserIdStr")) {
       EchofonCommon.pref().setCharPref("activeUserIdStr", account.user_id);
     }
     EchofonCommon.reloadTimeline();
