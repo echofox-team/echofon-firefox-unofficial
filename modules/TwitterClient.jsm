@@ -425,7 +425,7 @@ TwitterClient.prototype = {
     // Recover request if timestamp is skewed
     //
     if (resp && resp.error.match('Timestamp out of bounds')) {
-      if (EchofonUtils.hasServerTimestamp() == false) {
+      if (!EchofonUtils.hasServerTimestamp()) {
         EchofonUtils.log("Set timestamp by server");
         var localTimestamp = Math.ceil((new Date()).getTime() / 1000);
         var serverTimestamp = Math.ceil((new Date(req.getResponseHeader("Date"))).getTime() / 1000);

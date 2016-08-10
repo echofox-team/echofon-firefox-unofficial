@@ -91,7 +91,7 @@ const EchofonUtils = {
   },
 
   isActiveUser: function(token) {
-    return (EchofonUtils.pref().getCharPref("activeUserIdStr") == token.user_id) ? true : false;
+    return EchofonUtils.pref().getCharPref("activeUserIdStr") == token.user_id;
   },
 
   setDelayTask: function(delay, target, func, data, type) {
@@ -109,7 +109,7 @@ const EchofonUtils = {
     if (!this.appInfo) {
       this.appInfo = Cc["@mozilla.org/xre/app-info;1"].getService(Ci.nsIXULAppInfo);
     }
-    return (this.appInfo.name == "Echofon") ? true : false;
+    return this.appInfo.name == "Echofon";
   },
 
   get_version: function() {

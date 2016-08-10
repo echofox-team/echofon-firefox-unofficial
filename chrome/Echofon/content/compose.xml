@@ -110,10 +110,10 @@
         else if (event.keyCode == event.DOM_VK_TAB) {
           if (!event.ctrlKey) {
             try {
-                nextTab(event.shiftKey ? false : true);
+                nextTab(!event.shiftKey);
             }
             catch (e) {
-                EchofonCommon.notifyObservers("nextTab", event.shiftKey ? false : true);
+                EchofonCommon.notifyObservers("nextTab", !event.shiftKey);
             }
             event.preventDefault();
             event.stopPropagation();
@@ -263,7 +263,7 @@
           length -= diff;
           var count = this.maxCharCount - length;
           this.setAttribute('value', count);
-          this.setAttribute('charOver', (count < 0) ? true : false);
+          this.setAttribute('charOver', count < 0);
           if (length == 0) {
             this.inReplyTo = null;
           }
@@ -651,7 +651,7 @@
       <property name="inReplyTo">
         <setter>
           this._inReplyTo = val;
-          var c = document.getAnonymousElementByAttribute(this, 'anonid', 'inReplyToField').hidden = val ? false : true;
+          var c = document.getAnonymousElementByAttribute(this, 'anonid', 'inReplyToField').hidden = !val;
         </setter>
         <getter>
           return this._inReplyTo;

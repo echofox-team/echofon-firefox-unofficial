@@ -60,7 +60,7 @@ Echofon.prototype = {
     }
 
     if (EchofonUtils.isXULRunner()) {
-      this._pref.setBoolPref("login", EchofonAccountManager.instance().numAccounts() == 0 ? false : true);
+      this._pref.setBoolPref("login", EchofonAccountManager.instance().numAccounts() != 0);
     }
 
     var runtime = Cc["@mozilla.org/xre/app-info;1"].getService(Ci.nsIXULRuntime);

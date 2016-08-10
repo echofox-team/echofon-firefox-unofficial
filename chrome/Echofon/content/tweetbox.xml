@@ -472,7 +472,7 @@
         document.getAnonymousElementByAttribute(this, "anonid", "usericon").user = this.thread.user;
         this.setAttribute("screen_name", this.thread.user.screen_name);
         this.setAttribute("text", this.thread.text);
-        this.setAttribute("timestamp", EchofonCommon.getLocalTimeForDate(this.thread.updated_at, this.appMode == 'window' ? false : true));
+        this.setAttribute("timestamp", EchofonCommon.getLocalTimeForDate(this.thread.updated_at, this.appMode != 'window'));
         if (this.thread.unread) {
           this.setAttribute("unread", this.thread.unread);
         }
@@ -484,7 +484,7 @@
 
       <method name="updateTimestamp">
         <body>
-          this.setAttribute("timestamp", EchofonCommon.getLocalTimeForDate(this.thread.updated_at, this.appMode == 'window' ? false : true));
+          this.setAttribute("timestamp", EchofonCommon.getLocalTimeForDate(this.thread.updated_at, this.appMode != 'window'));
         </body>
       </method>
 
@@ -860,12 +860,12 @@
         <setter>
           var spinner = document.getAnonymousElementByAttribute(this, "anonid", "spinner");
           var dot = document.getAnonymousElementByAttribute(this, "anonid", "dot");
-          spinner.hidden = (val) ? false : true;
-          dot.hidden = (val) ? true : false;
+          spinner.hidden = !val;
+          dot.hidden = !!val;
         </setter>
         <getter>
           var spinner = document.getAnonymousElementByAttribute(this, "anonid", "spinner");
-          return spinner.hidden ? false : true;
+          return !spinner.hidden;
         </getter>
       </property>
     </implementation>

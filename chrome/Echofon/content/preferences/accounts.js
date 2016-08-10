@@ -125,7 +125,7 @@ var gAccountsPane = {
 
     var list = EchofonCommon.$("accounts");
     var buttons = ["sync-account-button", "mute-setting-button", "remove-account-button"];
-    var flag = (list.itemCount && list.selectedIndex >= 0) ? false : true;
+    var flag = !list.itemCount || list.selectedIndex < 0;
 
     for (var i in buttons) {
     EchofonCommon.$(buttons[i]).disabled = flag;

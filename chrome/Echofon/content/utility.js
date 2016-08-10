@@ -52,7 +52,7 @@ var EchofonCommon = {
     if (!this.appInfo) {
       this.appInfo = this.Cc["@mozilla.org/xre/app-info;1"].getService(this.Ci.nsIXULAppInfo);
     }
-    return (this.appInfo.name == "Echofon") ? true : false;
+    return this.appInfo.name == "Echofon";
   },
 
   geckoGetRv: function() {
@@ -76,7 +76,7 @@ var EchofonCommon = {
     if (!this.FFVersion) {
       this.FFVersion = this.geckoGetRv();
     }
-    return (this.FFVersion >= 2.0) ? true : false;
+    return this.FFVersion >= 2.0;
   },
 
   twitterURL: function(path) {
@@ -185,7 +185,7 @@ var EchofonCommon = {
         info.appendChild(topTweet);
       }
 
-      var label = EchofonCommon.getLocalTimeForDate(msg.created_at, (elem.appMode == 'window' || msg.type == 'user-timeline') ? false : true);
+      var label = EchofonCommon.getLocalTimeForDate(msg.created_at, elem.appMode != 'window' && msg.type != 'user-timeline');
       var time = EchofonCommon.createAnchorText(EchofonCommon.twitterURL(user.screen_name + "/statuses/" + permalink),
                                                 label,
                                                 "link",

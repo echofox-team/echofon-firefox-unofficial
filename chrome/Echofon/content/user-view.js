@@ -549,8 +549,8 @@ function updateMenu(source)
     $('user-action-menu').setAttribute("menu", "userActionMenu");
   }
 
-  $('send-dm').disabled = source.can_dm ? false : true;
-  $('report-spam-menu').disabled = source.marked_spam ? true : false;
+  $('send-dm').disabled = !source.can_dm;
+  $('report-spam-menu').disabled = !!source.marked_spam;
   $('block-menu').label = EchofonCommon.getFormattedString((source.blocking) ? 'unblockUser' : 'blockUser', [gUser.screen_name]);
   if (source.following) {
     $('no-retweet').hidden = false;
@@ -566,7 +566,7 @@ function updateMenu(source)
 
   if (!gUser.follow_request_sent) {
     $('follow_button').className = source.following ? "echobutton following" : "echobutton";
-    if (gUser.protected && source.following == false) {
+    if (gUser.protected && !source.following) {
       $('follow_button').label = EchofonCommon.getString("sendFollowRequest");
     }
     else {

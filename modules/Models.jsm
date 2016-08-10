@@ -84,7 +84,7 @@ EchofonModel.isInitialized = function() {
   else {
     try {
       Components.utils.import("resource://gre/modules/AddonManager.jsm");
-      return gDefaultPath ? true : false;
+      return !!gDefaultPath;
     }
     catch (e) {
       return true;
@@ -261,7 +261,7 @@ EchofonModel.User.prototype = {
     stmt.params['id'] = this.id;
     stmt.params['time'] = this.updated_at;
     if (stmt.executeStep()) {
-      return (stmt.getInt32(0)) ? true : false;
+      return !!stmt.getInt32(0);
     }
     return true;
   },
@@ -295,7 +295,7 @@ EchofonModel.User.prototype = {
   isFollowing: function() {
     var stmt = this.db.prepare("SELECT id FROM following WHERE id = ?");
     stmt.bindStringParameter(0, this.id);
-    return stmt.executeStep() ? true : false;
+    return !!stmt.executeStep();
   },
 
   toString: function() {
@@ -345,7 +345,7 @@ EchofonModel.User.findByScreenName = function(name, recipient_id) {
 EchofonModel.User.isFollowing = function(user_id, dbuid) {
   var stmt =EchofonModel.DBM.db(dbuid).prepare("SELECT id FROM following WHERE id = ?");
   stmt.bindStringParameter(0, user_id);
-  return stmt.executeStep() ? true : false;
+  return !!stmt.executeStep();
 }
 
 EchofonModel.User.follow = function(user_id, dbuid) {
@@ -591,7 +591,7 @@ EchofonModel.Status.exist = function(db_uid, type, status_id, retweeted_status_i
   if (retweeted_status_id) {
     var rtcheck = db.prepare("SELECT id FROM statuses WHERE id = ?1 OR retweeted_status_id = ?1");
     rtcheck.bindStringParameter(0, retweeted_status_id);
-    return (rtcheck.executeStep())? true : false;
+    return !!rtcheck.executeStep();
   }
   return false;
 }
@@ -820,7 +820,7 @@ EchofonModel.DirectMessage.prototype = {
     stmt.bindInt32Parameter(1, this.threadId());
 
     if (stmt.executeStep()) {
-      return stmt.getInt32(0) ? true : false;
+      return !!stmt.getInt32(0);
     }
     return true;
   },
@@ -835,7 +835,7 @@ EchofonModel.DirectMessage.exist = function(db_uid, id) {
   var stmt = db.prepare("SELECT id FROM direct_messages WHERE id = ?1");
   stmt.bindStringParameter(0, id);
   try {
-    return stmt.executeStep() ? true : false;
+    return !!stmt.executeStep();
   }
   catch (e) {}
   return false;
@@ -1230,7 +1230,7 @@ EchofonModel.List.prototype = {
   },
 
   isOwnList: function() {
-    return (this.user.id == this.recipient_id) ? true : false;
+    return this.user.id == this.recipient_id;
   }
 };
 

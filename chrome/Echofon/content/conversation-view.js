@@ -108,7 +108,7 @@ function onScrollTweetBox(event)
   if (y.value <= 0) {
     var lm = $('echofon-load-more');
     if (lm.noMoreTweet) return;
-    if (lm.spinner == false) {
+    if (!lm.spinner) {
       lm.spinner = true;
       Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer).
         initWithCallback({notify: function() {loadMore()}}, 300, Components.interfaces.nsITimer.TYPE_ONE_SHOT);

@@ -87,7 +87,7 @@ EchofonAccountManager.prototype = {
       val = this['oauth_error_count'];
       if (!val) val = 0;
       ++val;
-      var ret = (val >= 2) ? true : false;
+      var ret = val >= 2;
       this['oauth_error_count'] = val;
       Components.utils.reportError("Failed to OAuth (retry count = " + val + ")");
       this.save();
