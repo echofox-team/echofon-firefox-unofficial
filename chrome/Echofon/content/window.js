@@ -1204,7 +1204,7 @@ function onListSelected(menuitem)
 
 function eventDidReceive(event)
 {
-  if (event.source.id == this.activeUser()) {
+  if (this.isActiveUser(event.source.id)) {
     // The event made by owner (favorite, retweet...)
     if (event.event == 'favorite' || event.event == 'unfavorite') {
       EchofonUtils.notifyObservers("updateFavorite", {id:event.target_object.id_str, state:event.event == 'favorite'});
@@ -1540,7 +1540,7 @@ function mute(val, type)
 //
 function updateSyncData(data)
 {
-  if (data.user_id != this.activeUser()) return;
+  if (!this.isActiveUser(data.user_id)) return;
 
   var sync = data.data['sync'];
 
