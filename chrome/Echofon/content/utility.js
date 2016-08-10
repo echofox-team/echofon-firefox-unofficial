@@ -1001,8 +1001,8 @@ var EchofonCommon = {
   Cc: this.Components.classes,
   Ci: this.Components.interfaces
 
-}
 };
+}
 
 function echofonObserver()
 {

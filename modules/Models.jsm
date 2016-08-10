@@ -70,11 +70,11 @@ EchofonModel.init = function() {
       EchofonUtils.notifyComponents("initSession");
     }
   }
-}
+};
 
 EchofonModel.libraryPath = function() {
   return gPlatformPath;
-}
+};
 
 EchofonModel.isInitialized = function() {
   var appInfo = Cc["@mozilla.org/xre/app-info;1"].getService(Ci.nsIXULAppInfo);
@@ -90,7 +90,7 @@ EchofonModel.isInitialized = function() {
       return true;
     }
   }
-}
+};
 
 EchofonModel.DBM = {
   _db: {},
@@ -156,7 +156,7 @@ EchofonModel.DBM = {
     if (file.exists()) {
       file.remove(false);
     }
-    var newDB = new EchofonDatabase()
+    var newDB = new EchofonDatabase();
     newDB.openTweetCache(gDefaultPath, recipient_id);
     return newDB;
   },
@@ -204,7 +204,7 @@ EchofonModel.DBM = {
     }
     this._db = {};
   }
-}
+};
 
 /////////////////////////////////////////////////////////////////////////
 //
@@ -238,7 +238,7 @@ EchofonModel.User = function(json, recipient_id, stmt)
       this[col] = stmt.row[col];
     }
   }
-}
+};
 
 EchofonModel.User.prototype = {
   insertIntoDB: function(force) {
@@ -301,12 +301,12 @@ EchofonModel.User.prototype = {
   toString: function() {
     return "User: " + this.screen_name + " - " + this.id;
   }
-}
+};
 
 EchofonModel.User.statementForUpdate = function(db) {
   var values = USER_COLUMNS.map(function(word) {return ":"+word} ).join(",");
   return db.prepare("REPLACE INTO users VALUES (" + values + ")");
-}
+};
 
 EchofonModel.User.initWithRow = function(row, db_uid, startIndex) {
   var user = new EchofonModel.User(null, db_uid);
@@ -314,7 +314,7 @@ EchofonModel.User.initWithRow = function(row, db_uid, startIndex) {
     user[col] = row.getResultByIndex(startIndex++);
   }
   return user;
-}
+};
 
 EchofonModel.User.findById = function(id, recipient_id) {
   let cols = USER_COLUMNS.join(",");
@@ -327,7 +327,7 @@ EchofonModel.User.findById = function(id, recipient_id) {
   else {
     return null;
   }
-}
+};
 
 EchofonModel.User.findByScreenName = function(name, recipient_id) {
   let cols = USER_COLUMNS.join(",");
@@ -340,27 +340,27 @@ EchofonModel.User.findByScreenName = function(name, recipient_id) {
   else {
     return null;
   }
-}
+};
 
 EchofonModel.User.isFollowing = function(user_id, dbuid) {
   var stmt =EchofonModel.DBM.db(dbuid).prepare("SELECT id FROM following WHERE id = ?");
   stmt.bindStringParameter(0, user_id);
   return !!stmt.executeStep();
-}
+};
 
 EchofonModel.User.follow = function(user_id, dbuid) {
   var db =EchofonModel.DBM.db(dbuid);
   var stmt = db.prepare("REPLACE INTO following VALUES (?)");
   stmt.bindInt32Parameter(0, user_id);
   stmt.executeAsync();
-}
+};
 
 EchofonModel.User.unfollow = function(user_id, dbuid) {
   var db =EchofonModel.DBM.db(dbuid);
   var stmt = db.prepare("DELETE FROM following WHERE id = ?");
   stmt.bindInt32Parameter(0, user_id);
   stmt.executeAsync();
-}
+};
 
 EchofonModel.User.updateFollowing = function(db, friends) {
   var delete_stmt = db.prepare("DELETE FROM following");
@@ -374,7 +374,7 @@ EchofonModel.User.updateFollowing = function(db, friends) {
     stmts.push(insert_stmt);
   }
   db.executeAsync(stmts, stmts.length);
-}
+};
 
 //
 //
@@ -450,7 +450,7 @@ EchofonModel.Status = function(json, type, recipient_id)
   this.db =EchofonModel.DBM.db(recipient_id);
 
   this.updateAttributes();
-}
+};
 
 EchofonModel.Status.prototype = {
   insertIntoDB: function() {
@@ -533,7 +533,7 @@ EchofonModel.Status.statementForUpdate = function(db)
 {
   var values = STATUS_COLUMNS.map(function(word) {return ":"+word} ).join(",");
   return db.prepare("REPLACE INTO statuses VALUES (" + values + ")");
-}
+};
 
 EchofonModel.Status.statementForUpdateTimeline = function(db, type)
 {
@@ -543,7 +543,7 @@ EchofonModel.Status.statementForUpdateTimeline = function(db, type)
   else {
     return null;
   }
-}
+};
 
 EchofonModel.Status.initWithStatement = function(stmt, type, recipient_id)
 {
@@ -559,7 +559,7 @@ EchofonModel.Status.initWithStatement = function(stmt, type, recipient_id)
   status.updateAttributes();
 
   return status;
-}
+};
 
 EchofonModel.Status.initWithRow = function(row, type, recipient_id)
 {
@@ -578,7 +578,7 @@ EchofonModel.Status.initWithRow = function(row, type, recipient_id)
   status.updateAttributes();
 
   return status;
-}
+};
 
 EchofonModel.Status.exist = function(db_uid, type, status_id, retweeted_status_id) {
   var db = EchofonModel.DBM.db(db_uid);
@@ -594,7 +594,7 @@ EchofonModel.Status.exist = function(db_uid, type, status_id, retweeted_status_i
     return !!rtcheck.executeStep();
   }
   return false;
-}
+};
 
 EchofonModel.Status.restoreAsync = function(recipient_id, type, count, callback)
 {
@@ -604,7 +604,7 @@ EchofonModel.Status.restoreAsync = function(recipient_id, type, count, callback)
   if (!count) count = 20;
   stmt.bindInt32Parameter(0, count);
   stmt.executeAsync(callback);
-}
+};
 
 EchofonModel.Status.loadOlderTweets = function(recipient_id, type, count, max_id) {
   var results = [];
@@ -618,7 +618,7 @@ EchofonModel.Status.loadOlderTweets = function(recipient_id, type, count, max_id
     results.push(new EchofonModel.Status.initWithStatement(stmt, type, recipient_id));
   }
   return results;
-}
+};
 
 EchofonModel.Status.findById = function(status_id, recipient_id) {
   var stmt =EchofonModel.DBM.db(recipient_id).prepare("SELECT * FROM statuses WHERE statuses.id = ?1");
@@ -634,7 +634,7 @@ EchofonModel.Status.findById = function(status_id, recipient_id) {
   }
 
   return status;
-}
+};
 
 EchofonModel.Status.findByRetweetedStatusId = function(status_id, recipient_id) {
   var stmt =EchofonModel.DBM.db(recipient_id).prepare("SELECT * FROM statuses WHERE statuses.retweeted_status_id = ?1");
@@ -650,7 +650,7 @@ EchofonModel.Status.findByRetweetedStatusId = function(status_id, recipient_id) 
   }
 
   return status;
-}
+};
 
 EchofonModel.Status.toggleFavorite = function(recipient_id, status_id, favorited) {
   var db =EchofonModel.DBM.db(recipient_id);
@@ -658,7 +658,7 @@ EchofonModel.Status.toggleFavorite = function(recipient_id, status_id, favorited
   stmt.bindInt32Parameter(0, favorited);
   stmt.bindStringParameter(1, status_id);
   stmt.executeAsync();
-}
+};
 
 EchofonModel.Status.destroy = function(status_id, recipient_id) {
   var db =EchofonModel.DBM.db(recipient_id);
@@ -669,7 +669,7 @@ EchofonModel.Status.destroy = function(status_id, recipient_id) {
   stmt1.bindStringParameter(0, status_id);
   stmt2.bindStringParameter(0, status_id);
   db.executeAsync([stmt0, stmt1, stmt2], 3);
-}
+};
 
 EchofonModel.Status.getLatestId = function(recipient_id, type) {
   var db =EchofonModel.DBM.db(recipient_id);
@@ -678,7 +678,6 @@ EchofonModel.Status.getLatestId = function(recipient_id, type) {
   var sql = "SELECT id FROM " + type + " ORDER BY id DESC LIMIT 1";
   var stmt = db.prepare(sql);
 
-  var ret = 0;
   try {
     if (stmt.executeStep()) {
       return stmt.getString(0);
@@ -688,14 +687,14 @@ EchofonModel.Status.getLatestId = function(recipient_id, type) {
     db.logError("Failed to select " + type + " id");
   }
   return 0;
-}
+};
 
 EchofonModel.Status.blockUser = function(db_uid, user_id) {
   var db =EchofonModel.DBM.db(db_uid);
   var stmt = db.prepare("DELETE FROM statuses WHERE id = ?1");
   stmt.bindInt32Parameter(0, user_id);
   stmt.executeAsync();
-}
+};
 
 /////////////////////////////////////////////////////////////////////////
 //
@@ -716,7 +715,7 @@ EchofonModel.StatusWriter = function(db, type)
   this.length = 0;
 
   this.users = {};
-}
+};
 
 EchofonModel.StatusWriter.prototype = {
   addTweet: function(tweet) {
@@ -757,7 +756,7 @@ EchofonModel.StatusWriter.prototype = {
       num_users++;
     }
     if (num_users) {
-      user_stmt.bindParameters(user_params)
+      user_stmt.bindParameters(user_params);
       stmts.push(user_stmt);
     }
 
@@ -794,7 +793,7 @@ EchofonModel.DirectMessage = function(json, db_uid)
     this.type = "messages";
     this.isSent = (this.sender.id == db_uid);
   }
-}
+};
 
 EchofonModel.DirectMessage.prototype = {
   bind: function(params) {
@@ -839,12 +838,12 @@ EchofonModel.DirectMessage.exist = function(db_uid, id) {
   }
   catch (e) {}
   return false;
-}
+};
 
 EchofonModel.DirectMessage.statementForUpdate = function(db) {
   var values = MESSAGE_COLUMNS.map(function(word) {return ":"+word} ).join(",");
   return db.prepare("REPLACE INTO direct_messages VALUES (" + values + ")");
-}
+};
 
 EchofonModel.DirectMessage.getConversationWith = function(db_user_id, recipient_id, count, offset)
 {
@@ -894,7 +893,7 @@ EchofonModel.DirectMessage.getConversationWith = function(db_user_id, recipient_
   results.reverse();
 
   return results;
-}
+};
 
 EchofonModel.DirectMessage.destroy = function (message_id, db_user_id)
 {
@@ -927,7 +926,7 @@ EchofonModel.DirectMessage.getLatestId = function(recipient_id, type) {
     db.logError("Failed to select " + type + " id");
   }
   return 0;
-}
+};
 
 EchofonModel.DirectMessage.getEarliestId = function(recipient_id, type) {
   var stmt;
@@ -949,7 +948,7 @@ EchofonModel.DirectMessage.getEarliestId = function(recipient_id, type) {
     db.logError("Failed to select " + type + " id");
   }
   return 0;
-}
+};
 
 EchofonModel.DirectMessage.blockUser = function(db_uid, user_id) {
   var db =EchofonModel.DBM.db(db_uid);
@@ -957,7 +956,7 @@ EchofonModel.DirectMessage.blockUser = function(db_uid, user_id) {
   var stmt = db.prepare("DELETE FROM direct_messages WHERE sender_id = ?1 OR recipient_id = ?1");
   stmt.bindInt32Parameter(0, user_id);
   stmt.executeAsync();
-}
+};
 
 /////////////////////////////////////////////////////////////////////////
 //
@@ -971,7 +970,7 @@ EchofonModel.DirectMessageWriter = function(db)
   this.users = {};
   this.threads = {};
   this.length = 0;
-}
+};
 
 EchofonModel.DirectMessageWriter.prototype = {
   addMessage: function(msg) {
@@ -1066,13 +1065,13 @@ EchofonModel.Thread = function(user_id, message)
     this.updated_at   = new Date(message.created_at).getTime();
     this.user         = (message.isSent) ? message.recipient : message.sender;
   }
-}
+};
 
 EchofonModel.Thread.prototype = {
   toString:function() {
     return "Thread: " + this.id + " - " + this.user.screen_name + " - " + this.text + "( " + this.created_at + ")";
   }
-}
+};
 
 EchofonModel.Thread.initWithStatement = function(db_uid, stmt)
 {
@@ -1087,7 +1086,7 @@ EchofonModel.Thread.initWithStatement = function(db_uid, stmt)
   t.id = t.id_str;
   t.user = EchofonModel.User.findById(t.recipient_id, db_uid);
   return t;
-}
+};
 
 EchofonModel.Thread.initWithRow = function(row, db_uid)
 {
@@ -1103,7 +1102,7 @@ EchofonModel.Thread.initWithRow = function(row, db_uid)
 
   t.user = EchofonModel.User.initWithRow(row, db_uid, 5);
   return t;
-}
+};
 
 EchofonModel.Thread.bind = function(params, msg)
 {
@@ -1114,13 +1113,13 @@ EchofonModel.Thread.bind = function(params, msg)
   bp.bindByName('text', msg.text);
   bp.bindByName('updated_at', new Date(msg.created_at).getTime());
   params.addParams(bp);
-}
+};
 
 EchofonModel.Thread.statementForUpdate = function(db)
 {
   var cols = THREAD_COLUMNS.map(function(w) {return ":"+w}).join(",");
   return db.prepare("REPLACE INTO threads VALUES (" + cols + ")");
-}
+};
 
 EchofonModel.Thread.findByRecipientId = function(db_uid, recipient_id)
 {
@@ -1138,7 +1137,7 @@ EchofonModel.Thread.findByRecipientId = function(db_uid, recipient_id)
    EchofonModel.DBM.db(db_uid).logError("Failed to get direct message threads from local cache");
   }
   return t;
-}
+};
 
 EchofonModel.Thread.loadOlderThread = function(db_uid, count, max_id)
 {
@@ -1158,7 +1157,7 @@ EchofonModel.Thread.loadOlderThread = function(db_uid, count, max_id)
    EchofonModel.DBM.db(db_uid).logError("Failed to restore direct message threads from local cache");
   }
   return results;
-}
+};
 
 EchofonModel.Thread.restoreAsync = function(db_uid, count, callback)
 {
@@ -1166,7 +1165,7 @@ EchofonModel.Thread.restoreAsync = function(db_uid, count, callback)
   if (!count) count = 20;
   stmt.bindInt32Parameter(0, count);
   stmt.executeAsync(callback);
-}
+};
 
 EchofonModel.Thread.blockUser = function(db_uid, user_id) {
   var db =EchofonModel.DBM.db(db_uid);
@@ -1174,7 +1173,7 @@ EchofonModel.Thread.blockUser = function(db_uid, user_id) {
   var stmt = db.prepare("DELETE FROM threads WHERE recipient_id = ?1");
   stmt.bindInt32Parameter(0, user_id);
   stmt.executeAsync();
-}
+};
 
 /////////////////////////////////////////////////////////////////////////
 //
@@ -1201,7 +1200,7 @@ EchofonModel.List = function(json, recipient_id, stmt)
     }
     this.user  = EchofonModel.User.findById(this.user_id, recipient_id);
   }
-}
+};
 
 EchofonModel.List.prototype = {
   bind: function(params) {
@@ -1248,13 +1247,13 @@ EchofonModel.List.findById = function(db_uid, list_id) {
     Components.utils.reportError("Failed to find list " + list_id + " from local cache");
   }
   return list;
-}
+};
 
 EchofonModel.List.destroy = function(list_id, db_uid) {
   var stmt =EchofonModel.DBM.db(db_uid).prepare("DELETE FROM lists WHERE id = ?");
   stmt.bindInt32Parameter(0, list_id);
   stmt.executeAsync();
-}
+};
 
 EchofonModel.List.loadAll = function(recipient_id) {
   var stmt =EchofonModel.DBM.db(recipient_id).prepare("SELECT * FROM lists ORDER BY id DESC");
@@ -1264,7 +1263,7 @@ EchofonModel.List.loadAll = function(recipient_id) {
     results.push(new EchofonModel.List(null, recipient_id, stmt));
   }
   return results;
-}
+};
 
 EchofonModel.List.deleteAndUpdateAll = function(recipient_id, lists) {
   if (lists.length == 0) return;
@@ -1283,8 +1282,7 @@ EchofonModel.List.deleteAndUpdateAll = function(recipient_id, lists) {
   user_stmt.bindParameters(user_params);
 
   db.executeAsync([delete_stmt, insert_stmt, user_stmt], 3);
-  
-}
+};
 
 /////////////////////////////////////////////////////////////////////////
 //
@@ -1299,7 +1297,7 @@ EchofonModel.SavedSearch = function(json, recipient_id)
   }
   this.recipient_id = recipient_id;
   this.db =EchofonModel.DBM.db(recipient_id);
-}
+};
 
 EchofonModel.SavedSearch.prototype = {
   insertIntoDB: function() {
@@ -1322,7 +1320,7 @@ EchofonModel.SavedSearch.isExist = function(query, recipient_id)
   }
   catch (e) {}
   return 0;
-}
+};
 
 EchofonModel.SavedSearch.loadAll = function(recipient_id) {
   var stmt =EchofonModel.DBM.db(recipient_id).prepare("SELECT * FROM saved_searches ORDER BY id");
@@ -1357,13 +1355,13 @@ EchofonModel.SavedSearch.deleteAndUpdateAll = function(db_uid, ss) {
 
   ss_stmt.bindParameters(ss_params);
   db.executeAsync([stmt, ss_stmt], 2);
-}
+};
 
 EchofonModel.SavedSearch.destroy = function(query_id, recipient_id) {
   var stmt =EchofonModel.DBM.db(recipient_id).prepare("DELETE FROM saved_searches WHERE id = ?");
   stmt.bindInt32Parameter(0, query_id);
   stmt.executeAsync();
-}
+};
 
 /////////////////////////////////////////////////////////////////////////
 //
@@ -1371,13 +1369,13 @@ EchofonModel.SavedSearch.destroy = function(query_id, recipient_id) {
 //
 EchofonModel.Blocking = function()
 {
-}
+};
 
 EchofonModel.Blocking.create = function(dbuid, user_id) {
   var stmt =EchofonModel.DBM.db(dbuid).prepare("INSERT INTO blocks VALUES (?)");
   stmt.bindInt32Parameter(0, user_id);
   stmt.executeAsync();
-}
+};
 
 EchofonModel.Blocking.update = function(dbuid, user_ids) {
   var db = EchofonModel.DBM.db(dbuid);
@@ -1389,25 +1387,19 @@ EchofonModel.Blocking.update = function(dbuid, user_ids) {
     arr.push(stmt);
   }
   db.executeAsync(arr, arr.length);
-
-}
+};
 
 EchofonModel.Blocking.destroy = function(dbuid, user_id) {
   var stmt =EchofonModel.DBM.db(dbuid).prepare("DELETE FROM blocks WHERE id = ?");
   stmt.bindInt32Parameter(0, user_id);
   stmt.executeAsync();
-}
+};
 
 EchofonModel.Blocking.isBlocking = function(dbuid, user_id) {
   var stmt =EchofonModel.DBM.db(dbuid).prepare("SELECT id FROM blocks WHERE id = ?");
   stmt.bindInt32Parameter(0, user_id);
-  if (stmt.executeStep()) {
-    return true;
-  }
-  else {
-    return false;
-  }
-}
+  return !!stmt.executeStep();
+};
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -1415,7 +1407,7 @@ EchofonModel.Blocking.isBlocking = function(dbuid, user_id) {
 // No retweet
 //
 
-EchofonModel.NoRetweet = function() {}
+EchofonModel.NoRetweet = function() {};
 
 EchofonModel.NoRetweet.update = function(recipient_id, user_ids) {
   var arr = [];
@@ -1428,7 +1420,7 @@ EchofonModel.NoRetweet.update = function(recipient_id, user_ids) {
     arr.push(stmt);
   }
   db.executeAsync(arr, arr.length);
-}
+};
 
 EchofonModel.NoRetweet.create = function(dbuid, user_id) {
   try {
@@ -1437,7 +1429,7 @@ EchofonModel.NoRetweet.create = function(dbuid, user_id) {
     stmt.executeAsync();
   }
   catch (e) {}
-}
+};
 
 EchofonModel.NoRetweet.destroy = function(dbuid, user_id) {
   try {
@@ -1446,20 +1438,15 @@ EchofonModel.NoRetweet.destroy = function(dbuid, user_id) {
     stmt.executeAsync();
   }
   catch (e) {}
-}
+};
 
 EchofonModel.NoRetweet.wantsRetweet = function(dbuid, user_id) {
   try {
     var stmt =EchofonModel.DBM.db(dbuid).prepare("SELECT id FROM no_retweet WHERE id = ?");
     stmt.bindInt32Parameter(0, user_id);
-    if (stmt.executeStep()) {
-      return false;
-    }
-    else {
-      return true;
-    }
+    return !stmt.executeStep();
   }
   catch (e) {
   }
   return true;
-}
+};

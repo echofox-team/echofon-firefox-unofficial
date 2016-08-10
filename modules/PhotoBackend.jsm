@@ -28,7 +28,7 @@ EchofonPhotoBackend.initWithEntity = function(entity)
   pb._service = "Twitter";
   pb.media = entity['type'];
   return pb;
-}
+};
 
 EchofonPhotoBackend.prototype = {
   _url: null,
@@ -104,6 +104,7 @@ EchofonPhotoBackend.prototype = {
       if (vid) {
         return "http://img.youtube.com/vi/" + vid + "/default.jpg";
       }
+      return "";
 
     case "TwitVid":
       return url + ":thumb";
@@ -126,7 +127,6 @@ EchofonPhotoBackend.prototype = {
       else {
         return url.replace(/http:\/\/flic.kr\/p\/(\w+)/, "http://flic.kr/p/img/$1.jpg");
       }
-      break;
 
     case "picplz":
       var ret = ImageURLCache.instance().getCachedURL(url+"100sh");
@@ -204,7 +204,7 @@ ImageURLCache.instance = function()
     gEchofonImageURLCache = new ImageURLCache();
   }
   return gEchofonImageURLCache;
-}
+};
 
 ImageURLCache.prototype = {
   getCachedURL: function(url) {
@@ -229,7 +229,7 @@ ImageURLCache.prototype = {
     }
     catch (e) {}
   }
-}
+};
 
 function OembedClient(api_end_point, target_elem)
 {
@@ -287,7 +287,7 @@ OembedClient.prototype = {
 
 function OembedOperation()
 {
-  this.queue = new Array();
+  this.queue = [];
 }
 
 OembedOperation.prototype = {

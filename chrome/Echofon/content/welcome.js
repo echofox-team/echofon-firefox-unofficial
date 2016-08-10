@@ -122,8 +122,8 @@ function submitEmail()
   var r = new EchofonHttpRequest();
   r.setURL(url);
   r.setPostData(arr.join('&'));
-  r.onload    = function(p) {emailDidRegister(r);}
-  r.onerror   = function(p) {didFailToRegisterEmail(r);}
+  r.onload    = function(p) {emailDidRegister(r);};
+  r.onerror   = function(p) {didFailToRegisterEmail(r);};
   r.asyncOpen();
 }
 

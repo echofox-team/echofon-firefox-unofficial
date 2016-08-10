@@ -54,7 +54,7 @@ function onloadWindow()
   var text = $('echofon-textbox');
   if (text) text.focus();
 
-  gAppMode = EchofonCommon.pref().getCharPref("applicationMode")
+  gAppMode = EchofonCommon.pref().getCharPref("applicationMode");
   if (gAppMode == "window") {
     $('echofon-toolbar').setAttribute("mode", "window");
   }
@@ -135,7 +135,7 @@ function delayInitWindow()
 
   var tab = 'home';
   if (gAppMode == "sidebar") {
-    var tab = EchofonCommon.pref().getCharPref("lastTab");
+    tab = EchofonCommon.pref().getCharPref("lastTab");
   }
 
   if (tab != 'home') {

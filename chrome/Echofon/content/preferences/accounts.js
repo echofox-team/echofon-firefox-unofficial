@@ -128,7 +128,7 @@ var gAccountsPane = {
     var flag = !list.itemCount || list.selectedIndex < 0;
 
     for (var i in buttons) {
-    EchofonCommon.$(buttons[i]).disabled = flag;
+      EchofonCommon.$(buttons[i]).disabled = flag;
     }
 
     try {
@@ -142,4 +142,4 @@ var gAccountsPane = {
     }
     catch (e) {}
   }
-}
+};
