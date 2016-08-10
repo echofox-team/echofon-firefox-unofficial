@@ -221,7 +221,7 @@ EchofonModel.User = function(json, recipient_id, stmt)
 {
   this.recipient_id = recipient_id;
   if (recipient_id) {
-    this.db =EchofonModel.DBM.db(recipient_id);
+    this.db = EchofonModel.DBM.db(recipient_id);
   }
 
   // Init from JSON

@@ -1206,9 +1206,9 @@ TimelineLoader.prototype = {
     switch (obj['event']) {
       case 'unfavorite':
       case 'favorite':
-	if (obj.source.id == this.token.user_id) {
+        if (obj.source.id == this.token.user_id) {
           this.timelines.toggleFavorite(obj['target_object'].id_str, obj['event'] == 'favorite');
-	}
+        }
         this.notifyObservers("eventDidReceive", obj);
         break;
 

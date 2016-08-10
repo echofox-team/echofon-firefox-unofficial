@@ -29,13 +29,7 @@ function onload()
   var URI = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService).newURI(window.location, null, null);
   var aURL = URI.QueryInterface(Ci.nsIURL);
 
-  var uids = {};
-  if (aURL.query) {
-    var uids = EchofonCommon.parseURLQuery(aURL.query);
-  }
-  else {
-    var uids = EchofonCommon.parseURLQuery(window.arguments[0]);
-  }
+  var uids = EchofonCommon.parseURLQuery(aURL.query ? aURL.query : window.arguments[0]);
 
   account = EchofonAccountManager.instance().get(uids.source);
   gTargetUser = EchofonModel.User.findById(uids.target, account.user_id);

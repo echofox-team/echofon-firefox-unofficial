@@ -1025,7 +1025,7 @@ echofonObserver.prototype.observe = function(subject, topic, data)
   if (this[msg.state]) {
     this[msg.state](msg.data);
   }
-}
+};
 
 echofonObserver.prototype.failedToSendMessage = function(context)
 {
@@ -1037,7 +1037,7 @@ echofonObserver.prototype.failedToSendMessage = function(context)
     }
     panel.error = context.error;
   }
-}
+};
 
 echofonObserver.prototype.updateFavorite = function(tweet)
 {
@@ -1045,7 +1045,7 @@ echofonObserver.prototype.updateFavorite = function(tweet)
   for (var i = 0; i < elems.length; ++i) {
     elems[i].setFavorited(tweet.state);
   }
-}
+};
 
 echofonObserver.prototype.statusDidGet = function(resp)
 {
@@ -1053,7 +1053,7 @@ echofonObserver.prototype.statusDidGet = function(resp)
   if (e) {
     e.tweet = resp;
   }
-}
+};
 
 echofonObserver.prototype.didGetPlaces = function(places)
 {
@@ -1061,9 +1061,9 @@ echofonObserver.prototype.didGetPlaces = function(places)
     this.composePanel().places = places;
   }
   catch (e) {}
-}
+};
 
 echofonObserver.prototype.remove = function()
 {
   Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService).removeObserver(this, "echofon-status");
-}
+};
