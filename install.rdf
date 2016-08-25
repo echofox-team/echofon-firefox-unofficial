@@ -4,7 +4,7 @@
   <Description about="urn:mozilla:install-manifest">
     <em:id>echofon-unofficial@echofox-team</em:id>
     <em:name>Echofon Unofficial</em:name>
-    <em:version>2.6.1</em:version>
+    <em:version>2.6.2-beta</em:version>
     <em:type>2</em:type>
     <em:unpack>true</em:unpack>
     <em:creator>Echofox Team</em:creator>
