@@ -234,7 +234,7 @@ EchofonModel.User = function(json, recipient_id, stmt)
 
   // Init from DB
   if (stmt) {
-    for each (let col in USER_COLUMNS) {
+    for (let col of USER_COLUMNS) {
       this[col] = stmt.row[col];
     }
   }
@@ -250,7 +250,7 @@ EchofonModel.User.prototype = {
     if (!this.updated_at) {
       this.updated_at = new Date().getTime();
     }
-    for each (let col in USER_COLUMNS) {
+    for (let col of USER_COLUMNS) {
       stmt.params[col] = this[col];
     }
     stmt.executeAsync();
@@ -268,14 +268,14 @@ EchofonModel.User.prototype = {
 
   bind: function(params) {
     let bp = params.newBindingParams();
-    for each (let col in USER_COLUMNS) {
+    for (let col of USER_COLUMNS) {
       bp.bindByName(col, this[col]);
     }
     params.addParams(bp);
   },
 
   bindToStatement: function(stmt) {
-    for each (let col in USER_COLUMNS) {
+    for (let col of USER_COLUMNS) {
       stmt.params[col] = this[col];
     }
   },
@@ -310,7 +310,7 @@ EchofonModel.User.statementForUpdate = function(db) {
 
 EchofonModel.User.initWithRow = function(row, db_uid, startIndex) {
   var user = new EchofonModel.User(null, db_uid);
-  for each (let col in USER_COLUMNS) {
+  for (let col of USER_COLUMNS) {
     user[col] = row.getResultByIndex(startIndex++);
   }
   return user;
@@ -464,7 +464,7 @@ EchofonModel.Status.prototype = {
 
   bind: function(status_params, timeline_params) {
     let bp = status_params.newBindingParams();
-    for each (let col in STATUS_COLUMNS) {
+    for (let col of STATUS_COLUMNS) {
       if (col == 'user_id') {
         bp.bindByName('user_id', this.user.id);
       }
@@ -548,7 +548,7 @@ EchofonModel.Status.statementForUpdateTimeline = function(db, type)
 EchofonModel.Status.initWithStatement = function(stmt, type, recipient_id)
 {
   var status = new EchofonModel.Status(null, type, recipient_id);
-  for each (let col in STATUS_COLUMNS) {
+  for (let col of STATUS_COLUMNS) {
     status[col] = stmt.row[col];
   }
   status.id = status.id_str;
@@ -566,7 +566,7 @@ EchofonModel.Status.initWithRow = function(row, type, recipient_id)
   var status = new EchofonModel.Status(null, type, recipient_id);
 
   var index = 0;
-  for each (let col in STATUS_COLUMNS) {
+  for (let col of STATUS_COLUMNS) {
     status[col] = row.getResultByIndex(index);
     ++index;
   }
@@ -798,7 +798,7 @@ EchofonModel.DirectMessage = function(json, db_uid)
 EchofonModel.DirectMessage.prototype = {
   bind: function(params) {
     let bp = params.newBindingParams();
-    for each (let col in MESSAGE_COLUMNS) {
+    for (let col of MESSAGE_COLUMNS) {
       if (col == 'entities' && this.entities) {
         bp.bindByName(col, JSON.stringify(this.entities));
       }
@@ -1013,7 +1013,7 @@ EchofonModel.DirectMessageWriter.prototype = {
     user_stmt   = EchofonModel.User.statementForUpdate(this.db);
     user_params = user_stmt.newBindingParamsArray();
     let num_users = 0;
-    for each (let user in this.users) {
+    for (let user in this.users) {
       if (user.needToUpdate()) {
         user.bind(user_params);
         num_users++;
@@ -1027,7 +1027,7 @@ EchofonModel.DirectMessageWriter.prototype = {
     thread_stmt = EchofonModel.Thread.statementForUpdate(this.db);
     thread_params = thread_stmt.newBindingParamsArray();
     let num_thread = 0;
-    for each (let msg in this.threads) {
+    for (let msg in this.threads) {
       if (msg.needToUpdate()) {
         EchofonModel.Thread.bind(thread_params, msg);
         num_thread++;
@@ -1195,7 +1195,7 @@ EchofonModel.List = function(json, recipient_id, stmt)
   }
 
   if (stmt) {
-    for each (let col in LIST_COLUMNS) {
+    for (let col of LIST_COLUMNS) {
       this[col] = stmt.row[col];
     }
     this.user  = EchofonModel.User.findById(this.user_id, recipient_id);
@@ -1205,7 +1205,7 @@ EchofonModel.List = function(json, recipient_id, stmt)
 EchofonModel.List.prototype = {
   bind: function(params) {
     var bp = params.newBindingParams();
-    for each (let col in LIST_COLUMNS) {
+    for (let col of LIST_COLUMNS) {
       if (col == 'user_id') {
         bp.bindByName(col, this.user.id);
       }
@@ -1218,7 +1218,7 @@ EchofonModel.List.prototype = {
 
   insertIntoDB: function() {
     var insert_stmt = this.db.prepare("REPLACE INTO lists VALUES (" + LIST_COLUMNS.map(function(w){return ":" +w}).join(",") + ")");
-    for each (let col in LIST_COLUMNS) {
+    for (let col of LIST_COLUMNS) {
       insert_stmt.params[col] = this[col];
     }
 
@@ -1274,7 +1274,7 @@ EchofonModel.List.deleteAndUpdateAll = function(recipient_id, lists) {
 
   var params = insert_stmt.newBindingParamsArray();
   var user_params = user_stmt.newBindingParamsArray();
-  for each (let list in lists) {
+  for (let list of lists) {
     list.bind(params);
     list.user.bind(user_params);
   }
@@ -1346,7 +1346,7 @@ EchofonModel.SavedSearch.deleteAndUpdateAll = function(db_uid, ss) {
   var ss_stmt = db.prepare("INSERT INTO saved_searches VALUES (:id, :query)");
   var ss_params = ss_stmt.newBindingParamsArray();
 
-  for each (s in ss) {
+  for (s of ss) {
     let bp = ss_params.newBindingParams();
     bp.bindByName('id', s.id);
     bp.bindByName('query', s.query);
