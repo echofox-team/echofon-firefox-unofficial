@@ -192,7 +192,7 @@ function reply(parent, tweet, stats_url)
   var panel = EchofonCommon.openComposeWindow(parent, text);
   if (tweet) {
     panel.inReplyTo = tweet.id;
-    panel.inReplyToMessage = tweet.text;
+    panel.inReplyToMessage = tweet.full_text;
     panel.statsURL = stats_url;
   }
 }

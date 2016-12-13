@@ -1159,7 +1159,7 @@ TimelineLoader.prototype = {
       else {
         // if tweet has 'text@screen_name', it should be discarded
         var pat = new RegExp("@(" + this.token.screen_name + ")([^A-Za-z_].*)?$");
-        if (pat.test(tweet.text)) {
+        if (pat.test(tweet.full_text)) {
           return;
         }
         tweet.type = SEARCH_TIMELINE;

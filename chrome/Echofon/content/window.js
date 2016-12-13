@@ -1412,7 +1412,7 @@ function undoRetweet(tweet)
 
 function failedToRetweet(tweet)
 {
-  showMessage("Failed to retweet: " + tweet.text);
+  showMessage("Failed to retweet: " + tweet.full_text);
 }
 
 function tweetDidSend(tweet)
@@ -1771,7 +1771,7 @@ function statsFor140Ads(url)
 
 function replyOn140Ad(obj)
 {
-  var tweet = {id:obj.status.id_str, id_str:obj.status.id_str, text:obj.text, user:obj.user};
+  var tweet = {id:obj.status.id_str, id_str:obj.status.id_str, text:obj.full_text, user:obj.user};
   reply(null, tweet, obj.action_urls.reply_url);
   statsFor140Ads(obj.action_urls.reply_intent_url);
 }
@@ -1779,7 +1779,7 @@ function replyOn140Ad(obj)
 function retweetOn140Ad(obj)
 {
   var prompt = Cc["@mozilla.org/embedcomp/prompt-service;1"].getService(Ci.nsIPromptService);
-  var ret = prompt.confirm(window, "Echofon", EchofonCommon.getFormattedString("ConfirmRetweet", [obj.text]));
+  var ret = prompt.confirm(window, "Echofon", EchofonCommon.getFormattedString("ConfirmRetweet", [obj.full_text]));
   if (ret) {
     EchofonCommon.notify("retweet", {id:obj.status.id_str});
     statsFor140Ads(obj.action_urls.retweet_url);
