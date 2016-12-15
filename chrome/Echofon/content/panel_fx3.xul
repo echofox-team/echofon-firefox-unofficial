@@ -15,6 +15,8 @@
 <page id="sbEchofonSidebar" title="Echofon"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
+  <script src="lib/react.js" type="application/x-javascript;version=1.8"/>
+  <script src="lib/react-dom.js" type="application/x-javascript;version=1.8"/>
   <script src="utility.js" type="application/x-javascript;version=1.8"/>
   <script src="menu.js" type="application/x-javascript;version=1.8"/>
   <script src="window.js" type="application/x-javascript;version=1.8"/>

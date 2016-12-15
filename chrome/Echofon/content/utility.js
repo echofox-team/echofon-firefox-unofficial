@@ -7,6 +7,27 @@
 if (typeof EchofonCommon == 'undefined') {
 
 Components.utils.import("resource://echofon/PhotoBackend.jsm");
+
+const e = React.createElement;
+
+const AnchorText = ({ link, text, type, className = 'echofon-hyperlink', additionalClasses, style, screen_name }) => {
+  const attrs = {
+    style,
+    className: additionalClasses ? className + ' ' + additionalClasses : className,
+    href: link,
+    type,
+    ref: (node) => {
+      if (node) {
+        node.setAttribute('text', text);
+        node.setAttribute('tooltip', 'echofon-tooltip');
+        node.setAttribute('screen_name', screen_name);
+      }
+    },
+  };
+
+  return e('label', attrs, text);
+};
+
 var EchofonCommon = {
 
   FFVersion: 0,
@@ -150,19 +171,30 @@ var EchofonCommon = {
       var style = this.pref().getIntPref("displayStyle");
       var nameNode =  null;
       if (style == 0) {
-            nameNode = document.createElement('description');
-            nameNode.className = "echofon-status-body";
-            var anchor = this.createAnchorText(this.userViewURL(user.screen_name), user.name, "username");
-            anchor.setAttribute("screen_name", user.screen_name);
-            anchor.className += " echofon-status-user";
-            nameNode.appendChild(anchor);
+        nameNode = document.createElement('description');
+        nameNode.className = "echofon-status-body";
+        var anchor = e(AnchorText, {
+          link: this.userViewURL(user.screen_name),
+          text: user.name,
+          type: 'username',
+          screen_name: user.screen_name,
+          additionalClasses: 'echofon-status-user'
+        });
 
-            var screenName = this.createAnchorText(this.userViewURL(user.screen_name), "@" + user.screen_name, "username");
-            screenName.className = "echofon-status-additional-screen-name";
-            if (msg.type != 'user-timeline') {
-              screenName.style.fontSize = (fontSize - 1) + "px";
-            }
-            nameNode.appendChild(screenName);
+        var screenName = e(AnchorText, {
+          link: this.userViewURL(user.screen_name),
+          text: `@${user.screen_name}`,
+          type: 'username',
+          className: 'echofon-status-additional-screen-name',
+          screen_name: user.screen_name,
+          style: msg.type != 'user-timeline' ? {
+            fontSize: (fontSize - 1) + 'px',
+          } : undefined,
+        });
+
+        // TMP: React can only render single elements, so we need to wrap in a box for now
+        // As soon as we transform nameNode into a component, remove this <box>
+        ReactDOM.render(e('box', {}, anchor, screenName), nameNode);
       }
 
       var textnode = EchofonCommon.buildRichTextNode(uid, msg, user, elem);

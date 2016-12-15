@@ -6,6 +6,10 @@ rm -rf build
 mkdir -p build/src
 cp -r --parents chrome/ components/ defaults/ modules/ platform/ chrome.manifest install.rdf build/src
 
+LIB_DIR=chrome/Echofon/content/lib/
+cp node_modules/react/dist/react.js "$LIB_DIR"
+cp node_modules/react-dom/dist/react-dom.js "$LIB_DIR"
+
 cd build/src/chrome/Echofon
 zip -r -9 ../Echofon.jar *
 cd ..

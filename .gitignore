@@ -1,4 +1,6 @@
 build/
+node_modules/
+chrome/Echofon/content/lib/
 
 # IntelliJ
 .idea/

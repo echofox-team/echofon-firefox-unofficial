@@ -1,0 +1,29 @@
+{
+  "name": "echofon-firefox-unofficial",
+  "version": "2.6.2",
+  "description": "full featured, super clean Twitter app for Firefox",
+  "main": "install.rdf",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/echofox-team/echofon-firefox-unofficial.git"
+  },
+  "keywords": [
+    "twitter",
+    "client",
+    "firefox",
+    "add-on"
+  ],
+  "author": "Echofox Team",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/echofox-team/echofon-firefox-unofficial/issues"
+  },
+  "homepage": "https://github.com/echofox-team/echofon-firefox-unofficial#readme",
+  "dependencies": {
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1"
+  }
+}

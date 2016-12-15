@@ -136,6 +136,8 @@
 
 </vbox>
 
+  <script src="lib/react.js" type="application/x-javascript;version=1.8"/>
+  <script src="lib/react-dom.js" type="application/x-javascript;version=1.8"/>
   <script src="utility.js" type="application/x-javascript;version=1.8"/>
   <script src="user-view.js" type="application/x-javascript;version=1.8"/>
   <script src="menu.js" type="application/x-javascript;version=1.8"/>
