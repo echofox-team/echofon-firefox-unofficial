@@ -10,7 +10,7 @@ Components.utils.import("resource://echofon/PhotoBackend.jsm");
 
 const e = React.createElement;
 
-const AnchorText = ({ link, text, type, className = 'echofon-hyperlink', additionalClasses, style, screen_name }) => {
+const AnchorText = ({ children, link, text, type, className = 'echofon-hyperlink', additionalClasses, style, screen_name }) => {
   const attrs = {
     style,
     className: additionalClasses ? className + ' ' + additionalClasses : className,
@@ -25,7 +25,7 @@ const AnchorText = ({ link, text, type, className = 'echofon-hyperlink', additio
     },
   };
 
-  return e('label', attrs, text);
+  return e('label', attrs, children);
 };
 
 var EchofonCommon = {
@@ -179,7 +179,7 @@ var EchofonCommon = {
           type: 'username',
           screen_name: user.screen_name,
           additionalClasses: 'echofon-status-user'
-        });
+        }, user.name);
 
         var screenName = e(AnchorText, {
           link: this.userViewURL(user.screen_name),
@@ -190,7 +190,7 @@ var EchofonCommon = {
           style: msg.type != 'user-timeline' ? {
             fontSize: (fontSize - 1) + 'px',
           } : undefined,
-        });
+        }, `@${user.screen_name}`);
 
         // TMP: React can only render single elements, so we need to wrap in a box for now
         // As soon as we transform nameNode into a component, remove this <box>
@@ -253,14 +253,18 @@ var EchofonCommon = {
           info.appendChild(reply);
         }
         else {
-          var icon = document.createElement("image");
-          icon.className = "echofon-in-reply-to-icon";
-          var text = document.createTextNode(msg.in_reply_to_screen_name);
-          var reply = EchofonCommon.createAnchorWithElements(EchofonCommon.twitterURL(msg.in_reply_to_screen_name + "/statuses/" + msg.in_reply_to_status_id),
-                                                             [icon, text],
-                                                             "tweet-popup",
-                                                             "echofon-source-link");
-          info.appendChild(reply);
+          const tmpElement = document.createElement('box');
+
+          const icon = e('image', {
+            className: 'echofon-in-reply-to-icon',
+          });
+          ReactDOM.render(e(AnchorText, {
+            link: EchofonCommon.twitterURL(msg.in_reply_to_screen_name + "/statuses/" + msg.in_reply_to_status_id),
+            type: 'tweet-popup',
+            className: 'echofon-source-link',
+          }, icon, msg.in_reply_to_screen_name), tmpElement);
+
+          info.appendChild(tmpElement);
         }
       }
       /*
