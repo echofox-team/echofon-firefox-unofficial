@@ -10,6 +10,24 @@ Components.utils.import("resource://echofon/PhotoBackend.jsm");
 
 const e = React.createElement;
 
+function getString(key) {
+  return document.getElementById("echofon-strings").getString(key).replace(/\\S/g, " ");
+}
+
+function formatText({ children, type }) {
+  const text = getString(type);
+
+  // for single value
+  let arr = text.split(/%S/);
+  if (arr.length > 1) {
+    arr[1] = children;
+    return arr;
+  }
+
+  // for multiple values
+  return text.split(/%(\d)\$S/).map((chunk, i) => ((i % 2) && children[parseInt(chunk)-1]) || chunk);
+}
+
 const AnchorText = ({ children, link, text, type, className = 'echofon-hyperlink', additionalClasses, style, screen_name }) => {
   const attrs = {
     style,
@@ -287,23 +305,28 @@ var EchofonCommon = {
 
       if (msg.retweeted_status_id > 0) {
         var rt = document.createElement("echofon-status-retweet-status");
-
-        var rt_icon = document.createElement("image");
-        rt_icon.className = "echofon-retweet-icon";
-        rt.appendChild(rt_icon);
-
         rt.setAttribute("anonid", "retweet");
         rt.style.fontSize = (fontSize - 1) + "px";
-        var nameLabel;
+
+        const rt_icon = e('image', {
+          className: 'echofon-retweet-icon'
+        });
+
+        const nameLabel = msg.retweeter_user_id == uid ? EchofonCommon.getString("you") : msg.retweeter_screen_name;
+        const linkToUser = e(AnchorText, {
+          link: EchofonCommon.userViewURL(msg.retweeter_screen_name),
+          text: nameLabel,
+          screen_name: msg.retweeter_screen_name,
+          type: 'username',
+        }, nameLabel);
+
+        const rtby = formatText({type: 'retweetedBy', children: linkToUser});
+
+        ReactDOM.render(e('box', {}, rt_icon, ...rtby), rt);
+
         if (msg.retweeter_user_id == uid) {
-          nameLabel = EchofonCommon.getString("you");
           elem.setAttribute("is_own_retweet", true);
         }
-        else {
-          nameLabel = msg.retweeter_screen_name;
-        }
-        var rtby = EchofonCommon.createAnchorText(EchofonCommon.userViewURL(msg.retweeter_screen_name), nameLabel, "username");
-        EchofonCommon.formatTextNode(rt, "retweetedBy", rtby);
         elem.appendChild(rt);
       }
     }catch (e) {
@@ -609,18 +632,6 @@ var EchofonCommon = {
       anchor.setAttribute("tooltip", 'echofon-tooltip');
 
       anchor.appendChild(document.createTextNode(text));
-
-      return anchor;
-  },
-
-  createAnchorWithElements: function(link, elems, type, classname) {
-      var anchor = document.createElement("a");
-      anchor.className = classname ? classname : "echofon-hyperlink";
-      anchor.setAttribute("href", link);
-      anchor.setAttribute("type", type);
-      for (var i = 0; i < elems.length; ++i) {
-        anchor.appendChild(elems[i]);
-      }
 
       return anchor;
   },
