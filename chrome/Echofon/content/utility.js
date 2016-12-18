@@ -18,7 +18,7 @@ function formatText({ children, type }) {
   const text = getString(type);
 
   // for single value
-  let arr = text.split(/%S/);
+  let arr = text.split(/(%S)/);
   if (arr.length > 1) {
     arr[1] = children;
     return arr;
@@ -28,7 +28,7 @@ function formatText({ children, type }) {
   return text.split(/%(\d)\$S/).map((chunk, i) => ((i % 2) && children[parseInt(chunk)-1]) || chunk);
 }
 
-const AnchorText = ({ children, link, text, type, className = 'echofon-hyperlink', additionalClasses, style, screen_name }) => {
+const AnchorText = ({ children, link, text, type, className = 'echofon-hyperlink', additionalClasses, style, screen_name, created_at, label }) => {
   const attrs = {
     style,
     className: additionalClasses ? className + ' ' + additionalClasses : className,
@@ -38,7 +38,9 @@ const AnchorText = ({ children, link, text, type, className = 'echofon-hyperlink
       if (node) {
         node.setAttribute('text', text);
         node.setAttribute('tooltip', 'echofon-tooltip');
-        node.setAttribute('screen_name', screen_name);
+        if (screen_name) node.setAttribute('screen_name', screen_name);
+        if (created_at) node.setAttribute('created_at', created_at);
+        if (label) node.setAttribute('label', label);
       }
     },
   };
@@ -235,44 +237,62 @@ var EchofonCommon = {
         info.appendChild(topTweet);
       }
 
-      var label = EchofonCommon.getLocalTimeForDate(msg.created_at, elem.appMode != 'window' && msg.type != 'user-timeline');
-      var time = EchofonCommon.createAnchorText(EchofonCommon.twitterURL(user.screen_name + "/statuses/" + permalink),
-                                                label,
-                                                "link",
-                                                "echofon-status-timestamp");
-      time.created_at = new Date(msg.created_at).getTime();
-      time.label = label;
-      info.appendChild(time);
+      const containerTmp = document.createElement('box');
+      const label = EchofonCommon.getLocalTimeForDate(msg.created_at, elem.appMode !== 'window' && msg.type !== 'user-timeline');
+      const time = e(AnchorText, {
+        link: EchofonCommon.twitterURL(user.screen_name + "/statuses/" + permalink),
+        text: label,
+        type: 'link',
+        className: 'echofon-status-timestamp',
+        created_at: new Date(msg.created_at).getTime(),
+        label,
+      }, label);
+      ReactDOM.render(time, containerTmp);
+
+      info.appendChild(containerTmp);
       info.style.display = "block";
       if (msg.source) {
         if (msg.source.match(/<a href\=\"([^\"]*)\"[^>]*>(.*)<\/a>/)) {
-          var source = EchofonCommon.createAnchorText(RegExp.$1, RegExp.$2, "app", "echofon-source-link");
-          EchofonCommon.formatTextNode(info, "via", source);
+          const tmpElement = document.createElement('box');
+          const source = e(AnchorText, {
+            link: RegExp.$1,
+            text: RegExp.$2,
+            type: 'app',
+            className: 'echofon-source-link',
+          }, RegExp.$2);
+          const sources = formatText({type: 'via', children: source});
+
+          ReactDOM.render(e('box', {}, e('box', {}, ' '), ...sources), tmpElement); // whitespace box hack, if better, plz tell us
+          info.appendChild(tmpElement);
         }
       }
       if (msg.place) {
-        if (elem.appMode == "window") {
-          info.appendChild(document.createTextNode(EchofonCommon.getFormattedString("from", [msg.place.full_name])));
+        const tmpElement = document.createElement('box');
+        if (elem.appMode == 'window') {
+          const text = EchofonCommon.getFormattedString('from', [msg.place.full_name]);
+          ReactDOM.render(text, tmpElement);
         }
         else {
-          var icon = document.createElement("image");
-          icon.className = "echofon-place-icon";
-          var text = document.createTextNode(msg.place.full_name);
-          info.appendChild(icon);
-          info.appendChild(text);
+          ReactDOM.render(
+            e('box', {}, e('image', { className: 'echofon-place-icon' }), msg.place.full_name),
+            tmpElement
+          );
         }
+        info.appendChild(tmpElement);
       }
       if (msg.in_reply_to_status_id && msg.in_reply_to_screen_name) {
-        if (elem.appMode == "window" || msg.type == 'user-timeline') {
-          var reply = EchofonCommon.createAnchorText(EchofonCommon.twitterURL(msg.in_reply_to_screen_name + "/statuses/" + msg.in_reply_to_status_id),
-                                                     EchofonCommon.getFormattedString("inReplyToInline", [msg.in_reply_to_screen_name]),
-                                                     "tweet-popup",
-                                                     "echofon-source-link echofon-source-link-left-padding");
-          info.appendChild(reply);
+        const tmpElement = document.createElement('box');
+
+        if (elem.appMode === 'window' || msg.type === 'user-timeline') {
+          const text = EchofonCommon.getFormattedString("inReplyToInline", [msg.in_reply_to_screen_name]);
+          ReactDOM.render(e(AnchorText, {
+            link: EchofonCommon.twitterURL(msg.in_reply_to_screen_name + "/statuses/" + msg.in_reply_to_status_id),
+            text,
+            type: 'tweet-popup',
+            className: 'echofon-source-link echofon-source-link-left-padding',
+          }, text), tmpElement);
         }
         else {
-          const tmpElement = document.createElement('box');
-
           const icon = e('image', {
             className: 'echofon-in-reply-to-icon',
           });
@@ -281,9 +301,9 @@ var EchofonCommon = {
             type: 'tweet-popup',
             className: 'echofon-source-link',
           }, icon, msg.in_reply_to_screen_name), tmpElement);
-
-          info.appendChild(tmpElement);
         }
+
+        info.appendChild(tmpElement);
       }
       /*
       if (msg.metadata && msg.metadata.result_type == "popular") {
