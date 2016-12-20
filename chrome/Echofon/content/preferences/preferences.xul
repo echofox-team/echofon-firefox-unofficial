@@ -32,6 +32,7 @@
             persist="screenX screenY"
             width="480">
 
+  <script type="application/x-javascript;version=1.8" src="chrome://echofon/content/lib/react.js"/>
   <script type="application/x-javascript;version=1.8" src="chrome://echofon/content/utility.js"/>
 
   <stringbundle id="platformKeys" src="chrome://global-platform/locale/platformKeys.properties"/>

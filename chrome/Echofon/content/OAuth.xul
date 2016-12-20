@@ -14,6 +14,8 @@
         persist="screenX screenY">
 
   <stringbundle id="echofon-strings" src="chrome://echofon/locale/pref.properties"/>
+  <script type="application/x-javascript;version=1.8" src="chrome://echofon/content/lib/react.js"/>
+  <script type="application/x-javascript;version=1.8" src="chrome://echofon/content/lib/react-dom.js"/>
   <script type="application/x-javascript;version=1.8" src="chrome://echofon/content/utility.js"/>
   <script type="application/x-javascript;version=1.8" src="chrome://echofon/content/OAuth.js"/>
 

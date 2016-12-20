@@ -26,6 +26,8 @@
     <button label="&echofon.checkUpdate;" oncommand="opener.checkUpdate()"/>
   </vbox>
 
+  <script src="lib/react.js"/>
+  <script src="lib/react-dom.js"/>
   <script src="utility.js"/>
 
   <script>
