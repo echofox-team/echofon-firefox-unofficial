@@ -1013,7 +1013,8 @@ EchofonModel.DirectMessageWriter.prototype = {
     user_stmt   = EchofonModel.User.statementForUpdate(this.db);
     user_params = user_stmt.newBindingParamsArray();
     let num_users = 0;
-    for (let user in this.users) {
+    for (let uid in this.users) {
+      let user = this.users[uid];
       if (user.needToUpdate()) {
         user.bind(user_params);
         num_users++;
@@ -1027,7 +1028,8 @@ EchofonModel.DirectMessageWriter.prototype = {
     thread_stmt = EchofonModel.Thread.statementForUpdate(this.db);
     thread_params = thread_stmt.newBindingParamsArray();
     let num_thread = 0;
-    for (let msg in this.threads) {
+    for (let i in this.threads) {
+      let msg = this.threads[i];
       if (msg.needToUpdate()) {
         EchofonModel.Thread.bind(thread_params, msg);
         num_thread++;
@@ -1346,7 +1348,8 @@ EchofonModel.SavedSearch.deleteAndUpdateAll = function(db_uid, ss) {
   var ss_stmt = db.prepare("INSERT INTO saved_searches VALUES (:id, :query)");
   var ss_params = ss_stmt.newBindingParamsArray();
 
-  for (s of ss) {
+  for (let i in ss) {
+    let s = ss[i];
     let bp = ss_params.newBindingParams();
     bp.bindByName('id', s.id);
     bp.bindByName('query', s.query);
