@@ -440,9 +440,7 @@ function onresizeWindow()
 
   for (var i = 0; i < elems.length; i++) {
     var e = elems[i];
-    if (e.parentNode) {
-      e.style.width = (w - e.parentNode.padding) + "px";
-    }
+    e.style.width = (w - e.closest('echofon-status').padding) + "px";
   }
   var ad = $('echofon-ad');
   if (ad) {

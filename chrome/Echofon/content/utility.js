@@ -48,6 +48,40 @@ const AnchorText = ({ children, link, text, type, className = 'echofon-hyperlink
   return e('label', attrs, children);
 };
 
+class RichText extends React.Component {
+  componentDidMount() {
+    const { uid, msg, parent_elem } = this.props;
+
+    if (msg.entities) {
+      return EchofonCommon.convertLinksWithEntities(uid, msg, this.refs.node, parent_elem);
+    }
+    else {
+      return EchofonCommon.convertLinksWithRegExp(uid, msg, this.refs.node, parent_elem);
+    }
+  }
+
+  render() {
+    const { user } = this.props;
+    const children = [];
+
+    var style = EchofonCommon.pref().getIntPref("displayStyle");
+    if (style !== 0) {
+      const displayName = (style == 1) ? user.name : user.screen_name;
+      const anchor = e(AnchorText, {
+        link: EchofonCommon.userViewURL(user.screen_name),
+        text: displayName,
+        type: 'username',
+        screen_name: user.screen_name,
+        additionalClasses: 'echofon-status-user',
+      }, displayName);
+
+      children.push(anchor, ' ');
+    }
+
+    return e('description', { className: 'echofon-status-body', ref: 'node' }, ...children);
+  }
+}
+
 const StatusTagLine = ({ msg, fontSize, appMode, user }) => {
   let infoChildren = [];
 
@@ -226,9 +260,11 @@ var EchofonCommon = {
   },
 
   createTweetCell: function(uid, tweet, highlighted) {
-    if (document.getElementById("echofon-status-" + tweet.type + "-" + tweet.id)) return null;
+    const id = "echofon-status-" + tweet.type + "-" + tweet.id;
+    if (document.getElementById(id)) return null;
+
     var elem = document.createElement("echofon-status");
-    elem.id = "echofon-status-" + tweet.type + "-" + tweet.id;
+    elem.id = id;
     elem.setAttribute("messageId", tweet.id);
     elem.setAttribute("type", tweet.type);
     if (tweet.retweeted_status_id) {
@@ -273,13 +309,19 @@ var EchofonCommon = {
       elem.setAttribute("favorited", msg.favorited);
       elem.setAttribute("favoriteButtonTooltip", EchofonCommon.getString(msg.favorited ? "UnfavoriteTweet" : "FavoriteTweet"));
       elem.setAttribute("isFavorited", (msg.favorited) ? "block" : "none");
+      elem.setAttribute("text", msg.full_text);
+      elem.setAttribute("protected", user.protected ? 1 : 0);
+      if (msg.has_mention && msg.type == 'home') {
+        elem.setAttribute("highlighted", true);
+      }
+      if (msg.retweeted_status_id > 0 && msg.retweeter_user_id == uid) {
+        elem.setAttribute("is_own_retweet", true);
+      }
 
-      var style = this.pref().getIntPref("displayStyle");
-      var nameNode =  null;
-      if (style == 0) {
-        nameNode = document.createElement('description');
-        nameNode.className = "echofon-status-body";
-        var anchor = e(AnchorText, {
+      const style = this.pref().getIntPref("displayStyle");
+      let nameNode =  null;
+      if (style === 0) {
+        const anchor = e(AnchorText, {
           link: this.userViewURL(user.screen_name),
           text: user.name,
           type: 'username',
@@ -287,7 +329,7 @@ var EchofonCommon = {
           additionalClasses: 'echofon-status-user'
         }, user.name);
 
-        var screenName = e(AnchorText, {
+        const screenName = e(AnchorText, {
           link: this.userViewURL(user.screen_name),
           text: `@${user.screen_name}`,
           type: 'username',
@@ -298,34 +340,23 @@ var EchofonCommon = {
           } : undefined,
         }, `@${user.screen_name}`);
 
-        // TMP: React can only render single elements, so we need to wrap in a box for now
-        // As soon as we transform nameNode into a component, remove this <box>
-        ReactDOM.render(e('box', {}, anchor, screenName), nameNode);
+        nameNode = e('description', {
+          className: 'echofon-status-body',
+        }, anchor, screenName);
       }
 
-      var textnode = EchofonCommon.buildRichTextNode(uid, msg, user, elem);
-      textnode.className = "echofon-status-body";
-      elem.setAttribute("text", msg.full_text);
-      elem.setAttribute("protected", user.protected ? 1 : 0);
-      if (msg.has_mention && msg.type == 'home') {
-        elem.setAttribute("highlighted", true);
-      }
+      const textnode = e(RichText, {
+        className: 'echofon-status-body',
+        uid,
+        msg,
+        user,
+        parent_elem: elem,
+      });
 
-      let infoContainer = document.createElement('box');
-      ReactDOM.render(e(StatusTagLine, { msg, fontSize, appMode: elem.appMode, user }), infoContainer);
+      const info = e(StatusTagLine, { msg, fontSize, appMode: elem.appMode, user });
 
-      if (nameNode) {
-        elem.appendChild(nameNode);
-      }
-
-      elem.appendChild(textnode);
-      elem.appendChild(infoContainer);
-
+      let rt = null;
       if (msg.retweeted_status_id > 0) {
-        var rt = document.createElement("echofon-status-retweet-status");
-        rt.setAttribute("anonid", "retweet");
-        rt.style.fontSize = (fontSize - 1) + "px";
-
         const rt_icon = e('image', {
           className: 'echofon-retweet-icon'
         });
@@ -340,13 +371,33 @@ var EchofonCommon = {
 
         const rtby = formatText({type: 'retweetedBy', children: linkToUser});
 
-        ReactDOM.render(e('box', {}, rt_icon, ...rtby), rt);
-
-        if (msg.retweeter_user_id == uid) {
-          elem.setAttribute("is_own_retweet", true);
-        }
-        elem.appendChild(rt);
+        rt = e('echofon-status-retweet-status', {
+          anonid: 'retweet',
+          style: {
+            fontSize: (fontSize - 1) + 'px',
+          },
+        }, rt_icon, ...rtby);
       }
+
+      const container = document.createElement('box');
+      ReactDOM.render(
+        e('xul:vbox', {
+          className: 'echofon-status-message-container',
+          ref: (node) => node.setAttribute('flex', '1')
+        },
+          e('xul:description', { className: 'echofon-status-message' }, nameNode, textnode),
+          e('xul:hbox', {
+            className: 'echofon-status-info',
+            ref: (node) => {
+              node.setAttribute('crop', 'right');
+              node.setAttribute('align', 'left');
+            },
+          }, info),
+          e('xul:hbox', { className: 'echofon-status-info' }, rt),
+        ),
+        container
+      );
+      elem.appendChild(container.firstChild);
     }catch (e) {
       dump(e.message+":"+e.fileName+":"+e.lineNumber+"\n");
     }

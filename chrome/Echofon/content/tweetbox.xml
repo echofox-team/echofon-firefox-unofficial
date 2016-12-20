@@ -182,7 +182,7 @@
             items = document.createElement('echofon-' + type + "-menu");
 	    menu.target = event.target;
 	  }
-	  else if (event.target.tagName == 'echofon-status' || event.target.parentNode.tagName == 'echofon-status') {
+	  else if (event.target.tagName == 'echofon-status' || event.target.closest('echofon-status')) {
             items = document.createElement('echofon-tweet-cell-menu');
             menu.target = this;
 	  }
@@ -255,17 +255,7 @@
           </xul:vbox>
 
           <!-- messages -->
-          <xul:vbox class="echofon-status-message-container" flex="1">
-            <xul:description class="echofon-status-message">
-              <children />
-            </xul:description>
-            <xul:hbox class="echofon-status-info" crop="right" align="left">
-              <children includes="echofon-status-tagline"/>
-            </xul:hbox>
-            <xul:hbox class="echofon-status-info">
-              <children includes="echofon-status-retweet-status"/>
-            </xul:hbox>
-          </xul:vbox>
+          <children />
 
           <!-- function icons -->
           <xul:vbox align="end" class="echofon-function-icon-box">
@@ -319,7 +309,7 @@
         if (!this.containerWidth) {
           this.containerWidth = window.innerWidth - 16;
         }
-        this.firstChild.style.width = (this.containerWidth-this.padding) + "px";
+        this.querySelector('.echofon-status-message:first-child').style.width = (this.containerWidth-this.padding) + "px";
 
         if (this.pb) {
           var target = this;
@@ -341,20 +331,15 @@
         <parameter name="tweet"/>
         <body>
         <![CDATA[
-          for (var i = 0; i < this.childNodes.length; ++i) {
-            var e = this.childNodes[i];
-            if (e.tagName == 'echofon-status-retweet-status') {
-              this.removeChild(e);
-              break;
-            }
-          }
+          this.querySelectorAll('echofon-status-retweet-status').forEach(e => e.remove());
+
           var rt = document.createElement("echofon-status-retweet-status");
           var fontSize = EchofonCommon.fontSize();
           rt.style.fontSize = (fontSize - 1) + "px";
           var rtby = EchofonCommon.createAnchorText(EchofonCommon.twitterURL(tweet.retweeter_screen_name), EchofonCommon.getString("you"));
           EchofonCommon.formatTextNode(rt, "retweetedBy", rtby);
           rt.id = "retweet-status-" + this.tweet.id;
-          this.appendChild(rt);
+          this.querySelector('.echofon-status-info:last-child').appendChild(rt);
           this.setAttribute("is_own_retweet", true);
           this.tweet = tweet;
         ]]>
