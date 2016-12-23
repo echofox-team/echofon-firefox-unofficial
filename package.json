@@ -4,6 +4,7 @@
   "description": "full featured, super clean Twitter app for Firefox",
   "main": "install.rdf",
   "scripts": {
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,7 +24,15 @@
   },
   "homepage": "https://github.com/echofox-team/echofon-firefox-unofficial#readme",
   "dependencies": {
+    "babel-polyfill": "^6.20.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-env": "^1.1.4",
+    "babel-preset-react": "^6.16.0",
+    "webpack": "^2.2.0-rc.1"
   }
 }

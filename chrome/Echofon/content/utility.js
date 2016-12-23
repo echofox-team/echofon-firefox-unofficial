@@ -3,170 +3,18 @@
 //
 // Copyright (c) 2009-2010 Kazuho Okui / naan studio, Inc. ALL RIGHTS RESERVED.
 //
+import { createElement as e } from 'react';
+import ReactDOM from 'react-dom';
 
-if (typeof EchofonCommon == 'undefined') {
+import AnchorText from '../../../src/components/AnchorText/index.jsx';
+import RichText from '../../../src/components/RichText/index.jsx';
+import StatusTagLine from '../../../src/components/StatusTagLine/index.jsx';
 
 Components.utils.import("resource://echofon/PhotoBackend.jsm");
-
-const e = React.createElement;
 
 function getString(key) {
   return document.getElementById("echofon-strings").getString(key).replace(/\\S/g, " ");
 }
-
-function formatText({ children, type }) {
-  const text = getString(type);
-
-  // for single value
-  let arr = text.split(/(%S)/);
-  if (arr.length > 1) {
-    arr[1] = children;
-    return arr;
-  }
-
-  // for multiple values
-  return text.split(/%(\d)\$S/).map((chunk, i) => ((i % 2) && children[parseInt(chunk)-1]) || chunk);
-}
-
-const AnchorText = ({ children, link, text, type, className = 'echofon-hyperlink', additionalClasses, style, screen_name, created_at, label }) => {
-  const attrs = {
-    style,
-    className: additionalClasses ? className + ' ' + additionalClasses : className,
-    href: link,
-    type,
-    ref: (node) => {
-      if (node) {
-        node.setAttribute('text', text);
-        node.setAttribute('tooltip', 'echofon-tooltip');
-        if (screen_name) node.setAttribute('screen_name', screen_name);
-        if (created_at) node.setAttribute('created_at', created_at);
-        if (label) node.setAttribute('label', label);
-      }
-    },
-  };
-
-  return e('label', attrs, children);
-};
-
-class RichText extends React.Component {
-  componentDidMount() {
-    const { uid, msg, parent_elem } = this.props;
-
-    if (msg.entities) {
-      return EchofonCommon.convertLinksWithEntities(uid, msg, this.refs.node, parent_elem);
-    }
-    else {
-      return EchofonCommon.convertLinksWithRegExp(uid, msg, this.refs.node, parent_elem);
-    }
-  }
-
-  render() {
-    const { user } = this.props;
-    const children = [];
-
-    var style = EchofonCommon.pref().getIntPref("displayStyle");
-    if (style !== 0) {
-      const displayName = (style == 1) ? user.name : user.screen_name;
-      const anchor = e(AnchorText, {
-        link: EchofonCommon.userViewURL(user.screen_name),
-        text: displayName,
-        type: 'username',
-        screen_name: user.screen_name,
-        additionalClasses: 'echofon-status-user',
-      }, displayName);
-
-      children.push(anchor, ' ');
-    }
-
-    return e('description', { className: 'echofon-status-body', ref: 'node' }, ...children);
-  }
-}
-
-const StatusTagLine = ({ msg, fontSize, appMode, user }) => {
-  let infoChildren = [];
-
-  var permalink = (msg.retweeted_status_id) ? msg.retweeted_status_id : msg.id;
-
-  if (msg.metadata && msg.metadata.result_type === "popular") {
-    infoChildren.push(e('description', { className: 'echofon-top-tweet' }, 'Top Tweet'));
-  }
-
-  const label = EchofonCommon.getLocalTimeForDate(msg.created_at, appMode !== 'window' && msg.type !== 'user-timeline');
-  const time = e(AnchorText, {
-    link: EchofonCommon.twitterURL(user.screen_name + "/statuses/" + permalink),
-    text: label,
-    type: 'link',
-    className: 'echofon-status-timestamp',
-    created_at: new Date(msg.created_at).getTime(),
-    label,
-  }, label);
-  infoChildren.push(time);
-
-  if (msg.source) {
-    if (msg.source.match(/<a href\=\"([^\"]*)\"[^>]*>(.*)<\/a>/)) {
-      const source = e(AnchorText, {
-        link: RegExp.$1,
-        text: RegExp.$2,
-        type: 'app',
-        className: 'echofon-source-link',
-      }, RegExp.$2);
-      const sources = formatText({type: 'via', children: source});
-
-      infoChildren.push(e('box', {}, ' '), ...sources); // whitespace box hack, if better, plz tell us
-    }
-  }
-  if (msg.place) {
-    if (appMode === 'window') {
-      const text = EchofonCommon.getFormattedString('from', [msg.place.full_name]);
-      infoChildren.push(text);
-    } else {
-        infoChildren.push(e('box', {}, e('image', { className: 'echofon-place-icon' }), msg.place.full_name));
-    }
-  }
-  if (msg.in_reply_to_status_id && msg.in_reply_to_screen_name) {
-    const link = EchofonCommon.twitterURL(msg.in_reply_to_screen_name + '/statuses/' + msg.in_reply_to_status_id);
-    if (appMode === 'window' || msg.type === 'user-timeline') {
-      const text = EchofonCommon.getFormattedString('inReplyToInline', [msg.in_reply_to_screen_name]);
-      infoChildren.push(
-        e(AnchorText, {
-          link,
-          text,
-          type: 'tweet-popup',
-          className: 'echofon-source-link echofon-source-link-left-padding',
-        }, text)
-      );
-    } else {
-      const icon = e('image', {
-        className: 'echofon-in-reply-to-icon',
-      });
-      infoChildren.push(
-        e(AnchorText, {
-          link,
-          type: 'tweet-popup',
-          className: 'echofon-source-link',
-        }, icon, msg.in_reply_to_screen_name)
-      );
-    }
-  }
-  /*
-  if (msg.metadata && msg.metadata.result_type === 'popular') {
-    if (msg.metadata.recent_retweets) {
-      infoChildren.push(e(
-        'description',
-        { className: 'echofon-top-tweet-retweets' },
-        `, retweeted ${msg.metadata.recent_retweets} times`
-      ));
-    }
-  }
-  */
-
-  return e('echofon-status-tagline', {
-    style: {
-      fontSize: (fontSize - 1) + 'px',
-      display: 'block',
-    },
-  }, ...infoChildren);
-};
 
 var EchofonCommon = {
 
@@ -369,7 +217,7 @@ var EchofonCommon = {
           type: 'username',
         }, nameLabel);
 
-        const rtby = formatText({type: 'retweetedBy', children: linkToUser});
+        const rtby = EchofonCommon.formatText({type: 'retweetedBy', children: linkToUser});
 
         rt = e('echofon-status-retweet-status', {
           anonid: 'retweet',
@@ -1046,6 +894,20 @@ var EchofonCommon = {
     return node;
   },
 
+  formatText: function({ children, type }) {
+    const text = getString(type);
+
+    // for single value
+    let arr = text.split(/(%S)/);
+    if (arr.length > 1) {
+      arr[1] = children;
+      return arr;
+    }
+
+    // for multiple values
+    return text.split(/%(\d)\$S/).map((chunk, i) => ((i % 2) && children[parseInt(chunk)-1]) || chunk);
+  },
+
   // OAuth
   //
   startOAuth: function(screen_name, callback) {
@@ -1114,11 +976,10 @@ var EchofonCommon = {
     return EchofonCommon.pref().getIntPref("fontSize");
   },
 
-  Cc: this.Components.classes,
-  Ci: this.Components.interfaces
+  Cc: Components.classes,
+  Ci: Components.interfaces
 
 };
-}
 
 function echofonObserver()
 {
@@ -1183,3 +1044,9 @@ echofonObserver.prototype.remove = function()
 {
   Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService).removeObserver(this, "echofon-status");
 };
+
+// This is the only way I found to expose globally the variables
+// the expose-loader sounds interesting but does not attach to the window object
+// or maybe I'm mistaken
+window.EchofonCommon = EchofonCommon;
+window.echofonObserver = echofonObserver;

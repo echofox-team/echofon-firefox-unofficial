@@ -1,0 +1,13 @@
+{
+  "presets": [
+    ["env", {
+      "debug": true,
+      "targets": {
+        "firefox": 45
+      },
+      "modules": false,
+      "useBuiltIns": true
+    }],
+    "react"
+  ]
+}
