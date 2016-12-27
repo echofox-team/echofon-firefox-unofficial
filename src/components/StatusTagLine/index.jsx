@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AnchorText from '../AnchorText/index.jsx';
+import AnchorText from '../AnchorText';
 
 const StatusTagLine = ({ msg, fontSize, appMode, user }) => {
   let infoChildren = [];

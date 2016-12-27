@@ -1,9 +1,6 @@
 import React from 'react';
 
-// this should be elsewhere
-const DISPLAY_STYLE_BOTH = 0;
-const DISPLAY_STYLE_NAME = 1;
-const DISPLAY_STYLE_SCREEN_NAME = 2;
+import * as DisplayStyles from '../../constants/display-style';
 
 class RichText extends React.Component {
   componentDidMount() {
@@ -21,7 +18,7 @@ class RichText extends React.Component {
       const { user } = this.props;
       const style = EchofonCommon.pref().getIntPref("displayStyle");
 
-      const displayName = (style === DISPLAY_STYLE_NAME) ? user.name : user.screen_name;
+      const displayName = (style === DisplayStyles.NAME) ? user.name : user.screen_name;
 
       return (
         <AnchorText
@@ -45,8 +42,8 @@ class RichText extends React.Component {
 
     return (
       <description className="echofon-status-body" ref="node">
-        {style !== DISPLAY_STYLE_BOTH && this.renderNameHeader()}
-        {style !== DISPLAY_STYLE_BOTH && ' '}
+        {style !== DisplayStyles.BOTH && this.renderNameHeader()}
+        {style !== DisplayStyles.BOTH && ' '}
         {/* appended when component mount, this will change */}
       </description>
     );

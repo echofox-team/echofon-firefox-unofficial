@@ -6,9 +6,8 @@
 import { createElement as e } from 'react';
 import ReactDOM from 'react-dom';
 
-import AnchorText from '../../../src/components/AnchorText/index.jsx';
-import RichText from '../../../src/components/RichText/index.jsx';
-import StatusTagLine from '../../../src/components/StatusTagLine/index.jsx';
+import AnchorText from '../../../src/components/AnchorText';
+import TweetCell from '../../../src/components/TweetCell';
 
 Components.utils.import("resource://echofon/PhotoBackend.jsm");
 
@@ -111,146 +110,10 @@ var EchofonCommon = {
     const id = "echofon-status-" + tweet.type + "-" + tweet.id;
     if (document.getElementById(id)) return null;
 
-    var elem = document.createElement("echofon-status");
-    elem.id = id;
-    elem.setAttribute("messageId", tweet.id);
-    elem.setAttribute("type", tweet.type);
-    if (tweet.retweeted_status_id) {
-      elem.createdAt   = new Date(tweet.retweeted_at).getTime();
-    }
-    else {
-      elem.createdAt   = new Date(tweet.created_at).getTime();
-    }
-    elem.unread      = tweet.unread;
-    elem.tweet       = tweet;
-    elem.uid         = uid;
-    elem.user        = tweet.user;
-    elem.highlighted = highlighted;
-    elem.appMode   = EchofonCommon.pref().getCharPref("applicationMode");
+    const container = document.createElement('box');
+    ReactDOM.render(<TweetCell uid={uid} id={id} tweet={tweet} highlighted={highlighted} />, container);
 
-    try{
-      elem.setAttribute("messageId", elem.tweet.id);
-      var fontSize = EchofonCommon.fontSize();
-      if (!elem.getAttribute("user-timeline")) {
-        elem.setAttribute("mode", elem.appMode);
-      }
-      elem.style.fontSize = fontSize + "px";
-      elem.style.fontFamily = EchofonCommon.pref().getCharPref("fontFace");
-
-
-      var msg = elem.tweet;
-      var user = elem.user;
-
-      elem.setAttribute("profile_image_url", user.profile_image_url);
-
-      elem.setAttribute("href", EchofonCommon.userViewURL(user.screen_name));
-
-      elem.setAttribute("replyButtonTooltip", EchofonCommon.getFormattedString("ReplyTo", [elem.user.screen_name]));
-      elem.setAttribute("screen_name", user.screen_name);
-      if (user.id == elem.uid) {
-        elem.setAttribute('is_own_tweet', true);
-      }
-
-      elem.setAttribute("name", user.name);
-
-      elem.setAttribute("requestFavorite", false);
-      elem.setAttribute("favorited", msg.favorited);
-      elem.setAttribute("favoriteButtonTooltip", EchofonCommon.getString(msg.favorited ? "UnfavoriteTweet" : "FavoriteTweet"));
-      elem.setAttribute("isFavorited", (msg.favorited) ? "block" : "none");
-      elem.setAttribute("text", msg.full_text);
-      elem.setAttribute("protected", user.protected ? 1 : 0);
-      if (msg.has_mention && msg.type == 'home') {
-        elem.setAttribute("highlighted", true);
-      }
-      if (msg.retweeted_status_id > 0 && msg.retweeter_user_id == uid) {
-        elem.setAttribute("is_own_retweet", true);
-      }
-
-      const style = this.pref().getIntPref("displayStyle");
-      let nameNode =  null;
-      if (style === 0) {
-        const anchor = e(AnchorText, {
-          link: this.userViewURL(user.screen_name),
-          text: user.name,
-          type: 'username',
-          screen_name: user.screen_name,
-          additionalClasses: 'echofon-status-user'
-        }, user.name);
-
-        const screenName = e(AnchorText, {
-          link: this.userViewURL(user.screen_name),
-          text: `@${user.screen_name}`,
-          type: 'username',
-          className: 'echofon-status-additional-screen-name',
-          screen_name: user.screen_name,
-          style: msg.type != 'user-timeline' ? {
-            fontSize: (fontSize - 1) + 'px',
-          } : undefined,
-        }, `@${user.screen_name}`);
-
-        nameNode = e('description', {
-          className: 'echofon-status-body',
-        }, anchor, screenName);
-      }
-
-      const textnode = e(RichText, {
-        className: 'echofon-status-body',
-        uid,
-        msg,
-        user,
-        parent_elem: elem,
-      });
-
-      const info = e(StatusTagLine, { msg, fontSize, appMode: elem.appMode, user });
-
-      let rt = null;
-      if (msg.retweeted_status_id > 0) {
-        const rt_icon = e('image', {
-          className: 'echofon-retweet-icon'
-        });
-
-        const nameLabel = msg.retweeter_user_id == uid ? EchofonCommon.getString("you") : msg.retweeter_screen_name;
-        const linkToUser = e(AnchorText, {
-          link: EchofonCommon.userViewURL(msg.retweeter_screen_name),
-          text: nameLabel,
-          screen_name: msg.retweeter_screen_name,
-          type: 'username',
-        }, nameLabel);
-
-        const rtby = EchofonCommon.formatText({type: 'retweetedBy', children: linkToUser});
-
-        rt = e('echofon-status-retweet-status', {
-          anonid: 'retweet',
-          style: {
-            fontSize: (fontSize - 1) + 'px',
-          },
-        }, rt_icon, ...rtby);
-      }
-
-      const container = document.createElement('box');
-      ReactDOM.render(
-        e('xul:vbox', {
-          className: 'echofon-status-message-container',
-          ref: (node) => node.setAttribute('flex', '1')
-        },
-          e('xul:description', { className: 'echofon-status-message' }, nameNode, textnode),
-          e('xul:hbox', {
-            className: 'echofon-status-info',
-            ref: (node) => {
-              node.setAttribute('crop', 'right');
-              node.setAttribute('align', 'left');
-            },
-          }, info),
-          e('xul:hbox', { className: 'echofon-status-info' }, rt),
-        ),
-        container
-      );
-      elem.appendChild(container.firstChild);
-    }catch (e) {
-      dump(e.message+":"+e.fileName+":"+e.lineNumber+"\n");
-    }
-
-    return elem;
+    return container.firstChild;
   },
 
   findStatusElement: function(tweet_id) {

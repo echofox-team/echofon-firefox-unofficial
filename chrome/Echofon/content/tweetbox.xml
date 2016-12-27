@@ -309,7 +309,7 @@
         if (!this.containerWidth) {
           this.containerWidth = window.innerWidth - 16;
         }
-        this.querySelector('.echofon-status-message:first-child').style.width = (this.containerWidth-this.padding) + "px";
+        this.querySelector('.echofon-status-body').style.width = (this.containerWidth-this.padding) + "px";
 
         if (this.pb) {
           var target = this;
