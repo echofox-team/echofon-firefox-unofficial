@@ -54,7 +54,7 @@ class TweetCell extends React.Component {
       href: EchofonCommon.userViewURL(user.screen_name),
       replyButtonTooltip: EchofonCommon.getFormattedString("ReplyTo", [user.screen_name]),
       screen_name: user.screen_name,
-      is_own_tweet: user.id === uid,
+      is_own_tweet: user.id === uid || undefined,
       name: user.name,
       requestFavorite: false,
       favorited: msg.favorited,
@@ -62,8 +62,8 @@ class TweetCell extends React.Component {
       isFavorited: (msg.favorited) ? 'block' : 'none',
       text: msg.full_text,
       protected: user.protected ? 1 : 0,
-      highlighted: msg.has_mention && msg.type == 'home',
-      is_own_retweet: msg.retweeted_status_id > 0 && msg.retweeter_user_id == uid,
+      highlighted: msg.has_mention && msg.type == 'home' || undefined,
+      is_own_retweet: msg.retweeted_status_id > 0 && msg.retweeter_user_id == uid || undefined,
     };
 
     const style = EchofonCommon.pref().getIntPref("displayStyle");
