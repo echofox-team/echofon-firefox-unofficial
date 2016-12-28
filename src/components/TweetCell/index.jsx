@@ -7,10 +7,16 @@ import RichText from '../RichText';
 import StatusTagLine from '../StatusTagLine';
 
 class TweetCell extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
-    this.state = {};
+    this.state = {
+      tweet: props.tweet,
+      containerWidth: window.innerWidth - 16,
+      padding: 10 + 32 + 5 + 18 + 5, // left avator spacing icons right
+    };
+
+    this.setRetweet = this.setRetweet.bind(this);
   }
 
   componentDidMount() {
@@ -27,12 +33,41 @@ class TweetCell extends React.Component {
     this.setState({node: this.node});
   }
 
+  handleBuildContent() {
+    const { node } = this.state;
+    let padding = this.state.padding;
+
+    if (node.pb) {
+      padding += 64;
+    }
+    if (node.getAttribute("user-timeline")) {
+      padding += 24;
+    }
+    else if (EchofonCommon.pref().getCharPref("applicationMode") !== 'window') {
+      padding  -= (8+5);
+      if (node.pb) {
+        padding -= 12;
+      }
+    }
+
+    node.padding = padding;
+    this.setState({padding});
+  }
+
+  setRetweet(tweet) {
+    this.state.node.tweet = tweet;
+
+    this.setState({tweet});
+  }
+
   render() {
-    const { uid, id, tweet, highlighted } = this.props;
+    const { uid, id, highlighted } = this.props;
+    const { tweet, containerWidth, padding } = this.state;
     const appMode = EchofonCommon.pref().getCharPref("applicationMode");
     const fontSize = EchofonCommon.fontSize();
     const msg = tweet;
     const { user } = tweet;
+
     const attrs = {
       id,
       messageId: tweet.id,
@@ -40,9 +75,14 @@ class TweetCell extends React.Component {
       highlighted,
       ref: (node) => {
         if (node) {
+          node.padding = padding;
           if (!node.getAttribute("user-timeline")) {
             node.setAttribute("mode", appMode);
           }
+
+          node.doRetweet = this.setRetweet;
+          node.undoRetweet = this.setRetweet;
+
           this.node = node;
         }
       },
@@ -71,6 +111,8 @@ class TweetCell extends React.Component {
     const XULVbox = 'xul:vbox';
     const XULHbox = 'xul:hbox';
     const XULDescription = 'xul:description';
+    const XULBox = 'xul:box';
+    const XULSpacer = 'xul:spacer';
 
     const namesProps = {
       link: EchofonCommon.userViewURL(user.screen_name),
@@ -81,11 +123,29 @@ class TweetCell extends React.Component {
 
     return (
       <echofon-status {...attrs}>
+
+        <XULVbox>
+          <XULBox
+            className="echofon-status-usericon"
+            style={{ background: `url(${user.profile_image_url})` }}
+            href={EchofonCommon.userViewURL(user.screen_name)}
+            ref={(node) => {
+              if (node) {
+                node.user = user;
+                node.setAttribute('anonid', 'usericon');
+                node.setAttribute('tooltip', 'echofon-user-tooltip');
+                node.setAttribute('align', 'top');
+              }
+            }}
+          />
+          <XULSpacer ref={(node) => node && node.setAttribute('flex', 1)} />
+        </XULVbox>
+
         <XULVbox className="echofon-status-message-container" ref={(node) => node && node.setAttribute('flex', '1')}>
           <XULDescription className="echofon-status-message">
 
             {style === DisplayStyles.BOTH && (
-              <description className="echofon-status-body">
+              <description className="echofon-status-body" style={{ width: `${containerWidth - padding}px` }}>
                 <AnchorText additionalClasses="echofon-status-user" {...namesProps}>
                   {user.name}
                 </AnchorText>
@@ -103,6 +163,7 @@ class TweetCell extends React.Component {
 
             {this.state.node && <RichText
               className="echofon-status-body"
+              onBuildContent={this.handleBuildContent.bind(this)}
               uid={uid}
               msg={msg}
               user={user}
@@ -138,6 +199,7 @@ class TweetCell extends React.Component {
             )}
           </XULHbox>
         </XULVbox>
+
       </echofon-status>
     );
   }

@@ -249,11 +249,6 @@
         <xul:hbox flex="1" class="echofon-status-container">
 
           <!-- user icon -->
-          <xul:vbox>
-            <xul:box anonid="usericon" class="echofon-status-usericon" align="top" tooltip="echofon-user-tooltip" xbl:inherits="href"/>
-            <xul:spacer flex="1" />
-          </xul:vbox>
-
           <!-- messages -->
           <children />
 
@@ -289,28 +284,6 @@
     <implementation>
 
       <constructor>
-        var icon = document.getAnonymousElementByAttribute(this, "anonid", "usericon");
-        icon.style.background = "url(" + this.user.profile_image_url + ")";
-        icon.user = this.user;
-
-        this.padding = 10 + 32 + 5 + 18 + 5; // left avator spacing icons right
-        if (this.pb) {
-          this.padding += 64;
-        }
-        if (this.getAttribute("user-timeline")) {
-          this.padding += 24;
-        }
-        else if (this.appMode != "window") {
-          this.padding  -= (8+5);
-          if (this.pb) {
-            this.padding -= 12;
-          }
-        }
-        if (!this.containerWidth) {
-          this.containerWidth = window.innerWidth - 16;
-        }
-        this.querySelector('.echofon-status-body').style.width = (this.containerWidth-this.padding) + "px";
-
         if (this.pb) {
           var target = this;
           var u = this.pb.thumbnailURL(target);
@@ -326,37 +299,6 @@
 	  this.setAttribute("border", val);
 	</setter>
       </property>
-
-      <method name="doRetweet">
-        <parameter name="tweet"/>
-        <body>
-        <![CDATA[
-          this.querySelectorAll('echofon-status-retweet-status').forEach(e => e.remove());
-
-          var rt = document.createElement("echofon-status-retweet-status");
-          var fontSize = EchofonCommon.fontSize();
-          rt.style.fontSize = (fontSize - 1) + "px";
-          var rtby = EchofonCommon.createAnchorText(EchofonCommon.twitterURL(tweet.retweeter_screen_name), EchofonCommon.getString("you"));
-          EchofonCommon.formatTextNode(rt, "retweetedBy", rtby);
-          rt.id = "retweet-status-" + this.tweet.id;
-          this.querySelector('.echofon-status-info:last-child').appendChild(rt);
-          this.setAttribute("is_own_retweet", true);
-          this.tweet = tweet;
-        ]]>
-        </body>
-      </method>
-
-      <method name="undoRetweet">
-        <parameter name="tweet"/>
-        <body>
-        var rt = document.getElementById("retweet-status-" + this.tweet.id);
-        if (rt) {
-          rt.parentNode.removeChild(rt);
-        }
-        this.removeAttribute("is_own_retweet");
-        this.tweet = tweet;
-        </body>
-      </method>
 
       <method name="setFavorited">
         <parameter name="val"/>

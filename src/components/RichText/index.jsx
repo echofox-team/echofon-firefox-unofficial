@@ -7,11 +7,13 @@ class RichText extends React.Component {
     const { uid, msg, parent_elem } = this.props;
 
     if (msg.entities) {
-      return EchofonCommon.convertLinksWithEntities(uid, msg, this.refs.node, parent_elem);
+      EchofonCommon.convertLinksWithEntities(uid, msg, this.refs.node, parent_elem);
     }
     else {
-      return EchofonCommon.convertLinksWithRegExp(uid, msg, this.refs.node, parent_elem);
+      EchofonCommon.convertLinksWithRegExp(uid, msg, this.refs.node, parent_elem);
     }
+
+    this.props.onBuildContent();
   }
 
   renderNameHeader() {
