@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <link rel="stylesheet" type="text/css" href="{{ '/assets/css/print.css' | relative_url }}" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>{{ site.title | default: site.github.repository_name }} by {{ site.github.owner_name }}</title>
+    <style>
+      a.button, #view-on-github { float: none; margin: auto; }
+      #download-xpi span {
+        background: transparent url(https://addons.cdn.mozilla.net/static/img/addon-icons/default-32.png) 5px 50% no-repeat;
+        background-size: 23px;
+        padding-left: 30px;
+      }
+
+      #download-meta {
+        font-style: italic;
+        font-size: 12px;
+        margin: 15px;
+        color: #aaa;
+        text-align: center;
+      }
+
+      #main_content, footer { text-align: center; }
+    </style>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>{{ site.title | default: site.github.repository_name }}</h1>
+          <h2>{{ site.description | default: site.github.project_tagline }}</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="#" id="download-xpi" class="button"><span>Download latest .zip</span></a>
+          <p id="download-meta"></p>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          {{ content }}
+          <a href="{{ site.github.repository_url }}" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <footer>
+        {% if site.github.is_project_page %}
+          {{ site.title | default: site.github.repository_name }} is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a><br>
+        {% endif %}
+        </footer>
+
+      </div>
+    </div>
+
+    <script>
+      // fetch('https://api.github.com/repos/{{ site.github.owner_url }}/{{ site.github.repository_name }}/releases/latest')
+      fetch('https://api.github.com/repos/echofox-team/echofon-firefox-unofficial/releases/latest')
+      .then((response) => response.json())
+      .then((release) => {
+        var asset = release.assets[0];
+        var downloadCount = asset.download_count;
+        
+        var oneHour = 60 * 60 * 1000;
+        var oneDay = 24 * oneHour;
+        var dateDiff = new Date() - new Date(asset.updated_at);
+        var timeAgo;
+        if (dateDiff < oneDay) {
+          timeAgo = (dateDiff / oneHour).toFixed(1) + " hours ago";
+        } else {
+          timeAgo = (dateDiff / oneDay).toFixed(1) + " days ago";
+        }
+
+        var button = document.getElementById('download-xpi');
+        button.setAttribute('href', asset.browser_download_url);
+        button.firstChild.innerHTML = "Install Echofon " + release.tag_name;
+
+        document.getElementById('download-meta').innerHTML = "Released " + timeAgo + " and downloaded " + downloadCount.toLocaleString() + " times.";
+      });
+    </script>
+
+    {% if site.google_analytics %}
+      <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+      </script>
+      <script type="text/javascript">
+        try {
+          var pageTracker = _gat._getTracker("{{ site.google_analytics }}");
+        pageTracker._trackPageview();
+        } catch(err) {}
+      </script>
+    {% endif %}
+  </body>
+</html>
