@@ -1130,6 +1130,15 @@ TimelineLoader.prototype = {
   },
 
   status_received: function(status) {
+    // TODO: remove when Twitter changes Streaming API to extended mode
+    status.full_text = (status.extended_tweet && status.extended_tweet.full_text) || status.text;
+    status.entities = (status.extended_tweet && status.extended_tweet.entities) || status.entities;
+    if (status.retweeted_status) {
+      var retweet = status.retweeted_status;
+      retweet.full_text = (retweet.extended_tweet && retweet.extended_tweet.full_text) || retweet.text;
+      retweet.entities = (retweet.extended_tweet && retweet.extended_tweet.entities) || retweet.entities;
+    }
+
     var tweet = new EchofonModel.Status(status, HOME_TIMELINE, this.token.user_id);
 
     // Do not display blocked user
@@ -1150,7 +1159,7 @@ TimelineLoader.prototype = {
       else {
         // if tweet has 'text@screen_name', it should be discarded
         var pat = new RegExp("@(" + this.token.screen_name + ")([^A-Za-z_].*)?$");
-        if (pat.test(tweet.text)) {
+        if (pat.test(tweet.full_text)) {
           return;
         }
         tweet.type = SEARCH_TIMELINE;

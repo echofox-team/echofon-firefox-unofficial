@@ -785,7 +785,7 @@
           this.setAttribute("screen_name", '@' + val.screen_name);
           this.setAttribute("href", EchofonCommon.userViewURL(val.screen_name));
           this.setAttribute("name", val.name);
-          this.setAttribute("text", (val.status) ? val.status.text : "");
+          this.setAttribute("text", (val.status) ? val.status.full_text : "");
         </setter>
       </property>
 

@@ -167,7 +167,7 @@ var EchofonCommon = {
 
       var textnode = EchofonCommon.buildRichTextNode(uid, msg, user, elem);
       textnode.className = "echofon-status-body";
-      elem.setAttribute("text", msg.text);
+      elem.setAttribute("text", msg.full_text);
       elem.setAttribute("protected", user.protected ? 1 : 0);
       if (msg.has_mention && msg.type == 'home') {
         elem.setAttribute("highlighted", true);
@@ -375,7 +375,7 @@ var EchofonCommon = {
   convertLinksWithRegExp: function(uid, msg, elem, parent_elem) {
 
     var escape = this.Cc["@mozilla.org/feed-unescapehtml;1"].getService(this.Ci.nsIScriptableUnescapeHTML);
-    var text = escape.unescape(msg.text.replace(/&amp;/g,"&"));
+    var text = escape.unescape((msg.full_text || msg.text).replace(/&amp;/g,"&"));
 
     var pat = /((https?\:\/\/|www\.)[^\s]+)([^\w\s\d]*)/g;
     var re = /[!.,;:)}\]]+$/;
@@ -447,7 +447,7 @@ var EchofonCommon = {
     }
 
     var index = 0;
-    var text = msg.text;
+    var text = msg.full_text || msg.text;
     for (var i in entities) {
       if (!entities.hasOwnProperty(i)) continue;
       var type = entities[i]['type'];

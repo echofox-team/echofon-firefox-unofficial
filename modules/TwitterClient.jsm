@@ -137,11 +137,11 @@ TwitterClient.buildOAuthHeader = function (user, method, url, param)
 
 TwitterClient.prototype = {
   get: function(method, params, callback) {
-    this._req = this.createRequest("GET", method, params, callback);
+    this._req = this.createRequest("GET", method, Object.assign({}, params, {tweet_mode: "extended"}), callback);
   },
 
   post: function(method, params, callback) {
-    this._req = this.createRequest("POST", method, params, callback);
+    this._req = this.createRequest("POST", method, Object.assign({}, params, {tweet_mode: "extended"}), callback);
   },
 
   stream: function(query) {
