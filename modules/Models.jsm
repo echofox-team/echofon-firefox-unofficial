@@ -6,7 +6,7 @@
 
 var EXPORTED_SYMBOLS = ["EchofonModel"];
 
-const SCHEMA_VERSION = 2;
+const SCHEMA_VERSION = 3;
 const MAX_STATUSES = 10000;
 const { classes: Cc, interfaces: Ci } = Components;
 
@@ -381,7 +381,7 @@ EchofonModel.User.updateFollowing = function(db, friends) {
 // Status model
 //
 const STATUS_COLUMNS = [
-    'id', 'id_str', 'user_id', 'text', 'created_at', 'source', 'latitude', 'longitude',
+    'id', 'id_str', 'user_id', 'full_text', 'created_at', 'source', 'latitude', 'longitude',
     'in_reply_to_status_id', 'in_reply_to_screen_name',
     'retweeted_status_id', 'retweeter_user_id', 'retweeter_screen_name', 'retweeted_at',
     'favorited', 'place', 'entities'
@@ -400,7 +400,7 @@ EchofonModel.Status = function(json, type, recipient_id)
     this.retweeter_screen_name = json.user.screen_name;
     this.retweeter_user_id     = json.user.id;
     this.retweeted_at          = json.created_at;
-    var keys = ['user', 'text', 'full_text', 'created_at', 'source', 'geo', 'in_reply_to_status_id', 'in_reply_to_user_id', 'in_reply_to_screen_name', 'entities'];
+    var keys = ['user', 'full_text', 'created_at', 'source', 'geo', 'in_reply_to_status_id', 'in_reply_to_user_id', 'in_reply_to_screen_name', 'entities'];
     for (var i in keys) {
       var key = keys[i];
       if (json['retweeted_status'][key]) {
@@ -552,7 +552,6 @@ EchofonModel.Status.initWithStatement = function(stmt, type, recipient_id)
     status[col] = stmt.row[col];
   }
   status.id = status.id_str;
-  status.full_text = status.text;
   try {status.place    = JSON.parse(status.place) } catch (e) {}
   try {status.entities = JSON.parse(status.entities)} catch (e) {}
 
@@ -572,7 +571,6 @@ EchofonModel.Status.initWithRow = function(row, type, recipient_id)
     ++index;
   }
   status.id = status.id_str;
-  status.full_text = status.text;
   try {status.place    = JSON.parse(status.place) } catch (e) {}
   try {status.entities = JSON.parse(status.entities)} catch (e) {}
 
