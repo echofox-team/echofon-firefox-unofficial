@@ -5,6 +5,7 @@
 //
 import { createElement as e } from 'react';
 import ReactDOM from 'react-dom';
+import { substring, length } from 'stringz'; // emoji breaks string manipulation
 
 import AnchorText from '../../../src/components/AnchorText';
 import TweetCell from '../../../src/components/TweetCell';
@@ -250,43 +251,21 @@ var EchofonCommon = {
     //
     // sort entities.
     //
-    var entities = [];
-    if (msg.entities) {
-      for (var i in msg.entities) {
-        if (msg.entities.hasOwnProperty(i)) {
-          var key = i;
-          for (var j in msg.entities[key]) {
-            if (msg.entities[key].hasOwnProperty(j)) {
-              var value = msg.entities[key][j];
-              entities.push({'type':key, 'value':value})
-            }
-          }
-        }
-      }
-    }
-    function sort_entities(a,b) {
-      var aa = a.value.indices[0];
-      var bb = b.value.indices[0];
-      return aa - bb;
-    }
-
-    entities.sort(sort_entities);
+    const entities = Object.entries(msg.entities)
+      .reduce(
+        (prev, [type, value]) =>
+          prev.concat(value.map(entity => ({ type, value: entity }))),
+        []
+      )
+      .sort((a, b) => a.value.indices[0] - b.value.indices[0]);
 
     //
     // building tweet with urls, mentions and hashtags.
     //
-    function unescape(a) {
-      var escape = Cc["@mozilla.org/feed-unescapehtml;1"].getService(Ci.nsIScriptableUnescapeHTML);
-      if (a[0] == ' ') {
-        return ' ' + escape.unescape(a);
-      }
-      else {
-        return escape.unescape(a);
-      }
-    }
 
     var index = 0;
     var text = msg.full_text || msg.text;
+    var elements = [];
     for (var i in entities) {
       if (!entities.hasOwnProperty(i)) continue;
       var type = entities[i]['type'];
@@ -296,11 +275,11 @@ var EchofonCommon = {
       var end   = entity['indices'][1];
       if (start < index || end < start) continue;
 
-      var left = text.substring(index, start);
+      var left = substring(text, index, start);
       if (left) {
-        elem.appendChild(document.createTextNode(unescape(left)));
+        elements.push(document.createTextNode(left));
       }
-      var linked_text = unescape(text.substring(start, end));
+      var linked_text = substring(text, start, end);
       var a;
       switch (type) {
         case "urls":
@@ -344,12 +323,63 @@ var EchofonCommon = {
         default:
           break;
       }
-      elem.appendChild(a);
+      elements.push(a);
       index = entity['indices'][1];
     }
-    if (text && index < text.length) {
-      elem.appendChild(document.createTextNode(unescape(text.substring(index, text.length))));
+    if (text && index < length(text)) {
+      elements.push(document.createTextNode(substring(text, index, length(text))));
     }
+
+    elements.forEach(e => elem.appendChild(e));
+
+    return elem;
+  },
+
+  // Compatibility function until we can delete the old one
+  convertLinksWithEntitiesNew: function(uid, msg, elem, parent_elem) {
+    //
+    // sort entities.
+    //
+    const entities = Object.entries(msg.entities)
+      .reduce(
+        (prev, [type, value]) =>
+          prev.concat(value.map(entity => ({ type, value: entity }))),
+        []
+      )
+      .sort((a, b) => a.value.indices[0] - b.value.indices[0]);
+
+    //
+    // building tweet with urls, mentions and hashtags.
+    //
+
+    var index = 0;
+    var text = msg.full_text || msg.text;
+    for (var i in entities) {
+      if (!entities.hasOwnProperty(i)) continue;
+      var type = entities[i]['type'];
+      var entity = entities[i]['value'];
+
+      var start = entity['indices'][0];
+      var end   = entity['indices'][1];
+      if (start < index || end < start) continue;
+
+      switch (type) {
+        case "urls":
+          this.checkPhotoURL(parent_elem, entity['expanded_url'] ? entity['expanded_url'] : entity['url']);
+          break;
+
+        case "media":
+          if (entity.type == "photo") {
+            parent_elem.setAttribute("status-photo", entity['url']);
+            parent_elem.pb = EchofonPhotoBackend.initWithEntity(entity);
+          }
+          break;
+        default:
+          break;
+      }
+      index = entity['indices'][1];
+    }
+
     return elem;
   },
 
@@ -373,8 +403,8 @@ var EchofonCommon = {
       text = RegExp.rightContext;
 
       var followed = '';
-      if (leftContext.length) {
-        followed = leftContext[leftContext.length-1];
+      if (length(leftContext)) {
+        followed = leftContext[length(leftContext)-1];
         var pat2 = /[A-Za-z0-9]/;
         if (pat2.test(followed)) {
           elem.appendChild(document.createTextNode(leftContext + matched));
