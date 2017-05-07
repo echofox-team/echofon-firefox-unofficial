@@ -32,13 +32,14 @@
     <em:homepageURL>https://github.com/echofox-team/echofon-firefox-unofficial</em:homepageURL>
     <em:iconURL>chrome://echofon/content/images/icon.png</em:iconURL>
     <em:optionsURL>chrome://echofon/content/preferences/preferences.xul</em:optionsURL>
+    <em:multiprocessCompatible>true</em:multiprocessCompatible>
 
     <!-- Firefox -->
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-        <em:minVersion>3.6.4</em:minVersion>
-        <em:maxVersion>54.0</em:maxVersion>
+        <em:minVersion>45</em:minVersion>
+        <em:maxVersion>55.0</em:maxVersion>
       </Description>
     </em:targetApplication>
   </Description>
