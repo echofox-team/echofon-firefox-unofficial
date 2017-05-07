@@ -9,7 +9,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: 'build/src/chrome/Echofon/content',
-    libraryTarget: 'var',
+    libraryTarget: 'umd',
   },
   module: {
     rules: [

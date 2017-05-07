@@ -16,7 +16,7 @@ function getString(key) {
   return document.getElementById("echofon-strings").getString(key).replace(/\\S/g, " ");
 }
 
-var EchofonCommon = {
+export var EchofonCommon = {
 
   FFVersion: 0,
 
@@ -874,7 +874,7 @@ var EchofonCommon = {
 
 };
 
-function echofonObserver()
+export function echofonObserver()
 {
   Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService).addObserver(this, "echofon-status", false);
 }
@@ -937,9 +937,3 @@ echofonObserver.prototype.remove = function()
 {
   Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService).removeObserver(this, "echofon-status");
 };
-
-// This is the only way I found to expose globally the variables
-// the expose-loader sounds interesting but does not attach to the window object
-// or maybe I'm mistaken
-window.EchofonCommon = EchofonCommon;
-window.echofonObserver = echofonObserver;
