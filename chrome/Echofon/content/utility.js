@@ -247,6 +247,29 @@ export var EchofonCommon = {
     return elem;
   },
 
+  convertLinksWithRegExpNew: function(msg, parent_elem) {
+    var text = (msg.full_text || msg.text).replace(/&amp;/g,"&");
+
+    var pat = /((https?\:\/\/|www\.)[^\s]+)([^\w\s\d]*)/g;
+    var re = /[!.,;:)}\]]+$/;
+
+    while (pat.exec(text) != null) {
+      var url = RegExp.$1;
+      text = RegExp.rightContext;
+      if (re.test(url)) {
+        text = RegExp.lastMatch + text;
+        url = url.replace(re, '');
+      }
+
+      var urltext = url;
+      if (url.length > 27) {
+        urltext = url.substr(0, 27) + "...";
+      }
+      this.checkPhotoURL(parent_elem, urltext);
+      pat.lastIndex = 0;
+    }
+  },
+
   convertLinksWithEntities: function(uid, msg, elem, parent_elem) {
     //
     // sort entities.
@@ -336,7 +359,7 @@ export var EchofonCommon = {
   },
 
   // Compatibility function until we can delete the old one
-  convertLinksWithEntitiesNew: function(uid, msg, elem, parent_elem) {
+  convertLinksWithEntitiesNew: function(msg, parent_elem) {
     //
     // sort entities.
     //
@@ -379,8 +402,6 @@ export var EchofonCommon = {
       }
       index = entity['indices'][1];
     }
-
-    return elem;
   },
 
   checkPhotoURL: function(elem, url) {

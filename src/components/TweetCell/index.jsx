@@ -34,8 +34,15 @@ class TweetCell extends React.Component {
   }
 
   handleBuildContent() {
-    const { node } = this.state;
+    const { node, tweet } = this.state;
     let padding = this.state.padding;
+
+    if (tweet.entities) {
+      EchofonCommon.convertLinksWithEntitiesNew(tweet, node);
+    }
+    else {
+      EchofonCommon.convertLinksWithRegExpNew(tweet, node);
+    }
 
     if (node.pb) {
       padding += 64;

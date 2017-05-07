@@ -5,17 +5,102 @@ import AnchorText from '../AnchorText';
 
 import * as DisplayStyles from '../../constants/display-style';
 
-class RichText extends React.Component {
-  componentDidMount() {
-    const { uid, msg, parent_elem } = this.props;
+const convertFollowLink = (text) => {
+  var pat = /([@＠]([A-Za-z0-9_]+(?:\/[\w-]+)?)|[#＃][A-Za-z0-9_]+)/;
 
-    if (msg.entities) {
-      EchofonCommon.convertLinksWithEntitiesNew(uid, msg, this.refs.node, parent_elem);
+  const elements = [];
+  while(pat.exec(text) != null) {
+
+    var leftContext = RegExp.leftContext;
+    var matched = RegExp.$1;
+    var username = RegExp.$2;
+    var atUsername = RegExp.lastMatch;
+    text = RegExp.rightContext;
+
+    var followed = '';
+    if (length(leftContext)) {
+      followed = leftContext[length(leftContext)-1];
+      var pat2 = /[A-Za-z0-9]/;
+      if (pat2.test(followed)) {
+        elements.push(leftContext + matched)
+        continue;
+      }
+    }
+
+    elements.push(leftContext);
+    if (atUsername[0] == '@' || atUsername[0] == '＠') {
+      if (followed == '_') {
+        elements.push(matched);
+        continue;
+      }
+      elements.push(
+        <AnchorText
+          link={EchofonCommon.userViewURL(username)}
+          text={atUsername}
+          type="username"
+          screen_name={atUsername}
+        >
+          {atUsername}
+        </AnchorText>
+      )
     }
     else {
-      EchofonCommon.convertLinksWithRegExp(uid, msg, this.refs.node, parent_elem);
+      elements.push(
+        <AnchorText link={atUsername} text={atUsername} type="hashtag">
+          {atUsername}
+        </AnchorText>
+      )
+    }
+    pat.lastIndex = 0;
+  }
+  if (text) {
+    elements.push(text);
+  }
+
+  return elements;
+};
+
+const convertLinksWithRegExp = (text) => {
+  const e = document.createElement('div');
+  e.innerHTML = text;
+  var text = e.textContent;
+
+  var pat = /((https?\:\/\/|www\.)[^\s]+)([^\w\s\d]*)/g;
+  var re = /[!.,;:)}\]]+$/;
+
+  const elements = [];
+  while (pat.exec(text) != null) {
+    var left = RegExp.leftContext;
+    var url = RegExp.$1;
+    text = RegExp.rightContext;
+    if (re.test(url)) {
+      text = RegExp.lastMatch + text;
+      url = url.replace(re, '');
     }
 
+    elements.push(...convertFollowLink(left));
+
+    var urltext = url;
+    if (url.length > 27) {
+      urltext = url.substr(0, 27) + "...";
+    }
+    elements.push(
+      <AnchorText link={url} text={urltext} type="link">
+        {urltext}
+      </AnchorText>
+    );
+    pat.lastIndex = 0;
+  }
+
+  if (text) {
+    elements.push(...convertFollowLink(text));
+  }
+
+  return elements;
+};
+
+class RichText extends React.Component {
+  componentDidMount() {
     this.props.onBuildContent();
   }
 
@@ -60,7 +145,9 @@ class RichText extends React.Component {
       //
 
       var index = 0;
-      var text = msg.full_text || msg.text;
+      const e = document.createElement('div');
+      e.innerHTML = msg.full_text || msg.text;
+      var text = e.textContent;
       for (var i in entities) {
         if (!entities.hasOwnProperty(i)) continue;
         var type = entities[i]['type'];
@@ -151,6 +238,8 @@ class RichText extends React.Component {
       if (text && index < length(text)) {
         elements.push(substring(text, index, length(text)));
       }
+    } else {
+      elements.push(...convertLinksWithRegExp(msg.full_text || msg.text));
     }
 
     // When display style is set to both screen_name and name, a new container is created
