@@ -247,29 +247,6 @@ export var EchofonCommon = {
     return elem;
   },
 
-  convertLinksWithRegExpNew: function(msg, parent_elem) {
-    var text = (msg.full_text || msg.text).replace(/&amp;/g,"&");
-
-    var pat = /((https?\:\/\/|www\.)[^\s]+)([^\w\s\d]*)/g;
-    var re = /[!.,;:)}\]]+$/;
-
-    while (pat.exec(text) != null) {
-      var url = RegExp.$1;
-      text = RegExp.rightContext;
-      if (re.test(url)) {
-        text = RegExp.lastMatch + text;
-        url = url.replace(re, '');
-      }
-
-      var urltext = url;
-      if (url.length > 27) {
-        urltext = url.substr(0, 27) + "...";
-      }
-      this.checkPhotoURL(parent_elem, urltext);
-      pat.lastIndex = 0;
-    }
-  },
-
   convertLinksWithEntities: function(uid, msg, elem, parent_elem) {
     //
     // sort entities.
@@ -356,52 +333,6 @@ export var EchofonCommon = {
     elements.forEach(e => elem.appendChild(e));
 
     return elem;
-  },
-
-  // Compatibility function until we can delete the old one
-  convertLinksWithEntitiesNew: function(msg, parent_elem) {
-    //
-    // sort entities.
-    //
-    const entities = Object.entries(msg.entities)
-      .reduce(
-        (prev, [type, value]) =>
-          prev.concat(value.map(entity => ({ type, value: entity }))),
-        []
-      )
-      .sort((a, b) => a.value.indices[0] - b.value.indices[0]);
-
-    //
-    // building tweet with urls, mentions and hashtags.
-    //
-
-    var index = 0;
-    var text = msg.full_text || msg.text;
-    for (var i in entities) {
-      if (!entities.hasOwnProperty(i)) continue;
-      var type = entities[i]['type'];
-      var entity = entities[i]['value'];
-
-      var start = entity['indices'][0];
-      var end   = entity['indices'][1];
-      if (start < index || end < start) continue;
-
-      switch (type) {
-        case "urls":
-          this.checkPhotoURL(parent_elem, entity['expanded_url'] ? entity['expanded_url'] : entity['url']);
-          break;
-
-        case "media":
-          if (entity.type == "photo") {
-            parent_elem.setAttribute("status-photo", entity['url']);
-            parent_elem.pb = EchofonPhotoBackend.initWithEntity(entity);
-          }
-          break;
-        default:
-          break;
-      }
-      index = entity['indices'][1];
-    }
   },
 
   checkPhotoURL: function(elem, url) {

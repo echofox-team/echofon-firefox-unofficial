@@ -100,10 +100,6 @@ const convertLinksWithRegExp = (text) => {
 };
 
 class RichText extends React.Component {
-  componentDidMount() {
-    this.props.onBuildContent();
-  }
-
   renderNameHeader() {
       const { user } = this.props;
       const style = EchofonCommon.pref().getIntPref("displayStyle");
@@ -124,7 +120,7 @@ class RichText extends React.Component {
   }
 
   render() {
-    const { uid, msg, parent_elem } = this.props;
+    const { uid, msg } = this.props;
     const style = EchofonCommon.pref().getIntPref("displayStyle");
 
     const elements = [];

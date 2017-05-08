@@ -250,110 +250,13 @@
 
           <!-- user icon -->
           <!-- messages -->
-          <children />
-
           <!-- function icons -->
-          <xul:vbox align="end" class="echofon-function-icon-box">
-            <xul:image anonid="favorite"
-                       class="echofon-status-favorite"
-                       onclick="toggleFavorite()"
-                       xbl:inherits="favorited, messageId, attr,type,tooltiptext=favoriteButtonTooltip,requestFavorite"/>
-            <xul:image anonid="reply"
-                       style="display:none;"
-                       class="echofon-status-reply"
-                       onclick="onReplyButton(this)"
-                       xbl:inherits="name=screen_name,messageId,attr,type,text,tooltiptext=replyButtonTooltip"/>
-          </xul:vbox>
-
           <!-- timeline photo -->
-          <xul:vbox flex="1">
-            <xul:stack onclick="openPhoto(event)" flex="1">
-              <xul:image anonid="thumbnail-photo" xbl:inherits="src=thumbnail-photo" class="echofon-status-photo"/>
-              <xul:hbox align="center">
-                <xul:spacer flex="1"/>
-                <xul:image anonid="video-playback-icon" class="echofon-status-video-playback-icon"/>
-                <xul:spacer flex="1"/>
-              </xul:hbox>
-            </xul:stack>
-          </xul:vbox>
+          <children />
 
         </xul:hbox>
       </xul:vbox>
     </content>
-
-    <implementation>
-
-      <constructor>
-        if (this.pb) {
-          var target = this;
-          var u = this.pb.thumbnailURL(target);
-          this.setAttribute("thumbnail-photo", this.pb.thumbnailURL(target));
-          if (u.match(/(twitvid|youtube|youtu\.be)/)) {
-            document.getAnonymousElementByAttribute(this, "anonid", "video-playback-icon").style.display = "block";
-          }
-        }
-      </constructor>
-
-      <property name="border">
-	<setter>
-	  this.setAttribute("border", val);
-	</setter>
-      </property>
-
-      <method name="setFavorited">
-        <parameter name="val"/>
-        <body>
-          this.setAttribute("requestFavorite", false);
-          this.setAttribute("favorited", val);
-          this.setAttribute("favoriteButtonTooltip", EchofonCommon.getString(val ? "UnfavoriteTweet" : "FavoriteTweet"));
-          var favorite = document.getAnonymousElementByAttribute(this, "anonid", "favorite");
-	  favorite.style.display = (val) ? "block" : "none";
-        </body>
-      </method>
-
-      <method name="openPhoto">
-        <parameter name="event"/>
-	<body>
-          var url = this.getAttribute("status-photo");
-          var win = EchofonCommon.isWindowExist(url);
-          if (win) {
-            win.focus();
-          }
-          else {
-            if (this.pb.media == EchofonPhotoBackend.MEDIA_TYPE_VIDEO) {
-              EchofonCommon.openURL(url, event);
-            }
-            else {
-              EchofonCommon.openPhotoView(this.pb);
-            }
-          }
-	</body>
-      </method>
-
-      <method name="loadImage">
-	<parameter name="url"/>
-	<body>
-            this.setAttribute("thumbnail-photo", url);
-	</body>
-      </method>
-
-      <method name="toggleFavorite">
-        <body>
-          this.setAttribute("requestFavorite", true);
-          var messageId = this.getAttribute("messageId");
-          var method;
-          if (this.getAttribute("favorited") != "true") {
-            method = "create";
-          }
-          else {
-            method = "destroy";
-          }
-          EchofonCommon.notify("setFavorite",{id: messageId, method: method});
-        </body>
-      </method>
-
-    </implementation>
-
   </binding>
 
   <!--
