@@ -32,7 +32,7 @@ CREATE TABLE threads (
     'updated_at'        INTEGER
 );
 CREATE TABLE lists (
-    'id'                INTEGER PRIMARY KEY,
+    'id'                TEXT PRIMARY KEY,
     'name'              TEXT COLLATE NOCASE,
     'full_name'         TEXT COLLATE NOCASE,
     'slug'              TEXT COLLATE NOCASE,
@@ -43,7 +43,7 @@ CREATE TABLE lists (
     'user_id'           INTEGER
 );
 CREATE TABLE users (
-    'id'                     INTEGER PRIMARY KEY,
+    'id'                     TEXT PRIMARY KEY,
     'name'                   TEXT COLLATE NOCASE,
     'screen_name'            TEXT COLLATE NOCASE,
     'location'               TEXT,
@@ -67,7 +67,7 @@ CREATE TABLE saved_searches (
 CREATE TABLE statuses (
     'id'                          INTEGER PRIMARY KEY,
     'id_str'                      TEXT,
-    'user_id'                     INTEGER,
+    'user_id'                     TEXT,
     'full_text'                   TEXT,
     'created_at'                  INTEGER,
     'source'                      TEXT,
