@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+  <RDF:Description about="urn:mozilla:extension:echofon-unofficial@echofox-team">
+    <em:updates>
+      <RDF:Seq>
+        
+        <!-- Each li is a different version of the same add-on -->
+
+        <RDF:li>
+          <RDF:Description>
+            <em:version>2.6.4</em:version>
+            <em:targetApplication>
+              <RDF:Description>
+                <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+                <em:minVersion>45.0</em:minVersion>
+                <em:maxVersion>56.0</em:maxVersion>
+                <em:updateLink>https://github.com/echofox-team/echofon-firefox-unofficial/releases/download/2.6.4/echofon_unofficial-2.6.4-fx.xpi</em:updateLink>
+                <em:updateInfoURL>https://github.com/echofox-team/echofon-firefox-unofficial/releases/tag/2.6.4</em:updateInfoURL>
+              </RDF:Description>
+            </em:targetApplication>
+          </RDF:Description>
+        </RDF:li>
+
+      </RDF:Seq>
+    </em:updates>
+  </RDF:Description>
+</RDF:RDF>
