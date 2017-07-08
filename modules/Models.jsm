@@ -6,7 +6,7 @@
 
 var EXPORTED_SYMBOLS = ["EchofonModel"];
 
-const SCHEMA_VERSION = 3;
+const SCHEMA_VERSION = 4;
 const MAX_STATUSES = 10000;
 const { classes: Cc, interfaces: Ci } = Components;
 

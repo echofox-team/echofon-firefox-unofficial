@@ -4,7 +4,7 @@
   <Description about="urn:mozilla:install-manifest">
     <em:id>echofon-unofficial@echofox-team</em:id>
     <em:name>Echofon Unofficial</em:name>
-    <em:version>2.6.3</em:version>
+    <em:version>2.6.4</em:version>
     <em:type>2</em:type>
     <em:unpack>true</em:unpack>
     <em:creator>Echofox Team</em:creator>
@@ -30,6 +30,7 @@
     <em:translator>velociraptor(zh-TW)</em:translator>
     <em:description>Maintained version of Echofon: full featured, super clean Twitter app for Firefox.</em:description>
     <em:homepageURL>https://github.com/echofox-team/echofon-firefox-unofficial</em:homepageURL>
+    <em:updateURL>https://echofox-team.github.io/echofon-firefox-unofficial/updates.rdf</em:updateURL>
     <em:iconURL>chrome://echofon/content/images/icon.png</em:iconURL>
     <em:optionsURL>chrome://echofon/content/preferences/preferences.xul</em:optionsURL>
     <em:multiprocessCompatible>true</em:multiprocessCompatible>
@@ -38,8 +39,8 @@
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-        <em:minVersion>45</em:minVersion>
-        <em:maxVersion>55.0</em:maxVersion>
+        <em:minVersion>45.0</em:minVersion>
+        <em:maxVersion>56.0</em:maxVersion>
       </Description>
     </em:targetApplication>
   </Description>
