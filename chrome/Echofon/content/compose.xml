@@ -168,10 +168,10 @@
       <property name="maxCharCount">
         <getter>
           if (this.images.length == 0) {
-            return 140;
+            return 280;
           }
           var conf = JSON.parse(EchofonCommon.pref().getCharPref("configuration"));
-          return 140 - this.images.length * (conf.config.characters_reserved_per_media);
+          return 280 - this.images.length * (conf.config.characters_reserved_per_media);
         </getter>
       </property>
 
@@ -718,7 +718,7 @@
               <xul:button class="echofon-compose-attach-button" anonid="menu" menu="echofon-attach-menu"/>
               <xul:image class="echofon-geolocation-loader" src="chrome://echofon/content/images/geolocation_loader.gif" anonid="geospinner" hidden="true"/>
               <xul:spacer flex="1"/>
-              <xul:label class="echofon-compose-char-count" value="140" xbl:inherits="value,charOver" anonid="charcount"/>
+              <xul:label class="echofon-compose-char-count" value="280" xbl:inherits="value,charOver" anonid="charcount"/>
               <xul:button class="echofon-compose-send-button echobutton" label="&echofon.tweetButton;" oncommand="sendTweet()" anonid="sendButton"/>
             </xul:hbox>
 
@@ -849,7 +849,7 @@
 
           <xul:hbox flex="1" align="center">
             <xul:spacer flex="1"/>
-            <xul:label value="140" xbl:inherits="value,charOver" class="echofon-dm-compose-char-count" anonid="menu" menu="echofon-attach-menu"/>
+            <xul:label value="280" xbl:inherits="value,charOver" class="echofon-dm-compose-char-count" anonid="menu" menu="echofon-attach-menu"/>
             <xul:button id="echofon-compose-send-button" label="&echofon.sendButton;" oncommand="sendTweet()" anonid="sendButton"/>
           </xul:hbox>
         </xul:vbox>
